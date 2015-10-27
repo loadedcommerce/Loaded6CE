@@ -12,8 +12,6 @@
 */
 ?>
 <!-- Design Controls //-->
-          <tr>
-            <td>
 <?php
 $template_id_select_query = tep_db_query("select template_id from " . TABLE_TEMPLATE . "  where template_name = '" . DEFAULT_TEMPLATE . "'");
 $template_id_select =  tep_db_fetch_array($template_id_select_query);
@@ -30,7 +28,7 @@ $heading = array();
 $contents = array();
 $heading[] = array('text'  => BOX_HEADING_DESIGN_CONTROLS,
                    'link'  => tep_href_link(FILENAME_TEMPLATE_CONFIGURATION, 'selected_box=design_controls' . $default_temp_link));
-if ($_SESSION['selected_box'] == 'design_controls' || MENU_DHTML == 'True') {
+
   //RCI to include links  
   $returned_rci_top = $cre_RCI->get('designcontrols', 'boxestop');
   $returned_rci_bottom = $cre_RCI->get('designcontrols', 'boxesbottom');
@@ -61,10 +59,8 @@ if ($_SESSION['selected_box'] == 'design_controls' || MENU_DHTML == 'True') {
                                  $returned_rci_top5 .
                                  tep_admin_files_boxes(FILENAME_INFOBOX_CONFIGURATION, BOX_HEADING_BOXES_ADMIN, 'NONSSL', 'gID=' . $template_id_select['template_id'],'2') .
                                  $returned_rci_bottom);
-  }
+
   $box = new box;
   echo $box->menuBox($heading, $contents);
 ?>
-            </td>
-          </tr>
 <!-- design controls _eof //-->

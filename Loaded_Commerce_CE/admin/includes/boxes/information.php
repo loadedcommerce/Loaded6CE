@@ -12,15 +12,13 @@
 */
 ?>
 <!-- information [modified for CDS]//-->
-          <tr>
-            <td>
 <?php
 $heading = array();
 $contents = array();
 $heading[] = array('text'  => BOX_CDS_HEADING,
                    'link'  => tep_href_link(FILENAME_CDS_PAGE_MANAGER, 'selected_box=information'));
 if (defined('PROJECT_VERSION') && preg_match('/6.2/', PROJECT_VERSION)) {
-  if ($selected_box == 'information' || $menu_dhtml == true) {
+  
     //RCI start
     $returned_rci_top = $cre_RCI->get('information', 'boxestop');
     $returned_rci_bottom = $cre_RCI->get('information', 'boxesbottom');
@@ -35,9 +33,8 @@ if (defined('PROJECT_VERSION') && preg_match('/6.2/', PROJECT_VERSION)) {
                                    tep_admin_files_boxes(FILENAME_INFORMATION_MANAGER, BOX_INFORMATION_MANAGER, 'SSL', '', '0')  .
                                    $returned_rci_bottom);
     //RCI eof
-  }    
+      
 } else {
-  if ($_SESSION['selected_box'] == 'information' || MENU_DHTML == 'True') { 
     //RCI start
     $returned_rci_top = $cre_RCI->get('information', 'boxestop');
     $returned_rci_bottom = $cre_RCI->get('information', 'boxesbottom');
@@ -51,11 +48,8 @@ if (defined('PROJECT_VERSION') && preg_match('/6.2/', PROJECT_VERSION)) {
                                    tep_admin_files_boxes(FILENAME_DEFINE_MAINPAGE, BOX_CATALOG_DEFINE_MAINPAGE, 'SSL', '', '2') .
                                    $returned_rci_bottom);
     //RCI eof
-  }
-}  
+  } 
 $box = new box;
 echo $box->menuBox($heading, $contents);
 ?>
-            </td>
-          </tr>
 <!-- information_eof [modified for CDS]//-->
