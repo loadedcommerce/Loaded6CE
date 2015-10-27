@@ -1,0 +1,76 @@
+/*********** dynamic tree EOF **************/
+/********** admin top menu BOF *************/
+  div.menuBar, div.menuBar a.menuButton, div.menu, div.menu a.menuItem { 
+    font-family: "MS Sans Serif",Arial,sans-serif;
+    font-size: 8pt;
+    font-style: normal;
+    font-weight: normal;
+    color: #ffffff;
+    padding: 4px;
+  }
+
+  div.menuBar { 
+    text-align: center;
+    font-weight: bold;
+    background: url('../images/list-head-background-alt.png') repeat-x;
+    border-top:1px solid #ffffff;
+  }
+
+  div.menuBar a.menuButton, a.menuButton:hover { 
+    padding: 4px;
+    background-color: transparent;
+    color: #ffffff;
+    cursor: default;
+    left: 0px;
+    position: relative;
+    text-decoration: none;
+    top: 0px;
+    z-index: 100;
+    cursor: pointer;
+  }
+
+  div.menu { 
+    border: 1px solid #000000;
+    background:#177fd4;
+    opacity: 0.9;
+    left: 0px;
+    position: absolute;
+    top: 0px;
+    visibility: hidden;
+    z-index: 101;
+    cursor: pointer;
+    min-width:175px;
+    padding:0;
+  }
+
+  div.menu a.menuItem { 
+    padding: 4px 0 4px 8px;
+    color: #ffffff;
+    cursor: default;
+    display: block;
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+    text-align: left;
+  }
+
+  div.menu a.menuItem:hover { 
+    padding: 4px 0 4px 15px;
+    background: #52a5f3;
+    color: #ffffff;
+    cursor: pointer;
+  }
+
+  div.menuBoxSubhead {
+    text-align: left;
+    font-weight: bold;
+    padding: 4px 0 4px 4px;  
+    color: #000000;
+    z-index: 102;
+  }
+  
+  .menuBoxSubhead {
+    font-style: normal;
+    padding:0;
+  }
+/************** Admin top menu EOF ********************/
