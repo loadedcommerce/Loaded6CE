@@ -15,77 +15,100 @@ unset($_SESSION['login_id']);
 unset($_SESSION['login_firstname']);
 unset($_SESSION['login_groups_id']);
 ?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
-<title><?php echo TITLE; ?></title>
-<link rel="icon" type="image/png" href="favicon.ico" />
-<script type="text/javascript" src="<?php echo (($request_type == 'SSL') ? 'https:' : 'http:'); ?>//ajax.googleapis.com/ajax/libs/jquery/<?php echo JQUERY_VERSION; ?>/jquery.min.js"></script>
-<script type="text/javascript">
-  if (typeof jQuery == 'undefined') {
-    //alert('You are running a local copy of jQuery!');
-    document.write(unescape("%3Cscript src='includes/javascript/jquery-1.6.2.min.js' type='text/javascript'%3E%3C/script%3E"));
-  }
-</script>
-<link rel="stylesheet" type="text/css" href="includes/stylesheet.css" />
-<style>
-body {
-
-  width: 100%;
-  height: 100%;
-   background: #fff url(images/login_header.png) repeat-x;
-}
-.logo {
-  width: 450px;
-  margin: 14px auto;
-}
-</style>
-<link rel="stylesheet" type="text/css" href="includes/headernavmenu.css">
-<script type="text/javascript" src="includes/menu.js"></script>
+    <meta charset="utf-8" />
+    <title><?php echo TITLE; ?> | Login Page</title>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+    <meta content="noindex" name="index" />
+    <meta content="" name="author" />
+    
+    <!-- ================== BEGIN BASE CSS STYLE ================== -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+    <link href="assets/plugins/jquery-ui/themes/base/minified/jquery-ui.min.css" rel="stylesheet" />
+    <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="assets/css/animate.min.css" rel="stylesheet" />
+    <link href="assets/css/style.min.css" rel="stylesheet" />
+    <link href="assets/css/style-responsive.min.css" rel="stylesheet" />
+    <link href="assets/css/theme/blue.css" rel="stylesheet" id="theme" />
+    <!-- ================== END BASE CSS STYLE ================== -->
+    
+    <!-- ================== BEGIN BASE JS ================== -->
+    <script src="assets/plugins/pace/pace.min.js"></script>
+    <!-- ================== END BASE JS ================== -->
 </head>
 <body onload="document.getElementById('email_address').focus()">
-<p class="logo"><img src="images/lclogo_login.png"></p>
-<table border="0" cellpadding="0" cellspacing="0" width="400" style="margin: 45px auto;">
-  <tr>
-    <td class="box-top-left">&nbsp;</td>
-    <td class="box-top">&nbsp;</td>
-    <td class="box-top-right">&nbsp;</td>
-  </tr>
-  <tr>
-    <td class="box-left">&nbsp;</td>
-    <td class="box-content">
-      <table border="0" cellpadding="0" cellspacing="0" width="100%">
-        <tr>
-          <td style="padding-bottom: 1em;" valign="top"><h2 style="font-size:16px;font-weight:normal;margin: 0;">Admin Login</h2></td>
-          <td style="padding-bottom: 1em;" rowspan="2" align="right"></td>
-        </tr>
-        <tr>
-          <td style="padding-bottom: 1em;" valign="top"><?php echo TEXT_MAIN; ?></td>
-        </tr>
-      </table>
-      <table border="0" cellpadding="0" cellspacing="0" width="100%">
-        <tr>
-          <td align="left"><?php echo '<a href="' . tep_href_link(FILENAME_LOGIN, '', 'SSL') . '">' . TEXT_RELOGIN . '</a>'; ?></td>
-          <td align="right"><?php echo '<a href="../index.php">' . TEXT_VIEW_CATALOG . '</a>'; ?></td>
-        </tr>
-      </table>
-    </td>
-    <td class="box-right">&nbsp;</td>
-  </tr>
-  <tr>
-    <td class="box-bottom-left">&nbsp;</td>
-    <td class="box-bottom">&nbsp;</td>
-    <td class="box-bottom-right">&nbsp;</td>
-  </tr>
-  <tr>
-    <td></td>
-    <td style="font-size: 11px; color: #444;" align="left"><a href="http://www.loadedcommerce.com/" target="_blank"><?php echo PROJECT_VERSION;?></a></td>
-    <td></td>
-  </tr>
-</table>
+<body class="pace-top">
+    <!-- begin #page-loader -->
+    <div id="page-loader" class="fade in"><span class="spinner"></span></div>
+    <!-- end #page-loader -->
+    
+    <div class="login-cover">
+        <div class="login-cover-image"><img src="assets/img/login-bg/bg-1.jpg" data-id="login-cover-image" alt="" /></div>
+        <div class="login-cover-bg"></div>
+    </div>
+    <!-- begin #page-container -->
+    <div id="page-container" class="fade">
+        <!-- begin login -->
+        <div class="login login-v2" data-pageload-addclass="animated fadeIn">
+            <!-- begin brand -->
+            <div class="login-header">
+                <div class="brand">
+                    <span class="logo"></span> Admin Login
+                    <small><a href="http://www.loadedcommerce.com/" target="_blank"><?php echo PROJECT_VERSION; ?></a> | <a href="<?php echo HTTP_CATALOG_SERVER . DIR_WS_HTTP_CATALOG; ?>" target="_blank"><?php echo TEXT_VIEW_CATALOG; ?></a></small>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-sign-in"></i>
+                </div>
+            </div>
+            <!-- end brand -->
+            <div class="login-content">
+                <?php echo TEXT_MAIN; ?>
+                    <div class="checkbox m-b-20">
+                        <button class="btn btn-success btn-block btn-lg" onClick="location.href='<?php echo HTTP_CATALOG_SERVER . DIR_WS_HTTP_CATALOG; ?>'">Visit Catalog</button>
+                    </div>
+            </div>
+        </div>
+        <!-- end login -->
+        
+    </div>
+    <!-- end page container -->
+    
+    <!-- ================== BEGIN BASE JS ================== -->
+    <script src="assets/plugins/jquery/jquery-1.9.1.min.js"></script>
+    <script src="assets/plugins/jquery/jquery-migrate-1.1.0.min.js"></script>
+    <script src="assets/plugins/jquery-ui/ui/minified/jquery-ui.min.js"></script>
+    <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <!--[if lt IE 9]>
+        <script src="assets/crossbrowserjs/html5shiv.js"></script>
+        <script src="assets/crossbrowserjs/respond.min.js"></script>
+        <script src="assets/crossbrowserjs/excanvas.min.js"></script>
+    <![endif]-->
+    <script src="assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="assets/plugins/jquery-cookie/jquery.cookie.js"></script>
+    <!-- ================== END BASE JS ================== -->
+    
+    <!-- ================== BEGIN PAGE LEVEL JS ================== -->
+    <script src="assets/js/login-v2.demo.min.js"></script>
+    <script src="assets/js/apps.min.js"></script>
+    <!-- ================== END PAGE LEVEL JS ================== -->
+
+    <script>
+        $(document).ready(function() {
+            App.init();
+            LoginV2.init();
+        });
+    </script>
+    
+    
+
 <?php
-require('includes/application_bottom.php');
+    require('includes/application_bottom.php');
 ?>
 </body>
 </html>

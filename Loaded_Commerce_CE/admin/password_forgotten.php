@@ -41,55 +41,65 @@
     $info_message = TEXT_FORGOTTEN_ERROR;
   }
 ?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-"http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
-<title><?php echo TITLE; ?></title>
-<script type="text/javascript" src="<?php echo (($request_type == 'SSL') ? 'https:' : 'http:'); ?>//ajax.googleapis.com/ajax/libs/jquery/<?php echo JQUERY_VERSION; ?>/jquery.min.js"></script>
-<script type="text/javascript">
-  if (typeof jQuery == 'undefined') {
-    //alert('You are running a local copy of jQuery!');
-    document.write(unescape("%3Cscript src='includes/javascript/jquery-1.6.2.min.js' type='text/javascript'%3E%3C/script%3E"));
-  }
-</script>
-<link rel="stylesheet" type="text/css" href="includes/stylesheet.css" />
-<style>
-body {
-
-  width: 100%;
-  height: 100%;
-   background: #fff url(images/login_header.png) repeat-x;
-}
-.logo {
-  width: 600px;
-  margin: 14px auto;
-}
-</style>
-<link rel="stylesheet" type="text/css" href="includes/headernavmenu.css">
-<script type="text/javascript" src="includes/menu.js"></script>
+    <meta charset="utf-8" />
+    <title><?php echo TITLE; ?> | Login Page</title>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+    <meta content="noindex" name="index" />
+    <meta content="" name="author" />
+    
+    <!-- ================== BEGIN BASE CSS STYLE ================== -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+    <link href="assets/plugins/jquery-ui/themes/base/minified/jquery-ui.min.css" rel="stylesheet" />
+    <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="assets/css/animate.min.css" rel="stylesheet" />
+    <link href="assets/css/style.min.css" rel="stylesheet" />
+    <link href="assets/css/style-responsive.min.css" rel="stylesheet" />
+    <link href="assets/css/theme/blue.css" rel="stylesheet" id="theme" />
+    <!-- ================== END BASE CSS STYLE ================== -->
+    
+    <!-- ================== BEGIN BASE JS ================== -->
+    <script src="assets/plugins/pace/pace.min.js"></script>
+    <!-- ================== END BASE JS ================== -->
 </head>
-<body>
-
-<p class="logo"><img src="images/lclogo_login.png"></p>
-
-<table border="0" cellpadding="0" cellspacing="0" width="600" style="margin: 45px auto;">
-  <tr>
-    <td class="box-top-left">&nbsp;</td>
-    <td class="box-top">&nbsp;</td>
-    <td class="box-top-right">&nbsp;</td>
-  </tr>
-   <tr>
-      <td class="box-left">&nbsp;</td>
-      <td class="box-content">
-        <?php echo tep_draw_form('login', FILENAME_PASSWORD_FORGOTTEN, 'action=process');?>
-        <table border="0" cellpadding="0" cellspacing="0">
-        <?php
+<body onload="document.getElementById('email_address').focus()">
+   <body class="pace-top">
+    <!-- begin #page-loader -->
+    <div id="page-loader" class="fade in"><span class="spinner"></span></div>
+    <!-- end #page-loader -->
+    
+    <div class="login-cover">
+        <div class="login-cover-image"><img src="assets/img/login-bg/bg-1.jpg" data-id="login-cover-image" alt="" /></div>
+        <div class="login-cover-bg"></div>
+    </div>
+    <!-- begin #page-container -->
+    <div id="page-container" class="fade">
+        <!-- begin login -->
+        <div class="login login-v2" data-pageload-addclass="animated fadeIn">
+            <!-- begin brand -->
+            <div class="login-header">
+                <div class="brand">
+                    <span class="logo"></span> Admin Login
+                    <small><a href="http://www.loadedcommerce.com/" target="_blank"><?php echo PROJECT_VERSION; ?></a> | <a href="<?php echo HTTP_CATALOG_SERVER . DIR_WS_HTTP_CATALOG; ?>" target="_blank"><?php echo TEXT_VIEW_CATALOG; ?></a></small>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-sign-in"></i>
+                </div>
+            </div>
+            <!-- end brand -->
+            <div class="login-content">
+            <?php echo tep_draw_form('login', FILENAME_PASSWORD_FORGOTTEN, 'action=process', 'post', 'class="margin-bottom-0"', 'SSL') . tep_draw_hidden_field("action","process"); ?>
+<?php
         if (isset($_SESSION['password_forgotten'])) {
           ?>
-          <tr><td colspan="2"><h2 class="message" style="font-size:16px;font-weight:normal;margin: 0;"><?php echo TEXT_FORGOTTEN_FAIL; ?></h2></td></tr>
-          <tr><td colspan="2"><span class="forgot"><?php echo TEXT_FORGOTTEN_SUPPORT_MESSAGE; ?></span></td></tr>
+          <div class="form-group m-b-20"><?php echo TEXT_FORGOTTEN_FAIL; ?></div>
+          
           <?php
           $success_message = '';
         } elseif (isset($success_message)) {
@@ -103,33 +113,107 @@ body {
         }
         if (!isset($success_message) && !isset($_SESSION['password_forgotten'])){
           ?>
-          <tr>
-            <td colspan="2"><h3><?php echo TEXT_PASSWORD_FORGOTTEN_TITLE;?></h3></td>
-          </tr>
-          <tr>
-            <td colspan="2"><p><?php echo TEXT_FORGOTTEN_USER_MESSAGE;?></p></td>
-          </tr>
+                
+                    <div class="form-group m-b-20">
+                        <?php echo TEXT_FORGOTTEN_SUPPORT_MESSAGE; ?>
+                    </div>
+                   <div class="m-t-20">
+                        <h3><?php echo TEXT_PASSWORD_FORGOTTEN_TITLE;?></h3>
+                        <p><?php echo TEXT_FORGOTTEN_USER_MESSAGE;?></p>
+                    </div>
+                    <div class="form-group m-b-20">
+                        <input name="email_address" id="email_address" type="text" class="form-control input-lg" placeholder="Email Address" />
+                    </div>
+
+ 
+                    <div class="login-buttons">
+                        <button type="submit" class="btn btn-success btn-block btn-lg"><?php echo IMAGE_SEND;?></button>
+                    </div>
+                    <?php 
+        } else {
+          ?>
+          <div class="m-t-20">
+              <?php echo $success_message; ?>
+            </div>
+          <?php
+        }
+        ?>
+                    
+                          
+                 
+                </form>
+            </div>
+        </div>
+        <!-- end login -->
+        
+        <!--ul class="login-bg-list">
+            <li class="active"><a href="#" data-click="change-bg"><img src="assets/img/login-bg/bg-1.jpg" alt="" /></a></li>
+            <li><a href="#" data-click="change-bg"><img src="assets/img/login-bg/bg-2.jpg" alt="" /></a></li>
+            <li><a href="#" data-click="change-bg"><img src="assets/img/login-bg/bg-3.jpg" alt="" /></a></li>
+            <li><a href="#" data-click="change-bg"><img src="assets/img/login-bg/bg-4.jpg" alt="" /></a></li>
+            <li><a href="#" data-click="change-bg"><img src="assets/img/login-bg/bg-5.jpg" alt="" /></a></li>
+            <li><a href="#" data-click="change-bg"><img src="assets/img/login-bg/bg-6.jpg" alt="" /></a></li>
+        </ul-->
+        
+    </div>
+    <!-- end page container -->
+    
+    <!-- ================== BEGIN BASE JS ================== -->
+    <script src="assets/plugins/jquery/jquery-1.9.1.min.js"></script>
+    <script src="assets/plugins/jquery/jquery-migrate-1.1.0.min.js"></script>
+    <script src="assets/plugins/jquery-ui/ui/minified/jquery-ui.min.js"></script>
+    <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <!--[if lt IE 9]>
+        <script src="assets/crossbrowserjs/html5shiv.js"></script>
+        <script src="assets/crossbrowserjs/respond.min.js"></script>
+        <script src="assets/crossbrowserjs/excanvas.min.js"></script>
+    <![endif]-->
+    <script src="assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="assets/plugins/jquery-cookie/jquery.cookie.js"></script>
+    <!-- ================== END BASE JS ================== -->
+    
+    <!-- ================== BEGIN PAGE LEVEL JS ================== -->
+    <script src="assets/js/login-v2.demo.min.js"></script>
+    <script src="assets/js/apps.min.js"></script>
+    <!-- ================== END PAGE LEVEL JS ================== -->
+
+    <script>
+        $(document).ready(function() {
+            App.init();
+            LoginV2.init();
+        });
+    </script>
+
+<?php
+require('includes/application_bottom.php');
+?>
+</body>
+</html>
+
+<table border="0" cellpadding="0" cellspacing="0" width="600" style="margin: 45px auto;">
+  <tr>
+    <td class="box-top-left">&nbsp;</td>
+    <td class="box-top">&nbsp;</td>
+    <td class="box-top-right">&nbsp;</td>
+  </tr>
+   <tr>
+      <td class="box-left">&nbsp;</td>
+      <td class="box-content">
+        <?php echo tep_draw_form('login', FILENAME_PASSWORD_FORGOTTEN, 'action=process');?>
+        <table border="0" cellpadding="0" cellspacing="0">
+        
+
           <tr>
             <td class="form-label"><label for="email_address"><?php echo ENTRY_EMAIL_ADDRESS; ?></label></td><td class="form-value"><?php echo tep_draw_input_field('email_address','','id="email_address" class="string"'); ?></td>
           </tr>
           <tr>
             <td class="form-label"></td>
             <td class="form-value button-container">
-              <input type="submit" name="button" id="button" class="cssButtonSubmit" value="<?php echo IMAGE_SEND;?>" />
+              <input type="submit" name="button" id="button" class="cssButtonSubmit" value="" />
               <a href="./index.php"><?php echo IMAGE_CANCEL;?></a>
             </td>
           </tr>
-        <?php 
-        } else {
-          ?>
-          <tr>
-            <td>
-              <?php echo $success_message; ?>
-            </td>
-          </tr>
-          <?php
-        }
-        ?>
+        
         </table>
         </form>
       </td>

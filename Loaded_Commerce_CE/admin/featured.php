@@ -55,23 +55,38 @@ switch ($action) {
     break;
 }
 ?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html <?php echo HTML_PARAMS; ?>>
+<!DOCTYPE html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
 <title><?php echo TITLE; ?></title>
+<link rel="icon" type="image/png" href="favicon.ico" />
 <script type="text/javascript" src="<?php echo (($request_type == 'SSL') ? 'https:' : 'http:'); ?>//ajax.googleapis.com/ajax/libs/jquery/<?php echo JQUERY_VERSION; ?>/jquery.min.js"></script>
-<script type="text/javascript">
-  if (typeof jQuery == 'undefined') {
-    //alert('You are running a local copy of jQuery!');
-    document.write(unescape("%3Cscript src='includes/javascript/jquery-1.6.2.min.js' type='text/javascript'%3E%3C/script%3E"));
-  }
-</script>
-<link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
-<!--[if IE]>
-<link rel="stylesheet" type="text/css" href="includes/stylesheet-ie.css">
-<![endif]-->
-<script language="javascript" src="includes/general.js"></script>
+
+
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+                                                             <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
+  <!-- ================== BEGIN BASE CSS STYLE ================== -->
+  <link href="<?php echo (($request_type == 'SSL') ? 'https:' : 'http:'); ?>//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+  <link href="assets/plugins/jquery-ui/themes/base/minified/jquery-ui.min.css" rel="stylesheet" />
+  <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+  <link href="assets/css/animate.min.css" rel="stylesheet" />
+  <link href="assets/css/style.min.css" rel="stylesheet" />
+  <link href="assets/css/style-responsive.min.css" rel="stylesheet" />
+  <link href="assets/css/theme/blue.css" rel="stylesheet" id="theme" />
+  <!-- ================== END BASE CSS STYLE ================== -->
+  
+  <!-- ================== BEGIN PAGE LEVEL STYLE ================== -->
+  <link href="assets/plugins/jquery-jvectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" />
+  <link href="assets/plugins/bootstrap-datepicker/css/datepicker.css" rel="stylesheet" />
+  <link href="assets/plugins/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet" />
+    <link href="assets/plugins/gritter/css/jquery.gritter.css" rel="stylesheet" />  
+    <link href="assets/plugins/DataTables/media/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/plugins/DataTables/extensions/Select/css/select.bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/plugins/DataTables/extensions/Responsive/css/responsive.bootstrap.min.css" rel="stylesheet" />
+  <!-- ================== END PAGE LEVEL STYLE ================== -->
+  <script language="javascript" src="includes/general.js"></script>
+  <script type="text/javascript" src="includes/menu.js"></script>
 <?php
 if ( isset($_GET['action']) &&  (($_GET['action'] == 'new') || ($_GET['action'] == 'edit')) ) {
   ?>
@@ -80,31 +95,33 @@ if ( isset($_GET['action']) &&  (($_GET['action'] == 'new') || ($_GET['action'] 
   <?php
 }
 ?>
-<link rel="stylesheet" type="text/css" href="includes/headernavmenu.css">
-<script type="text/javascript" src="includes/menu.js"></script>
 </head>
-<body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF" onload="SetFocus();">
-<div id="popupcalendar" class="text"></div>
-<!-- header //-->
-<?php require(DIR_WS_INCLUDES . 'header.php'); ?>
-<!-- header_eof //-->
-<!-- body //-->
-<div id="body">
-<table border="0" width="100%" cellspacing="0" cellpadding="0" class="body-table">
-  <tr>
-      <!-- left_navigation //-->
-      <?php require(DIR_WS_INCLUDES . 'column_left.php'); ?>
-      <!-- left_navigation_eof //-->
-        <!-- body_text //-->
-    <td valign="top" class="page-container"><table border="0" width="100%" cellspacing="0" cellpadding="0">
-        <tr>
-        <td width="100%"><table border="0" width="100%" cellspacing="0" cellpadding="0">
-          <tr>
-            <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
-            <td class="pageHeading" align="right"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-          </tr>
-        </table></td>
-      </tr>
+<body>  <div id="popupcalendar" class="text"></div>
+    <!-- begin #page-container -->
+    <div id="page-container" class="fade page-sidebar-fixed page-header-fixed gradient-enabled">
+    <!-- header //-->
+    <?php require(DIR_WS_INCLUDES . 'header.php'); ?>
+    <!-- header_eof //-->
+      
+    <!-- left_navigation //-->
+    <?php require(DIR_WS_INCLUDES . 'column_left.php'); ?>
+    <!-- left_navigation_eof //-->
+      
+    <!-- begin #content -->
+    <div id="content" class="content">
+      <!-- begin breadcrumb -->
+      <ol class="breadcrumb pull-right">
+        <li>Create &nbsp; <a title="<?php echo BOX_MANUAL_ORDER_CREATE_ACCOUNT;?>" href="<?php echo tep_href_link(FILENAME_CREATE_ACCOUNT,'','SSL');?>" class="btn btn-xs btn-header"><i class="fa fa-user"></i><span class="label">+</span></a> <a title="<?php echo BOX_MANUAL_ORDER_CREATE_ORDER;?>" href="<?php echo tep_href_link(FILENAME_CREATE_ORDER,'','SSL');?>" class="btn btn-xs btn-header"><i class="fa fa-shopping-cart"></i><span class="label">+</span></a></li>
+        <li>Search &nbsp; <a href="javascript:;" class="btn btn-header btn-xs header-popover" id="ProductsPopover">Products</a> <a href="javascript:;" class="btn btn-header btn-xs header-popover" id="CustomerPopover">Customers</a> <a href="javascript:;" class="btn btn-header btn-xs header-popover" id="OrdersPopover">Orders</a> <a href="javascript:;" class="btn btn-header btn-xs header-popover" id="PagesPopover">Pages</a></li>
+      </ol>   
+      
+      <!-- end breadcrumb -->
+      <!-- begin page-header -->
+      <h1 class="page-header"><?php echo HEADING_TITLE; ?></h1>
+      <!-- end page-header -->
+      
+    <!-- begin panel -->
+    <div class="panel panel-inverse"><table border="0" width="100%" cellspacing="0" cellpadding="0" >
       <?php
       if ( isset($_GET['action']) &&  (($_GET['action'] == 'new') || ($_GET['action'] == 'edit')) ) {
         $form_action = 'insert';
@@ -132,11 +149,11 @@ if ( isset($_GET['action']) &&  (($_GET['action'] == 'new') || ($_GET['action'] 
           }
         }
         ?>
-        <tr><form name="new_feature" <?php echo 'action="' . tep_href_link(FILENAME_FEATURED, tep_get_all_get_params(array('action', 'info', 'sID')) . 'action=' . $form_action, 'NONSSL') . '"'; ?> method="post"><?php if ($form_action == 'update') echo tep_draw_hidden_field('featured_id', $_GET['sID']); ?>
-          <td><br><table border="0" cellspacing="0" cellpadding="2">
+        <tr><form name="new_feature" <?php echo 'action="' . tep_href_link(FILENAME_FEATURED, tep_get_all_get_params(array('action', 'info', 'sID')) . 'action=' . $form_action, 'NONSSL') . '"'; ?> method="post" class="form-inline"><?php if ($form_action == 'update') echo tep_draw_hidden_field('featured_id', $_GET['sID']); ?>
+          <td><br><table border="0" cellspacing="0" cellpadding="2" class="data-table">
             <tr>
               <td class="main"><?php echo TEXT_FEATURED_PRODUCT; ?>&nbsp;</td>
-              <td class="main"><?php echo (isset($sInfo->products_name) ? $sInfo->products_name : tep_draw_products_pull_down('products_id', 'style="font-size:10px"', $featured_array)); 
+              <td class="main"><?php echo (isset($sInfo->products_name) ? $sInfo->products_name : tep_draw_products_pull_down('products_id', 'class="form-control"', $featured_array)); 
                 if (isset($sInfo->products_price)) {
                   echo tep_draw_hidden_field('products_price', $sInfo->products_price); 
                 } else {
@@ -146,24 +163,21 @@ if ( isset($_GET['action']) &&  (($_GET['action'] == 'new') || ($_GET['action'] 
             </tr>
             <tr>
               <td class="main"><?php echo TEXT_FEATURED_EXPIRES_DATE; ?>&nbsp;</td>
-              <td class="main"><?php 
+              <td class="main"><table><tr><td><?php 
                 if (isset($sInfo->expires_date)) {
-                  echo tep_draw_input_field('day', substr($sInfo->expires_date, 8, 2), 'size="2" maxlength="2" class="cal-TextBox"') . tep_draw_input_field('month', substr($sInfo->expires_date, 5, 2), 'size="2" maxlength="2" class="cal-TextBox"') . tep_draw_input_field('year', substr($sInfo->expires_date, 0, 4), 'size="4" maxlength="4" class="cal-TextBox"');
+                  echo tep_draw_input_field('day', substr($sInfo->expires_date, 8, 2), 'size="2" maxlength="2" class="form-control"') . ' </td><td>' . tep_draw_input_field('month', substr($sInfo->expires_date, 5, 2), 'size="2" maxlength="2" class="form-control"') . ' </td><td>' . tep_draw_input_field('year', substr($sInfo->expires_date, 0, 4), 'size="4" maxlength="4" class="form-control"');
                 } else {
-                  echo tep_draw_input_field('day', '', 'size="2" maxlength="2" class="cal-TextBox"') . tep_draw_input_field('month', '', 'size="2" maxlength="2" class="cal-TextBox"') . tep_draw_input_field('year', '', 'size="4" maxlength="4" class="cal-TextBox"');
+                  echo tep_draw_input_field('day', '', 'size="2" maxlength="2" class="form-control"') . ' </td><td>' . tep_draw_input_field('month', '', 'size="2" maxlength="2" class="form-control"') . ' </td><td>' . tep_draw_input_field('year', '', 'size="4" maxlength="4" class="form-control"');
                 }
-                ?>
-                <a class="so-BtnLink" href="javascript:calClick();return false;" onmouseover="calSwapImg('BTN_date', 'img_Date_OVER',true);" onmouseout="calSwapImg('BTN_date', 'img_Date_UP',true);" onclick="calSwapImg('BTN_date', 'img_Date_DOWN');showCalendar('new_feature','dteWhen','BTN_date');return false;"><?php echo tep_image(DIR_WS_IMAGES . 'cal_date_up.gif', 'Calendar', '22', '17', 'align="absmiddle" name="BTN_date"'); ?></a>
+                ?></td><td> &nbsp; <a class="so-BtnLink" href="javascript:calClick();return false;" onmouseover="calSwapImg('BTN_date', 'img_Date_OVER',true);" onmouseout="calSwapImg('BTN_date', 'img_Date_UP',true);" onclick="calSwapImg('BTN_date', 'img_Date_DOWN');showCalendar('new_feature','dteWhen','BTN_date');return false;"><?php echo tep_image(DIR_WS_IMAGES . 'cal_date_up.gif', 'Calendar', '22', '17', 'align="absmiddle" name="BTN_date"'); ?></a>
+                </td></tr></table>
               </td>
             </tr>
-          </table></td>
-        </tr>
         <tr>
-          <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
-            <tr>
-              <td class="main" align="right" valign="top"><br><?php echo '<a href="' . tep_href_link(FILENAME_FEATURED, 'page=' . $_GET['page'] . '&sID=' . (isset($_GET['sID']) ? $_GET['sID'] : 0)) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>' . (($form_action == 'insert') ? tep_image_submit('button_insert.gif', IMAGE_INSERT) : tep_image_submit('button_update.gif', IMAGE_UPDATE)); ?></td>
-            </tr>
-          </table></td></form>
+          <td align="center" colspan="2"><br><?php echo '<a href="' . tep_href_link(FILENAME_FEATURED, 'page=' . $_GET['page'] . '&sID=' . (isset($_GET['sID']) ? $_GET['sID'] : 0)) . '">' . tep_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>' . (($form_action == 'insert') ? tep_image_submit('button_insert.gif', IMAGE_INSERT) : tep_image_submit('button_update.gif', IMAGE_UPDATE)); ?>
+          </td></form>
+        </tr>
+          </table></td>
         </tr>
         <?php
       } else {
@@ -237,7 +251,7 @@ if ( isset($_GET['action']) &&  (($_GET['action'] == 'new') || ($_GET['action'] 
                     ?>
                   </table></td>
                 </tr>
-              </table></td>
+              </table></td>     <td>&nbsp;</td>
               <?php
               $heading = array();
               $contents = array();
@@ -277,16 +291,17 @@ if ( isset($_GET['action']) &&  (($_GET['action'] == 'new') || ($_GET['action'] 
       echo $cre_RCI->get('featured', 'bottom');
       // RCI code eof
       ?>
-    </table></td>
-    <!-- body_text_eof //-->
-  </tr>
-</table>
-</div>
-<!-- body_eof //-->
-<!-- footer //-->
-<?php require(DIR_WS_INCLUDES . 'footer.php'); ?>
-<!-- footer_eof //-->
-<br>
+    </table></div>
+    </div>
+    <!-- end panel -->
+    </div>
+    <!-- end #content -->
+      
+      <!-- begin #footer -->
+  <?php
+require(DIR_WS_INCLUDES . 'footer.php');
+?>
+
 </body>
 </html>
 <?php require(DIR_WS_INCLUDES . 'application_bottom.php'); ?>

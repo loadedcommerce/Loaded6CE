@@ -118,20 +118,38 @@
     $error = true;
   } 
 ?>
-<!doctype html public "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html <?php echo HTML_PARAMS; ?>>
+<!DOCTYPE html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
 <title><?php echo TITLE; ?></title>
+<link rel="icon" type="image/png" href="favicon.ico" />
 <script type="text/javascript" src="<?php echo (($request_type == 'SSL') ? 'https:' : 'http:'); ?>//ajax.googleapis.com/ajax/libs/jquery/<?php echo JQUERY_VERSION; ?>/jquery.min.js"></script>
-<script type="text/javascript">
-  if (typeof jQuery == 'undefined') {
-    //alert('You are running a local copy of jQuery!');
-    document.write(unescape("%3Cscript src='includes/javascript/jquery-1.6.2.min.js' type='text/javascript'%3E%3C/script%3E"));
-  }
-</script>
-<link rel="stylesheet" type="text/css" href="./includes/stylesheet.css">
-<script language="javascript" src="./includes/general.js"></script>
+
+
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+                                                             <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
+  <!-- ================== BEGIN BASE CSS STYLE ================== -->
+  <link href="<?php echo (($request_type == 'SSL') ? 'https:' : 'http:'); ?>//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+  <link href="assets/plugins/jquery-ui/themes/base/minified/jquery-ui.min.css" rel="stylesheet" />
+  <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+  <link href="assets/css/animate.min.css" rel="stylesheet" />
+  <link href="assets/css/style.min.css" rel="stylesheet" />
+  <link href="assets/css/style-responsive.min.css" rel="stylesheet" />
+  <link href="assets/css/theme/blue.css" rel="stylesheet" id="theme" />
+  <!-- ================== END BASE CSS STYLE ================== -->
+  
+  <!-- ================== BEGIN PAGE LEVEL STYLE ================== -->
+  <link href="assets/plugins/jquery-jvectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" />
+  <link href="assets/plugins/bootstrap-datepicker/css/datepicker.css" rel="stylesheet" />
+  <link href="assets/plugins/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet" />
+    <link href="assets/plugins/gritter/css/jquery.gritter.css" rel="stylesheet" />  
+    <link href="assets/plugins/DataTables/media/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/plugins/DataTables/extensions/Select/css/select.bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/plugins/DataTables/extensions/Responsive/css/responsive.bootstrap.min.css" rel="stylesheet" />
+  <!-- ================== END PAGE LEVEL STYLE ================== -->
+  <script language="javascript" src="includes/general.js"></script>
+  <script type="text/javascript" src="includes/menu.js"></script>
 <!-- Tabs code -->
 <script type="text/javascript" src="includes/javascript/tabpane/local/webfxlayout.js"></script>
 <link type="text/css" rel="stylesheet" href="includes/javascript/tabpane/tab.webfx.css">
@@ -152,33 +170,34 @@
 </style>
 <script type="text/javascript" src="includes/javascript/tabpane/tabpane.js"></script>
 <!-- End Tabs -->
-
-<link rel="stylesheet" type="text/css" href="includes/headernavmenu.css">
-<script type="text/javascript" src="includes/menu.js"></script>
 </head>
-<body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF" onLoad="SetFocus();">
-<!-- header //-->
-<?php require(DIR_WS_INCLUDES . 'header.php'); ?>
-<!-- header_eof //-->
-<!-- body //-->
-<div id="body">
-<table border="0" width="100%" cellspacing="0" cellpadding="0" class="body-table">
-  <tr>
-        <!-- left_navigation //-->
-        <?php require(DIR_WS_INCLUDES . 'column_left.php'); ?>
-        <!-- left_navigation_eof //-->
-        <!-- body_text //-->
-    <td valign="top" class="page-container"><table border="0" width="100%" cellspacing="0" cellpadding="0">
+<body>
+    <!-- begin #page-container -->
+    <div id="page-container" class="fade page-sidebar-fixed page-header-fixed gradient-enabled">
+    <!-- header //-->
+    <?php require(DIR_WS_INCLUDES . 'header.php'); ?>
+    <!-- header_eof //-->
+      
+    <!-- left_navigation //-->
+    <?php require(DIR_WS_INCLUDES . 'column_left.php'); ?>
+    <!-- left_navigation_eof //-->
+      
+    <!-- begin #content -->
+    <div id="content" class="content">
+      <!-- begin breadcrumb -->
+      <ol class="breadcrumb pull-right">
+        <li>Create &nbsp; <a title="<?php echo BOX_MANUAL_ORDER_CREATE_ACCOUNT;?>" href="<?php echo tep_href_link(FILENAME_CREATE_ACCOUNT,'','SSL');?>" class="btn btn-xs btn-header"><i class="fa fa-user"></i><span class="label">+</span></a> <a title="<?php echo BOX_MANUAL_ORDER_CREATE_ORDER;?>" href="<?php echo tep_href_link(FILENAME_CREATE_ORDER,'','SSL');?>" class="btn btn-xs btn-header"><i class="fa fa-shopping-cart"></i><span class="label">+</span></a></li>
+        <li>Search &nbsp; <a href="javascript:;" class="btn btn-header btn-xs header-popover" id="ProductsPopover">Products</a> <a href="javascript:;" class="btn btn-header btn-xs header-popover" id="CustomerPopover">Customers</a> <a href="javascript:;" class="btn btn-header btn-xs header-popover" id="OrdersPopover">Orders</a> <a href="javascript:;" class="btn btn-header btn-xs header-popover" id="PagesPopover">Pages</a></li>
+      </ol>
+      <!-- end breadcrumb -->
+      <!-- begin page-header -->
+      <h1 class="page-header"><?php echo HEADING_TITLE; ?></h1>
+      <!-- end page-header -->
+      
+    <!-- begin panel -->
+    <div class="panel panel-inverse"><table border="0" width="100%" cellspacing="0" cellpadding="0" class="data-table">
         <tr>
-          <td width="100%"><table border="0" width="100%" cellspacing="0" cellpadding="0">
-              <tr>
-                <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
-                <td class="pageHeading" align="right"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-              </tr>
-            </table></td>
-        </tr>
-        <tr>
-          <td><?php echo tep_draw_form('frm_upload', FILENAME_BRANDING_MANAGER, 'action=upload', 'post', 'enctype="multipart/form-data"'); ?>
+          <td><?php echo tep_draw_form('frm_upload', FILENAME_BRANDING_MANAGER, 'action=upload', 'post', 'enctype="multipart/form-data" class="form-horizontal"'); ?>
             <table border="0" width="100%" cellspacing="0" cellpadding="4" align="center">
               <tr>
                 <td><div class="tab-pane" id="tabPane1">
@@ -195,35 +214,35 @@ $store_brand_info = tep_db_fetch_array($store_brand_info_qry);
                     <div class="tab-page" id="<?php echo $languages[$i]['name'];?>">
                       <h2 class="tab"><?php echo tep_image(HTTP_SERVER . DIR_WS_CATALOG_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], $languages[$i]['name'], '', '', 'valign="middle" style="height:16px; width:30px;"') . '&nbsp;' .$languages[$i]['name'];?></h2>
                       <script type="text/javascript">tp1.addTabPage( document.getElementById( "<?php echo $languages[$i]['name'];?>" ) );</script>
-<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<table width="100%" border="0" cellspacing="3" cellpadding="3">
       <tr>
-        <td class="formAreaTitle"><?php echo sprintf(TITLE_STORE_BRAND,$languages[$i]['name']); ?></td>
+        <td><h5><?php echo sprintf(TITLE_STORE_BRAND,$languages[$i]['name']); ?></h5></td>
       </tr>
       <tr>
-        <td class="formArea"><table border="0" cellspacing="2" cellpadding="2">
+        <td class="formArea"><table border="0" cellspacing="2" cellpadding="2" class="data-table">
           <tr>
-            <td class="main"><?php echo STORE_BRAND_TELEPHONE_NUMBER; ?></td>
-            <td class="main"><?php echo tep_draw_input_field('store_brand_telephone' . $languages[$i]['id'], $store_brand_info['store_brand_telephone'], 'maxlength="32"'); ?></td>
+            <td><?php echo STORE_BRAND_TELEPHONE_NUMBER; ?></td>
+            <td><?php echo tep_draw_input_field('store_brand_telephone' . $languages[$i]['id'], $store_brand_info['store_brand_telephone'], 'maxlength="32" class="form-control"'); ?></td>
           </tr>
           <tr>
-            <td class="main"><?php echo STORE_BRAND_FAX_NUMBER; ?></td>
-            <td class="main"><?php echo tep_draw_input_field('store_brand_fax' . $languages[$i]['id'], $store_brand_info['store_brand_fax'], 'maxlength="32"'); ?></td>
+            <td><?php echo STORE_BRAND_FAX_NUMBER; ?></td>
+            <td><?php echo tep_draw_input_field('store_brand_fax' . $languages[$i]['id'], $store_brand_info['store_brand_fax'], 'maxlength="32" class="form-control"'); ?></td>
           </tr>
           <tr>
-            <td class="main"><?php echo STORE_BRAND_HOMEPAGE; ?></td>
-            <td class="main"><?php echo tep_draw_input_field('store_brand_homepage' . $languages[$i]['id'], $store_brand_info['store_brand_homepage'], 'maxlength="64"'); ?></td>
+            <td><?php echo STORE_BRAND_HOMEPAGE; ?></td>
+            <td><?php echo tep_draw_input_field('store_brand_homepage' . $languages[$i]['id'], $store_brand_info['store_brand_homepage'], 'maxlength="64" class="form-control"'); ?></td>
           </tr>
           <tr>
-            <td class="main"><?php echo STORE_BRAND_COMPANY_LOGO; ?></td>
-            <td class="main"><?php echo tep_draw_file_field('store_brand_image' . $languages[$i]['id']);  if (tep_not_null($store_brand_info['store_brand_image']) && file_exists( DIR_FS_LOGO . $store_brand_info['store_brand_image'] )) { echo '<br>' . DIR_FS_LOGO . $store_brand_info['store_brand_image']; }?>
+            <td><?php echo STORE_BRAND_COMPANY_LOGO; ?></td>
+            <td><?php echo tep_draw_file_field('store_brand_image' . $languages[$i]['id']);  if (tep_not_null($store_brand_info['store_brand_image']) && file_exists( DIR_FS_LOGO . $store_brand_info['store_brand_image'] )) { echo '<br>' . DIR_FS_LOGO . $store_brand_info['store_brand_image']; }?>
             </td>
           </tr>
           <?php
           if (tep_not_null($store_brand_info['store_brand_image']) ) {
           ?>
           <tr>
-            <td class="main"></td>
-            <td class="main" valign="middle"><?php 
+            <td></td>
+            <td valign="middle"><?php 
             if( file_exists( DIR_FS_LOGO . $store_brand_info['store_brand_image'] )) { 
                 echo tep_image(DIR_WS_LOGO . $store_brand_info['store_brand_image']) ;
             } else {
@@ -235,20 +254,20 @@ $store_brand_info = tep_db_fetch_array($store_brand_info_qry);
           }
           ?>
           <tr>
-            <td class="main"><?php echo STORE_BRAND_BRANDING_COMPANY_NAME; ?></td>
-            <td class="main"><?php echo tep_draw_input_field('store_brand_name' . $languages[$i]['id'], $store_brand_info['store_brand_name']); ?></td>
+            <td><?php echo STORE_BRAND_BRANDING_COMPANY_NAME; ?></td>
+            <td><?php echo tep_draw_input_field('store_brand_name' . $languages[$i]['id'], $store_brand_info['store_brand_name'],'class="form-control"'); ?></td>
           </tr>
           <tr>
-            <td class="main"><?php echo STORE_BRAND_BRANDING_SLOGAN; ?></td>
-            <td class="main"><?php echo tep_draw_input_field('store_brand_slogan' . $languages[$i]['id'], $store_brand_info['store_brand_slogan']); ?></td>
+            <td><?php echo STORE_BRAND_BRANDING_SLOGAN; ?></td>
+            <td><?php echo tep_draw_input_field('store_brand_slogan' . $languages[$i]['id'], $store_brand_info['store_brand_slogan'],'class="form-control"'); ?></td>
           </tr>
           <tr>
-            <td class="main"><?php echo STORE_BRAND_BRANDING_SUPPORT_EMAIL; ?></td>
-            <td class="main"><?php echo tep_draw_input_field('store_brand_support_email' . $languages[$i]['id'],$store_brand_info['store_brand_support_email']); ?></td>
+            <td><?php echo STORE_BRAND_BRANDING_SUPPORT_EMAIL; ?></td>
+            <td><?php echo tep_draw_input_field('store_brand_support_email' . $languages[$i]['id'],$store_brand_info['store_brand_support_email'],'class="form-control"'); ?></td>
           </tr>
           <tr>
-            <td class="main"><?php echo STORE_BRAND_BRANDING_SUPPORT_PHONE; ?></td>
-            <td class="main"><?php echo tep_draw_input_field('store_brand_support_phone' . $languages[$i]['id'],$store_brand_info['store_brand_support_phone']); ?></td>
+            <td><?php echo STORE_BRAND_BRANDING_SUPPORT_PHONE; ?></td>
+            <td><?php echo tep_draw_input_field('store_brand_support_phone' . $languages[$i]['id'],$store_brand_info['store_brand_support_phone'],'class="form-control"'); ?></td>
           </tr>
 
           </table>
@@ -289,7 +308,7 @@ if (!$error) {
       </table></td>
     <!-- body_text_eof //-->
   </tr>
-</table>
+</table>  </div></div>
 </div>
 <!-- body_eof //-->
 <!-- footer //-->

@@ -226,45 +226,69 @@ if (tep_not_null($action)) {
   }
 }
 ?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html <?php echo HTML_PARAMS; ?>>
+<!DOCTYPE html>
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
-  <title><?php echo TITLE; ?></title>
-  <script type="text/javascript" src="<?php echo (($request_type == 'SSL') ? 'https:' : 'http:'); ?>//ajax.googleapis.com/ajax/libs/jquery/<?php echo JQUERY_VERSION; ?>/jquery.min.js"></script>
-<script type="text/javascript">
-  if (typeof jQuery == 'undefined') {
-    //alert('You are running a local copy of jQuery!');
-    document.write(unescape("%3Cscript src='includes/javascript/jquery-1.6.2.min.js' type='text/javascript'%3E%3C/script%3E"));
-  }
-</script>
-  <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
-  <!--[if IE]>
-  <link rel="stylesheet" type="text/css" href="includes/stylesheet-ie.css">
-  <![endif]-->
+<meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
+<title><?php echo TITLE; ?></title>
+<link rel="icon" type="image/png" href="favicon.ico" />
+<script type="text/javascript" src="<?php echo (($request_type == 'SSL') ? 'https:' : 'http:'); ?>//ajax.googleapis.com/ajax/libs/jquery/<?php echo JQUERY_VERSION; ?>/jquery.min.js"></script>
+
+
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+                                                             <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
+  <!-- ================== BEGIN BASE CSS STYLE ================== -->
+  <link href="<?php echo (($request_type == 'SSL') ? 'https:' : 'http:'); ?>//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+  <link href="assets/plugins/jquery-ui/themes/base/minified/jquery-ui.min.css" rel="stylesheet" />
+  <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+  <link href="assets/css/animate.min.css" rel="stylesheet" />
+  <link href="assets/css/style.min.css" rel="stylesheet" />
+  <link href="assets/css/style-responsive.min.css" rel="stylesheet" />
+  <link href="assets/css/theme/blue.css" rel="stylesheet" id="theme" />
+  <!-- ================== END BASE CSS STYLE ================== -->
+  
+  <!-- ================== BEGIN PAGE LEVEL STYLE ================== -->
+  <link href="assets/plugins/jquery-jvectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" />
+  <link href="assets/plugins/bootstrap-datepicker/css/datepicker.css" rel="stylesheet" />
+  <link href="assets/plugins/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet" />
+    <link href="assets/plugins/gritter/css/jquery.gritter.css" rel="stylesheet" />  
+    <link href="assets/plugins/DataTables/media/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/plugins/DataTables/extensions/Select/css/select.bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/plugins/DataTables/extensions/Responsive/css/responsive.bootstrap.min.css" rel="stylesheet" />
+  <!-- ================== END PAGE LEVEL STYLE ================== -->
   <script language="javascript" src="includes/general.js"></script>
-<link rel="stylesheet" type="text/css" href="includes/headernavmenu.css">
-<script type="text/javascript" src="includes/menu.js"></script>
+  <script type="text/javascript" src="includes/menu.js"></script>
 </head>
-<body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF" onLoad="SetFocus();">
-  <!-- header //-->
-  <?php require(DIR_WS_INCLUDES . 'header.php'); ?>
-  <!-- header_eof //-->
-  <!-- body //-->
-  <div id="body">
-    <table border="0" width="100%" cellspacing="0" cellpadding="0" class="body-table">
-      <tr>
-        <!-- left_navigation //-->
-        <?php require(DIR_WS_INCLUDES . 'column_left.php'); ?>
-        <!-- left_navigation_eof //-->
-        <!-- body_text //-->
-        <td class="page-container" valign="top">
-          <table border="0" width="100%" cellspacing="0" cellpadding="0">
+<body>
+    <!-- begin #page-container -->
+    <div id="page-container" class="fade page-sidebar-fixed page-header-fixed gradient-enabled">
+    <!-- header //-->
+    <?php require(DIR_WS_INCLUDES . 'header.php'); ?>
+    <!-- header_eof //-->
+      
+    <!-- left_navigation //-->
+    <?php require(DIR_WS_INCLUDES . 'column_left.php'); ?>
+    <!-- left_navigation_eof //-->
+      
+    <!-- begin #content -->
+    <div id="content" class="content">
+      <!-- begin breadcrumb -->
+      <ol class="breadcrumb pull-right">
+        <li>Create &nbsp; <a title="<?php echo BOX_MANUAL_ORDER_CREATE_ACCOUNT;?>" href="<?php echo tep_href_link(FILENAME_CREATE_ACCOUNT,'','SSL');?>" class="btn btn-xs btn-header"><i class="fa fa-user"></i><span class="label">+</span></a> <a title="<?php echo BOX_MANUAL_ORDER_CREATE_ORDER;?>" href="<?php echo tep_href_link(FILENAME_CREATE_ORDER,'','SSL');?>" class="btn btn-xs btn-header"><i class="fa fa-shopping-cart"></i><span class="label">+</span></a></li>
+        <li>Search &nbsp; <a href="javascript:;" class="btn btn-header btn-xs header-popover" id="ProductsPopover">Products</a> <a href="javascript:;" class="btn btn-header btn-xs header-popover" id="CustomerPopover">Customers</a> <a href="javascript:;" class="btn btn-header btn-xs header-popover" id="OrdersPopover">Orders</a> <a href="javascript:;" class="btn btn-header btn-xs header-popover" id="PagesPopover">Pages</a></li>
+      </ol>
+      <!-- end breadcrumb -->
+      <!-- begin page-header -->
+      <h1 class="page-header"><?php echo HEADING_TITLE; ?></h1>
+      <!-- end page-header -->
+      
+    <!-- begin panel -->
+    <div class="panel panel-inverse"><table border="0" width="100%" cellspacing="0" cellpadding="0">
             <tr>
               <td width="100%">
                 <table border="0" width="100%" cellspacing="0" cellpadding="0">
                   <tr>
-                    <td class="pageHeading"><?php echo HEADING_TITLE; ?>
+                    <td class="pageHeading">
                     <?php
                       if(isset($_GET['action']) && $_GET["action"] == "sync") {           
                         $ln_id = get_degault_language_id();
@@ -274,9 +298,6 @@ if (tep_not_null($action)) {
                         Print(" <span class='dataTableContent'><br> ".DEFAULT_LANGUAGE_IS." ".$data_lang["name"] . "</span>");
                       }
                     ?>
-                    </td>
-                    <td class="pageHeading" align="right">
-                      <?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?>
                     </td>
                   </tr>
                 </table>
@@ -398,7 +419,7 @@ if (tep_not_null($action)) {
                           ?>
                             <tr>
                               <td>
-                                <table border="0" width="100%" cellspacing="1" cellpadding="2">
+                                <table border="0" width="100%" cellspacing="1" cellpadding="2" class="data-table">
                                   <tr class="dataTableHeadingRow">
                                     <td class="dataTableHeadingContent" style = "padding-left:20"><?php print(TABLE_NAMES);?> </td>
                                     <td class="dataTableHeadingContent" style = "padding-left:20"><?php print(MISSING_LANGUAGE);?> </td>
@@ -606,7 +627,7 @@ if (tep_not_null($action)) {
                     <?php
                     } else {
                     ?>
-                    <table border="0" width="100%" cellspacing="0" cellpadding="2">
+                    <table border="0" width="100%" cellspacing="0" cellpadding="2" class="data-table">
                     <tr class="dataTableHeadingRow">
                       <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_LANGUAGE_NAME; ?></td>
                       <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_LANGUAGE_CODE; ?></td>
@@ -645,19 +666,23 @@ if (tep_not_null($action)) {
                             <td class="smallText" valign="top"><?php echo $languages_split->display_count($languages_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, $_GET['page'], TEXT_DISPLAY_NUMBER_OF_LANGUAGES); ?></td>
                             <td class="smallText" align="right"><?php echo $languages_split->display_links($languages_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, MAX_DISPLAY_PAGE_LINKS, $_GET['page']); ?></td>
                           </tr>
-                          <?php
-                          if (empty($action)) {
-                          ?>
-                          <tr>
-                            <td align="right" colspan="2"><?php echo '<a href="' . tep_href_link(FILENAME_LANGUAGES, 'page=' . $_GET['page'] . '&lID=' . $lInfo->languages_id . '&action=new') . '">' . tep_image_button('button_new_language.gif', IMAGE_NEW_LANGUAGE) . '</a>'; ?></td>
-                          </tr>
-                          <?php
-                          }
-                          ?>
-                        </table>
+                          </table>
                       </td>
                     </tr>
                     </table>
+                          <?php
+                          if (empty($action)) {
+                          ?>
+                          <table>
+                          <tr>
+                            <td align="right" colspan="2"><?php echo '<a href="' . tep_href_link(FILENAME_LANGUAGES, 'page=' . $_GET['page'] . '&lID=' . $lInfo->languages_id . '&action=new') . '">' . tep_image_button('button_new_language.gif', IMAGE_NEW_LANGUAGE) . '</a>'; ?></td>
+                          </tr>
+                          </table>
+                          <?php
+                          }
+                          ?>
+                        
+
                     <?php
                     }
                     ?>
@@ -761,10 +786,7 @@ if (tep_not_null($action)) {
               </td>
             </tr>
           </table>
-        </td>
-        <!-- body_text_eof //-->
-      </tr>
-    </table>
+        </div></div>
   </div>
   <!-- body_eof //-->
   <!-- footer //-->

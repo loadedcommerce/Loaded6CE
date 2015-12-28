@@ -650,23 +650,41 @@ switch (true) {
 }
 $go_back_to=$_SERVER["REQUEST_URI"];
 ?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html <?php echo HTML_PARAMS; ?>>
+<!DOCTYPE html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
 <title><?php echo TITLE; ?></title>
+<link rel="icon" type="image/png" href="favicon.ico" />
 <script type="text/javascript" src="<?php echo (($request_type == 'SSL') ? 'https:' : 'http:'); ?>//ajax.googleapis.com/ajax/libs/jquery/<?php echo JQUERY_VERSION; ?>/jquery.min.js"></script>
-<script type="text/javascript">
-  if (typeof jQuery == 'undefined') {
-    //alert('You are running a local copy of jQuery!');
-    document.write(unescape("%3Cscript src='includes/javascript/jquery-1.6.2.min.js' type='text/javascript'%3E%3C/script%3E"));
-  }
-</script>
-<link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
+
+
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+                                                             <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
+  <!-- ================== BEGIN BASE CSS STYLE ================== -->
+  <link href="<?php echo (($request_type == 'SSL') ? 'https:' : 'http:'); ?>//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+  <link href="assets/plugins/jquery-ui/themes/base/minified/jquery-ui.min.css" rel="stylesheet" />
+  <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+  <link href="assets/css/animate.min.css" rel="stylesheet" />
+  <link href="assets/css/style.min.css" rel="stylesheet" />
+  <link href="assets/css/style-responsive.min.css" rel="stylesheet" />
+  <link href="assets/css/theme/blue.css" rel="stylesheet" id="theme" />
+  <!-- ================== END BASE CSS STYLE ================== -->
+  
+  <!-- ================== BEGIN PAGE LEVEL STYLE ================== -->
+  <link href="assets/plugins/jquery-jvectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" />
+  <link href="assets/plugins/bootstrap-datepicker/css/datepicker.css" rel="stylesheet" />
+  <link href="assets/plugins/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet" />
+    <link href="assets/plugins/gritter/css/jquery.gritter.css" rel="stylesheet" />  
+    <link href="assets/plugins/DataTables/media/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/plugins/DataTables/extensions/Select/css/select.bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/plugins/DataTables/extensions/Responsive/css/responsive.bootstrap.min.css" rel="stylesheet" />
+  <!-- ================== END PAGE LEVEL STYLE ================== -->
+  <script language="javascript" src="includes/general.js"></script>
+  <script type="text/javascript" src="includes/menu.js"></script>
 <!--[if IE]>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet-ie.css">
 <![endif]-->
-<script type="text/javascript" src="includes/general.js"></script>
 <!-- Tabs code -->
 <script type="text/javascript" src="includes/javascript/tabpane/local/webfxlayout.js"></script>
 <link type="text/css" rel="stylesheet" href="includes/javascript/tabpane/tab.webfx.css">
@@ -704,24 +722,31 @@ function trim(str) {
 
 //-->
 </script>
-<link rel="stylesheet" type="text/css" href="includes/headernavmenu.css">
-<script type="text/javascript" src="includes/menu.js"></script>
 </head>
-<body bgcolor="#FFFFFF">
+<body>
 <div id="spiffycalendar" class="text"></div>
-<!-- header //-->
-<?php require(DIR_WS_INCLUDES . 'header.php'); ?>
-<!-- header_eof //-->
-<!-- body //-->
-<div id="body">
-<table width="100%"  border="0" align="center" cellpadding="0" cellspacing="0" class="body-table">
-  <tr>
-  <!-- left_navigation //-->
-  <?php require(DIR_WS_INCLUDES . 'column_left.php'); ?>
-  <!-- left_navigation_eof //-->
-    <!-- body_text //-->
-    <td valign="top" class="page-container">
-      <table border="0" width="100%" cellspacing="0" cellpadding="0">
+    <!-- begin #page-container -->
+    <div id="page-container" class="fade page-sidebar-fixed page-header-fixed gradient-enabled">
+    <!-- header //-->
+    <?php require(DIR_WS_INCLUDES . 'header.php'); ?>
+    <!-- header_eof //-->
+      
+    <!-- left_navigation //-->
+    <?php require(DIR_WS_INCLUDES . 'column_left.php'); ?>
+    <!-- left_navigation_eof //-->
+      
+    <!-- begin #content -->
+    <div id="content" class="content">
+      <!-- begin breadcrumb -->
+      <ol class="breadcrumb pull-right">
+        <li>Create &nbsp; <a title="<?php echo BOX_MANUAL_ORDER_CREATE_ACCOUNT;?>" href="<?php echo tep_href_link(FILENAME_CREATE_ACCOUNT,'','SSL');?>" class="btn btn-xs btn-header"><i class="fa fa-user"></i><span class="label">+</span></a> <a title="<?php echo BOX_MANUAL_ORDER_CREATE_ORDER;?>" href="<?php echo tep_href_link(FILENAME_CREATE_ORDER,'','SSL');?>" class="btn btn-xs btn-header"><i class="fa fa-shopping-cart"></i><span class="label">+</span></a></li>
+        <li>Search &nbsp; <a href="javascript:;" class="btn btn-header btn-xs header-popover" id="ProductsPopover">Products</a> <a href="javascript:;" class="btn btn-header btn-xs header-popover" id="CustomerPopover">Customers</a> <a href="javascript:;" class="btn btn-header btn-xs header-popover" id="OrdersPopover">Orders</a> <a href="javascript:;" class="btn btn-header btn-xs header-popover" id="PagesPopover">Pages</a></li>
+      </ol>
+      <!-- end breadcrumb -->
+      
+    <!-- begin panel -->
+    <div class="panel panel-inverse">
+      <table border="0" width="100%" cellspacing="0" cellpadding="0" class="table dataTable no-footer dtr-inline">
         <?php
         $manage_image = new DirSelect($ImageLocations);
         $image_dir = $manage_image->getDirs();
@@ -777,11 +802,8 @@ function trim(str) {
           // RCI eof           
           ?>
           <tr>
-            <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '5'); ?></td>
-          </tr>
-          <tr>
-            <td class="pageHeading">
-              <?php echo sprintf($text_new_or_edit, tep_output_generated_category_path($current_category_id)); ?>
+            <td>
+              <h1 class="page-header"><?php echo sprintf($text_new_or_edit, tep_output_generated_category_path($current_category_id)); ?></h1>
             </td>
           </tr>
           <?php   
@@ -1054,7 +1076,7 @@ function trim(str) {
               <tr>
                 <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
                   <tr>
-                    <td class="pageHeading"><?php echo tep_image(HTTP_SERVER . DIR_WS_CATALOG_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], $languages[$i]['name']) . '&nbsp;' . $cInfo->categories_heading_title; ?></td>
+                    <td><h1 class="page-header"><?php echo tep_image(HTTP_SERVER . DIR_WS_CATALOG_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], $languages[$i]['name']) . '&nbsp;' . $cInfo->categories_heading_title; ?></h1></td>
                   </tr>
                 </table></td>
               </tr>
@@ -1277,19 +1299,132 @@ function trim(str) {
         }
         </script>
         <form name="new_product" method="post" enctype="multipart/form-data" onSubmit="return OnSubmitForm();setRetailPrice()">
-        <table border="0" width="98%" cellspacing="0" cellpadding="2" align="center"> 
+        <table border="0" width="98%" cellspacing="0" cellpadding="2" align="center" class="data-table"> 
           <tr>
-            <td class="pageHeading">
+            <td><h1 class="page-header">
               <?php             
               $text_new_or_edit = (isset($_GET['pID'])) ? sprintf(TEXT_INFO_HEADING_EDIT_PRODUCT, tep_get_products_name($_GET['pID'], $language_id)) : sprintf(TEXT_NEW_PRODUCT, tep_output_generated_category_path($current_category_id)); 
               echo $text_new_or_edit;
-              ?>
+              ?></h1>
             </td>
           </tr>
+     
+          <tr>                  
+            <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '5'); ?></td>
+          </tr>  
           <?php
+          // RCO start fieldsetdescr
+          if ($cre_RCO->get('categories', 'fieldsetdescr') !== true) { 
+            ?>   
+            <tr>
+              <td colspan="2"><!-- tabs -->
+                <table border="0" cellspacing="0" cellpadding="2" width="100%" align="center">
+                  <tr>
+                    <td class="main" valign="top" width="100%">
+                    <ul class="nav nav-tabs">
+                      <?php
+                      for ($i=0; $i<sizeof($languages); $i++) {
+                        ?>
+                        <li><a aria-expanded="true" href="#default-tab-<?php echo $languages[$i]['id'];?>" data-toggle="tab"><?php echo tep_image(HTTP_SERVER . DIR_WS_CATALOG_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], $languages[$i]['name'],'align="absmiddle" style="height:16px; width:30px;"') . '&nbsp;' .$languages[$i]['name'];?></a></li>
+                    <?php
+                      }
+                    echo '</ul>';
+                      for ($i=0; $i<sizeof($languages); $i++) {
+                        ?>
+                        <div class="tab-content">
+                        <div class="tab-pane fade in" id="default-tab-<?php echo $languages[$i]['id'];?>">
+                          <table width="100%"  border="0" cellspacing="0" cellpadding="0" summary="tab table">
+                            <tr>
+                              <td valign="top"><table border="0" cellspacing="4" cellpadding="4" summary="Title table">
+                                <tr valign="top">
+                                  <td class="main"><strong><?php echo TEXT_PRODUCTS_NAME; ?></strong></td>
+                                  <td class="main"><?php echo tep_draw_input_field('products_name[' . $languages[$i]['id'] . ']', (isset($products_name[$languages[$i]['id']]) ? $products_name[$languages[$i]['id']] : tep_get_products_name($pInfo->products_id, $languages[$i]['id'])), 'size="64" maxlength="64"'); ?></td>
+                                </tr>
+                                <tr>
+                                  <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '100%', '1'); ?></td>
+                                </tr>
+                                <tr valign="top">
+                                  <td class="main"><?php echo '<strong>' . TEXT_PRODUCTS_URL . '</strong><br><small>' . TEXT_PRODUCTS_URL_WITHOUT_HTTP . '</small>'; ?></td>
+                                  <td class="main"><?php echo tep_draw_input_field('products_url[' . $languages[$i]['id'] . ']', (isset($products_url[$languages[$i]['id']]) ? $products_url[$languages[$i]['id']] : tep_get_products_url($pInfo->products_id, $languages[$i]['id'])), 'size="64" maxlength="255"'); ?></td>
+                                </tr>
+                                <tr>
+                                  <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '100%', '1'); ?></td>
+                                </tr>
+                              </table>
+                              <?php if ($parentid["products_parent_id"] == 0) { ?>
+                              <table width="100%"  border="0" cellspacing="4" cellpadding="4" summary="description tabe">
+                                <tr valign="top">
+                                  <td class="main"><strong><?php echo TEXT_PRODUCTS_DESCRIPTION; ?></strong></td>
+                                </tr>
+                                <tr>
+                                  <td><?php echo tep_draw_textarea_field('products_description[' . $languages[$i]['id'] . ']', 'soft', '70', '15', (isset($products_description[$languages[$i]['id']]) ? $products_description[$languages[$i]['id']] : tep_get_products_description($pInfo->products_id, $languages[$i]['id']))); ?></td>
+                                </tr>
+                              </table>
+                              <?php
+                                }
+                     
+                              // RCO start fieldsetmeta
+                              if ($cre_RCO->get('categories', 'fieldsetmeta') !== true) {
+                                if ($parentid["products_parent_id"] == 0) {
+                                ?>                        
+                                <table width="100%"  border="0" cellspacing="3" cellpadding="0" summary="meta content holder table">
+                                  <tr>
+                                    <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+                                  </tr>  
+                                  <tr>
+                                    <td class="main"><fieldset><legend><?php echo TEXT_PRODUCT_METTA_INFO; ?></legend>
+                                      <table width="100%"  border="0" cellspacing="3" cellpadding="3">
+                                        <tr>
+                                          <td class="main"><strong><?php echo TEXT_PRODUCTS_PAGE_TITLE;?></strong></td>
+                                        </tr>
+                                        <tr>
+                                          <td class="main"><?php echo tep_draw_textarea_field('products_head_title_tag[' . $languages[$i]['id'] . ']', 'soft', '15', '2', (isset($products_head_title_tag[$languages[$i]['id']]) ? $products_head_title_tag[$languages[$i]['id']] : tep_get_products_head_title_tag($pInfo->products_id, $languages[$i]['id'])),'style="width:100%"'); ?></td>
+                                        </tr>
+                                      </table>
+                                      <table width="100%"  border="0" cellspacing="3" cellpadding="3">
+                                        <tr class="main">
+                                          <td width="50%"><strong><?php echo TEXT_PRODUCTS_HEADER_DESCRIPTION;?></strong></td>
+                                          <td width="50%"><strong><?php echo TEXT_PRODUCTS_KEYWORDS; ?></strong></td>
+                                        </tr>
+                                        <tr class="main">
+                                          <td><?php echo tep_draw_textarea_field('products_head_desc_tag[' . $languages[$i]['id'] . ']', 'soft', '35', '5', (isset($products_head_desc_tag[$languages[$i]['id']]) ? $products_head_desc_tag[$languages[$i]['id']] : tep_get_products_head_desc_tag($pInfo->products_id, $languages[$i]['id'])),'style="width:100%"'); ?></td>
+                                          <td><?php echo tep_draw_textarea_field('products_head_keywords_tag[' . $languages[$i]['id'] . ']', 'soft', '35', '5', (isset($products_head_keywords_tag[$languages[$i]['id']]) ? $products_head_keywords_tag[$languages[$i]['id']] : tep_get_products_head_keywords_tag($pInfo->products_id, $languages[$i]['id'])),'style="width:100%"'); ?></td>
+                                        </tr>
+                                      </table>
+                                    </fieldset></td>
+                                  </tr>
+                                </table>
+                                <?php
+                               }
+                              }
+                              ?>
+                            </tr>
+                          </table>
+                        </div></div>
+                        <?php
+                      }
+                      ?>
+                    
+                    </div>
+                    <script type="text/javascript">
+                      //<![CDATA[
+                      setupAllTabs();
+                      //]]>
+                    </script>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <?php
+          } // RCO eof fieldsetdescr
+
           // RCO start fieldsetpinfo
           if ($cre_RCO->get('categories', 'fieldsetpinfo') !== true) {  
-            ?>
+            ?>                               
+          <tr>
+            <td><?php echo tep_draw_separator('pixel_trans.gif', '10', '10'); ?></td>
+          </tr>  
             <tr>
               <td colspan="2"><fieldset><legend><?php echo TEXT_GENERAL_OPTIONS; ?></legend>
                 <table width="100%"  border="0" cellspacing="0" cellpadding="0">
@@ -1362,113 +1497,10 @@ function trim(str) {
                   </script>
                 </table>
               </fieldset></td>
-            </tr>
+            </tr>  
               <?php
           } // RCO eof fieldsetpinfo
-          ?>    
-          <tr>                  
-            <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '5'); ?></td>
-          </tr>  
-          <?php
-          // RCO start fieldsetdescr
-          if ($cre_RCO->get('categories', 'fieldsetdescr') !== true) { 
-            ?>   
-            <tr>
-              <td colspan="2"><!-- tabs -->
-                <table border="0" cellspacing="0" cellpadding="2" width="100%" align="center">
-                  <tr>
-                    <td class="main" valign="top" width="100%"><div class="tab-pane" id="tabPane1">
-                      <script type="text/javascript">tp1 = new WebFXTabPane( document.getElementById( "tabPane1" ) );</script>
-                      <?php
-                      for ($i=0; $i<sizeof($languages); $i++) {
-                        ?>
-                        <div class="tab-page" id="<?php echo $languages[$i]['name'];?>">
-                          <h2 class="tab"><nobr><?php echo tep_image(HTTP_SERVER . DIR_WS_CATALOG_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], $languages[$i]['name'],'align="absmiddle" style="height:16px; width:30px;"') . '&nbsp;' .$languages[$i]['name'];?></nobr></h2>
-                          <script type="text/javascript">tp1.addTabPage( document.getElementById( "<?php echo $languages[$i]['name'];?>" ) );</script>
-                          <table width="100%"  border="0" cellspacing="0" cellpadding="0" summary="tab table">
-                            <tr>
-                              <td valign="top"><table border="0" cellspacing="4" cellpadding="0" summary="Title table">
-                                <tr valign="top">
-                                  <td class="main"><strong><?php echo TEXT_PRODUCTS_NAME; ?></strong></td>
-                                  <td class="main"><?php echo tep_draw_input_field('products_name[' . $languages[$i]['id'] . ']', (isset($products_name[$languages[$i]['id']]) ? $products_name[$languages[$i]['id']] : tep_get_products_name($pInfo->products_id, $languages[$i]['id'])), 'size="64" maxlength="64"'); ?></td>
-                                </tr>
-                                <tr valign="top">
-                                  <td class="main"><?php echo '<strong>' . TEXT_PRODUCTS_URL . '</strong><br><small>' . TEXT_PRODUCTS_URL_WITHOUT_HTTP . '</small>'; ?></td>
-                                  <td class="main"><?php echo tep_draw_input_field('products_url[' . $languages[$i]['id'] . ']', (isset($products_url[$languages[$i]['id']]) ? $products_url[$languages[$i]['id']] : tep_get_products_url($pInfo->products_id, $languages[$i]['id'])), 'size="64" maxlength="255"'); ?></td>
-                                </tr>
-                                <tr>
-                                  <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '100%', '1'); ?></td>
-                                </tr>
-                              </table>
-                              <?php if ($parentid["products_parent_id"] == 0) { ?>
-                              <table width="100%"  border="0" cellspacing="4" cellpadding="0" summary="description tabe">
-                                <tr valign="top">
-                                  <td class="main"><strong><?php echo TEXT_PRODUCTS_DESCRIPTION; ?></strong></td>
-                                </tr>
-                                <tr>
-                                  <td><?php echo tep_draw_textarea_field('products_description[' . $languages[$i]['id'] . ']', 'soft', '70', '15', (isset($products_description[$languages[$i]['id']]) ? $products_description[$languages[$i]['id']] : tep_get_products_description($pInfo->products_id, $languages[$i]['id']))); ?></td>
-                                </tr>
-                              </table>
-                              <?php
-                                }
-                              // RCO start fieldsetmeta
-                              if ($cre_RCO->get('categories', 'fieldsetmeta') !== true) {
-                                if ($parentid["products_parent_id"] == 0) {
-                                ?>                        
-                                <table width="100%"  border="0" cellspacing="3" cellpadding="0" summary="meta content holder table">
-                                  <tr>
-                                    <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-                                  </tr>  
-                                  <tr>
-                                    <td class="main"><fieldset><legend><?php echo TEXT_PRODUCT_METTA_INFO; ?></legend>
-                                      <table width="100%"  border="0" cellspacing="3" cellpadding="3">
-                                        <tr>
-                                          <td class="main"><strong><?php echo TEXT_PRODUCTS_PAGE_TITLE;?></strong></td>
-                                        </tr>
-                                        <tr>
-                                          <td class="main"><?php echo tep_draw_textarea_field('products_head_title_tag[' . $languages[$i]['id'] . ']', 'soft', '15', '2', (isset($products_head_title_tag[$languages[$i]['id']]) ? $products_head_title_tag[$languages[$i]['id']] : tep_get_products_head_title_tag($pInfo->products_id, $languages[$i]['id'])),'style="width:100%"'); ?></td>
-                                        </tr>
-                                      </table>
-                                      <table width="100%"  border="0" cellspacing="3" cellpadding="3">
-                                        <tr class="main">
-                                          <td width="50%"><strong><?php echo TEXT_PRODUCTS_HEADER_DESCRIPTION;?></strong></td>
-                                          <td width="50%"><strong><?php echo TEXT_PRODUCTS_KEYWORDS; ?></strong></td>
-                                        </tr>
-                                        <tr class="main">
-                                          <td><?php echo tep_draw_textarea_field('products_head_desc_tag[' . $languages[$i]['id'] . ']', 'soft', '35', '5', (isset($products_head_desc_tag[$languages[$i]['id']]) ? $products_head_desc_tag[$languages[$i]['id']] : tep_get_products_head_desc_tag($pInfo->products_id, $languages[$i]['id'])),'style="width:100%"'); ?></td>
-                                          <td><?php echo tep_draw_textarea_field('products_head_keywords_tag[' . $languages[$i]['id'] . ']', 'soft', '35', '5', (isset($products_head_keywords_tag[$languages[$i]['id']]) ? $products_head_keywords_tag[$languages[$i]['id']] : tep_get_products_head_keywords_tag($pInfo->products_id, $languages[$i]['id'])),'style="width:100%"'); ?></td>
-                                        </tr>
-                                      </table>
-                                    </fieldset></td>
-                                  </tr>
-                                </table>
-                                <?php
-                               }
-                              }
-                              ?>
-                            </tr>
-                          </table>
-                        </div>
-                        <?php
-                      }
-                      ?>
-                    </div>
-                    <script type="text/javascript">
-                      //<![CDATA[
-                      setupAllTabs();
-                      //]]>
-                    </script>
-                    </td>
-                  </tr>
-                </table>
-              </td>
-            </tr>
-            <?php
-          } // RCO eof fieldsetdescr
           ?>
-          <tr>
-            <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '5'); ?></td>
-          </tr>  
           <?php
           // RCO start fieldsetimages
           if ($cre_RCO->get('categories', 'fieldsetimages') !== true) { 
@@ -1476,7 +1508,7 @@ function trim(str) {
             <tr>    
               <td colspan="2">    
                 <fieldset><legend><!-- Product Images --><?php echo TEXT_PRODUCT_IMAGES;?></legend>
-                  <table border="0" cellpadding="0" cellspacing="0" width="100%" class="data-table">
+                  <table border="0" cellpadding="2" cellspacing="2" width="100%">
                     <!-- // BOF: MaxiDVD Added for Ulimited Images Pack! -->
                     <tr>
                       <td class="dataTableRow" valign="top">
@@ -1964,8 +1996,8 @@ function trim(str) {
             <tr>
               <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
                   <tr>
-                    <td class="pageHeading"><?php echo tep_image(HTTP_SERVER . DIR_WS_CATALOG_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], $languages[$i]['name']) . '&nbsp;' . $pInfo->products_name; ?></td>
-                    <td class="pageHeading" align="right"><?php echo $currencies->format($pInfo->products_price); ?></td>
+                    <td><h1 class="page-header"><?php echo tep_image(HTTP_SERVER . DIR_WS_CATALOG_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], $languages[$i]['name']) . '&nbsp;' . $pInfo->products_name; ?></h1></td>
+                    <td align="right"><h1 class="page-header"><?php echo $currencies->format($pInfo->products_price); ?></h1></td>
                   </tr>
               </table></td>
             </tr>
@@ -2171,8 +2203,7 @@ function trim(str) {
             <tr>
               <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
                 <tr>
-                  <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
-                  <td class="pageHeading" align="right"><?php echo tep_draw_separator('pixel_trans.gif', 1, HEADING_IMAGE_HEIGHT); ?></td>
+                  <td><h1 class="page-header"><?php echo HEADING_TITLE; ?></h1></td>
                   <td align="right"><table border="0" width="100%" cellspacing="0" cellpadding="0">
                     <tr>
                       <td class="smallText" align="right">
@@ -2247,9 +2278,10 @@ function trim(str) {
                         <td class="dataTableContent" align="right"><?php echo '<a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&cID=' . $categories['categories_id'] . '&action=edit_category') . '">' . tep_image(DIR_WS_ICONS . 'page_edit.png', ICON_EDIT) . '</a>'; ?>&nbsp;&nbsp;
                           <?php
                           if (isset($cInfo) && is_object($cInfo) && ($categories['categories_id'] == $cInfo->categories_id) ) {
-                            echo tep_image(DIR_WS_IMAGES . 'arrow_right_blue.png', '');
+                           // echo tep_image(DIR_WS_IMAGES . 'arrow_right_blue.png', '');
+                           echo '<i class="fa fa-lg fa-caret-right"></i> &nbsp; ';
                           } else {
-                            echo '<a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&cID=' . $categories['categories_id']) . '">' . tep_image(DIR_WS_IMAGES . 'information.png', IMAGE_ICON_INFO) . '</a>';
+                            echo '<a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&cID=' . $categories['categories_id']) . '"><i class="fa fa-lg fa-info-circle"></i></a></a>';
                           }
                           ?>&nbsp;
                         </td>
@@ -2315,18 +2347,19 @@ function trim(str) {
                           <td class="dataTableContent" align="center">
                             <?php
                             if ($products['products_status'] == '1') {
-                              echo tep_image(DIR_WS_IMAGES . 'accept.png', IMAGE_ICON_STATUS_GREEN, 16, 16) . '&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_CATEGORIES, 'action=setflag&flag=0&pID=' . $products['products_id'] . '&cPath=' . $cPath) . '">' . tep_image(DIR_WS_IMAGES . 'cancel-off.png', IMAGE_ICON_STATUS_RED_LIGHT, 16, 16) . '</a>';
+                              echo /*tep_image(DIR_WS_IMAGES . 'accept.png', IMAGE_ICON_STATUS_GREEN, 16, 16) .*/ '<i class="fa fa-lg fa-check light-green"></i>&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_CATEGORIES, 'action=setflag&flag=0&pID=' . $products['products_id'] . '&cPath=' . $cPath) . '"><i class="fa fa-lg fa-times light-red"></i></a>';
                             } else {
-                              echo '<a href="' . tep_href_link(FILENAME_CATEGORIES, 'action=setflag&flag=1&pID=' . $products['products_id'] . '&cPath=' . $cPath) . '">' . tep_image(DIR_WS_IMAGES . 'accept-off.png', IMAGE_ICON_STATUS_GREEN_LIGHT, 16, 16) . '</a>&nbsp;&nbsp;' . tep_image(DIR_WS_IMAGES . 'cancel.png', IMAGE_ICON_STATUS_RED, 16, 16);
+                              echo '<a href="' . tep_href_link(FILENAME_CATEGORIES, 'action=setflag&flag=1&pID=' . $products['products_id'] . '&cPath=' . $cPath) . '"><i class="fa fa-lg fa-times light-red"></i></a>&nbsp;&nbsp;<i class="fa fa-lg fa-check light-green"></i>';
                             }
                             ?>
                           </td>
-                          <td class="dataTableContent" align="right"><?php echo '<a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&pID=' . $products['products_id'] . '&action=new_product') . '">' . tep_image(DIR_WS_ICONS . 'page_edit.png', ICON_EDIT) . '</a>'; ?>&nbsp;&nbsp;
+                          <td class="dataTableContent" align="right"><?php echo '<a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&pID=' . $products['products_id'] . '&action=new_product') . '"><i class="fa fa-lg fa-edit"></i></a>'; ?>&nbsp;&nbsp;
                             <?php
                             if (isset($pInfo) && is_object($pInfo) && ($products['products_id'] == $pInfo->products_id)) {
-                              echo tep_image(DIR_WS_IMAGES . 'arrow_right_blue.png', '');
+                              //echo tep_image(DIR_WS_IMAGES . 'arrow_right_blue.png', '');
+                              echo '<i class="fa fa-lg fa-caret-right"></i> &nbsp; ';
                             } else {
-                              echo '<a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&pID=' . $products['products_id']) . '">' . tep_image(DIR_WS_IMAGES . 'information.png', IMAGE_ICON_INFO) . '</a>';
+                              echo '<a href="' . tep_href_link(FILENAME_CATEGORIES, 'cPath=' . $cPath . '&pID=' . $products['products_id']) . '"><i class="fa fa-lg fa-info-circle"></i></a></a>';
                             }
                             ?>&nbsp;
                           </td>
@@ -2377,7 +2410,7 @@ function trim(str) {
                           </tr>                      
                         </table></td>
                       </tr>
-                    </table></td>
+                    </table></td><td>&nbsp;</td>
              <?php
               $heading = array();
               $contents = array();
@@ -2565,7 +2598,8 @@ function trim(str) {
                       if (tep_not_null($pInfo->products_last_modified)) $contents[] = array('text' => TEXT_LAST_MODIFIED . ' <b>' . tep_date_short($pInfo->products_last_modified) . '</b>');
                       if (date('Y-m-d') < $pInfo->products_date_available) $contents[] = array('text' => TEXT_DATE_AVAILABLE . ' <b>' . tep_date_short($pInfo->products_date_available) . '</b>');
                       $contents[] = array('align' => 'center', 'text' => '<br>' . tep_info_image($pInfo->products_image, tep_get_products_name($pInfo->products_id, $languages_id), SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '<br>' . $pInfo->products_image);
-                      $contents[] = array('text' => '<br>' . TEXT_PRODUCTS_PRICE_INFO . ' <b>' . $currencies->format($pInfo->products_price) . '</b><br>' . TEXT_PRODUCTS_QUANTITY_INFO . ' <b>' . $pInfo->products_quantity . '</b>');
+                      $contents[] = array('text' => '<br>' . TEXT_PRODUCTS_PRICE_INFO . ' <b>' . $currencies->format($pInfo->products_price) . '</b>');
+                      $contents[] = array('text' => '<br>' . TEXT_PRODUCTS_QUANTITY_INFO . ' <b>' . $pInfo->products_quantity . '</b>');
                       $contents[] = array('text' => '<br>' . TEXT_PRODUCTS_AVERAGE_RATING . ' <b>' . number_format($pInfo->average_rating, 2) . '%</b>');
                       //RCI include product sidebar product text
                       $returned_rci = $cre_RCI->get('categories', 'psidebarproducttext');
@@ -2610,16 +2644,9 @@ function trim(str) {
         // RCI code eof
         ?>
       </table>
-    </td>
-    <!-- body_text_eof //-->
-  </tr>
-</table>
-</div>
-<!-- body_eof //-->
-<!-- footer //-->
+    
 <?php require(DIR_WS_INCLUDES . 'footer.php'); ?>
 <!-- footer_eof //-->
-<br>
 </body>
 </html>
 <?php require(DIR_WS_INCLUDES . 'application_bottom.php'); ?>

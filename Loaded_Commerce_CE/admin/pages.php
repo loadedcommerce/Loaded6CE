@@ -755,22 +755,38 @@ switch ($action) {
     $messageStack->add(ERROR_CATALOG_IMAGE_DIRECTORY_DOES_NOT_EXIST, 'error');
   }
 ?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html <?php echo HTML_PARAMS; ?>>
+<!DOCTYPE html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET;?>">
+<meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
 <title><?php echo TITLE; ?></title>
-<link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
-<?php
-if ($is_62) {
-    echo '<script language="javascript" src="includes/menu.js"></script>' . "\n";
-} else {
-    echo '<!--[if IE]>' . "\n";
-    echo '<link rel="stylesheet" type="text/css" href="includes/stylesheet-ie.css">' . "\n";
-    echo '<![endif]-->' . "\n";
-}
-?>
-<script language="javascript" src="includes/general.js"></script>
+<link rel="icon" type="image/png" href="favicon.ico" />
+<script type="text/javascript" src="<?php echo (($request_type == 'SSL') ? 'https:' : 'http:'); ?>//ajax.googleapis.com/ajax/libs/jquery/<?php echo JQUERY_VERSION; ?>/jquery.min.js"></script>
+
+
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+                                                             <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
+  <!-- ================== BEGIN BASE CSS STYLE ================== -->
+  <link href="<?php echo (($request_type == 'SSL') ? 'https:' : 'http:'); ?>//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+  <link href="assets/plugins/jquery-ui/themes/base/minified/jquery-ui.min.css" rel="stylesheet" />
+  <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+  <link href="assets/css/animate.min.css" rel="stylesheet" />
+  <link href="assets/css/style.min.css" rel="stylesheet" />
+  <link href="assets/css/style-responsive.min.css" rel="stylesheet" />
+  <link href="assets/css/theme/blue.css" rel="stylesheet" id="theme" />
+  <!-- ================== END BASE CSS STYLE ================== -->
+  
+  <!-- ================== BEGIN PAGE LEVEL STYLE ================== -->
+  <link href="assets/plugins/jquery-jvectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" />
+  <link href="assets/plugins/bootstrap-datepicker/css/datepicker.css" rel="stylesheet" />
+  <link href="assets/plugins/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet" />
+    <link href="assets/plugins/gritter/css/jquery.gritter.css" rel="stylesheet" />  
+    <link href="assets/plugins/DataTables/media/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/plugins/DataTables/extensions/Select/css/select.bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/plugins/DataTables/extensions/Responsive/css/responsive.bootstrap.min.css" rel="stylesheet" />
+  <!-- ================== END PAGE LEVEL STYLE ================== -->
+  <script language="javascript" src="includes/general.js"></script>
+  <script type="text/javascript" src="includes/menu.js"></script>
 <!-- Tabs code -->
 <script type="text/javascript" src="includes/javascript/tabpane/local/webfxlayout.js"></script>
 <link type="text/css" rel="stylesheet" href="includes/javascript/tabpane/tab.webfx.css">
@@ -802,24 +818,27 @@ if ($is_62) {
   }
   // End -->
 </script>
-<link rel="stylesheet" type="text/css" href="includes/headernavmenu.css">
-<script type="text/javascript" src="includes/menu.js"></script>
-<script type="text/javascript" src="includes/prototype.js"></script>
 </head>
-<body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF" onload="SetFocus();">
-<div id="spiffycalendar" class="text"></div>
-<!-- header //-->
-<?php require(DIR_WS_INCLUDES . 'header.php'); ?>
-<!-- header_eof //-->
-<!-- body //-->
-<div id="body">
-<table border="0" width="100%" cellspacing="0" cellpadding="0" class="body-table">
-  <tr>
+<body>
+    <!-- begin #page-container -->
+    <div id="page-container" class="fade page-sidebar-fixed page-header-fixed gradient-enabled">
+    <!-- header //-->
+    <?php require(DIR_WS_INCLUDES . 'header.php'); ?>
+    <!-- header_eof //-->
+      
     <!-- left_navigation //-->
     <?php require(DIR_WS_INCLUDES . 'column_left.php'); ?>
     <!-- left_navigation_eof //-->
-    <!-- body_text //-->
-    <td valign="top" class="page-container"><table border="0" width="100%" cellspacing="0" cellpadding="0">
+      
+    <!-- begin #content -->
+    <div id="content" class="content">
+      <!-- begin breadcrumb -->
+      <ol class="breadcrumb pull-right">
+        <li>Create &nbsp; <a title="<?php echo BOX_MANUAL_ORDER_CREATE_ACCOUNT;?>" href="<?php echo tep_href_link(FILENAME_CREATE_ACCOUNT,'','SSL');?>" class="btn btn-xs btn-header"><i class="fa fa-user"></i><span class="label">+</span></a> <a title="<?php echo BOX_MANUAL_ORDER_CREATE_ORDER;?>" href="<?php echo tep_href_link(FILENAME_CREATE_ORDER,'','SSL');?>" class="btn btn-xs btn-header"><i class="fa fa-shopping-cart"></i><span class="label">+</span></a></li>
+        <li>Search &nbsp; <a href="javascript:;" class="btn btn-header btn-xs header-popover" id="ProductsPopover">Products</a> <a href="javascript:;" class="btn btn-header btn-xs header-popover" id="CustomerPopover">Customers</a> <a href="javascript:;" class="btn btn-header btn-xs header-popover" id="OrdersPopover">Orders</a> <a href="javascript:;" class="btn btn-header btn-xs header-popover" id="PagesPopover">Pages</a></li>
+      </ol>
+      <!-- end breadcrumb -->
+      <!-- begin page-header -->
       <?php
       if ( $action == 'edit_page' || $action == 'update_page' || $action == 'new_page' || $action == 'insert_page') {
         if ($action == 'edit_page' || $action == 'update_page') {
@@ -829,7 +848,12 @@ if ($is_62) {
         }
         $title = ( $action=='new_page' ) ? HEADING_TITLE_NEW_PAGES : HEADING_TITLE_EDIT_PAGES;
         ?>
-                <tr>
+      <h1 class="page-header"><?php echo $title; ?></h1>
+      <!-- end page-header -->
+      
+    <!-- begin panel -->
+    <div class="panel panel-inverse"><table border="0" width="100%" cellspacing="0" cellpadding="0">
+         <tr>
           <td>
             <?php 
             if (isset($_GET['pID']) ) {
@@ -879,7 +903,7 @@ if ($is_62) {
                 <?php
                   $title = (isset($pInfo->pages_title)) ? $pInfo->pages_title : HEADING_TITLE_NEW_PAGES;
                 ?>
-                <td valign="top" class="pageHeading"><?php echo $title;  ?></td>
+                <td valign="top"><h1 class="page-header"><?php echo $title;  ?></h1></td>
                 <td align="right">
                   <?php 
                   echo '<a href="JavaScript:history.back();">' . tep_image_button('button_back.gif', IMAGE_BACK) . '</a>&nbsp;';
@@ -2235,9 +2259,7 @@ $sql_listing = " SELECT ic.categories_id as 'ID', ic.categories_parent_id as 'CI
           }
           ?>
         <!-- body_text_eof //-->
-    </table></td>
-  </tr>
-</table>
+    </table></div></div>
 </div>
 <!-- body_eof //-->
 <!-- footer //-->

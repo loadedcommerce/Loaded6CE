@@ -19,48 +19,73 @@ $my_account_query = tep_db_query ("select admin_id, admin_firstname, admin_lastn
 $myAccount = tep_db_fetch_array($my_account_query);
 $store_admin_name = $myAccount['admin_firstname'] . ' ' . $myAccount['admin_lastname'];
 ?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+    <!DOCTYPE html>
+    <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+    <!--[if !IE]><!-->
+    <html lang="en">
+    <!--<![endif]-->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
 <title><?php echo TITLE; ?></title>
 <link rel="icon" type="image/png" href="favicon.ico" />
 <script type="text/javascript" src="<?php echo (($request_type == 'SSL') ? 'https:' : 'http:'); ?>//ajax.googleapis.com/ajax/libs/jquery/<?php echo JQUERY_VERSION; ?>/jquery.min.js"></script>
-<script type="text/javascript">
-  if (typeof jQuery == 'undefined') {
-    //alert('You are running a local copy of jQuery!');
-    document.write(unescape("%3Cscript src='includes/javascript/jquery-1.6.2.min.js' type='text/javascript'%3E%3C/script%3E"));
-  }
-</script>
-<link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
+
+
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+                                                             <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
+  <!-- ================== BEGIN BASE CSS STYLE ================== -->
+  <link href="<?php echo (($request_type == 'SSL') ? 'https:' : 'http:'); ?>//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+  <link href="assets/plugins/jquery-ui/themes/base/minified/jquery-ui.min.css" rel="stylesheet" />
+  <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+  <link href="assets/css/animate.min.css" rel="stylesheet" />
+  <link href="assets/css/style.min.css" rel="stylesheet" />
+  <link href="assets/css/style-responsive.min.css" rel="stylesheet" />
+  <link href="assets/css/theme/blue.css" rel="stylesheet" id="theme" />
+  <!-- ================== END BASE CSS STYLE ================== -->
+  
+  <!-- ================== BEGIN PAGE LEVEL STYLE ================== -->
+  <link href="assets/plugins/jquery-jvectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" />
+  <link href="assets/plugins/bootstrap-datepicker/css/datepicker.css" rel="stylesheet" />
+  <link href="assets/plugins/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet" />
+    <link href="assets/plugins/gritter/css/jquery.gritter.css" rel="stylesheet" />  
+      <script language="javascript" src="includes/general.js"></script>
+  <script type="text/javascript" src="includes/menu.js"></script>
+  <!-- ================== END PAGE LEVEL STYLE ================== -->
+
+
+
 <!--[if IE]>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet-ie.css">
 <![endif]-->
-<!-- code related to index.php only -->
-<link type="text/css" rel="StyleSheet" href="includes/index.css" />
-<link type="text/css" rel="StyleSheet" href="includes/helptip.css" /> 
-<script type="text/javascript" src="includes/javascript/helptip.js"></script>
-<!-- code related to index.php EOF -->
-<!-- Tabs code -->
-<script type="text/javascript" src="includes/javascript/tabpane/local/webfxlayout.js"></script>
-<link type="text/css" rel="stylesheet" href="includes/javascript/tabpane/luna/tab.css">
-<script type="text/javascript" src="includes/javascript/tabpane/tabpane.js"></script>
-<!-- End Tabs -->
-
-<link rel="stylesheet" type="text/css" href="includes/headernavmenu.css">
-<script type="text/javascript" src="includes/menu.js"></script>
 </head>
 <body>    
 <!-- header //-->
-<?php require(DIR_WS_INCLUDES . 'header.php'); ?>
+    <!-- begin #page-container -->
+    <div id="page-container" class="fade page-sidebar-fixed page-header-fixed gradient-enabled">
+    <!-- header //-->
+    <?php require(DIR_WS_INCLUDES . 'header.php'); ?>
+    <!-- header_eof //-->
+      
+    <!-- left_navigation //-->
+    <?php require(DIR_WS_INCLUDES . 'column_left.php'); ?>
+    <!-- left_navigation_eof //-->
+      
+    <!-- begin #content -->
+    <div id="content" class="content">
+      <!-- begin breadcrumb -->
+      <ol class="breadcrumb pull-right">
+        <li><a href="javascript:;">Home</a></li>
+        <li><a href="javascript:;">Tools</a></li>
+        <li class="active"><?php echo HEADING_TITLE; ?></li>
+      </ol>
+      <!-- end breadcrumb -->
+      <!-- begin page-header -->
+      <h1 class="page-header"><?php echo HEADING_TITLE; ?></h1>
+      <!-- end page-header -->
+      
+
 <!-- header_eof //-->
-<div id="body">
-<table width="100%"  border="0" align="center" cellpadding="0" cellspacing="0" class="body-table">
-  <tr>                   
-  <!-- left_navigation //-->
-  <?php require(DIR_WS_INCLUDES . 'column_left.php'); ?>
-  <!-- left_navigation_eof //-->
-    <td valign="top" class="page-container">
       <table width="100%" border="0" cellpadding="0" cellspacing="0">
         <tr>
           <td colspan="2" style="padding-bottom: 1em;">
@@ -95,6 +120,7 @@ $store_admin_name = $myAccount['admin_firstname'] . ' ' . $myAccount['admin_last
             </table>
           
           </td>
+          <?php /*
           <td width="180" valign="top">
             <?php echo $cre_RCI->get('index', 'rightcolumn'); ?>
             <!-- CRE Forge & Loaded Commerce News -->
@@ -150,20 +176,60 @@ $store_admin_name = $myAccount['admin_firstname'] . ' ' . $myAccount['admin_last
             // RCO eof
             ?>
           </td>
+          */
+          ?>
         </tr>
       </table>
-    </td>    
-  </tr>
-</table>
-</div>
-<table width="100%" border="0" cellspacing="0" cellpadding="0" summary="Footer Banner Table">
-  <tr>
-    <td align="center"><?php require(DIR_WS_INCLUDES . 'footer.php'); ?></td>
-  </tr>
-</table>
-<?php
+      </div>
+    </div>
+    <!-- end panel -->
+    </div>
+    <!-- end #content -->
+      
+      <!-- begin #footer -->
+      <div id="footer" class="footer">
+        <?php echo FOOTER_TEXT_BODY;?>
+      </div>
+      <!-- end #footer -->
+      
+      <!-- begin scroll to top btn -->
+      <a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top">
+        <i class="fa fa-angle-up"></i>
+      </a>
+      <!-- end scroll to top btn -->
+    </div>
+    <!-- end page container -->
+       
+    <!-- ================== BEGIN BASE JS ================== -->
+    <script src="assets/plugins/jquery/jquery-1.9.1.min.js"></script>
+    <script src="assets/plugins/jquery/jquery-migrate-1.1.0.min.js"></script>
+    <script src="assets/plugins/jquery-ui/ui/minified/jquery-ui.min.js"></script>
+    <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <!--[if lt IE 9]>
+        <script src="assets/crossbrowserjs/html5shiv.js"></script>
+        <script src="assets/crossbrowserjs/respond.min.js"></script>
+        <script src="assets/crossbrowserjs/excanvas.min.js"></script>
+    <![endif]-->
+    <script src="assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="assets/plugins/jquery-cookie/jquery.cookie.js"></script>
+    <!-- ================== END BASE JS ================== -->
+    
+    <!-- ================== BEGIN PAGE LEVEL JS ================== -->
+    <script src="assets/js/apps.min.js"></script>
+    <!-- ================== END PAGE LEVEL JS ================== -->
+    
+    <script>
+        $(document).ready(function() {
+            App.init();
+        });
+    </script>
+    <?php
 // RCI top
 echo $cre_RCI->get('index', 'bottom'); 
 ?>
+    <?php require(DIR_WS_INCLUDES . 'application_bottom.php'); ?>
+
+
+
 </body>
 </html>
