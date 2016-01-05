@@ -269,6 +269,15 @@ CREATE TABLE branding_description (
   store_brand_name varchar(64) NOT NULL DEFAULT '',
   store_brand_support_email varchar(128) NOT NULL DEFAULT '',
   store_brand_support_phone varchar(16) NOT NULL DEFAULT '',
+  store_brand_address text NOT NULL DEFAULT '',
+  facebook_link varchar(255) NOT NULL DEFAULT '',
+  twitter_link varchar(255) NOT NULL DEFAULT '',
+  pinterest_link varchar(255) NOT NULL DEFAULT '',
+  google_link varchar(255) NOT NULL DEFAULT '',
+  youtube_link varchar(255) NOT NULL DEFAULT '',
+  linkedin_link varchar(255) NOT NULL DEFAULT '',
+  footer_text text NOT NULL DEFAULT '',
+  custom_css text NOT NULL DEFAULT '',
   language_id int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (language_id)
 ) ENGINE=MyISAM DEFAULT COLLATE=latin1_swedish_ci;
