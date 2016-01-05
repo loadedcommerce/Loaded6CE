@@ -21,6 +21,14 @@ define('STORE_BRAND_BRANDING_COMPANY_NAME','Company Name:');
 define('STORE_BRAND_BRANDING_SLOGAN','Business Slogan:');
 define('STORE_BRAND_BRANDING_SUPPORT_EMAIL','Support Email:');
 define('STORE_BRAND_BRANDING_SUPPORT_PHONE','Support Phone:');
+define('STORE_BRAND_BRANDING_ADDRESS','Store Address:');
+
+define('STORE_BRAND_BRANDING_FACEBOOK_LINK','Facebook Page:');
+define('STORE_BRAND_BRANDING_TWITTER_LINK','Twitter:');
+define('STORE_BRAND_BRANDING_PINTEREST_LINK','Pinterest:');
+define('STORE_BRAND_BRANDING_GOOGLEPLUS_LINK','Google+:');
+define('STORE_BRAND_BRANDING_YOUTUBE_LINK','YouTube:');
+define('STORE_BRAND_BRANDING_LINKEDIN_LINK','LinkedIn:');
 
 define('TEXT_ERROR_MISSING_LOGO_IMAGE','Store Logo Image Missing');
 define('TEXT_ERROR_NO_LOGO_IMAGE','No logo image added');
