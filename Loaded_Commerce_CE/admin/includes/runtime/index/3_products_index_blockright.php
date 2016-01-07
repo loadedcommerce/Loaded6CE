@@ -28,19 +28,21 @@ if (defined('ADMIN_BLOCKS_PRODUCTS_STATUS') && ADMIN_BLOCKS_PRODUCTS_STATUS == '
   $productcount = tep_db_fetch_array($product_query);
   define('ACTIVE_PRODUCT_COUNT',$productcount['productcnt']);
   ?>
-  <table width="100%"  border="0" cellspacing="0" cellpadding="0" summary="Product / Categories Information">
-    <tr valign="top">
-      <td width="100%" style="padding-right: 12px;"><div class="form-head-light"><?php cre_index_block_title(BLOCK_TITLE_PRODUCTS,tep_href_link(FILENAME_CATEGORIES,'selected_box=catalog','NONSSL'),BLOCK_HELP_PRODUCTS);?></div>
-      <div class="form-body form-body-fade">
-        <ul class="ul_index">
+<!-- begin products -->
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h4 class="panel-title"><?php echo BLOCK_TITLE_PRODUCTS;?></h4>
+    </div>
+    <div class="panel-body bg-white">
+         <ul class="list-unstyled">
           <li><?php echo BLOCK_CONTENT_PRODUCTS_CATEGORIES.' : '.CATEGORY_COUNT;?></li>
           <li><?php echo BLOCK_CONTENT_PRODUCTS_TOTAL_PRODUCTS.' : '.PRODUCT_COUNT;?></li>
           <li><?php echo BLOCK_CONTENT_PRODUCTS_ACTIVE.' : '.ACTIVE_PRODUCT_COUNT;?></li>
           <li><?php echo BLOCK_CONTENT_PRODUCTS_NOSTOCK.' : '.PRODUCT_OUT_OF_STOCK_COUNT;?></li>
         </ul>
-      </div></td>
-    </tr>
-  </table>
+    </div>
+</div>
+<!-- end products -->
   <?php
   }
 ?>

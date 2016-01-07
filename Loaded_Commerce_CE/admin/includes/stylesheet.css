@@ -1,12 +1,12 @@
 @import url("css/extra_css.css");
 
-body {
+/*body {
   margin: 0;
   width: 100%;
   background: #F2F5EB url(../images/header.png) repeat-x;
 }
 body, table {
-  font-family: Verdana, sans-serif;
+  
   font-size: 11px;
 }
 a {
@@ -19,86 +19,137 @@ a:hover {
 
 img {
   border: none;
+} */
+
+/*** Header buttons ****/
+
+.btn-header { 
+  color: #FFFFFF  ! important; 
+  background-color: #B6C2C9; 
+  border-color: #B6C2C9; 
+} 
+ 
+.btn-header:hover, 
+.btn-header:focus, 
+.btn-header:active, 
+.btn-header.active, 
+.open .dropdown-toggle.btn-header { 
+  color: #FFFFFF; 
+  background-color: #348FE2; 
+  border-color: #B6C2C9; 
+} 
+ 
+.btn-header:active, 
+.btn-header.active, 
+.open .dropdown-toggle.btn-header { 
+  background-image: none; 
 }
+
+/** btn create **/
+
+.btn-create { 
+  color: #FFFFFF  ! important; 
+  background-color: #B6C2C9; 
+  border-color: #B6C2C9; 
+} 
+ 
+.btn-create:hover, 
+.btn-create:focus, 
+.btn-create:active, 
+.btn-create.active, 
+.open .dropdown-toggle.btn-create { 
+  color: #FFFFFF; 
+  background-color: #348FE2; 
+  border-color: #B6C2C9; 
+} 
+ 
+.btn-create:active, 
+.btn-create.active, 
+.open .dropdown-toggle.btn-create { 
+  background-image: none; 
+}
+
+
 
 /* Buttons */
 
-.cssButtonSubmit, .cssButtonSubmitHover {
-  width: auto;
-  height: 26px !important;
-
-  background-image: url(../images/button-submit.png);
-  background-repeat: repeat-x;
-  background-position: middle;
-  
-  font-family: Verdana, sans-serif;
-  font-size: 11px;
-  
-  color: white;
-  
-  padding: 4px 8px;
-  margin-right: 4px;
-  margin-bottom: 4px;
-  border: solid 1px #555;
-  text-align: center;
-  vertical-align: middle;
-  text-decoration: none;
-  
-  white-space: nowrap;
-  cursor: pointer;
-  outline: none;
+.cssButtonSubmit,  .cssButton {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    -moz-user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    border-radius: 3px;
+    margin: 5px;
 }
+
+.cssButtonSubmit, .cssButton {
+    color: #FFF;
+    background-color: #337AB7;
+    border-color: #2E6DA4;
+}
+
+.cssButtonSubmitHover, 
+.cssButtonSubmit:focus, 
+.cssButtonSubmit:active, 
+.cssButtonSubmit.active, 
+.cssButtonHover, 
+.cssButton:focus, 
+.cssButton:active, 
+.cssButton.active { 
+  color: #ffffff; 
+  background-color: #2C97F5; 
+  border-color: #337AB7; 
+} 
+
+ /*
+
+.cssButtonSubmitHover {
+  
+}
+.cssButtonSubmit:active, .cssButtonSubmitHover:active, cssButtonSubmitActive {
+  
+}
+
+.cssButtonHover {
+  
+}
+.cssButton:active, .cssButtonHover:active, .cssButtonActive {
+  
+}  */
+
+/*
+.btn.btn-primary {
+    color: #FFF;
+    background: #348FE2 none repeat scroll 0% 0%;
+    border-color: #348FE2;
+} */
+
+
+ /*
+ 
 .cssButtonSubmitMoz {
   padding: 3px 4px 5px 4px;
 }
-.cssButtonSubmitHover {
-  background-image: url(../images/button-submit-over.png);
-}
-.cssButtonSubmit:active, .cssButtonSubmitHover:active, cssButtonSubmitActive {
-  background-image: url(../images/button-submit-active.png);
-}
-.cssButton, .cssButtonHover {
-  position: relative;
-  width: auto;
-  height: 16px !important;
 
-  background-image: url(../images/button.png);
-  background-repeat: repeat-x;
-  background-position: middle;
-  
-  font-family: Verdana, sans-serif;
-  font-size: 11px;
-  
-  color: white;
-  
-  padding: 4px 8px;
-  margin-right: 4px;
-  margin-bottom: 4px;
-  border: solid 1px #555;
-  text-align: center;
-  vertical-align: middle;
-  text-decoration: none !important;
-  
-  display: -moz-inline-stack;
-  display: inline-block;
 
-  white-space: nowrap;
-  cursor: pointer;
-  outline: none;
-}
 .cssButtonMoz {
   margin-right: 0px;
 }
-.cssButtonHover {
-  background-image: url(../images/button-over.png);
-}
-.cssButton:active, .cssButtonHover:active, .cssButtonActive {
-  background-image: url(../images/button-active.png);
-}
 
+                  */
 .button-container {
   line-height: 16px !important;
-}
+} 
 
 .shadow {
   position: absolute;
@@ -110,219 +161,31 @@ img {
   line-height: 6px;
 }
 
-/* Head */
 
-#head {
-  position: relative;
-  height: 85px;
-}
-.head-content {
-  padding: 6px 16px;
-}
 
-/* Toolbar */
+/* Info */
 
-#toolbar {
-  position: relative;
-  width: 100%;
-  height: 49px;
-  z-index: 100;
+.info-box-head {
+  background: #1A2229;
+  padding: 4px;
 }
-#toolbar-table {
-  position: relative;
-  font-family: Verdana;
-  font-size: 11px;
-  color: #666;
-  overflow: hidden;
-  padding: 8px 12px 4px 12px;
-}
-#toolbar-left a, #toolbar-right a {
-  color: #666;
-  font-size: 11px;
-  text-decoration: none;
-}
-#toolbar-left a:hover, #toolbar-right a:hover {
-  color: #069;
-  text-decoration: underline;
-}
-#toolbar-shadow {
-  position: absolute;
-  background-image: url(../images/toolbar-shadow.png);
-  baclground-repeat: repeat-x;
-  left: 0px;
-  top: 49px;
-  width: 100%;
-  height: 6px;
-  line-height: 6px;
-  z-index: 1001;
-}
-.toolbar-label {
-  color: #666;
-  padding: 0 8px 0 4px;
-  font-weight:bold;
-}
-.toolbar-link, .toolbar-search-link, .toolbar-input, .toolbar-search-input {
-  padding: 0 4px;
-}
-.toolbar-search-label {
-  color: #666;
-  padding: 0 0 0 4px;
-}
-.toolbar-separator {
-  color: #666;
-  padding: 0 12px;
-}
-
-/* Body */
-
-#body {
-  position: relative;
-  padding: 0 12px;
-  background-color: #F2F5EB;
-}
-.body-table {
-  position: relative;
-  background-color: #fff;
-  width: 100%;
+.info-box-body {
+  background-color: #fcfcfc;
   border: solid 1px #ccc;
   border-top: none;
+  padding: 4px;
+}
+.infoBoxHeading, .infoBoxHeading1, .infoBoxHeading2 { 
+  color: #fff;
+  font-size: 12px;
+  font-weight: normal;
+  line-height: 20px;
+  
+}
+.infoBoxContent, .infoBoxContent1 {
+  font-size: 12px;
 }
 
-/* DHTML Menu */
-
-.nav {
-  position: relative;
-  background: url(../images/nav-background.png) repeat-x bottom;
-  font-family: Verdana, sans-serif;
-  font-size: 11px;
-  border-bottom: solid 1px #999;
-}
-.nav-container {
-  border-left: solid 2px #bbb;
-}
-.nav-item {
-  position: relative;
-  font-family: Verdana, sans-serif;
-  font-size: 11px;
-  height: 16px;
-  padding: 2px 6px;
-  border-right: solid 2px #bbb;
-  line-height: 16px;
-  cursor: pointer;
-}
-.nav-item-active {
-  background: url(../images/nav-background-hover.png) repeat-x bottom;
-}
-.nav-menu {
-  position: absolute;
-  font-family: Verdana, sans-serif;
-  font-size: 11px;
-  left: -2px;
-  top: 20px;
-  border-top: solid 1px #bbb;
-  visibility: hidden;
-  z-index: 1;
-}
-
-.nav-item-menu-head {
-  position: relative;
-  height: 1px;
-  line-height: 1px;
-  background: url(../images/nav-item-menu-head.png) no-repeat top;
-}
-.nav-item-menu-body {
-  background: url(../images/nav-item-menu-background-gray.png) repeat-y;
-}
-.nav-item-menu-foot {
-  position: relative;
-  width: 210px;
-  height: 7px;
-  background: url(../images/nav-item-menu-foot.png) no-repeat top;
-}
-
-a.menuItem {
-  display: block;
-  color: #006d8b;
-  padding: 2px 8px;
-}
-a.menuItem:hover {
-  text-decoration: underline;
-}
-
-.menuBoxSubhead {
-  font-style: italic;
-  padding: 2px 8px;
-}
-
-/* Menu */
-
-.menu-container {
-  background-color: #f8f8f8;
-  width: 180px;
-  border-right: solid 1px #ccc;
-  padding-top: 12px;
-  padding-bottom: 12px;
-}
-.menu-table {
-  font-size: 11px;
-  border-top: solid 1px #ccc;
-}
-.menuBoxHeading {
-  font-size: 11px;
-  padding: 2px 12px;
-  border-bottom: solid 1px #ccc;
-  cursor: pointer;
-  line-height: 18px;
-}
-.menuBoxHeading:hover {
-  background-color: #CCCCFF;
-}
-a.menuBoxHeadingLink {
-  font-size: 11px;
-  color: #000;
-  text-decoration: none;
-}
-.menuBoxHeadingSelected, .menuBoxHeadingSelected:hover {
-  font-weight: bold;
-  background-color: white;
-  border-bottom: none;
-  cursor: default;
-}
-.menuBoxHeadingSelected a.menuBoxHeadingLink {
-  font-weight: bold;
-}
-.menuBoxSubhead {
-  color: #555;
-  margin-top: .5em;
-}
-.menuBoxContent {
-  background-color: white;
-  padding: 2px 12px;
-  line-height: 18px;
-  border-bottom: solid 1px #ccc;
-}
-a.menuBoxContentLink {
-  color: #006d8b !important;
-  text-decoration: none;
-  margin-left: 1em;
-}
-a.menuBoxContentLink:hover {
-  text-decoration: underline;
-}
-
-/* Page */
-
-.page-container {
-  padding: 12px;
-}
-
-.pageHeading {
-  color: #111;
-  font-family: Verdana, sans-serif;
-  font-size: 20px;
-  line-height: 24px;
-  padding-bottom: 6px;
-}
 
 /* Data */
 
@@ -333,22 +196,10 @@ a.menuBoxContentLink:hover {
 
 .dataTableHeadingRow { 
   color: #fff;
-  background: #385264 url(../images/list-head-background-alt.png) repeat-x top;
+  background: #1A2229;
 }
 
-.dataTableHeadingContent {
-  color: #fff;
-  font-family: Verdana, sans-serif;
-  font-size: 12px;
-  line-height: 20px;
-  padding: 4px;
-}
-.dataTableHeadingContent img {
-  vertical-align: top;
-}
-.dataTableHeadingContent a {
-  color: #80CFE6
-}
+
 
 .dataTableRow, .dataTableRowOver, .dataTableRowSelected {
   background: url(../images/data-row-background.png) repeat-x bottom;
@@ -372,10 +223,7 @@ a.menuBoxContentLink:hover {
 
 
 .dataTableContent, .dataTableContentBlue, .dataTableContentGreen, .dataTableContentRed, .dataTableContentRedAlert {
-  font-family: Verdana, sans-serif;
-  font-size: 11px;
-  line-height: 16px;
-  padding: 4px;
+    font-size: 12px;
 }
 .dataTableContent {
   color: #000;
@@ -408,38 +256,8 @@ a.menuBoxContentLink:hover {
   margin-top: 6px;
 }
 
-/* Info */
-
-.info-box-head {
-  background: #547B96 url(../images/list-head-background-medium.png) repeat-x top;
-  padding: 4px;
-}
-.info-box-body {
-  background-color: #fcfcfc;
-  border: solid 1px #ccc;
-  border-top: none;
-  padding: 4px;
-}
-.infoBoxHeading, .infoBoxHeading1, .infoBoxHeading2 { 
-  color: #fff;
-  font-size: 12px;
-  font-weight: normal;
-  line-height: 20px;
-  
-}
-.infoBoxContent, .infoBoxContent1 {
-  color: #111;
-  font-size: 11px;
-}
-
-/* Index */
-
-.ul_index li {
-  line-height: 1.5em;
-}
-
 /* Form */
-
+ /*
 .form-head {
   background: #547B96 url(../images/list-head-background-medium.png) repeat-x top;
   color: white;
@@ -543,142 +361,7 @@ a.menuBoxContentLink:hover {
   padding-left: 4px;
 }
 
-/* Foot */
-
-#foot {
-  position: relative;
-  background: #000 url(../images/footer.png) repeat-x;
-  height:424px;
-}
-.foot-content .smallText {
-  color:#fff;
-}
-
-.foot-content{
-  padding: 75px 16px 0px; 
-}
-
-/* Input */
-
-/* typography, spacing */
-
-input.text {
-  font-size: 11px;
-  margin: 4px 0;
-  border: solid 1px #888;
-  padding: 4px;
-}
-input.text:focus {
-  border: solid 1px #444;
-}
-
-input.string, input.number, input.date, textarea, select, .cal-TextBox {
-  font-size: 12px;
-  margin: 4px 0;
-  border: solid 1px #888;
-}
-
-input.string:focus, input.number:focus, input.date:focus, textarea:focus, select:focus, .cal-TextBox:focus {
-  border: solid 1px #444;
-}
-
-input.string, input.number, input.date, textarea, .cal-TextBox {
-  padding: 4px;
-}
-
-input.main {
-  font-size: 18px;
-}
-
-/* Input dimensions */
-
-input.string {
-  width: 250px;
-}
-input.long {
-  width: 350px;
-}
-input.short {
-  width: 200px;
-}
-input.number {
-  width: 40px;
-}
-input.price {
-  width: 65px;
-}
-input.date {
-  width: 100px;
-}
-input.table {
-  text-align: right;
-}
-textarea.string {
-  width: 450px;
-  height: 200px;
-}
-textarea.brief {
-  width: 350px;
-  height: 100px;
-}
-select.string {
-  width: 260px;
-}
-
-/* Tabs */
-
-h2.tab {
-  font-size: 12px;
-  font-weight: normal;
-}
-
-/* Rounded Box */
-
-.box-top-left {
-  width: 18px;
-  height: 16px;
-  background: url(../images/window-topleft.png) no-repeat right bottom;
-  line-height: 16px;
-}
-.box-top {
-  height: 16px;
-  background: url(../images/window-top.png) repeat-x bottom;
-  line-height: 16px;
-}
-.box-top-right {
-  width: 24px;
-  height: 16px;
-  background: url(../images/window-topright.png) no-repeat left bottom;
-  line-height: 16px;
-}
-
-.box-left {
-  width: 18px;
-  background: url(../images/window-left.png) repeat-y right;
-}
-.box-content {
-  background: #fff;
-  padding:10px;  
-}
-.box-right {
-  width: 24px;
-  background: url(../images/window-right.png) repeat-y left;
-}
-
-.box-bottom-left {
-  width: 18px;
-  height: 24px;
-  background: url(../images/window-bottomleft.png) no-repeat right top;
-}
-.box-bottom {
-  height: 24px;
-  background: url(../images/window-bottom.png) repeat-x top;
-}
-.box-bottom-right {
-  width: 24px;
-  height: 24px;
-  background: url(../images/window-bottomright.png) no-repeat left top;
-}
+    */
 
 /* Image Cells */
 
@@ -757,101 +440,32 @@ h2.tab {
 .success a  { color: #264409; }
 
 /* eof */
-.admin_header {
-  font-family: Verdana, Arial, Helvetica, sans-serif;
-  font-size: 11px;
-  color: #000000;
-}
-a.admin_header:link, a.admin_header:visited {
-  font-family: Verdana, Arial, Helvetica, sans-serif;
-  font-size: 11px;
-  color: #3B8CCC;
-}
-a.admin_header:hover {
-  color: #FF0000;
-  text-decoration:underline;
-}
-
-  a.content:link { font-family: Verdana,sans-serif;
-    font-size: 10px;
-    color: rgb(0, 0, 0);
-    font-weight: normal;
-    text-decoration: none;
-    }
-
-  a.content:visited { font-family: Verdana,sans-serif;
-    font-size: 10px;
-    color: rgb(0, 0, 0);
-    font-weight: normal;
-    text-decoration: none;
-    }
-
-  a.content:active { font-family: Verdana,sans-serif;
-    font-size: 10px;
-    color: rgb(0, 0, 0);
-    font-weight: normal;
-    text-decoration: none;
-    }
-
-  a.content:hover { font-family: Verdana,sans-serif;
-    font-size: 10px;
-    color: rgb(0, 0, 0);
-    font-weight: normal;
-    text-decoration: underline;
-    }
-
-  a.headerLink:link { font-family: Verdana,Arial,sans-serif;
-    font-size: 8px;
-    color: rgb(143, 2, 14);
-    font-weight: bold;
-    text-decoration: none;
-    }
-
-  a.headerLink:visited { font-family: Verdana,Arial,sans-serif;
-    font-size: 8px;
-    color: rgb(143, 2, 14);
-    font-weight: bold;
-    text-decoration: none;
-    }
-
-  a.headerLink:active { font-family: Verdana,Arial,sans-serif;
-    font-size: 8px;
-    color: rgb(143, 2, 14);
-    font-weight: bold;
-    text-decoration: none;
-    }
-
-  a.headerLink:hover { font-family: Verdana,Arial,sans-serif;
-    font-size: 8px;
-    color: rgb(143, 2, 14);
-    font-weight: bold;
-    text-decoration: underline;
-    }
 
 
 
-  a.splitPageLink:link { font-family: Verdana,Arial,sans-serif;
+
+  a.splitPageLink:link { 
     font-size: 10px;
     color: rgb(0, 0, 255);
     font-weight: normal;
     text-decoration: none;
     }
 
-  a.splitPageLink:visited { font-family: Verdana,Arial,sans-serif;
+  a.splitPageLink:visited { 
     font-size: 10px;
     color: rgb(0, 0, 255);
     font-weight: normal;
     text-decoration: none;
     }
 
-  a.splitPageLink:active { font-family: Verdana,Arial,sans-serif;
+  a.splitPageLink:active { 
     font-size: 10px;
     color: rgb(0, 0, 255);
     font-weight: normal;
     text-decoration: none;
     }
 
-  a.splitPageLink:hover { font-family: Verdana,Arial,sans-serif;
+  a.splitPageLink:hover { 
     font-size: 10px;
     color: rgb(0, 0, 255);
     font-weight: normal;
@@ -859,67 +473,29 @@ a.admin_header:hover {
     background-color: rgb(255, 255, 51);
     }
 
-    /*
-  .menuBoxHeading { font-family: Verdana,Arial,sans-serif;
-    font-size: 10px;
-    color: rgb(97, 96, 96);
-    background-color: rgb(255, 255, 255);
-    }
-
-  .menuBoxContent { font-family: Verdana,Arial,sans-serif;
-    font-size: 10px;
-    color: rgb(97, 96, 96);
-    }
-    */
-
-  body { margin: 0px;
-    background-color: rgb(255, 255, 255);
-    color: rgb(0, 0, 0);
-    }
-
-  .headerBar { background-color: rgb(179, 186, 197);
-    }
-
-  .headerBarContent { padding: 2px;
-    font-family: Verdana,Arial,sans-serif;
-    font-size: 8px;
-    color: rgb(0, 0, 128);
-    font-weight: bold;
-    }
-
-  .content { font-family: Arial,Verdana,sans-serif;
-    font-size: 14px;
-    color: rgb(0, 0, 0);
-    }
-
-  .content_heading { font-family: Arial,Verdana,sans-serif;
-    font-size: 14px;
-    color: rgb(0, 0, 0);
-    font-weight: bold;
-    }
-
+ 
     
-  .messageBox { font-family: Verdana,Arial,sans-serif;
+  .messageBox { 
     font-size: 10px;
     text-align: left;
     font-weight: bold;
     }
 
-  .messageStackError { font-family: Verdana,Arial,sans-serif;
+  .messageStackError { 
     font-size: 10px;
     background-color: rgb(255, 77, 82);
     text-align: left;
     color: rgb(255, 255, 255);
     }
     
-  .messageStackWarning { font-family: Verdana,Arial,sans-serif;
+  .messageStackWarning { 
     font-size: 10px;
     background-color: rgb(255, 255, 0);
     text-align: left;
     color: rgb(0, 0, 0);
     }
 
-  .messageStackSuccess { font-family: Verdana,Arial,sans-serif;
+  .messageStackSuccess { 
     font-size: 10px;
     background-color: rgb(0 , 204 , 102);
     text-align: left;
@@ -930,7 +506,7 @@ TR.headerError {
 }
 
 TD.headerError {
-  font-family: Tahoma, Verdana, Arial, sans-serif;
+  
   font-size: 12px;
   background: #ff0000;
   color: #ffffff;
@@ -942,27 +518,25 @@ TR.headerInfo {
 }
 
 TD.headerInfo {
-  font-family: Tahoma, Verdana, Arial, sans-serif;
+  
   font-size: 12px;
   background: #00ff00;
   color: #ffffff;
   font-weight: bold;
   text-align: center;
 }
-  checkbox, input, radio, select, textarea, file { font-family: Verdana,Arial,sans-serif;
-    }
-
+    /*
   form { display: inline; margin:0; padding:0;  }
 
   .formArea { border: 1px solid rgb(123, 158, 189);
     background-color: rgb(241, 249, 254);
     }
 
-  .formAreaTitle { font-family: Tahoma,Verdana,Arial,sans-serif;
+  .formAreaTitle { 
     font-size: 12px;
     font-weight: bold;
     }
-
+                   */
   .attributes-odd { background-color: rgb(244, 247, 253);
     }
 
@@ -975,51 +549,53 @@ TD.headerInfo {
   .oldPrice { text-decoration: line-through;
     }
 
-  .fieldRequired { font-family: Verdana,Arial,sans-serif;
-    font-size: 10px;
-    color: rgb(255, 0, 0);
+  .fieldRequired { 
+      
+      font-size: 10px;
+      color: rgb(255, 0, 0);
     }
 
-  .smallText { font-family: Verdana,Arial,sans-serif;
-    font-size: 10px;
+  .smallText { 
+      
+      font-size: 10px;
     }
 
-  .main { font-family: Verdana,Arial,sans-serif;
+  .main { 
     font-size: 12px;
     }
 
-  .errorText { font-family: Verdana,Arial,sans-serif;
+  .errorText { 
     font-size: 10px;
     color: rgb(255, 0, 0);
     }
 
-  .attributeBoxContent { font-family: Verdana,Arial,sans-serif;
+  .attributeBoxContent { 
     font-size: 10px;
     color: rgb(0, 0, 0);
     background-color: rgb(128, 128, 128);
     font-weight: bold;
     }
 
-  .TR.attributeBoxContent { font-family: Verdana,Arial,sans-serif;
+  .TR.attributeBoxContent { 
     font-size: 10px;
     color: rgb(0, 0, 0);
     background-color: rgb(128, 128, 128);
     }
 
-  .TD.attributeBoxContent { font-family: Verdana,Arial,sans-serif;
+  .TD.attributeBoxContent { 
     font-size: 10px;
     color: rgb(0, 0, 0);
     background-color: rgb(192, 192, 192);
     font-weight: bold;
     }
 
-  .infoboxAdminHeading { font-family: Verdana,Arial,sans-serif;
+  .infoboxAdminHeading { 
     font-size: 14px;
     font-weight: bold;
     color: rgb(0, 0, 0);
     }
 
-  .infoboxAdmin { font-family: Verdana,Arial,sans-serif;
+  .infoboxAdmin { 
     font-size: 12px;
     color: rgb(0, 0, 0);
     }
@@ -1031,7 +607,7 @@ TD.headerInfo {
     }
 
   .epa_error { background: rgb(227, 18, 48) none repeat scroll 0%;
-    font-family: Verdana,Arial,sans-serif;
+    
     font-size: 12px;
     color: rgb(255, 255, 255);
     }
@@ -1042,18 +618,18 @@ TD.headerInfo {
   .epa_msg { background: rgb(153, 204, 255) none repeat scroll 0%;
     }
 
-  .editOrder { font-family: Arial,Helvetica,Geneva,Swiss,SunSans-Regular;
+  .editOrder { 
     font-size: 10px;
     color: rgb(0, 0, 0);
     background-color: rgb(192, 192, 192);
     }
 
-  .helpMain { font-family: Arial,Helvetica,Geneva,Swiss,SunSans-Regular;
+  .helpMain { 
     font-size: 12px;
     color: rgb(0, 0, 0);
     }
 
-  .dtree { font-family: Verdana,Geneva,Arial,Helvetica,sans-serif;
+  .dtree { 
     font-size: 11px;
     color: rgb(102, 102, 102);
     white-space: nowrap;
@@ -1171,67 +747,93 @@ TD.headerInfo {
     }
 
   /*
-  body, td, th { font-family: Verdana,Arial,Helvetica,sans-serif;
+  body, td, th { 
     font-size: 11px;
     color: rgb(0, 0, 0);
     line-height: 1.5em;
     }
   */
 
-  style1 { font-family: Verdana,Arial,Helvetica,sans-serif;
+  style1 { 
     font-size: 11px;
     font-weight: bold;
     color: rgb(255, 255, 255);
     }
 
-  style2 { font-family: Verdana,Arial,Helvetica,sans-serif;
+  style2 { 
     font-size: 11px;
     font-weight: bold;
     color: rgb(0, 0, 0);
     font-style: normal;
     }
 
-  style3 { font-family: Verdana,Arial,Helvetica,sans-serif;
+  style3 { 
     font-size: 11px;
     font-weight: bold;
     color: rgb(0, 0, 0);
     }
 
-  style4 { font-family: Verdana,Arial,Helvetica,sans-serif;
+  style4 { 
     font-size: 11px;
     font-weight: bold;
     color: rgb(255, 255, 255);
     }
 
-  style5 { font-family: Verdana,Arial,Helvetica,sans-serif;
+  style5 { 
     font-size: 11px;
     font-weight: bold;
     color: rgb(0, 0, 0);
     }
 
-  style6 { font-family: Verdana,Arial,Helvetica,sans-serif ! important;
+  style6 { 
     color: rgb(255, 0, 0) ! important;
     font-weight: bold ! important;
     font-size: 11px ! important;
     font-style: normal;
     text-transform: none;
     }
-#demo-header-container {
-  width: 100%;
-  height: 75px;
-  background: url(../images/demo-header-background.png) repeat-x top;
-  font-family: Arial, sans-serif;
-  font-size: 18px;
-  color: white;
-  line-height: 60px;
+    
+    
+.panel {
+    background: transparent ! important;
 }
-#demo-footer-container {
-  width: 100%;
-  height: 58px;
-  background: url(../images/demo-footer-background.png) repeat-x top;
-  font-family: Arial, sans-serif;
-  font-size: 16px;
-  color: white;
-  font-weight: bold;
-  line-height: 40px;
+.table {
+    background-color: #fff ! important;
+    border-radius: 0px ! important;
+    -moz-border-radius:0px ! important;
+}
+
+
+.table th, .table-title, .dataTableHeadingContent {
+    background: #2A2A2A ! important;
+    color:#fff ! important;
+    font-size: 12px ! important;
+    font-weight: normal ! important;
+}
+
+
+.dataTableHeadingContent img {
+  vertical-align: top;
+}
+.dataTableHeadingContent a {
+  color: #80CFE6
+}
+
+
+.green {
+    color:#0f0;
+}
+
+.light-green {
+    color: #98FF98;
+}
+
+.light-red {
+    color: #F75D59;
+}
+
+.logo-sm {
+    float: left;
+    margin-right: 5px;
+    margin-top: 0px;
 }

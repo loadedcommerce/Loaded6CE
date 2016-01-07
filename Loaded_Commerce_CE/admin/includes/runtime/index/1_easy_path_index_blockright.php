@@ -12,16 +12,16 @@
 */
 if (defined('ADMIN_BLOCKS_EASY_PATH') && ADMIN_BLOCKS_EASY_PATH == 'true'){
   ?>
-  <table width="100%"  border="0" cellspacing="0" cellpadding="0" summary="Reviews Information">
-    <tr valign="top">
-      <td width="100%" style="padding-right: 12px;">
-        <div class="form-head-light"><?php cre_index_block_title(BLOCK_TITLE_EASY_PATH); ?></div>
-        <div class="form-body form-body-fade">         
-          <a href="<?php echo tep_href_link(REMOVE_EASY_PATH_LINK, 'gID=23&selected_box=configuration&cID=10013', 'SSL'); ?>" style="font-size:smaller"> Click to remove this block</a> 
-        </div>
-      </td>
-    </tr>
-  </table>
+  <!-- begin easypath -->
+  <div class="panel panel-primary">
+      <div class="panel-heading">
+          <h4 class="panel-title"><?php echo BLOCK_TITLE_EASY_PATH;?></h4>
+      </div>
+      <div class="panel-body bg-white">
+        <a href="<?php echo tep_href_link(REMOVE_EASY_PATH_LINK, 'gID=23&selected_box=configuration&cID=10013', 'SSL'); ?>" style="font-size:smaller"> Click to remove this block</a> 
+      </div>
+  </div>
+  <!-- end easypath -->
   <?php
 }
 ?>

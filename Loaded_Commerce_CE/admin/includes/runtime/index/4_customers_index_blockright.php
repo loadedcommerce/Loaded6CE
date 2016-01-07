@@ -20,16 +20,19 @@ if(defined('ADMIN_BLOCKS_CUSTOMERS_STATUS') && ADMIN_BLOCKS_CUSTOMERS_STATUS == 
   $customercount = tep_db_fetch_array($customer_query);
   define('CUSTOMER_SUBSCRIBED_COUNT',$customercount['customercnt']);
   ?>
-  <table width="100%"  border="0" cellspacing="0" cellpadding="0" summary="Customer Information">
-    <tr valign="top">
-      <td width="100%" style="padding-right: 12px;"><div class="form-head-light"><?php cre_index_block_title(BLOCK_TITLE_CUSTOMERS,tep_href_link(FILENAME_CREATE_ACCOUNT,'selected_box=customers','NONSSL'),BLOCK_HELP_CUSTOMERS);?></div><div class="form-body form-body-fade">
-        <ul class="ul_index">
+  <!-- begin customers -->
+  <div class="panel panel-primary">
+      <div class="panel-heading">
+          <h4 class="panel-title"><?php echo BLOCK_TITLE_CUSTOMERS;?></h4>
+      </div>
+      <div class="panel-body bg-white">
+         <ul class="list-unstyled">
           <li><?php echo BLOCK_CONTENT_CUSTOMERS_TOTAL.' : '.CUSTOMER_COUNT;?></li>
           <li><?php echo BLOCK_CONTENT_CUSTOMERS_SUBSCRIBED.' : '.CUSTOMER_SUBSCRIBED_COUNT;?></li>
         </ul>
-      </div></td>
-    </tr>
-  </table>
+      </div>
+  </div>
+  <!-- end customers -->
   <?php
 }
 ?>

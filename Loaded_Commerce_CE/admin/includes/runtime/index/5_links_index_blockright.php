@@ -24,18 +24,20 @@ if(defined('ADMIN_BLOCKS_LINKS_STATUS') && ADMIN_BLOCKS_LINKS_STATUS == 'true'){
   $linkapprovedcount = tep_db_fetch_array($linkapproved_query);
   define('LINKS_APPROVAL_COUNT',$linkapprovedcount['linkapprovedcnt']);
   ?>
-  <table width="100%"  border="0" cellspacing="0" cellpadding="0" summary="Links Information">
-    <tr valign="top">
-      <td width="100%" style="padding-right: 12px;"><div class="form-head"><?php cre_index_block_title(BLOCK_TITLE_LINKS, tep_href_link(FILENAME_LINKS,'selected_box=links','NONSSL'), BLOCK_LINKS_HELP);?></div>
-      <div class="form-body">
-        <ul class="ul_index">
+  <!-- begin links -->
+  <div class="panel panel-primary">
+      <div class="panel-heading">
+          <h4 class="panel-title"><?php echo BLOCK_TITLE_LINKS;?></h4>
+      </div>
+      <div class="panel-body bg-white">
+        <ul class="list-unstyled">
           <li><?php echo BLOCK_CONTENT_LINKS_TOTAL.' : '.LINKS_COUNT;?></li>  
           <li><?php echo BLOCK_CONTENT_LINKS_CATEGORIES.' : '.LINK_CATEGORIES_COUNT;?></li>
           <li><?php echo BLOCK_CONTENT_LINKS_WAITING.' : '.LINKS_APPROVAL_COUNT;?></li>
         </ul>
-      </div></td>
-    </tr>
-  </table>
+      </div>
+  </div>
+  <!-- end links -->
   <?php
 }
 ?>

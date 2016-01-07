@@ -12,10 +12,12 @@
 */
 if (defined('ADMIN_BLOCKS_WHATS_NEW') && ADMIN_BLOCKS_WHATS_NEW == 'true'){
   ?>
-  <table width="100%"  border="0" cellspacing="0" cellpadding="0" summary="Reviews Information">
-    <tr valign="top">
-      <td width="100%" style="padding-right: 12px;"><div class="form-head-light"><?php cre_index_block_title(BLOCK_TITLE_WHATS_NEW); ?></div>
-        <div class="form-body form-body-fade">
+    <!-- begin whats new -->
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h4 class="panel-title"><?php cre_index_block_title(BLOCK_TITLE_WHATS_NEW); ?></h4>
+      </div>
+      <div class="panel-body bg-white">
         <script language='JavaScript' type='text/javascript' src='https://adserver.authsecure.com/adx.js'></script>
         <script language='JavaScript' type='text/javascript'>
         <!--
@@ -32,10 +34,9 @@ if (defined('ADMIN_BLOCKS_WHATS_NEW') && ADMIN_BLOCKS_WHATS_NEW == 'true'){
         //-->
         </script><noscript><a href='https://adserver.authsecure.com/adclick.php?n=a0fe9c07' target='_blank'><img src='https://adserver.authsecure.com/adview.php?what=zone:110&amp;n=a0fe9c07' border='0' alt=''></a></noscript>
         <a href="<?php echo tep_href_link(REMOVE_WHATS_NEW_LINK, 'gID=23&selected_box=configuration&cID=10012', 'SSL'); ?>" style="font-size:smaller"> Click to remove this block</a>  
-        </div>
-      </td>
-    </tr>
-  </table>
+      </div>
+    </div>
+    <!-- end whats new -->
   <?php
 }
 ?>

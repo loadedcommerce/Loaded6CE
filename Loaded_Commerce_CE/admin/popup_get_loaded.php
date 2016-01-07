@@ -12,12 +12,9 @@
 */
 require('includes/application_top.php');
 $page = (isset($_GET['page'])) ? $_GET['page'] : '';
-if ($page == 'login') {
-  if (isset($_SESSION['from_login'])) unset($_SESSION['from_login']);
-   $email_address = isset($_POST['email_address']) ? $_POST['email_address'] : '';
-   $password = isset($_POST['password']) ? $_POST['password'] : '';
   ?>
-head>
+<!DOCTYPE html>
+<head>
     <meta charset="utf-8" />
     <title><?php echo TITLE; ?> | Login Page</title>
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
@@ -40,7 +37,6 @@ head>
     <!-- ================== END BASE JS ================== -->
 </head>
 <body>
-<body class="pace-top">
     <!-- begin #page-loader -->
     <div id="page-loader" class="fade in"><span class="spinner"></span></div>
     <!-- end #page-loader -->
@@ -52,49 +48,34 @@ head>
     <!-- begin #page-container -->
     <div id="page-container" class="fade">
         <!-- begin login -->
-        <div class="login login-v2" data-pageload-addclass="animated fadeIn">
-            <!-- begin brand -->
-            <div class="login-header">
-
-<table border="0" cellpadding="0" cellspacing="0" width="100%" style="margin: 45px auto;">
-    <tr>
-       <td class="box-top-left">&nbsp;</td>
-       <td class="box-top">&nbsp;</td>
-       <td class="box-top-right">&nbsp;</td>
-    </tr>
-    <tr>
-       <td class="box-left">&nbsp;</td>
-       <td class="box-content">
-          <table border="0" cellpadding="0" cellspacing="0">
-             <tr>
-                <td>
-                   <iframe name="fr1" src="messages.php?s=login" scrolling="no" allowtransparency="true" frameborder="0" marginheight="0" marginwidth="0" height="200" width="550" align="center"></iframe>
-                    <div style="margin-top: 1em;">
-                      <a href="<?php echo tep_href_link(FILENAME_DEFAULT, '', 'SSL'); ?>"><?php echo IMAGE_BUTTON_CONTINUE; ?></a>
-                    </div>
-                </td>
-             </tr>
-          </table>
-       </td>
-       <td class="box-right">&nbsp;</td>
-    </tr>
-    <tr>
-       <td class="box-bottom-left">&nbsp;</td>
-       <td class="box-bottom">&nbsp;</td>
-       <td class="box-bottom-right">&nbsp;</td>
-    </tr>
-  </table>
-  </body>
-  </html>
+        <div class="login col-md-6 pull-none" data-pageload-addclass="animated fadeIn" style="margin: 168px auto; position: relative;">
+        <div class="news-caption">
+<?php
+    if ($page == 'login') {
+    if (isset($_SESSION['from_login'])) unset($_SESSION['from_login']);
+    $email_address = isset($_POST['email_address']) ? $_POST['email_address'] : '';
+    $password = isset($_POST['password']) ? $_POST['password'] : '';
+ ?>
+            <div class="panel panel-primary">
+              <div class="panel-heading">
+                <h4 class="panel-title"><strong>Get Loaded</strong></h4>
+              </div>
+                <div class="panel-body">
+                   <iframe name="fr1" src="messages.php?s=login" scrolling="no" allowtransparency="true" frameborder="0" marginheight="0" marginwidth="0" width="100%" align="center"></iframe>
+                    <p class="text-center m-t-40">
+                      <a href="<?php echo tep_href_link(FILENAME_DEFAULT, '', 'SSL'); ?>" class="btn btn-primary btn-lg m-r-5"><?php echo IMAGE_BUTTON_CONTINUE; ?></a>
+                    </p>
+                </div>
+            </div>
   <?php
 } else if ($page == 'new_admin_member' || $page == 'new_admin_group') {
   ?>
+            <div class="panel panel-primary">
+              <div class="panel-heading">
+                <h4 class="panel-title"><strong>Get Loaded</strong></h4>
+              </div>
+                <div class="panel-body"> 
   <table border="0" cellpadding="0" cellspacing="0" style="margin: 0 auto; width: 600px;" align="center">
-     <tr>
-       <td class="box-top-left">&nbsp;</td>
-       <td class="box-top">&nbsp;</td>
-       <td class="box-top-right" style="width: 48px;" >&nbsp;</td>
-     </tr>
      <tr>
         <td class="box-left"">&nbsp;</td>
         <td style="background: #f0f8fc url(images/window-right.png) repeat-y right;" width="600" colspan="2">
@@ -129,22 +110,31 @@ Multiple Admin Groups allow you control over user access. Decide who gets access
         <td class="box-left">&nbsp;</td>
         <td align="right" class="box-content" valign="bottom">
         <div style="padding-top: 1em;">
-        <a href="javascript:void(0)" onclick="hideNewAdminMember()">No Thanks</a>&nbsp;&nbsp;
+        <a href="javascript:void(0)" onclick="hideNewAdminMember()">No Thanks</a> &nbsp; &nbsp;
         <a href="http://www.loadedcommerce.com/" onclick="hideNewAdminMember()" target="_blank"><img src="images/window-more.png" /></a>
         </div>
         </td>
         <td class="box-right" style="width: 48px;">&nbsp;</td>
      </tr>
-     <tr>
-       <td class="box-bottom-left">&nbsp;</td>
-       <td class="box-bottom">&nbsp;</td>
-       <td class="box-bottom-right" style="width: 48px;">&nbsp;</td>
-     </tr>
   </table>
+  </div>
+            </div>
   <?php
 } else {
-  echo 'Feature not available in Standard version.';
-}
+?>
+              <div class="panel panel-primary">
+              <div class="panel-heading">
+                <h4 class="panel-title"><strong>Oops!</strong></h4>
+              </div>
+                <div class="panel-body">
+                   <h3>Feature not available in Standard version.</h3>
+                    <p class="text-center m-t-40">
+                      <a href="<?php echo tep_href_link(FILENAME_DEFAULT, '', 'SSL'); ?>" class="btn btn-primary btn-lg m-r-5"><?php echo IMAGE_BUTTON_CONTINUE; ?></a>
+                    </p>
+                </div>
+            </div>
+<?php
+  }
 ?>
            </div>
         <!-- end login -->

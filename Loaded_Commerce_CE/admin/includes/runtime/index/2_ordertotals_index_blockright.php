@@ -105,14 +105,14 @@ if(defined('ADMIN_BLOCKS_OT_STATUS') && ADMIN_BLOCKS_OT_STATUS == 'true'){
     $ytd_approved_total = $ot_data['total'];
     $ytd_approved_count = $ot_data['count'];
   }
-  
-  
 ?>
-  <table width="100%"  border="0" cellspacing="0" cellpadding="0" summary="Order Information">
-    <tr valign="top">
-      <td width="100%" style="padding-right: 12px;"><div class="form-head-light"><?php cre_index_block_title(BLOCK_TITLE_OT, tep_href_link(FILENAME_ORDERS),BLOCK_HELP_OT);?></div>
-      <div class="form-body form-body-fade">
-        <ul class="ul_index">
+<!-- begin ordertotal -->
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h4 class="panel-title"><?php echo BLOCK_TITLE_OT;?></h4>
+    </div>
+    <div class="panel-body bg-white">
+        <ul class="list-unstyled">
           <li><?php echo BLOCK_CONTENT_OT_HIGHEST_ORDER_NUM . $highest_order_num['highest_order_num'];?></li>
           <li><?php echo BLOCK_CONTENT_OT_TODAY_SO_FAR . $currencies->format($todays_raw_total) . ' (' . $currencies->format($todays_approved_total) . ')';?></li>
           <li><?php echo BLOCK_CONTENT_OT_YESTERDAYS_ORDERS . $currencies->format($yesterdays_raw_total) . ' (' . $currencies->format($yesterdays_approved_total) . ')';?></li>
@@ -132,9 +132,9 @@ if(defined('ADMIN_BLOCKS_OT_STATUS') && ADMIN_BLOCKS_OT_STATUS == 'true'){
           <li><?php echo BLOCK_CONTENT_OT_PERCENT_APPROVED . '<br>' . BLOCK_CONTENT_OT_TODAY . tep_round($todays_approved_percent, 2) . '%<br>' . BLOCK_CONTENT_OT_MONTH . tep_round($this_month_approved_percent, 2) . '%';?></li>
           <b><a href="#" onclick="window.open('<?php echo tep_href_link('index_block_preference.php', '', 'SSL');?>', 'popupWindow', 'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=yes,copyhistory=no,width=400,height=300,top=200,left=300');"><?php echo BLOCK_CONTENT_OT_PREFERENCE; ?></a></b>
         </ul>
-        </div><td>
-    </tr>
-  </table>
+    </div>
+</div>
+<!-- end ordertotal -->
 <?php
 }
 ?>

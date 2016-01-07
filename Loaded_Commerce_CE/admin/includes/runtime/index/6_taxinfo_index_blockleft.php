@@ -31,16 +31,18 @@ if (defined('ADMIN_BLOCKS_TAX_RATES_STATUS') && ADMIN_BLOCKS_TAX_RATES_STATUS ==
     $tax_contents .="</li>\n";
   }
   ?>
-  <table width="100%"  border="0" cellspacing="0" cellpadding="0" summary="Tax Information">
-    <tr valign="top">
-      <td width="100%" style="padding-right: 12px;"><div class="form-head-light"><?php cre_index_block_title(BLOCK_TITLE_TAX_RATES,tep_href_link(FILENAME_TAX_RATES,'selected_box=catalog','NONSSL'),BLOCK_HELP_TAXES);?></div>
-      <div class="form-body form-body-fade">
-        <ul class="ul_index">
+  <!-- begin taxinfo -->
+  <div class="panel panel-primary">
+      <div class="panel-heading">
+          <h4 class="panel-title"><?php echo BLOCK_TITLE_TAX_RATES;?></h4>
+      </div>
+      <div class="panel-body bg-white">
+        <ul class="list-unstyled">
           <?php echo $tax_contents;?>
         </ul>
-      </div></td>
-    </tr>
-  </table>
+      </div>
+  </div>
+  <!-- end taxinfo -->
   <?php
 }
 ?>

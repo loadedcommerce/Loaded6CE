@@ -16,17 +16,19 @@ if (defined('ADMIN_BLOCKS_REVIEWS_STATUS') && ADMIN_BLOCKS_REVIEWS_STATUS == 'tr
   $reviewcount = tep_db_fetch_array($review_query);
   //define('REVIEW_COUNT',$reviewcount['reviewcnt']);
   ?>
-  <table width="100%"  border="0" cellspacing="0" cellpadding="0" summary="Reviews Information">
-    <tr valign="top">
-      <td width="100%" style="padding-right: 12px;"><div class="form-head-light"><?php cre_index_block_title(BLOCK_TITLE_REVIEWS,tep_href_link(FILENAME_REVIEWS,'selected_box=catalog','NONSSL'),BLOCK_HELP_REVIEWS);?></div>
-      <div class="form-body form-body-fade">
-        <ul class="ul_index">
-          <li><?php echo BLOCK_CONTENT_REVIEWS_TOTAL_REVIEWS.' : '.$reviewcount['reviewcnt'];?></li>
-          <!-- li><?php echo BLOCK_CONTENT_REVIEWS_WAITING_APPROVAL;?>: 2 </li -->
-        </ul>
-      </div></td>
-    </tr>
-  </table>
+  <!-- begin reviews -->
+  <div class="panel panel-primary">
+      <div class="panel-heading">
+          <h4 class="panel-title"><?php echo BLOCK_TITLE_REVIEWS;?></h4>
+      </div>
+      <div class="panel-body bg-white">
+          <ul class="list-unstyled">
+              <li><?php echo BLOCK_CONTENT_REVIEWS_TOTAL_REVIEWS.' : '.$reviewcount['reviewcnt'];?></li>
+              <!-- li><?php echo BLOCK_CONTENT_REVIEWS_WAITING_APPROVAL;?>: 2 </li -->
+          </ul>
+      </div>
+  </div>
+  <!-- end reviews -->
   <?php
 }
 ?>
