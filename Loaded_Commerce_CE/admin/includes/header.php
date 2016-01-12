@@ -43,7 +43,7 @@ for (var i = 0; i < imgs.length; i++) {
       <div class="container-fluid">
         <!-- begin mobile sidebar expand / collapse button -->
         <div class="navbar-header">
-          <a href="<?php echo tep_href_link(FILENAME_DEFAULT);?>" class="navbar-brand"><span class="logo-sm"><img src="images/logo-sm.jpg" border="0"></span><?php echo PROJECT_VERSION;?></a>
+          <a href="<?php echo tep_href_link(FILENAME_DEFAULT);?>" class="navbar-brand"><span class="logo-sm"><img src="images/logo-sm.png" border="0"></span><?php echo PROJECT_VERSION;?></a>
           <button type="button" class="navbar-toggle" data-click="sidebar-toggled">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
