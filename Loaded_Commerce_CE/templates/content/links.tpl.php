@@ -1,10 +1,11 @@
-    <?php
-    // RCI code start
-    echo $cre_RCI->get('global', 'top');
-    echo $cre_RCI->get('links', 'top');
-    // RCI code eof
-    ?>        
-    <table border="0" width="100%" cellspacing="0" cellpadding="<?php echo CELLPADDING_SUB; ?>">
+<?php
+// RCI code start
+echo $cre_RCI->get('global', 'top');
+echo $cre_RCI->get('links', 'top');
+// RCI code eof
+?>
+<div class="row">
+  <div class="col-sm-12 col-lg-12">
 <?php
   if ($display_mode == 'categories') {
 ?>
@@ -14,17 +15,7 @@ if (SHOW_HEADING_TITLE_ORIGINAL == 'yes') {
 $header_text = '&nbsp;'
 //EOF: Lango Added for template MOD
 ?>
-      <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
-          <tr>
-            <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
-          </tr>
-        </table></td>
-      </tr>
-      <tr>
-        <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
-      </tr>
-
+    <h1 class="no-margin-top"><?php echo HEADING_TITLE; ?></h1>
 <?php
 // BOF: Lango Added for template MOD
 }else{
@@ -33,21 +24,7 @@ $header_text = HEADING_TITLE;
 // EOF: Lango Added for template MOD
 ?>
 <?php
-// BOF: Lango Added for template MOD
-if (MAIN_TABLE_BORDER == 'yes'){
-table_image_border_top(false, false, $header_text);
-}
-// EOF: Lango Added for template MOD
-?>
-      <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
-          <tr>
-            <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
-          </tr>
-          <tr>
-<?php
     $categories_query = tep_db_query("select lc.link_categories_id, lcd.link_categories_name, lcd.link_categories_description, lc.link_categories_image from " . TABLE_LINK_CATEGORIES . " lc, " . TABLE_LINK_CATEGORIES_DESCRIPTION . " lcd where lc.link_categories_id = lcd.link_categories_id and lc.link_categories_status = '1' and lcd.language_id = '" . (int)$languages_id . "' order by lcd.link_categories_name");
-
     $number_of_categories = tep_db_num_rows($categories_query);
 
     if ($number_of_categories > 0) {
@@ -79,32 +56,11 @@ table_image_border_top(false, false, $header_text);
 <?php
     }
 ?>
-        </table></td>
-      </tr>
-<?php
-// BOF: Lango Added for template MOD
-if (MAIN_TABLE_BORDER == 'yes'){
-table_image_border_bottom();
-}
-// EOF: Lango Added for template MOD
-?>
 
-      <tr>
-        <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
-      </tr>
-      <tr>
-        <td><table border="0" width="100%" cellspacing="1" cellpadding="2" class="infoBox">
-          <tr class="infoBoxContents">
-            <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
-              <tr>
-                <td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
-                <td class="main" align="right"><?php echo '<a href="' . tep_href_link(FILENAME_LINKS_SUBMIT, tep_get_all_get_params()) . '">' . tep_template_image_button('button_submit_link.gif', IMAGE_BUTTON_SUBMIT_LINK) . '</a>'; ?></td>
-                <td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
-              </tr>
-            </table></td>
-          </tr>
-        </table></td>
-      </tr>
+
+
+                <?php echo '<a href="' . tep_href_link(FILENAME_LINKS_SUBMIT, tep_get_all_get_params()) . '">' . tep_template_image_button('button_submit_link.gif', IMAGE_BUTTON_SUBMIT_LINK) . '</a>'; ?>
+
       <!--endcategorieslinks-->
 <?php
   } elseif ($display_mode == 'links') {
@@ -160,7 +116,7 @@ table_image_border_bottom();
       ld.language_id = '" . (int)$languages_id . "' and
       l2lc.link_categories_id = '" . (int)$current_category_id . "'";
 
-    if ( (!isset($_GET['sort'])) || (!preg_match('/[1-8][ad]/', $_GET['sort'])) || (substr($_GET['sort'], 0, 1) > sizeof($column_list)) ) {
+    if ( (!isset($_GET['sort'])) || (!ereg('[1-8][ad]', $_GET['sort'])) || (substr($_GET['sort'], 0, 1) > sizeof($column_list)) ) {
       for ($i=0, $n=sizeof($column_list); $i<$n; $i++) {
         if ($column_list[$i] == 'LINK_LIST_TITLE') {
           $_GET['sort'] = $i+1 . 'a';
@@ -197,11 +153,11 @@ if (SHOW_HEADING_TITLE_ORIGINAL == 'yes') {
 $header_text = '&nbsp;'
 //EOF: Lango Added for template MOD
 ?>
-      <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
-          <tr>
-            <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
-            <td class="pageHeading" align="right">
+
+
+
+            <h1 class="no-margin-top"><?php echo HEADING_TITLE; ?></h1>
+
 <?php
 // Get the right image for the top-right ;-)
     $image = 'table_background_list.gif';
@@ -214,11 +170,9 @@ $header_text = '&nbsp;'
       }
     }
 ?>
-            </td>
-            <td align="right"><?php echo tep_image(DIR_WS_IMAGES . $image, HEADING_TITLE, HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
-          </tr>
-        </table></td>
-      </tr>
+
+
+
   <?php
 // BOF: Lango Added for template MOD
 }else{
@@ -228,56 +182,43 @@ $header_text = HEADING_TITLE;
 ?>
 <?php
 // BOF: Lango Added for template MOD
-if (MAIN_TABLE_BORDER == 'yes'){
-table_image_border_top(false, false, $header_text);
-}
 // EOF: Lango Added for template MOD
 ?>
 
-      <tr>
-        <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
-      </tr>
-      <tr>
-        <td><?php
-        //include(DIR_WS_MODULES . FILENAME_LINK_LISTING); 
+
+  <div class="product-listing-module-container">
+
+     <?php
+        //include(DIR_WS_MODULES . FILENAME_LINK_LISTING);
          if ( file_exists(TEMPLATE_FS_CUSTOM_MODULES . FILENAME_LINK_LISTING)) {
             require(TEMPLATE_FS_CUSTOM_MODULES . FILENAME_LINK_LISTING);
         } else {
             require(DIR_WS_MODULES . FILENAME_LINK_LISTING);
-        } 
-        ?></td>
-      </tr>
+        }
+        ?>
+      </div>
+      <div class="clear-both"></div>
+
 
 <?php
 // RCI code start
 echo $cre_RCI->get('links', 'menu');
 // RCI code eof
 // BOF: Lango Added for template MOD
-if (MAIN_TABLE_BORDER == 'yes'){
-table_image_border_bottom();
-}
 // EOF: Lango Added for template MOD
 ?>
-      <tr>
-        <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
-      </tr>
-      <tr>
-        <td><table border="0" width="100%" cellspacing="1" cellpadding="2" class="infoBox">
-          <tr class="infoBoxContents">
-            <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
-              <tr>
-                <td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
-                <td class="main" align="right"><?php echo '<a href="' . tep_href_link(FILENAME_LINKS_SUBMIT, tep_get_all_get_params()) . '">' . tep_template_image_button('button_submit_link.gif', IMAGE_BUTTON_SUBMIT_LINK) . '</a>'; ?></td>
-                <td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
-              </tr>
-            </table></td>
-          </tr>
-        </table></td>
-      </tr>
+
+               <?php echo '<a href="' . tep_href_link(FILENAME_LINKS_SUBMIT, tep_get_all_get_params()) . '"><button type="submit" class="pull-right btn btn-lg btn-primary">' .  IMAGE_BUTTON_SUBMIT_LINK . '</button></a>'; ?>
+
+
+
+
 <?php
   }
 ?>
-    </table>
+    </div>
+   </div>
+
     <?php
     // RCI code start
     echo $cre_RCI->get('links', 'bottom');

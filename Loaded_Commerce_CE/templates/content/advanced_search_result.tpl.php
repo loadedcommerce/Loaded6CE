@@ -2,40 +2,24 @@
 // RCI code start
 echo $cre_RCI->get('global', 'top');
 echo $cre_RCI->get('advancedsearchresult', 'top');
-// RCI code eof 
+// RCI code eof
 ?>
-<table border="0" width="100%" cellspacing="0" cellpadding="<?php echo CELLPADDING_SUB; ?>">
+<div class="row">
+  <div class="col-sm-12 col-lg-12">
 <?php
 // BOF: Lango Added for template MOD
 if (SHOW_HEADING_TITLE_ORIGINAL == 'yes') {
 $header_text = '&nbsp;'
 //EOF: Lango Added for template MOD
 ?>
-      <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
-          <tr>
-            <td class="pageHeading"><?php echo HEADING_TITLE_2; ?></td>
-            <td class="pageHeading" align="right"><?php echo tep_image(DIR_WS_IMAGES . 'table_background_browse.gif', HEADING_TITLE_2, HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
-          </tr>
-        </table></td>
-      </tr>
-      <tr>
-        <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
-      </tr>
+             <h1 class="no-margin-top"><?php echo HEADING_TITLE_2; ?></h1>
 <?php
 }else{
-$header_text = HEADING_TITLE_2;
+$header_text = '<h1 class="no-margin-top">'.HEADING_TITLE_2 . '</h1>';
 }
 ?>
-<?php
-// BOF: Lango Added for template MOD
-if (MAIN_TABLE_BORDER == 'yes'){
-table_image_border_top(false, false, $header_text);
-}
-// EOF: Lango Added for template MOD
-?>
-      <tr>
-        <td>
+
+
 <?php
 // create column list
   $define_list = array('PRODUCT_LIST_MODEL' => PRODUCT_LIST_MODEL,
@@ -53,6 +37,21 @@ table_image_border_top(false, false, $header_text);
   reset($define_list);
   while (list($key, $value) = each($define_list)) {
     if ($value > 0) $column_list[] = $key;
+  }
+
+// Eversun mod for sppp
+  if(!isset($_SESSION['sppc_customer_group_id'])) {
+    $customer_group_id = 'G';
+  } else {
+    $customer_group_id = $_SESSION['sppc_customer_group_id'];
+  }
+// Eversun mod end for sppp
+
+  $customer_group_array = array();
+  if(!isset($_SESSION['sppc_customer_group_id'])) {
+    $customer_group_array[] = 'G';
+  } else {
+    $customer_group_array = tep_get_customers_access_group($_SESSION['customer_id']);
   }
 
   $select_column_list = '';
@@ -98,7 +97,7 @@ table_image_border_top(false, false, $header_text);
    $status_tmp_product_prices_table = false;
    $status_need_to_get_prices = false;
    // find out if sorting by price has been requested
-   if ( (isset($_GET['sort'])) && (preg_match('/[1-8][ad]/', $_GET['sort'])) && (substr($_GET['sort'], 0, 1) <= sizeof($column_list)) ){
+   if ( (isset($_GET['sort'])) && (ereg('[1-8][ad]', $_GET['sort'])) && (substr($_GET['sort'], 0, 1) <= sizeof($column_list)) ){
     $_sort_col = substr($_GET['sort'], 0 , 1);
     if ($column_list[$_sort_col-1] == 'PRODUCT_LIST_PRICE') {
       $status_need_to_get_prices = true;
@@ -141,25 +140,34 @@ table_image_border_top(false, false, $header_text);
     $select_str .= ", SUM(tr.tax_rate) as tax_rate ";
   }
 
+if(INSTALLED_VERSION_TYPE == 'B2B')
+{
+   $from_str = "from (((" . TABLE_PRODUCTS . " p
+               left join " . TABLE_PRODUCTS_GROUPS . " pg on p.products_id = pg.products_id and pg.customers_group_id = '" . (int)$customer_group_id . "')
+               left join " . TABLE_SPECIALS . " s on(s.products_id = p.products_id and s.status = 1 and s.customers_group_id = " . (int)$customer_group_id . ") )
+               left join " . TABLE_MANUFACTURERS . " m on p.manufacturers_id = m.manufacturers_id )";
+}
+else
+{
    $from_str = "from ((" . TABLE_PRODUCTS . " p
                left join " . TABLE_SPECIALS . " s on(s.products_id = p.products_id and s.status = 1) )
                left join " . TABLE_MANUFACTURERS . " m on p.manufacturers_id = m.manufacturers_id )";
-
+}
   if ( (DISPLAY_PRICE_WITH_TAX == 'true') && (tep_not_null($pfrom) || tep_not_null($pto)) ) {
     if (!isset($_SESSION['customer_country_id'])) {
       $_SESSION['customer_country_id'] = STORE_COUNTRY;
       $_SESSION['customer_zone_id'] = STORE_ZONE;
     }
     $from_str .= " left join " . TABLE_TAX_RATES . " tr on p.products_tax_class_id = tr.tax_class_id left join " . TABLE_ZONES_TO_GEO_ZONES . " gz on tr.tax_zone_id = gz.geo_zone_id and (gz.zone_country_id is null or gz.zone_country_id = '0' or gz.zone_country_id = '" . (int)$_SESSION['customer_country_id'] . "') and (gz.zone_id is null or gz.zone_id = '0' or gz.zone_id = '" . (int)$_SESSION['customer_zone_id'] . "'),";
-  } else { 
+  } else {
     $from_str .= " , ";
   }
-  
+
   // modified for mysql 5 support - add tables after the left join tables
   $from_str .= TABLE_PRODUCTS_DESCRIPTION . " pd,
                " . TABLE_CATEGORIES . " c,
                " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c ";
-  
+
   $where_str = " where p.products_status = 1
                    and p.products_id = pd.products_id
                    and pd.language_id = " . (int)$languages_id . "
@@ -246,11 +254,17 @@ table_image_border_top(false, false, $header_text);
     if ($pto > 0) $where_str .= " and (IF(s.status, s.specials_new_products_price, p.products_price) <= " . (double)$pto . ")";
   }
 
+if(INSTALLED_VERSION_TYPE == 'B2B')
+{
+  $where_str .= tep_get_access_sql('p.products_group_access', $customer_group_array);
+}
+// Eversun mod end for group_access check
+
   if ( (DISPLAY_PRICE_WITH_TAX == 'true') && (tep_not_null($pfrom) || tep_not_null($pto)) ) {
     $where_str .= " group by p.products_id, tr.tax_priority";
   }
 
-  if ( (!isset($_GET['sort'])) || (!preg_match('/[1-8][ad]/', $_GET['sort'])) || (substr($_GET['sort'], 0, 1) > sizeof($column_list)) ) {
+  if ( (!isset($_GET['sort'])) || (!ereg('[1-8][ad]', $_GET['sort'])) || (substr($_GET['sort'], 0, 1) > sizeof($column_list)) ) {
     for ($i=0, $n=sizeof($column_list); $i<$n; $i++) {
       if ($column_list[$i] == 'PRODUCT_LIST_NAME') {
         $_GET['sort'] = $i+1 . 'a';
@@ -290,7 +304,7 @@ table_image_border_top(false, false, $header_text);
         break;
     }
   }
-  
+
   $listing_sql = $select_str . $from_str . $where_str . $order_str;
 
 //  require(DIR_WS_MODULES . FILENAME_PRODUCT_LISTING);
@@ -300,31 +314,23 @@ table_image_border_top(false, false, $header_text);
             require(DIR_WS_MODULES . FILENAME_PRODUCT_LISTING);
         }
 ?>
-        </td>
-      </tr>
+ </div>
+</div>
+
 <?php
 // RCI code start
 echo $cre_RCI->get('advancedsearchresult', 'menu');
-// RCI code eof 
-// BOF: Lango Added for template MOD
-if (MAIN_TABLE_BORDER == 'yes'){
-table_image_border_bottom();
-}
-// EOF: Lango Added for template MOD
+// RCI code eof
 ?>
-          <tr>
-            <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
-          </tr>
-      <tr>
-        <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
-      </tr>
-      <tr>
-        <td class="main"><?php echo '<a href="' . tep_href_link(FILENAME_ADVANCED_SEARCH, tep_get_all_get_params(array('sort', 'page')), 'NONSSL', true, false) . '">' . tep_template_image_button('button_back.gif', IMAGE_BUTTON_BACK) . '</a>'; ?></td>
-      </tr>
-    </table>
+
+<div class="button-set clearfix large-margin-bottom">
+<?php echo '<a href="' . tep_href_link(FILENAME_ADVANCED_SEARCH, tep_get_all_get_params(array('sort', 'page')), 'NONSSL', true, false) . '"><button class="pull-left btn btn-lg btn-default" type="button">'.IMAGE_BUTTON_BACK.'</button></a>'; ?>
+</div>
+
+
 <?php
 // RCI code start
 echo $cre_RCI->get('advancedsearchresult', 'bottom');
 echo $cre_RCI->get('global', 'bottom');
-// RCI code eof 
+// RCI code eof
 ?>

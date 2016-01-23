@@ -4,19 +4,6 @@ echo $cre_RCI->get('global', 'top');
 echo $cre_RCI->get('wishlist', 'top');
 // RCI code eof
 ?>
-<script type="text/javascript">
-  function validateEmail(){	
-    var inputvalue = document.tell_a_friend.send_to.value;   
-    var pattern=/^([a-zA-Z0-9_.-])+@([a-zA-Z0-9_.-])+\.([a-zA-Z])+([a-zA-Z])+/;    
-    if(pattern.test(inputvalue)){         
-      return true;   
-    }else{  
-      alert("Please enter valid email address");
-      return false; 
-    }
-  }
-</script>
-
 <!-- wishlist.tpl.php //start -->
 <table border="0" width="100%" cellspacing="0" cellpadding="<?php echo CELLPADDING_SUB; ?>">
 <?php
@@ -28,7 +15,7 @@ if (SHOW_HEADING_TITLE_ORIGINAL == 'yes') {
   <tr>
     <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
         <tr>
-          <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
+          <td class="pageHeading"><h1 class="no-margin-top"><?php echo HEADING_TITLE; ?></h1></td>
           <td class="pageHeading" align="right"><?php echo tep_image(DIR_WS_IMAGES . 'table_background_wishlist.gif', HEADING_TITLE, HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
         </tr>
       </table></td>
@@ -53,7 +40,7 @@ if (SHOW_HEADING_TITLE_ORIGINAL == 'yes') {
         <!-- wishlist content //start -->
         <?php
         $wishlist_sql = "select * from " . TABLE_WISHLIST . " where customers_id = '" . $_SESSION['customer_id'] . "' and products_id > 0 order by products_name";
-        $wishlist_split = new splitPageResults($wishlist_sql, MAX_DISPLAY_WISHLIST_PRODUCTS);
+        $wishlist_split = new splitPageResults_rspv($wishlist_sql, MAX_DISPLAY_WISHLIST_PRODUCTS);
         $wishlist_query = tep_db_query($wishlist_split->sql_query);
 
         $info_box_contents = array();
@@ -68,17 +55,17 @@ if (SHOW_HEADING_TITLE_ORIGINAL == 'yes') {
 
           if ( ($wishlist_split->number_of_rows > 0) && ( (PREV_NEXT_BAR_LOCATION == '1') || (PREV_NEXT_BAR_LOCATION == '3') ) ) {
           ?>
-            <tr>
-              <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
-                <tr>
-                  <td class="smallText"><?php echo $wishlist_split->display_count(TEXT_DISPLAY_NUMBER_OF_WISHLIST); ?></td>
-                  <td class="smallText" align="right"><?php echo TEXT_RESULT_PAGE . ' ' . $wishlist_split->display_links(MAX_DISPLAY_PAGE_LINKS, tep_get_all_get_params(array('page', 'info', 'x', 'y'))); ?></td>
-                </tr>
-                <tr>
-                  <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
-                </tr>
-              </table></td>
-            </tr>
+      <div class="product-listing-module-pagination margin-bottom">
+        <div class="pull-left large-margin-bottom page-results"><?php echo $wishlist_split->display_count(TEXT_DISPLAY_NUMBER_OF_WISHLIST); ?></div>
+        <div class="pull-right large-margin-bottom no-margin-top">
+          <ul class="pagination no-margin-top no-margin-bottom">
+           <?php echo  $wishlist_split->display_links(MAX_DISPLAY_PAGE_LINKS, tep_get_all_get_params(array('page', 'info', 'x', 'y'))); ?>
+
+          </ul>
+        </div>
+      </div><div class="clear-both"></div>
+
+
           <?php
           }
           ?>
@@ -107,7 +94,7 @@ if (SHOW_HEADING_TITLE_ORIGINAL == 'yes') {
                           <?php
                           // Begin Wish List Code w/Attributes
                           $attributes_addon_price = 0;
-                          $tmp_prodid = tep_subproducts_parent($products['products_id']);
+
                           // Now get and populate product attributes
                           if ($_SESSION['customer_id'] > 0) {
                             $wishlist_products_attributes_query = tep_db_query("select products_options_id as po, products_options_value_id as pov from " . TABLE_WISHLIST_ATTRIBUTES . " where customers_id='" . $_SESSION['customer_id'] . "' and products_id = '" . $products['products_id'] . "'");
@@ -116,53 +103,38 @@ if (SHOW_HEADING_TITLE_ORIGINAL == 'yes') {
                               $data = unserialize(str_replace("\\",'',$data1));
 
                                 if(array_key_exists('c',$data)) {
-                                 foreach($data['c'] as $ak => $av) { 
+                                 foreach($data['c'] as $ak => $av) {
                                   $data = $av;
                                   // We now populate $id[] hidden form field with product attributes
                                   echo tep_draw_hidden_field('id['.$products['products_id'].']['.$wishlist_products_attributes['po'].']', $wishlist_products_attributes['pov']);
                                   // And Output the appropriate attribute name
-                                  $attributes = tep_db_query("select poptt.products_options_name, poval.products_options_values_name, pa.options_values_price, pa.price_prefix from " . TABLE_PRODUCTS_OPTIONS . " popt, " . TABLE_PRODUCTS_OPTIONS_TEXT . " poptt,  " . TABLE_PRODUCTS_OPTIONS_VALUES . " poval, " . TABLE_PRODUCTS_ATTRIBUTES . " pa where pa.products_id = '" . ((int)$tmp_prodid > 0 ? $tmp_prodid : $products['products_id']) . "' and pa.options_id = '" . $wishlist_products_attributes['po'] . "' and pa.options_id = popt.products_options_id and pa.options_values_id = '" . $data . "' and pa.options_values_id = poval.products_options_values_id  and poptt.products_options_text_id = popt.products_options_id                                 and poptt.language_id = '" . $languages_id . "' and poval.language_id = '" . $languages_id . "'");
+                                  $attributes = tep_db_query("select poptt.products_options_name, poval.products_options_values_name, pa.options_values_price, pa.price_prefix from " . TABLE_PRODUCTS_OPTIONS . " popt, " . TABLE_PRODUCTS_OPTIONS_TEXT . " poptt,  " . TABLE_PRODUCTS_OPTIONS_VALUES . " poval, " . TABLE_PRODUCTS_ATTRIBUTES . " pa where pa.products_id = '" . $products['products_id'] . "' and pa.options_id = '" . $wishlist_products_attributes['po'] . "' and pa.options_id = popt.products_options_id and pa.options_values_id = '" . $data . "' and pa.options_values_id = poval.products_options_values_id  and poptt.products_options_text_id = popt.products_options_id                                 and poptt.language_id = '" . $languages_id . "' and poval.language_id = '" . $languages_id . "'");
 
                                   $attributes_values = tep_db_fetch_array($attributes);
                                   if ($attributes_values['price_prefix'] == '+') {
-                                    $attributes_addon_price += $attributes_values['options_values_price']; 
+                                    $attributes_addon_price += $attributes_values['options_values_price'];
                                   } else if ($attributes_values['price_prefix'] == '-') {
-                                    $attributes_addon_price -= $attributes_values['options_values_price']; 
+                                    $attributes_addon_price -= $attributes_values['options_values_price'];
                                   }
                                   echo '<br><small><i>' . $attributes_values['products_options_name'] . '&nbsp;:&nbsp; ' . $attributes_values['products_options_values_name'] .'&nbsp; :'.$attributes_values['price_prefix'].$attributes_values['options_values_price']. '</i></small>';
                                   // end while attributes for product
                                 }
-                              } else if(array_key_exists('t',$data)) {
+                              } else {
+                                $data = implode(",", $data);
                                 // We now populate $id[] hidden form field with product attributes
                                 echo tep_draw_hidden_field('id['.$products['products_id'].']['.$wishlist_products_attributes['po'].']', $wishlist_products_attributes['pov']);
                                 // And Output the appropriate attribute name
-                                $attributes = tep_db_query("select poptt.products_options_name, pa.options_values_price, pa.price_prefix from " .  TABLE_PRODUCTS_OPTIONS_TEXT . " poptt,  " . TABLE_PRODUCTS_ATTRIBUTES . " pa where pa.products_id = '" . ((int)$tmp_prodid > 0 ? $tmp_prodid : $products['products_id']) . "' and pa.options_id = '" . $wishlist_products_attributes['po'] . "' and poptt.products_options_text_id = pa.options_id                                 and poptt.language_id = '" . $languages_id . "' and poptt.language_id = '" . $languages_id . "' ");
-
+                                $attributes = tep_db_query("select poptt.products_options_name, poval.products_options_values_name, pa.options_values_price, pa.price_prefix from " . TABLE_PRODUCTS_OPTIONS . " popt, " . TABLE_PRODUCTS_OPTIONS_TEXT . " poptt,  " . TABLE_PRODUCTS_OPTIONS_VALUES . " poval, " . TABLE_PRODUCTS_ATTRIBUTES . " pa where pa.products_id = '" . $products['products_id'] . "' and pa.options_id = '" . $wishlist_products_attributes['po'] . "' and pa.options_id = popt.products_options_id and pa.options_values_id = '" . $data . "' and pa.options_values_id = poval.products_options_values_id  and poptt.products_options_text_id = popt.products_options_id                                 and poptt.language_id = '" . $languages_id . "' and poval.language_id = '" . $languages_id . "'");
                                 $attributes_values = tep_db_fetch_array($attributes);
                                 if ($attributes_values['price_prefix'] == '+') {
                                   $attributes_addon_price += $attributes_values['options_values_price'];
                                 } else if ($attributes_values['price_prefix'] == '-') {
                                 $attributes_addon_price -= $attributes_values['options_values_price'];
                                 }
-                                echo '<br><small><i>' . $attributes_values['products_options_name'] . '&nbsp;:&nbsp; ' . $data['t'] .'&nbsp; :'.$attributes_values['price_prefix'].$attributes_values['options_values_price']. '</i></small>';
-                              } else {
-                                if( is_array($data)) {
-                                  $data = implode(",", $data);         
-                                }                                
-                                // We now populate $id[] hidden form field with product attributes
-                                echo tep_draw_hidden_field('id['.$products['products_id'].']['.$wishlist_products_attributes['po'].']', $wishlist_products_attributes['pov']);
-                                // And Output the appropriate attribute name
-                                $attributes = tep_db_query("select poptt.products_options_name, poval.products_options_values_name, pa.options_values_price, pa.price_prefix from " . TABLE_PRODUCTS_OPTIONS . " popt, " . TABLE_PRODUCTS_OPTIONS_TEXT . " poptt,  " . TABLE_PRODUCTS_OPTIONS_VALUES . " poval, " . TABLE_PRODUCTS_ATTRIBUTES . " pa where pa.products_id = '" . ((int)$tmp_prodid > 0 ? $tmp_prodid : $products['products_id']) . "' and pa.options_id = '" . $wishlist_products_attributes['po'] . "' and pa.options_id = popt.products_options_id and pa.options_values_id = '" . $data . "' and pa.options_values_id = poval.products_options_values_id  and poptt.products_options_text_id = popt.products_options_id                                 and poptt.language_id = '" . $languages_id . "' and poval.language_id = '" . $languages_id . "'");
-                                $attributes_values = tep_db_fetch_array($attributes);
-                                if ($attributes_values['price_prefix'] == '+') {
-                                  $attributes_addon_price += $attributes_values['options_values_price']; 
-                                } else if ($attributes_values['price_prefix'] == '-') {
-                                $attributes_addon_price -= $attributes_values['options_values_price']; 
-                                }
                                 echo '<br><small><i>' . $attributes_values['products_options_name'] . '&nbsp;:&nbsp; ' . $attributes_values['products_options_values_name'] .'&nbsp; :'.$attributes_values['price_prefix'].$attributes_values['options_values_price']. '</i></small>';
-                                } 
+                                }
                             } // end while attributes for product
-                            
+
                             $pf->loadProduct($products['products_id'],$languages_id);
                             $products_price = $pf->getPriceStringShort();
                           }
@@ -217,12 +189,16 @@ if (SHOW_HEADING_TITLE_ORIGINAL == 'yes') {
               <?php
               if ( ($wishlist_split->number_of_rows > 0) && ( (PREV_NEXT_BAR_LOCATION == '2') || (PREV_NEXT_BAR_LOCATION == '3') ) ) {
               ?>
-              <table border="0" width="100%" cellspacing="0" cellpadding="2">
-                <tr>
-                  <td class="smallText"><?php echo $wishlist_split->display_count(TEXT_DISPLAY_NUMBER_OF_WISHLIST); ?></td>
-                  <td align="right" class="smallText"><?php echo TEXT_RESULT_PAGE . ' ' . $wishlist_split->display_links(MAX_DISPLAY_PAGE_LINKS, tep_get_all_get_params(array('page', 'info', 'x', 'y'))); ?></td>
-                </tr>
-              </table></td>
+      <div class="product-listing-module-pagination margin-bottom">
+        <div class="pull-left large-margin-bottom page-results"><?php echo $wishlist_split->display_count(TEXT_DISPLAY_NUMBER_OF_WISHLIST); ?></div>
+        <div class="pull-right large-margin-bottom no-margin-top">
+          <ul class="pagination no-margin-top no-margin-bottom">
+           <?php echo  $wishlist_split->display_links(MAX_DISPLAY_PAGE_LINKS, tep_get_all_get_params(array('page', 'info', 'x', 'y'))); ?>
+
+          </ul>
+        </div>
+      </div><div class="clear-both"></div>
+</td>
               </tr>
 <?php
       // RCI code start
@@ -256,23 +232,15 @@ if (SHOW_HEADING_TITLE_ORIGINAL == 'yes') {
             <td colspan="4">
               <!-- tell_a_friend //-->
               <?php
-              $info_box_contents = array();
-              $info_box_contents[] = array('text' => BOX_HEADING_SEND_WISHLIST);
 
-              new contentBoxHeading($info_box_contents, false, false);
+			   echo '<h3 class="no-margin-top">'.BOX_HEADING_SEND_WISHLIST .'</h3>';
+
 
               $info_box_contents = array();
-              $info_box_contents[] = array('form' => tep_draw_form('tell_a_friend', tep_href_link(FILENAME_WISHLIST_SEND, '', 'NONSSL', false), 'get','onSubmit="return validateEmail();"'),
+              $info_box_contents[] = array('form' => tep_draw_form('tell_a_friend', tep_href_link(FILENAME_WISHLIST_SEND, '', 'NONSSL', false), 'get'),
                                                         'align' => 'center',
-                                                        'text' => tep_draw_input_field('send_to', '', 'size="20"') . '&nbsp;' . tep_template_image_submit('button_tell_a_friend.gif', BOX_TEXT_SEND) . tep_draw_hidden_field('products_ids', isset($_GET['products_ids'])) . tep_hide_session_id() . '<br>' . BOX_TEXT_SEND);
+                                                        'text' => tep_draw_input_field('send_to', '', 'size="20" class="form-control"') . '&nbsp;<br><br>' . tep_template_image_submit('button_tell_a_friend.gif', BOX_TEXT_SEND) . tep_draw_hidden_field('products_ids', isset($_GET['products_ids'])) . tep_hide_session_id() . '<br><br>' . BOX_TEXT_SEND);
               new contentBox($info_box_contents, true, true);
-              if (TEMPLATE_INCLUDE_CONTENT_FOOTER =='true'){
-                  $info_box_contents = array();
-                  $info_box_contents[] = array('align' => 'left',
-                                'text'  => tep_draw_separator('pixel_trans.gif', '100%', '1')
-                              );
-                  new contentBoxFooter($info_box_contents);
-              }   //end content footer
               ?>
               <!-- tell_a_friend_eof //-->
               </td>

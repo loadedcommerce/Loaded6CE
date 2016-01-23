@@ -4,42 +4,11 @@ echo $cre_RCI->get('global', 'top');
 echo $cre_RCI->get('allprods', 'top');
 // RCI code eof
 ?>
+<h1 class="no-margin-top"><?php echo HEADING_TITLE; ?></h1>
 <table border="0" width="100%" cellspacing="0" cellpadding="<?php echo CELLPADDING_SUB;?>">
-<?php
-// BOF: Lango Added for template MOD
-if (SHOW_HEADING_TITLE_ORIGINAL == 'yes') {
-$header_text = '&nbsp;'
-//EOF: Lango Added for template MOD
-?>
-      <tr>
-        <td width="100%"><table border="0" width="100%" cellspacing="0" cellpadding="0">
-          <tr>
-         <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
-            <td align="right"></td>
-          </tr>
-        </table></td>
-      </tr>
-      <tr>
-        <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
-      </tr>
-<?php
-// BOF: Lango Added for template MOD
-}else{
-$header_text = HEADING_TITLE;
-}
-// EOF: Lango Added for template MOD
-?>
-
-<?php
-// BOF: Lango Added for template MOD
-if (MAIN_TABLE_BORDER == 'yes'){
-table_image_border_top(false, false, $header_text);
-}
-// EOF: Lango Added for template MOD
-?>
       <tr>
         <td>
-        <table border="0" width="100%" cellspacing="0" cellpadding="2">
+        <table border="0" width="100%" cellspacing="0" cellpadding="2" class="table table-striped table-hover">
         <tr class="productListing-heading">
         <td align="left" class="productListing-heading"><?php echo HEADING_TEXT_PRODUCT; ?></td>
        <td align="center" class="productListing-heading"><?php echo HEADING_TEXT_MODEL; ?></td>
@@ -81,11 +50,6 @@ table_image_border_top(false, false, $header_text);
 // RCI code start
 echo $cre_RCI->get('allprods', 'menu');
 // RCI code eof
-// BOF: Lango Added for template MOD
-if (MAIN_TABLE_BORDER == 'yes'){
-table_image_border_bottom();
-}
-// EOF: Lango Added for template MOD
 ?>
       <tr>
         <td><table border="0" width="100%" cellspacing="1" cellpadding="2" class="infoBox">

@@ -1,23 +1,23 @@
-<?php 
+<?php
 // RCI code start
 echo $cre_RCI->get('global', 'top');
 echo $cre_RCI->get('checkoutpayment', 'top');
 // RCI code eof
-echo tep_draw_form('checkout_payment', tep_href_link(FILENAME_CHECKOUT_CONFIRMATION, '', 'SSL'), 'post', 'onsubmit="return check_form();"'); ?><table border="0" width="100%" cellspacing="0" cellpadding="<?php echo CELLPADDING_SUB; ?>">
+echo tep_draw_form('checkout_payment', tep_href_link(FILENAME_CHECKOUT_CONFIRMATION, '', 'SSL'), 'post', 'onsubmit="return check_form();"'); ?>
+<div class="row">
+<div class="col-sm-12 col-lg-12 large-margin-bottom">
 <?php
 // BOF: Lango Added for template MOD
 if (SHOW_HEADING_TITLE_ORIGINAL == 'yes') {
 $header_text = '&nbsp;'
 //EOF: Lango Added for template MOD
 ?>
-      <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
-          <tr>
-            <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
-            <td class="pageHeading" align="right"><?php echo tep_image(DIR_WS_IMAGES . 'table_background_payment.gif', HEADING_TITLE, HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
-          </tr>
-        </table></td>
-      </tr>
+
+
+
+    <h1 class="no-margin-top"><?php echo HEADING_TITLE; ?></h1>
+
+
 <?php
 // BOF: Lango Added for template MOD
 }else{
@@ -25,7 +25,7 @@ $header_text = HEADING_TITLE;
 }
 // EOF: Lango Added for template MOD
 ?>
- 
+
 <?php
   if (isset($_GET['error_message']) && tep_not_null($_GET['error_message'])) {
 //echo 'x_Invoice_Num ' . $x_Invoice_Num;
@@ -35,128 +35,89 @@ $header_text = HEADING_TITLE;
                            'customer_notified' => '0',
                            'comments' => $_GET['error_message']);
    tep_db_perform(TABLE_ORDERS_STATUS_HISTORY, $sql_data_array);
-  
+
 
 }
   if (isset($_GET['payment_error']) && is_object(${$_GET['payment_error']}) && ($error = ${$_GET['payment_error']}->get_error())) {
 ?>
-      <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
-          <tr>
-            <td class="main"><b><?php echo tep_output_string_protected($error['title']); ?></b></td>
-          </tr>
-        </table></td>
-      </tr>
-      <tr>
-        <td><table border="0" width="100%" cellspacing="1" cellpadding="2" class="infoBoxNotice">
-          <tr class="infoBoxNoticeContents">
-            <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
-              <tr>
-                <td><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
-                <td class="main" width="100%" valign="top"><?php echo tep_output_string_protected($error['error']); ?></td>
-                <td><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
-              </tr>
-            </table></td>
-          </tr>
-        </table></td>
-      </tr>
-      <tr>
-        <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
-      </tr>
+
+
+
+           <b><?php echo tep_output_string_protected($error['title']); ?></b>
+
+                <?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?>
+                <?php echo tep_output_string_protected($error['error']); ?>
+                <?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?>
+
+
 <?php
   }
 ?>
+
+
+
+ <div class="clearfix panel panel-default no-margin-bottom">
+          <div class="panel-heading">
+            <h3 class="no-margin-top no-margin-bottom">Payment Information</h3>
+          </div>
+          <div class="panel-body no-padding-bottom">
+            <div class="row">
+
+
+
+        <div class="col-sm-6 col-lg-6">
+         <div class="well clearfix" style="height:210px;">
+			<?php echo TEXT_SELECTED_BILLING_DESTINATION; ?><br><br><?php echo '<a href="' . tep_href_link(FILENAME_CHECKOUT_PAYMENT_ADDRESS, '', 'SSL') . '" type="button" class="btn btn-sm cursor-pointer small-margin-right btn-success" style="color:#ffffff !important;text-decoration:none !important;">' .  IMAGE_BUTTON_CHANGE_ADDRESS . '</a>'; ?>
+		 </div>
+		</div>
+        <div class="col-sm-6 col-lg-6">
+         <div class="well clearfix" style="height:210px;">
+                  <?php echo '<h4 class="no-margin-top"><b>' . TITLE_BILLING_ADDRESS .'</b></h4>'; ?>
+                  <?php echo tep_address_label($_SESSION['customer_id'], $_SESSION['billto'], true, ' ', '<br>'); ?>
+        </div>
+       </div>
 <?php
 // BOF: Lango Added for template MOD
-if (MAIN_TABLE_BORDER == 'yes'){
-table_image_border_top(false, false, TABLE_HEADING_BILLING_ADDRESS);
-}else{
-?>
-      <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
-          <tr>
-            <td class="main"><b><?php echo TABLE_HEADING_BILLING_ADDRESS; ?></b></td>
-          </tr>
-        </table></td>
-      </tr>
-<?php
-}
-// BOF: Lango Added for template MOD
-?>
-      <tr>
-        <td><table border="0" width="100%" cellspacing="1" cellpadding="2" class="infoBox">
-          <tr class="infoBoxContents">
-            <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
-              <tr>
-                <td><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td> 
-                <td class="main" width="50%" valign="top"><?php echo TEXT_SELECTED_BILLING_DESTINATION; ?><br><br><?php echo '<a href="' . tep_href_link(FILENAME_CHECKOUT_PAYMENT_ADDRESS, '', 'SSL') . '">' . tep_template_image_button('button_change_address.gif', IMAGE_BUTTON_CHANGE_ADDRESS) . '</a>'; ?></td>
-                <td align="right" width="50%" valign="top"><table border="0" cellspacing="0" cellpadding="2">
-                  <tr>
-                    <td class="main" align="center" valign="top"><b><?php echo TITLE_BILLING_ADDRESS; ?></b><br><?php echo tep_image(DIR_WS_IMAGES . 'arrow_south_east.gif'); ?></td>
-                    <td><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td> 
-                    <td class="main" valign="top"><?php echo tep_address_label($_SESSION['customer_id'], $_SESSION['billto'], true, ' ', '<br>'); ?></td>
-                  </tr>
-                </table></td>
-              </tr>
-            </table></td>
-          </tr>
-        </table></td>
-      </tr>
-<?php
-// BOF: Lango Added for template MOD
-if (MAIN_TABLE_BORDER == 'yes'){
-table_image_border_bottom();
-}
 // EOF: Lango Added for template MOD
 
 // beginning of the coupon redemption code
   if ($order_total_modules->credit_selection()!='' ) {
-    if (SHOW_HEADING_TITLE_ORIGINAL == 'yes') {
-      ?>
-      <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
-          <tr>
-            <td class="pageHeading"><?php echo TABLE_HEADING_CREDIT; ?></td>
-          </tr>
-        </table></td>
-      </tr>
-      <?php
-    } 
-    if (MAIN_TABLE_BORDER == 'yes') {
-      table_image_border_top(false, false, TABLE_HEADING_CREDIT);
-    }
-
-    echo $order_total_modules->credit_selection();//ICW ADDED FOR CREDIT CLASS SYSTEM 
-    if (MAIN_TABLE_BORDER == 'yes') {
-      table_image_border_bottom();
-    }
-  }
-// End of the coupon redemption code
-
-  if (SHOW_HEADING_TITLE_ORIGINAL == 'yes') {
-    $header_text = '&nbsp;';
 ?>
-      <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
-          <tr>
-            <td class="pageHeading"><?php echo TABLE_HEADING_PAYMENT_METHOD; ?></td>
-          </tr>
-        </table></td>
-      </tr>
-<?php
-  } else {
-    $header_text = TABLE_HEADING_PAYMENT_METHOD;
-  }
-  if (MAIN_TABLE_BORDER == 'yes'){
-    table_image_border_top(false, false, $header_text);
+	<div class="row">
+	<div class="col-sm-12 col-lg-12" style="padding-left:30px;padding-right:30px;">
+	  <div class="well clearfix">
+  <?php  if (SHOW_HEADING_TITLE_ORIGINAL == 'yes') {
+      ?>
+            <?php echo '<h4 class="no-margin-top"><b>' . TABLE_HEADING_CREDIT . '</b></h4>' ; ?>
+
+      <?php
+    }
+
+    echo $order_total_modules->credit_selection();//ICW ADDED FOR CREDIT CLASS SYSTEM
+  ?>
+    </div>
+  </div>
+</div>
+<div class="clearfix"></div>
+  <?php
   }
 
+// End of the coupon redemption code
+?>
+    <div class="col-sm-12 col-lg-12">
+         <div class="well clearfix">
+
+			<h4 class="no-margin-top"><b><?php echo TABLE_HEADING_PAYMENT_METHOD; ?></b></h4><br>
+          <div class="col-sm-7 col-lg-7 hide-on-mobile"><?php echo TEXT_SELECT_PAYMENT_METHOD; ?></div>
+		  <div class="col-sm-5 col-lg-5 text-right hide-on-mobile"><b><?php echo TITLE_PLEASE_SELECT; ?></b></div><br>
+
+
+<?php
   if( $order->info['total'] != 0 ){
 // RCO start
-    if ($cre_RCO->get('checkoutpayment', 'paymentmodule') !== true) {     
+    if ($cre_RCO->get('checkoutpayment', 'paymentmodule') !== true) {
 ?>
-      <tr>
-        <td><table border="0" width="100%" cellspacing="1" cellpadding="2" class="infoBox">
+    <table border="0" width="100%" cellspacing="1" cellpadding="2" class="table">
           <tr class="infoBoxContents">
             <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
 <?php
@@ -247,7 +208,6 @@ table_image_border_bottom();
     }
 ?>
                 </table></td>
-                <td><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
               </tr>
 <?php
     $radio_buttons++;
@@ -255,8 +215,7 @@ table_image_border_bottom();
 ?>
             </table></td>
           </tr>
-        </table></td>
-      </tr>
+        </table>
 <?php
     }
     // RCO end
@@ -269,58 +228,56 @@ table_image_border_bottom();
 $_SESSION['payment'] = 'freecharger';
 }
 // BOF: Lango Added for template MOD
-if (MAIN_TABLE_BORDER == 'yes'){
-table_image_border_bottom();
-}
 // EOF: Lango Added for template MOD
 
   // RCI code start
-    echo $cre_RCI->get('checkoutpayment', 'billingtableright');
-  // RCI code eof  
+ //   echo $cre_RCI->get('checkoutpayment', 'billingtableright');
+  // RCI code eof
+?>
+<div class="clearfix"></div>
+ </div>
+</div>
 
+<?php
   if (SHOW_HEADING_TITLE_ORIGINAL == 'yes') {
     $header_text = '&nbsp;'
   ?>
-     <tr>
-    <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
-      <tr>
-        <td class="pageHeading"><?php echo TABLE_HEADING_COMMENTS; ?></td>
-      </tr>
-    </table></td>
-  </tr>
+<div class="col-sm-12 col-lg-12">
+              <div class="well ">
+            <h4><b><?php echo TABLE_HEADING_COMMENTS; ?></h3></h4>
+
   <?php
   } else {
      $header_text = TABLE_HEADING_COMMENTS;
   }
-  if (MAIN_TABLE_BORDER == 'yes') {
-    table_image_border_top(false, false, $header_text);
-  }
   ?>
-  <tr>                
-    <td><table border="0" width="100%" cellspacing="1" cellpadding="2" class="infoBox">
-      <tr class="infoBoxContents">
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
-          <tr>
-            <td><?php echo tep_draw_textarea_field('comments', 'soft', '60', '5', isset($_SESSION['comments']) ? $_SESSION['comments'] : ''); ?></td>
-          </tr>
-        </table></td>
-      </tr>
-    </table></td>
-  </tr>
-<?php
-  if (MAIN_TABLE_BORDER == 'yes'){
-    table_image_border_bottom();
-  }
-?>
-      <tr>
-        <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
-      </tr>
+<div class="form-group">
+        <label class="sr-only"></label>
+
+<?php/*<textarea class="form-control" name="comments" rows="5" cols="25" ></textarea>
+  */ ?>
+  <?php echo tep_draw_textarea_field('comments', 'soft', '60', '5', isset($_SESSION['comments']) ? $_SESSION['comments'] : '');?>
+</div>
+</div>
+</div>
+
+
+
       <?php
       //RCI start
       echo $cre_RCI->get('checkoutpayment', 'insideformabovebuttons');
       //RCI end
-      ?>   
-      <tr>
+      ?>
+ <div class="col-sm-6 col-lg-6"><div class="well clearfix">  <?php echo '<h4 style="color:#000000"><b>' . TITLE_CONTINUE_CHECKOUT_PROCEDURE . '</b></h4><br>' . TEXT_CONTINUE_CHECKOUT_PROCEDURE; ?></div></div>
+<div class="col-sm-6 col-lg-6">
+  <div class="btn-set small-margin-top clearfix">
+      <button type="submit" class="pull-right btn btn-lg btn-primary">Continue</button>
+    </div>
+   </div>
+
+
+
+   <?php/*   <tr>
         <td><table border="0" width="100%" cellspacing="1" cellpadding="2" class="infoBox">
           <tr class="infoBoxContents">
             <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
@@ -333,48 +290,24 @@ table_image_border_bottom();
             </table></td>
           </tr>
         </table></td>
-      </tr>
+      </tr>*/?>
       <?php
       //RCI start
       echo $cre_RCI->get('checkoutpayment', 'insideformbelowbuttons');
       //RCI end
-      ?>         
-      <tr>
-        <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
-      </tr>
-      <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
-          <tr>
-            <td width="25%"><table border="0" width="100%" cellspacing="0" cellpadding="0">
-              <tr>
-                <td width="50%" align="right"><?php echo tep_draw_separator('pixel_silver.gif', '1', '5'); ?></td>
-                <td width="50%"><?php echo tep_draw_separator('pixel_silver.gif', '100%', '1'); ?></td>
-              </tr>
-            </table></td>
-            <td width="25%"><table border="0" width="100%" cellspacing="0" cellpadding="0">
-              <tr>
-                <td width="50%"><?php echo tep_draw_separator('pixel_silver.gif', '100%', '1'); ?></td>
-                <td><?php echo tep_image(DIR_WS_IMAGES . 'checkout_bullet.gif'); ?></td>
-                <td width="50%"><?php echo tep_draw_separator('pixel_silver.gif', '100%', '1'); ?></td>
-              </tr>
-            </table></td>
-            <td width="25%"><?php echo tep_draw_separator('pixel_silver.gif', '100%', '1'); ?></td>
-            <td width="25%"><table border="0" width="100%" cellspacing="0" cellpadding="0">
-              <tr>
-                <td width="50%"><?php echo tep_draw_separator('pixel_silver.gif', '100%', '1'); ?></td>
-                <td width="50%"><?php echo tep_draw_separator('pixel_silver.gif', '1', '5'); ?></td>
-              </tr>
-            </table></td>
-          </tr>
-          <tr>
-            <td align="center" width="25%" class="checkoutBarFrom"><?php echo '<a href="' . tep_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL') . '" class="checkoutBarFrom">' . CHECKOUT_BAR_DELIVERY . '</a>'; ?></td>
-            <td align="center" width="25%" class="checkoutBarCurrent"><?php echo CHECKOUT_BAR_PAYMENT; ?></td>
-            <td align="center" width="25%" class="checkoutBarTo"><?php echo CHECKOUT_BAR_CONFIRMATION; ?></td>
-            <td align="center" width="25%" class="checkoutBarTo"><?php echo CHECKOUT_BAR_FINISHED; ?></td>
-          </tr>
-        </table></td>
-      </tr>
-    </table></form>
+      ?>
+
+      </div>
+     </div>
+    </div>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="no-margin-top no-margin-bottom">Order Conformation</h3>
+          </div>
+        </div>
+   </div>
+  </div>
+  </form>
 <?php
 // RCI code start
 echo $cre_RCI->get('checkoutpayment', 'bottom');

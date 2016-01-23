@@ -1,192 +1,100 @@
-<?php 
+<?php
 // RCI code start
 echo $cre_RCI->get('global', 'top');
 echo $cre_RCI->get('productreviews', 'top');
 // RCI code eof
 ?>
-<table border="0" width="100%" cellspacing="0" cellpadding="<?php echo CELLPADDING_SUB;?>">
+<div class="row">
+   <div class="col-sm-12 col-lg-12">
+            <div class="col-sm-8 col-lg-8 headertext no-padding-left no-padding-right"><h3><?php echo $products_name; ?></h3></div>
+            <div class="col-sm-4 col-lg-4 text-right headertext no-padding-left no-padding-right"><h3><?php echo $products_price; ?></h3></div>
+			<div class="clearfix"></div>
+			<?php
+			  $reviews_query_raw = "select r.reviews_id, left(rd.reviews_text, 100) as reviews_text, r.reviews_rating, r.date_added, r.customers_name from " . TABLE_REVIEWS . " r, " . TABLE_REVIEWS_DESCRIPTION . " rd where r.products_id = '" . (int)$product_info['products_id'] . "' and r.reviews_id = rd.reviews_id and rd.languages_id = '" . (int)$languages_id . "' order by r.reviews_id desc";
+			  $reviews_split = new splitPageResults_rspv($reviews_query_raw, MAX_DISPLAY_NEW_REVIEWS);
+
+			  if ($reviews_split->number_of_rows > 0) {
+				if ((PREV_NEXT_BAR_LOCATION == '1') || (PREV_NEXT_BAR_LOCATION == '3')) {
+			?>
+				  <div class="product-listing-module-pagination margin-bottom">
+					<div class="pull-left large-margin-bottom page-results"><?php echo $reviews_split->display_count(TEXT_DISPLAY_NUMBER_OF_REVIEWS); ?></div>
+					<div class="pull-right large-margin-bottom no-margin-top">
+					  <ul class="pagination no-margin-top no-margin-bottom">
+					   <?php echo  $reviews_split->display_links(MAX_DISPLAY_PAGE_LINKS, tep_get_all_get_params(array('page', 'info'))); ?>
+					  </ul>
+
+					</div>
+				  </div>
+			<div class="clearfix"></div>
+			<?php
+				}
+				$reviews_query = tep_db_query($reviews_split->sql_query);
+				while ($reviews = tep_db_fetch_array($reviews_query)) {
+			?>
+            <div class="col-sm-5 col-lg-5"><?php echo '<a href="' . tep_href_link(FILENAME_PRODUCT_REVIEWS_INFO, 'products_id=' . $product_info['products_id'] . '&amp;reviews_id=' . $reviews['reviews_id']) . '"><u><b>' . sprintf(TEXT_REVIEW_BY, tep_output_string_protected($reviews['customers_name'])) . '</b></u></a>'; ?></div>
+            <div class="col-sm-7 col-lg-7 text-right"><?php echo sprintf(TEXT_REVIEW_DATE_ADDED, tep_date_long($reviews['date_added'])); ?></div>
+			<div class="clearfix"></div>
+			<div class="col-sm-8 col-lg-8"><?php echo tep_break_string(tep_output_string_protected($reviews['reviews_text']), 60, '-<br>') . ((strlen($reviews['reviews_text']) >= 100) ? '..' : '') . '<br><br><i>' . sprintf(TEXT_REVIEW_RATING, tep_image(DIR_WS_IMAGES . 'stars_' . $reviews['reviews_rating'] . '.gif', sprintf(TEXT_OF_5_STARS, $reviews['reviews_rating'])), sprintf(TEXT_OF_5_STARS, $reviews['reviews_rating'])) . '</i>'; ?></div>
+			<div class="col-sm-4 col-lg-4 text-center">
+					<?php
+					  if (tep_not_null($product_info['products_image'])) {
+							echo '<a data-toggle="modal" href="#popup-image-modal" class="">' . tep_image(DIR_WS_IMAGES .  $product_info['products_image'], $product_info['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT, 'class="img-responsive"') . '</a><br><p class="text-center no-margin-top no-margin-bottom"><a data-toggle="modal" href="#popup-image-modal" class="btn normal">Click To Enlarge</a></p>    <div class="modal fade" id="popup-image-modal">
+									  <div class="modal-dialog">
+										<div class="modal-content">
+										  <div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+											<h4 class="modal-title">'.$product_info['products_name'] .'</h4>
+										  </div>
+										  <div class="modal-body pop_im">'.tep_image(DIR_WS_IMAGES .  $product_info['products_image'], $product_info['products_name'], LARGE_IMAGE_WIDTH, LARGE_IMAGE_HEIGHT, 'class="img-responsive" style="border:1px solid red"').'
+										  </div>
+										  <div class="modal-footer">
+											<button type="button" class="btn btn-default" data-dismiss="modal">close</button>
+										  </div>
+										</div>
+									  </div>
+									</div>
+								';
+
+						  }
+
+						?>
+					</div>
+					<?php } ?>
+					<?php
+					  if (($reviews_split->number_of_rows > 0) && ((PREV_NEXT_BAR_LOCATION == '2') || (PREV_NEXT_BAR_LOCATION == '3'))) {
+					?>
+					  <div class="content-product-listing-div">
+						  <div class="product-listing-module-pagination margin-bottom">
+							<div class="pull-left large-margin-bottom page-results"><?php echo $reviews_split->display_count(TEXT_DISPLAY_NUMBER_OF_REVIEWS); ?></div>
+							<div class="pull-right large-margin-bottom no-margin-top">
+							  <ul class="pagination no-margin-top no-margin-bottom">
+							   <?php echo  $reviews_split->display_links(MAX_DISPLAY_PAGE_LINKS, tep_get_all_get_params(array('page', 'info'))); ?>
+							  </ul>
+
+							</div>
+						  </div>
+						 </div>
+
+					<?php
+					  } //end bottom pagination
+					  } else {
+					echo '<div class="col-sm-12 col-lg-12"><div class="well"><h4>' . TEXT_NO_REVIEWS .'</h4></div></div>';
+
+					// RCI code start
+					echo $cre_RCI->get('productreviews', 'menu');
+					  }
+					?>
+					<div class="clearfix"></div>
+					<div class="col-xs-6 col-sm-3 col-lg-3 small-margin-top small-margin-bottom"><?php echo '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, tep_get_all_get_params()) . '" class="btn btn-sm cursor-pointer small-margin-right btn-success" >' . IMAGE_BUTTON_BACK . '</a>'; ?></div>
+
+				    <div class="col-xs-6 col-sm-3 col-lg-3 small-margin-top small-margin-bottom"><a href="<?php echo tep_href_link(basename($PHP_SELF), tep_get_all_get_params(array('action','cPath','products_id')) . 'action=buy_now&products_id=' . $product_info['products_id'] . '&cPath=' . tep_get_product_path($product_info['products_id']));?>"><?php echo tep_template_image_button('button_in_cart.gif', IMAGE_BUTTON_IN_CART)?></a></div>
+					<div class="col-xs-6 col-sm-3 col-lg-3 small-margin-top small-margin-bottom"><?php echo '<a href="' . tep_href_link(FILENAME_PRODUCT_REVIEWS_WRITE, tep_get_all_get_params()) . '" class="btn btn-lg cursor-pointer small-margin-right btn-success">' . IMAGE_BUTTON_WRITE_REVIEW . '</a>'; ?></div>
+					<div class="clearfix"></div>
+
+					<div class="clearfix"></div>
+ </div>
+</div>
 <?php
-// BOF: Lango Added for template MOD
-if (SHOW_HEADING_TITLE_ORIGINAL == 'yes') {
-$header_text = '&nbsp;' ;
-//EOF: Lango Added for template MOD
-?>
-      <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
-          <tr>
-            <td class="pageHeading" valign="top"><?php echo $products_name; ?></td>
-            <td class="pageHeading" align="right" valign="top"><?php echo $products_price; ?></td>
-          </tr>
-        </table></td>
-      </tr>
-      <tr>
-        <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
-      </tr>
-<?php
-}else{
-$header_text =  $products_name .'</td><td class="productlisting-headingPrice">' . $products_price;
-}
-
-
-  $reviews_query_raw = "select r.reviews_id, left(rd.reviews_text, 100) as reviews_text, r.reviews_rating, r.date_added, r.customers_name from " . TABLE_REVIEWS . " r, " . TABLE_REVIEWS_DESCRIPTION . " rd where r.products_id = '" . (int)$product_info['products_id'] . "' and r.reviews_id = rd.reviews_id and rd.languages_id = '" . (int)$languages_id . "' order by r.reviews_id desc";
-  $reviews_split = new splitPageResults($reviews_query_raw, MAX_DISPLAY_NEW_REVIEWS);
-
-if ($reviews_split->number_of_rows > 0) {
-
-// BOF: Lango Added for template MOD
-if (MAIN_TABLE_BORDER == 'yes'){
-table_image_border_top(false, false, $header_text);
-}
-// EOF: Lango Added for template MOD
-
-    if ((PREV_NEXT_BAR_LOCATION == '1') || (PREV_NEXT_BAR_LOCATION == '3')) {
-?>
-              <tr>
-                <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
-                  <tr>
-                    <td class="smallText"><?php echo $reviews_split->display_count(TEXT_DISPLAY_NUMBER_OF_REVIEWS); ?></td>
-                    <td align="right" class="smallText"><?php echo TEXT_RESULT_PAGE . ' ' . $reviews_split->display_links(MAX_DISPLAY_PAGE_LINKS, tep_get_all_get_params(array('page', 'info'))); ?></td>
-                  </tr>
-                </table></td>
-              </tr>
-<?php
-    } //end pagination
-    $reviews_query = tep_db_query($reviews_split->sql_query);
-    while ($reviews = tep_db_fetch_array($reviews_query)) {
-?>
-         <tr>
-            <td> <?php //echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
-              <tr>
-                <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
-                  <tr>
-                    <td class="main"><?php echo '<a href="' . tep_href_link(FILENAME_PRODUCT_REVIEWS_INFO, 'products_id=' . $product_info['products_id'] . '&amp;reviews_id=' . $reviews['reviews_id']) . '"><u><b>' . sprintf(TEXT_REVIEW_BY, tep_output_string_protected($reviews['customers_name'])) . '</b></u></a>'; ?></td>
-                    <td class="smallText" align="right"><?php echo sprintf(TEXT_REVIEW_DATE_ADDED, tep_date_long($reviews['date_added'])); ?></td>
-                  </tr>
-                </table></td>
-              </tr>
-              <tr>
-                <td><table border="0" width="100%" cellspacing="1" cellpadding="2" class="infoBox">
-                  <tr class="infoBoxContents">
-                    <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
-                      <tr>
-                        <td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
-                        <td valign="top" class="main"><?php echo tep_break_string(tep_output_string_protected($reviews['reviews_text']), 60, '-<br>') . ((strlen($reviews['reviews_text']) >= 100) ? '..' : '') . '<br><br><i>' . sprintf(TEXT_REVIEW_RATING, tep_image(DIR_WS_IMAGES . 'stars_' . $reviews['reviews_rating'] . '.gif', sprintf(TEXT_OF_5_STARS, $reviews['reviews_rating'])), sprintf(TEXT_OF_5_STARS, $reviews['reviews_rating'])) . '</i>'; ?></td>
-                        <td width="10" align="right"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
-                      </tr>
-                    </table></td>
-                  </tr>
-                </table></td>
-              </tr>
-            </td>
-          </tr>
-<?php } ?>
-       <tr>
-         <td><table>
-             <td width="<?php echo SMALL_IMAGE_WIDTH + 10; ?>" align="right" valign="top">
-              <table border="0" cellspacing="0" cellpadding="2">
-<?php
-  if (tep_not_null($product_info['products_image'])) {
-?>
- <td class="smallText">
-
-<script language="javascript"><!--
-document.write('<?php echo '<a href="javascript:popupWindow(\\\'' . tep_href_link(FILENAME_POPUP_IMAGE, 'pID=' . $product_info['products_id']) . '\\\')">' . tep_image(DIR_WS_IMAGES . $product_info['products_image'], addslashes($product_info['products_name']), SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT, 'hspace="5" vspace="5"') . '<br>' . TEXT_CLICK_TO_ENLARGE . '</a>'; ?>');
-//--></script>
-<noscript>
-<?php echo '<a href="' . tep_href_link(DIR_WS_IMAGES . $product_info['products_image']) . '" target="_blank">' . tep_image(DIR_WS_IMAGES . $product_info['products_image'], $product_info['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT, 'hspace="5" vspace="5"') . '<br>' . TEXT_CLICK_TO_ENLARGE . '</a>'; ?>
-</noscript>
-
-<?php
-  }
-
-//wishlist button
-  $wishlist_id_query = tep_db_query('select products_id as wPID from ' . TABLE_WISHLIST . ' where products_id= ' . $product_info['products_id'] . ' and customers_id = ' . (int)$_SESSION['customer_id'] . ' order by products_name');
-  $wishlist_Pid = tep_db_fetch_array($wishlist_id_query);
-
-  echo '<td><p>';
-
-    echo '<a href="' . tep_href_link(basename($PHP_SELF), tep_get_all_get_params(array('action','cPath','products_id')) . 'action=buy_now&products_id=' . $product_info['products_id'] . '&cPath=' . tep_get_product_path($product_info['products_id'])) . '">' . tep_template_image_button('button_in_cart.gif', IMAGE_BUTTON_IN_CART) . '</a>';
-  
-
-echo '<form name="wishlist_quantity" method="post" action="' . tep_href_link(basename($PHP_SELF), tep_get_all_get_params(array('action')) . 'action=add_wishlist', 'NONSSL') . '">';
-echo '                    <input type="hidden" name="products_id" value="' . (isset($product_info['products_id']) ? $product_info['products_id'] : 0) . '">
-                          <input type="hidden" name="products_model" value="' . (isset($product_info['products_model']) ? $product_info['products_model'] : '') . '">
-                          <input type="hidden" name="products_name" value="' . (isset($product_info['products_name']) ? $product_info['products_name'] : '') . '">
-                          <input type="hidden" name="products_price" value="' . (isset($product_info['products_price']) ? $product_info['products_price'] : 0) . '">';
-
-if ( (!tep_not_null($wishlist_Pid['wPID'])) && isset($_SESSION['customer_id']) )  echo tep_template_image_submit('button_add_wishlist.gif', IMAGE_BUTTON_ADD_WISHLIST);
-echo  '
-                        </form>
-</p></td>';
-?>                </td></table>
-                 </td>
-             </table></td>
-          </tr>
-<?php
-  if (($reviews_split->number_of_rows > 0) && ((PREV_NEXT_BAR_LOCATION == '2') || (PREV_NEXT_BAR_LOCATION == '3'))) {
-?>
-              <tr>
-                <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
-                  <tr>
-                    <td class="smallText"><?php echo $reviews_split->display_count(TEXT_DISPLAY_NUMBER_OF_REVIEWS); ?></td>
-                    <td align="right" class="smallText"><?php echo TEXT_RESULT_PAGE . ' ' . $reviews_split->display_links(MAX_DISPLAY_PAGE_LINKS, tep_get_all_get_params(array('page', 'info'))); ?></td>
-                  </tr>
-                </table></td>
-              </tr>
-
-<?php
-  } //end bottom pagination
-
-// BOF: Lango Added for template MOD
-if (MAIN_TABLE_BORDER == 'yes'){
-table_image_border_bottom();
-}
-// EOF: Lango Added for template MOD
-
-  } else {
-
-// BOF: Lango Added for template MOD
-if (MAIN_TABLE_BORDER == 'yes'){
-table_image_border_top(false, false, $header_text);
-}
-// EOF: Lango Added for template MOD
-?>
-              <tr>
-                <td align="center" class="infoboxContents"><?php echo TEXT_NO_REVIEWS; ?></td>
-              </tr>
-
-<?php
-// RCI code start
-echo $cre_RCI->get('productreviews', 'menu');
-// RCI code eof
-// BOF: Lango Added for template MOD
-if (MAIN_TABLE_BORDER == 'yes'){
-table_image_border_bottom();
-}
-// EOF: Lango Added for template MOD
-
-  }
-?>
-              <tr>
-                <td><table border="0" width="100%" cellspacing="1" cellpadding="2" class="infoBox">
-                  <tr class="infoBoxContents">
-                    <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
-                      <tr>
-                        <td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
-                        <td class="main"><?php echo '<a href="' . tep_href_link(FILENAME_PRODUCT_INFO, tep_get_all_get_params()) . '">' . tep_template_image_button('button_back.gif', IMAGE_BUTTON_BACK) . '</a>'; ?></td>
-                        <td class="main" align="right"><?php
-                        if (DESIGN_BUTTON_REVIEWS == 'true') { 
-                          echo '<a href="' . tep_href_link(FILENAME_PRODUCT_REVIEWS_WRITE, tep_get_all_get_params()) . '">' . tep_template_image_button('button_write_review.gif', IMAGE_BUTTON_WRITE_REVIEW) . '</a>';
-                        }
-                        ?></td>
-                        <td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
-                      </tr>
-                     </table></td>
-                  </tr>
-                 </table></td>
-              </tr>
-   </table>
-<?php 
 // RCI code start
 echo $cre_RCI->get('productreviews', 'bottom');
 echo $cre_RCI->get('global', 'bottom');

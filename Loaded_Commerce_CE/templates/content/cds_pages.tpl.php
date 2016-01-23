@@ -17,21 +17,22 @@ echo $cre_RCI->get('cdspages', 'top');
 // RCI code eof
 ?>
 <!-- cds_pages.tpl.php -->
-<table border="0" width="100%" cellspacing="0" cellpadding="0">
-  <tr>
-    <td class="<?php echo ($heading_image != '') ? 'cds_pageHeading_img' : 'cds_pageHeading'; ?>"><?php echo ($heading_image != '') ? $heading_image : $heading_title; ?></td>
-  </tr>
-  <?php 
+ <div class="row">
+   <div class="col-sm-12 col-lg-12 large-padding-left margin-top">
+
+<h1><?php echo $heading_title; ?></h1>
+ <div class="well no-padding-top">
+  <?php
 
 //echo '[' . $listing_columns . ']<br>';
   $displayed = false;
   if ( ($listing_columns != 1) && (!isset($_GET['pID'])) ) {
     $product_insert = (isset($product_string) && $product_string != '') ? $product_string : '';
-    if (strip_tags($product_insert . $product_string) != '') {    
+    if (strip_tags($product_insert . $product_string) != '') {
       ?>
-      <tr>
-        <td class="cds_category_description"><?php echo $product_insert . $descr . $display_string; ?></td>
-      </tr>
+
+       <?php echo $product_insert . $descr . $display_string; ?>
+
       <?php
       $displayed = true;
     }
@@ -40,42 +41,34 @@ echo $cre_RCI->get('cdspages', 'top');
 
   if (strip_tags($display_string) != '') {
     ?>
-    <tr>
-      <td valign="top">
-        <table border="0" width="100%" cellspacing="0" cellpadding="0">
-          <tr>
             <?php
-            if ($listing_columns == 1) {          
+            if ($listing_columns == 1) {
               $product_insert = (isset($product_string) && $product_string != '') ? $product_string : '';
               if((strip_tags($descr) != '') || ($product_insert != '')) {
-                echo '<td valign="top" width="40%" class="cds_category_description">'. $product_insert . $descr . '</td>';
+                echo '<div class="cds_category_description">'. $product_insert . $descr . '</div>';
               }
-              echo '<td valign="top">'. $display_string . '</td>';
+              echo '<div>'. $display_string . '</div>';
             } else {
               if (!$displayed) {
-                echo '<td valign="top" class="cds_category_description">'. $descr . $display_string .  '</td>';
+                echo '<div class="cds_category_description">'. $descr . $display_string .  '</div>';
               }
             }
             ?>
-          </tr>
-          <tr>
+
+
             <!-- ACF start -->
-            <td class="cds_category_description">
+            <div class="cds_category_description">
               <?php
               if (isset($acf_file) && $acf_file != '') {
                 @include_once($acf_file);
               }
               ?>
-            </td>
+            </div>
             <!-- ACF eof -->
-          </tr>
-        </table>
-      </td>
-    </tr>
     <?php
   }
   ?>
-</table>
+</div></div></div>
 <?php
 // RCI code start
 echo $cre_RCI->get('global', 'bottom');

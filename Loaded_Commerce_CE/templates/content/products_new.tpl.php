@@ -1,10 +1,12 @@
-<?php 
+<?php
 // RCI code start
 echo $cre_RCI->get('global', 'top');
 echo $cre_RCI->get('productsnew', 'top');
 // RCI code eof
-?>    
-<table border="0" width="100%" cellspacing="0" cellpadding="<?php echo CELLPADDING_SUB;?>">
+?>
+<div class="row">
+<h1 class="no-margin-top"><?php echo HEADING_TITLE; ?></h1>
+  <div id="content-product-listing-category-description-container">
 <?php
 // BOF: Lango Added for template MOD
 if (SHOW_HEADING_TITLE_ORIGINAL == 'yes') {
@@ -12,16 +14,6 @@ $header_text = '&nbsp;'
 //EOF: Lango Added for template MOD
 ?>
       <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
-          <tr>
-            <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
-            <td class="pageHeading" align="right"><?php echo tep_image(DIR_WS_IMAGES . 'table_background_products_new.gif', HEADING_TITLE, HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
-          </tr>
-        </table></td>
-      </tr>
-      <tr>
-        <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
-      </tr>
 <?php
 }else{
 $header_text =  HEADING_TITLE;
@@ -36,10 +28,10 @@ table_image_border_top(false, false, $header_text);
 
 
 ?>
-   <tr>
-        <td>
-        <?php 
-   
+
+
+        <?php
+
   //decide which product listing to use
    if (PRODUCT_LIST_CONTENT_LISTING == 'column'){
   $listing_method = FILENAME_PRODUCT_LISTING_COL;
@@ -47,15 +39,15 @@ table_image_border_top(false, false, $header_text);
   $listing_method = FILENAME_PRODUCT_LISTING;
   }
   //Then show product listing
-//  include(DIR_WS_MODULES . $listing_method); 
+//  include(DIR_WS_MODULES . $listing_method);
          if ( file_exists(TEMPLATE_FS_CUSTOM_MODULES . $listing_method)) {
             require(TEMPLATE_FS_CUSTOM_MODULES . $listing_method);
         } else {
             require(DIR_WS_MODULES . $listing_method);
-        }  
+        }
 ?>
-        </td>
-      </tr>
+
+
 <?php
 // RCI code start
 echo $cre_RCI->get('productsnew', 'menu');
@@ -66,12 +58,13 @@ table_image_border_bottom();
 }
 // EOF: Lango Added for template MOD
 ?>
-        </td>
-      </tr>
+
+
 <?php
 ?>
-    </table>
-<?php 
+    </div>    </div>
+
+<?php
 // RCI code start
 echo $cre_RCI->get('productsnew', 'bottom');
 echo $cre_RCI->get('global', 'bottom');

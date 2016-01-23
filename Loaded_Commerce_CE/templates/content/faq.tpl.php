@@ -12,7 +12,7 @@ if ($display_mode == 'faq') {
   $faq_category = tep_db_fetch_array($faq_category_query);
 ?>
   <tr>
-    <td class="pageHeading"><?php echo $faq_category['categories_name']; ?></td>
+    <td><h1 class="no-margin-top"><?php echo $faq_category['categories_name']; ?></h1></td>
   </tr>
   <?php //   GSR Start ?>
   <tr>
@@ -66,10 +66,7 @@ if ($display_mode == 'faq') {
 } else {
 ?>
   <tr>
-    <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
-  </tr>
-  <tr>
-    <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
+    <td><h1 class="no-margin-top"><?php echo HEADING_TITLE; ?></h1></td>
   </tr>
   <tr>
      <td class="main">

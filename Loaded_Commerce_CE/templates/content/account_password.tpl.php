@@ -1,27 +1,18 @@
-  <?php 
+  <?php
   // RCI code start
   echo $cre_RCI->get('global', 'top');
   echo $cre_RCI->get('accountpassword', 'top');
-  // RCI code eof   
+  // RCI code eof
   echo tep_draw_form('account_password', tep_href_link(FILENAME_ACCOUNT_PASSWORD, '', 'SSL'), 'post', 'onSubmit="return check_form(account_password);"') . tep_draw_hidden_field('action', 'process'); ?>
-  <table border="0" width="100%" cellspacing="0" cellpadding="<?php echo CELLPADDING_SUB; ?>">
+  <div class="row">
 <?php
 // BOF: Lango Added for template MOD
 if (SHOW_HEADING_TITLE_ORIGINAL == 'yes') {
 $header_text = '&nbsp;'
 //EOF: Lango Added for template MOD
 ?>
-      <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
-          <tr>
-            <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
-            <td class="pageHeading" align="right"><?php echo tep_image(DIR_WS_IMAGES . 'table_background_account.gif', HEADING_TITLE, HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
-          </tr>
-        </table></td>
-      </tr>
-      <tr>
-        <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
-      </tr>
+  <div class="col-sm-12 col-lg-12">
+           <h3 class="no-margin-top"><?php echo HEADING_TITLE; ?></h3>
 <?php
 // BOF: Lango Added for template MOD
 }else{
@@ -40,81 +31,42 @@ table_image_border_top(false, false, $header_text);
 <?php
   if ($messageStack->size('account_password') > 0) {
 ?>
-      <tr>
-        <td><?php echo $messageStack->output('account_password'); ?></td>
-      </tr>
-      <tr>
-        <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
-      </tr>
+
+        <div><?php echo $messageStack->output('account_password'); ?></div>
+        <div><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></div>
+
 <?php
   }
 ?>
-      <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
-          <tr>
-            <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
-              <tr>
-                <td class="main"><b><?php echo MY_PASSWORD_TITLE; ?></b></td>
-                <td class="inputRequirement" align="right"><?php echo FORM_REQUIRED_INFORMATION; ?></td>
-              </tr>
-            </table></td>
-          </tr>
-          <tr>
-            <td><table border="0" width="100%" cellspacing="1" cellpadding="2" class="infoBox">
-              <tr class="infoBoxContents">
-                <td><table border="0" cellspacing="2" cellpadding="2">
-                  <tr>
-                    <td class="main"><?php echo ENTRY_PASSWORD_CURRENT; ?></td>
-                    <td class="main"><?php echo tep_draw_password_field('password_current') . '&nbsp;' . (tep_not_null(ENTRY_PASSWORD_CURRENT_TEXT) ? '<span class="inputRequirement">' . ENTRY_PASSWORD_CURRENT_TEXT . '</span>': ''); ?></td>
-                  </tr>
-                  <tr>
-                    <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
-                  </tr>
-                  <tr>
-                    <td class="main"><?php echo ENTRY_PASSWORD_NEW; ?></td>
-                    <td class="main"><?php echo tep_draw_password_field('password_new') . '&nbsp;' . (tep_not_null(ENTRY_PASSWORD_NEW_TEXT) ? '<span class="inputRequirement">' . ENTRY_PASSWORD_NEW_TEXT . '</span>': ''); ?></td>
-                  </tr>
-                  <tr>
-                    <td class="main"><?php echo ENTRY_PASSWORD_CONFIRMATION; ?></td>
-                    <td class="main"><?php echo tep_draw_password_field('password_confirmation') . '&nbsp;' . (tep_not_null(ENTRY_PASSWORD_CONFIRMATION_TEXT) ? '<span class="inputRequirement">' . ENTRY_PASSWORD_CONFIRMATION_TEXT . '</span>': ''); ?></td>
-                  </tr>
-                </table></td>
-              </tr>
-            </table></td>
-          </tr>
-        </table></td>
-      </tr>
+
+    <div class="well">
+        <div class=""><label class="sr-only"></label><?php echo tep_draw_password_field('password_current', '', 'placeholder="' . ENTRY_PASSWORD_CURRENT . '" class="form-control"'); ?></div>
+        <div class="margin-top"><label class="sr-only"></label><?php echo tep_draw_password_field('password_new','', 'placeholder="' . ENTRY_PASSWORD_NEW . '" class="form-control"'); ?></div>
+        <div class="margin-top"><label class="sr-only"></label><?php echo tep_draw_password_field('password_confirmation','', 'placeholder="' . ENTRY_PASSWORD_CONFIRMATION . '" class="form-control"'); ?></div>
+
+    </div>
+
+    <div class="btn-set small-margin-top clearfix">
+      <button class="pull-right btn btn-lg btn-primary" type="submit"><?php echo IMAGE_BUTTON_CONTINUE; ?></button>
+      <a href="<?php echo tep_href_link(FILENAME_ACCOUNT, '', 'SSL') ?>"><button class="pull-left btn btn-lg btn-default" type="button"><?php echo IMAGE_BUTTON_BACK; ?></button></a>
+
+   </div>
+
       <?php
       // RCI code start
       echo $cre_RCI->get('accountpassword', 'menu');
-      // RCI code eof   
+      // RCI code eof
       // BOF: Lango Added for template MOD
       if (MAIN_TABLE_BORDER == 'yes'){
         table_image_border_bottom();
       }
       // EOF: Lango Added for template MOD
       ?>
-      <tr>
-        <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
-      </tr>
-      <tr>
-        <td><table border="0" width="100%" cellspacing="1" cellpadding="2" class="infoBox">
-          <tr class="infoBoxContents">
-            <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
-              <tr>
-                <td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
-                <td><?php echo '<a href="' . tep_href_link(FILENAME_ACCOUNT, '', 'SSL') . '">' . tep_template_image_button('button_back.gif', IMAGE_BUTTON_BACK) . '</a>'; ?></td>
-                <td align="right"><?php echo tep_template_image_submit('button_continue.gif', IMAGE_BUTTON_CONTINUE); ?></td>
-                <td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
-              </tr>
-            </table></td>
-          </tr>
-        </table></td>
-      </tr>
-    </table></form>
+   </div>
+  </div></form>
     <?php
     // RCI code start
     echo $cre_RCI->get('accountpassword', 'bottom');
     echo $cre_RCI->get('global', 'bottom');
-    // RCI code eof   
+    // RCI code eof
     ?>

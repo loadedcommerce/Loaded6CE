@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
   $Id: articles.php, v1.0 2003/12/04 12:00:00 ra Exp $
 
@@ -13,14 +13,14 @@
 // RCI code start
 echo $cre_RCI->get('global', 'top');
 echo $cre_RCI->get('articles', 'top');
-// RCI code eof  
+// RCI code eof
 // added for CDS CDpath support
-$CDpath = (isset($_SESSION['CDpath'])) ? '&CDpath=' . $_SESSION['CDpath'] : ''; 
+$CDpath = (isset($_SESSION['CDpath'])) ? '&CDpath=' . $_SESSION['CDpath'] : '';
 ?>
 <table border="0" width="100%" cellspacing="0" cellpadding="<?php echo CELLPADDING_SUB;?>">
   <?php
   if ($topic_depth == 'nested') {
-    $topic_query = tep_db_query("select td.topics_name, td.topics_heading_title, td.topics_description from " . TABLE_TOPICS . " t, " . TABLE_TOPICS_DESCRIPTION . " td where t.topics_id = '" . (int)$current_topic_id . "' and td.topics_id = '" . (int)$current_topic_id . "' and td.language_id = '" . (int)$languages_id . "'");
+    $topic_query = tep_db_query("select td.topics_name, td.topics_heading_title, td.topics_description from " . TABLE_TOPICS . " t, " . TABLE_TOPICS_DESCRIPTION . " td where t.topics_id = '" . (int)$current_topic_id . "' and td.topics_id = '" . (int)$current_topic_id . "' and td.language_id = '" . (int)$languages_id . "' ");
     $topic = tep_db_fetch_array($topic_query);
     ?>
     <tr>
@@ -37,7 +37,7 @@ $CDpath = (isset($_SESSION['CDpath'])) ? '&CDpath=' . $_SESSION['CDpath'] : '';
           </td>
           <td valign="top" class="pageHeading" align="right"></td>
         </tr>
-        <?php 
+        <?php
         if ( tep_not_null($topic['topics_description']) ) { ?>
           <tr>
             <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
@@ -48,8 +48,8 @@ $CDpath = (isset($_SESSION['CDpath'])) ? '&CDpath=' . $_SESSION['CDpath'] : '';
           <tr>
             <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
           </tr>
-          <?php 
-        } 
+          <?php
+        }
         ?>
         <tr>
           <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
@@ -68,7 +68,7 @@ $CDpath = (isset($_SESSION['CDpath'])) ? '&CDpath=' . $_SESSION['CDpath'] : '';
                       } else {
                         $topics_query = tep_db_query("select t.topics_id, td.topics_name, t.parent_id from " . TABLE_TOPICS . " t, " . TABLE_TOPICS_DESCRIPTION . " td where t.parent_id = '" . (int)$topic_links[$i] . "' and t.topics_id = td.topics_id and td.language_id = '" . (int)$languages_id . "' order by sort_order, td.topics_name");
                         break; // we've found the deepest topic the customer is in
-                      } 
+                      }
                     }
                   } else {
                     $topics_query = tep_db_query("select t.topics_id, td.topics_name, t.parent_id from " . TABLE_TOPICS . " t, " . TABLE_TOPICS_DESCRIPTION . " td where t.parent_id = '" . (int)$current_topic_id . "' and t.topics_id = td.topics_id and td.language_id = '" . (int)$languages_id . "' order by sort_order, td.topics_name");
@@ -88,7 +88,7 @@ $CDpath = (isset($_SESSION['CDpath'])) ? '&CDpath=' . $_SESSION['CDpath'] : '';
           </table></td>
         </tr>
       </table></td>
-    </tr>        
+    </tr>
     <?php
   } elseif ($topic_depth == 'articles' || isset($_GET['authors_id'])) {
     // Get the topic name and description from the database
@@ -113,7 +113,7 @@ $CDpath = (isset($_SESSION['CDpath'])) ? '&CDpath=' . $_SESSION['CDpath'] : '';
                           and a2t.topics_id = '" . (int)$_GET['filter_id'] . "'
                           and td.topics_id = '" . (int)$_GET['filter_id'] . "'
                           and ad.language_id = '" . (int)$languages_id . "'
-                          and td.language_id = '" . (int)$languages_id . "'
+                          and td.language_id = '" . (int)$languages_id . "' 
                         ORDER BY a.articles_date_added desc, ad.articles_name";
       } else {
         // We show them all
@@ -131,7 +131,7 @@ $CDpath = (isset($_SESSION['CDpath'])) ? '&CDpath=' . $_SESSION['CDpath'] : '';
                           and ad.articles_id = a2t.articles_id
                           and a2t.topics_id = td.topics_id
                           and ad.language_id = '" . (int)$languages_id . "'
-                          and td.language_id = '" . (int)$languages_id . "'
+                          and td.language_id = '" . (int)$languages_id . "' 
                         ORDER BY a.articles_date_added desc, ad.articles_name";
       }
     } else {
@@ -153,7 +153,7 @@ $CDpath = (isset($_SESSION['CDpath'])) ? '&CDpath=' . $_SESSION['CDpath'] : '';
                           and a2t.topics_id = '" . (int)$current_topic_id . "'
                           and td.topics_id = '" . (int)$current_topic_id . "'
                           and ad.language_id = '" . (int)$languages_id . "'
-                          and td.language_id = '" . (int)$languages_id . "'
+                          and td.language_id = '" . (int)$languages_id . "' 
                         ORDER BY a.articles_date_added desc, ad.articles_name";
       } else {
         // We show them all
@@ -171,7 +171,7 @@ $CDpath = (isset($_SESSION['CDpath'])) ? '&CDpath=' . $_SESSION['CDpath'] : '';
                           and a2t.topics_id = '" . (int)$current_topic_id . "'
                           and td.topics_id = '" . (int)$current_topic_id . "'
                           and ad.language_id = '" . (int)$languages_id . "'
-                          and td.language_id = '" . (int)$languages_id . "'
+                          and td.language_id = '" . (int)$languages_id . "' 
                         ORDER BY a.articles_date_added desc, ad.articles_name";
       }
     }
@@ -257,8 +257,8 @@ $CDpath = (isset($_SESSION['CDpath'])) ? '&CDpath=' . $_SESSION['CDpath'] : '';
               <tr>
                 <td class="main"><?php echo $topic['topics_description']; ?></td>
               </tr>
-              <?php 
-              if (tep_not_null($authors_description)) { 
+              <?php
+              if (tep_not_null($authors_description)) {
                 ?>
                 <tr>
                   <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
@@ -266,9 +266,9 @@ $CDpath = (isset($_SESSION['CDpath'])) ? '&CDpath=' . $_SESSION['CDpath'] : '';
                 <tr>
                   <td class="main" valign="top"><?php echo $authors_description; ?></td>
                 <tr>
-                <?php 
-              } 
-              if (tep_not_null($authors_url)) { 
+                <?php
+              }
+              if (tep_not_null($authors_url)) {
                 ?>
                 <tr>
                   <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
@@ -276,8 +276,8 @@ $CDpath = (isset($_SESSION['CDpath'])) ? '&CDpath=' . $_SESSION['CDpath'] : '';
                 <tr>
                   <td class="main" valign="top"><?php echo sprintf(TEXT_MORE_INFORMATION, $authors_url); ?></td>
                 </tr>
-                <?php 
-              } 
+                <?php
+              }
               ?>
               <tr>
                 <td>&nbsp;</td>
@@ -298,8 +298,8 @@ $CDpath = (isset($_SESSION['CDpath'])) ? '&CDpath=' . $_SESSION['CDpath'] : '';
     }
     ?>
     <tr>
-      <td class="main"><?php 
-      //include(DIR_WS_MODULES . FILENAME_ARTICLE_LISTING); 
+      <td class="main"><?php
+      //include(DIR_WS_MODULES . FILENAME_ARTICLE_LISTING);
          if ( file_exists(TEMPLATE_FS_CUSTOM_MODULES . FILENAME_ARTICLE_LISTING)) {
             require(TEMPLATE_FS_CUSTOM_MODULES . FILENAME_ARTICLE_LISTING);
         } else {
@@ -318,7 +318,7 @@ $CDpath = (isset($_SESSION['CDpath'])) ? '&CDpath=' . $_SESSION['CDpath'] : '';
       <tr>
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
-            <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
+            <td class="pageHeading"><h1><?php echo HEADING_TITLE; ?></h1></td>
             <td class="pageHeading" align="right"><?php echo tep_image(DIR_WS_IMAGES . 'table_background_reviews_new.gif', HEADING_TITLE, HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
           </tr>
         </table></td>
@@ -348,11 +348,11 @@ $CDpath = (isset($_SESSION['CDpath'])) ? '&CDpath=' . $_SESSION['CDpath'] : '';
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
       </tr>
-      <?php 
-    } 
+      <?php
+    }
     ?>
     <tr>
-      <td class="pageHeading"><?php echo '<b>' . TEXT_CURRENT_ARTICLES . '</b>'; ?></td>
+      <td class="pageHeading main "><?php echo '<b>' . TEXT_CURRENT_ARTICLES . '</b>'; ?></td>
     </tr>
     <?php
     $articles_all_array = array();
@@ -367,25 +367,26 @@ $CDpath = (isset($_SESSION['CDpath'])) ? '&CDpath=' . $_SESSION['CDpath'] : '';
                                  and a.authors_id = au.authors_id
                                  and a.articles_id = a2t.articles_id
                                  and a.articles_id = ad.articles_id
-                                 and a2t.topics_id = td.topics_id 
+                                 and a2t.topics_id = td.topics_id
                                  and ad.language_id = '" . (int)$languages_id . "'
-                                 and td.language_id = '" . (int)$languages_id . "'
+                                 and td.language_id = '" . (int)$languages_id . "' 
                               ORDER BY a.articles_date_added desc, ad.articles_name";
 
     $articles_all_split = new splitPageResults($articles_all_query_raw, MAX_ARTICLES_PER_PAGE);
     if (($articles_all_split->number_of_rows > 0) && ((ARTICLE_PREV_NEXT_BAR_LOCATION == 'top') || (ARTICLE_PREV_NEXT_BAR_LOCATION == 'both'))) {
       ?>
-      <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
-          <tr>
-            <td class="smallText"><?php echo $articles_all_split->display_count(TEXT_DISPLAY_NUMBER_OF_ARTICLES); ?></td>
-            <td align="right" class="smallText"><?php echo TEXT_RESULT_PAGE . ' ' . $articles_all_split->display_links(MAX_DISPLAY_PAGE_LINKS, tep_get_all_get_params(array('page', 'info', 'x', 'y'))); ?></td>
-          </tr>
-        </table></td>
-      </tr>
+ <div class="product-listing-module-pagination margin-bottom">
+        <div class="pull-left large-margin-bottom page-results"><?php echo $articles_all_split->display_count(TEXT_DISPLAY_NUMBER_OF_ARTICLES); ?></div>
+        <div class="pull-right large-margin-bottom no-margin-top">
+          <ul class="pagination no-margin-top no-margin-bottom">
+           <?php echo  $articles_all_split->display_links(MAX_DISPLAY_PAGE_LINKS, tep_get_all_get_params(array('page', 'info', 'x', 'y'))); ?>
+
+          </ul>
+        </div>
+     </div><div class="clear-both"></div>
       <?php
-    }
-    ?>
+       }
+      ?>
     <tr>
       <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
         <?php
@@ -398,45 +399,39 @@ $CDpath = (isset($_SESSION['CDpath'])) ? '&CDpath=' . $_SESSION['CDpath'] : '';
           <?php
           while ($articles_all = tep_db_fetch_array($articles_all_query)) {
             ?>
-            <tr>
-              <td valign="top" class="main" width="75%">
-                <?php
-                echo '<a href="' . tep_href_link(FILENAME_ARTICLE_INFO, 'articles_id=' . $articles_all['articles_id'] . $CDpath) . '"><b>' . $articles_all['articles_name'] . '</b></a> ';
-                if (DISPLAY_AUTHOR_ARTICLE_LISTING == 'true' && tep_not_null($articles_all['authors_name'])) {
-                  echo TEXT_BY . ' ' . '<a href="' . tep_href_link(FILENAME_ARTICLES, 'authors_id=' . $articles_all['authors_id'] . $CDpath) . '"> ' . $articles_all['authors_name'] . '</a>';
-                }
-                ?>
-              </td>
-              <?php
+  <div class=" bor_rad shadow">
+    <?php
+      echo  '<div class="box-header small-margin-bottom small-margin-left" style="text-align:left;float:left;padding-right:10px;"><a href="' . tep_href_link(FILENAME_ARTICLE_INFO, 'articles_id=' . $articles_all['articles_id'] . $CDpath) . '"><b>' . $articles_all['articles_name'] . '</b></a> </div>';
+	     echo '<div>' .TEXT_BY .   '<a href="' . tep_href_link(FILENAME_ARTICLES, 'authors_id=' . $articles_all['authors_id'] . $CDpath) . '"> ' . $articles_all['authors_name'] . '</a>';
+     ?>
+       <div style="float:right;">
+            <?php
               if (DISPLAY_TOPIC_ARTICLE_LISTING == 'true' && tep_not_null($articles_all['topics_name'])) {
                 ?>
-                <td valign="top" class="main" width="25%" nowrap><?php echo TEXT_TOPIC . '&nbsp;<a href="' . tep_href_link(FILENAME_ARTICLES, 'tPath=' . $articles_all['topics_id'] . $CDpath) . '">' . $articles_all['topics_name'] . '</a>'; ?></td>
+                <?php echo TEXT_TOPIC . '&nbsp;<a href="' . tep_href_link(FILENAME_ARTICLES, 'tPath=' . $articles_all['topics_id'] . $CDpath) . '">' . $articles_all['topics_name'] . '</a>'; ?></td>
                 <?php
               }
               ?>
-            </tr>
+              </div>
+       </div>
+		<div style="clear:both;margin-left:20px;padding-top:5px;">
+			  <?php echo clean_html_comments(substr($articles_all['articles_head_desc_tag'],0, MAX_ARTICLE_ABSTRACT_LENGTH)) . ((strlen($articles_all['articles_head_desc_tag']) >= MAX_ARTICLE_ABSTRACT_LENGTH) ? '...' : ''); ?>
+	   </div>
+	<div style="clear:both;margin-left:20px;">
+	      <?php      if (DISPLAY_DATE_ADDED_ARTICLE_LISTING == 'true') {
+	              ?>
+	              <div>
+			 		<?php echo TEXT_DATE_ADDED . ' ' . tep_date_long($articles_all['articles_date_added']); ?>   </div>
+
+	              <?php
+	            }
+			?>
+
+  </div>
+ </div>
+
             <?php
-            if (DISPLAY_ABSTRACT_ARTICLE_LISTING == 'true') {
-              ?>
-              <tr>
-                <td class="main" style="padding-left:15px"><?php echo clean_html_comments(substr($articles_all['articles_head_desc_tag'],0, MAX_ARTICLE_ABSTRACT_LENGTH)) . ((strlen($articles_all['articles_head_desc_tag']) >= MAX_ARTICLE_ABSTRACT_LENGTH) ? '...' : ''); ?></td>
-              </tr>
-              <?php
-            }
-            if (DISPLAY_DATE_ADDED_ARTICLE_LISTING == 'true') {
-              ?>
-              <tr>
-                <td class="smalltext" style="padding-left:15px"><?php echo TEXT_DATE_ADDED . ' ' . tep_date_long($articles_all['articles_date_added']); ?></td>
-              </tr>
-              <?php
-            }
-            if (DISPLAY_ABSTRACT_ARTICLE_LISTING == 'true' || DISPLAY_DATE_ADDED_ARTICLE_LISTING) {
-              ?>
-              <tr>
-                <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
-              </tr>
-              <?php
-            }
+
           } // End of listing loop
         } else {
           ?>
@@ -454,19 +449,32 @@ $CDpath = (isset($_SESSION['CDpath'])) ? '&CDpath=' . $_SESSION['CDpath'] : '';
         </tr>
       </table></td>
     </tr>
-    <?php
-    if (($articles_all_split->number_of_rows > 0) && ((ARTICLE_PREV_NEXT_BAR_LOCATION == 'bottom') || (ARTICLE_PREV_NEXT_BAR_LOCATION == 'both'))) {
-      ?>
-      <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
-          <tr>
-            <td class="smallText"><?php echo $articles_all_split->display_count(TEXT_DISPLAY_NUMBER_OF_ARTICLES); ?></td>
-            <td align="right" class="smallText"><?php echo TEXT_RESULT_PAGE . ' ' . $articles_all_split->display_links(MAX_DISPLAY_PAGE_LINKS, tep_get_all_get_params(array('page', 'info', 'x', 'y'))); ?></td>
-          </tr>
-        </table></td>
-      </tr>
-      <?php
-    }
+    <tr>
+     <td>
+  <div class="clearfix"></div>
+  <div class="content-product-listing-div">
+
+<?php if (($articles_all_split->number_of_rows > 0) && ((ARTICLE_PREV_NEXT_BAR_LOCATION == 'bottom') || (ARTICLE_PREV_NEXT_BAR_LOCATION == 'both'))) {?>
+      <div class="product-listing-module-pagination margin-bottom">
+        <div class="pull-left large-margin-bottom page-results"><?php echo $articles_all_split->display_count(TEXT_DISPLAY_NUMBER_OF_ARTICLES); ?></div>
+        <div class="pull-right large-margin-bottom no-margin-top">
+          <ul class="pagination no-margin-top no-margin-bottom">
+           <?php echo  $articles_all_split->display_links(MAX_DISPLAY_PAGE_LINKS, tep_get_all_get_params(array('page', 'info', 'x', 'y'))); ?>
+
+          </ul>
+        </div>
+      </div><div class="clear-both"></div>
+
+
+<?php
+  }
+?>
+</div>
+    </tr>
+     </td>
+
+     <?php
+
     // RCI code start
     echo $cre_RCI->get('articles', 'menu');
     // RCI code eof
@@ -482,3 +490,4 @@ echo $cre_RCI->get('articles', 'bottom');
 echo $cre_RCI->get('global', 'bottom');
 // RCI code eof
 ?>
+

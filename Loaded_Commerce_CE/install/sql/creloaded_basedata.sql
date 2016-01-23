@@ -540,6 +540,50 @@ INSERT INTO infobox_configuration VALUES( 11,  82, 'best_sellers_scroll.php', 'B
 INSERT INTO infobox_configuration VALUES( 11,  83, 'affiliate_branding.php', 'BOX_HEADING_AFFILIATE', 'no', 'left',  33, '0000-00-00 00:00:00', now(), '', 'infobox', '#FFFFFF');
 INSERT INTO infobox_configuration VALUES( 11,  84, 'fdm_file_library.php', 'BOX_HEADING_FDMS', 'no', 'left',  34, '0000-00-00 00:00:00', now(), '', 'infobox', '#FFFFFF');
 INSERT INTO infobox_configuration VALUES( 11,  85, 'forms.php', 'BOX_HEADING_FORMS', 'no', 'left',  35, '0000-00-00 00:00:00', now(), '', 'infobox', '#FFFFFF');
+INSERT INTO infobox_configuration VALUES( 12,  86, 'downloads.php', 'BOX_HEADING_DOWNLOADS', 'no', 'right',  7, '0000-00-00 00:00:00', now(), 'You Have a Download', 'infobox', '#F39800');
+INSERT INTO infobox_configuration VALUES( 12,  87, 'currencies.php', 'BOX_HEADING_CURRENCIES', 'no', 'right',  6, '0000-00-00 00:00:00', now(), 'Currencies', 'infobox', '#F39800');
+INSERT INTO infobox_configuration VALUES( 12,  88, 'order_history.php', 'BOX_HEADING_CUSTOMER_ORDERS', 'no', 'right',  4, '0000-00-00 00:00:00', now(), 'Order History', 'infobox', '#F39800');
+INSERT INTO infobox_configuration VALUES( 12,  89, 'languages.php', 'BOX_HEADING_LANGUAGES', 'no', 'right',  5, '0000-00-00 00:00:00', now(), 'Languages', 'infobox', '#F39800');
+INSERT INTO infobox_configuration VALUES( 12,  90, 'best_sellers.php', 'BOX_HEADING_BESTSELLERS', 'no', 'right',  3, '0000-00-00 00:00:00', now(), 'Best Sellers', 'infobox', '#F39800');
+INSERT INTO infobox_configuration VALUES( 12,  91, 'customer_gv.php', 'BOX_HEADING_GIFT_VOUCHER', 'no', 'right',  1, '0000-00-00 00:00:00', now(), 'Gift Voucher', 'infobox', '#F39800');
+INSERT INTO infobox_configuration VALUES( 12,  92, 'loginbox.php', 'BOX_HEADING_LOGIN', 'yes', 'right',  2, '0000-00-00 00:00:00', now(), 'Your Account', 'infobox', '#F39800');
+INSERT INTO infobox_configuration VALUES( 12,  93, 'shopping_cart.php', 'BOX_HEADING_SHOPPING_CART', 'yes', 'right',  1, '0000-00-00 00:00:00', now(), 'Shopping Cart', 'infobox', '#F39800');
+INSERT INTO infobox_configuration VALUES( 12,  94, 'googlead.php', 'BOX_GOOGLE_AD_BANNER_HEADING', 'no', 'left',  26, '0000-00-00 00:00:00', now(), 'Google Ad', 'infobox', '#F39800');
+INSERT INTO infobox_configuration VALUES( 12,  95, 'whos_online.php', 'BOX_HEADING_WHOS_ONLINE', 'no', 'left',  25, '0000-00-00 00:00:00', now(), 'Who\'s Online', 'infobox', '#F39800');
+INSERT INTO infobox_configuration VALUES( 12,  96, 'links.php', 'BOX_HEADING_LINKS', 'no', 'left',  24, '0000-00-00 00:00:00', now(), 'Links', 'infobox', '#F39800');
+INSERT INTO infobox_configuration VALUES( 12,  97, 'featured.php', 'BOX_HEADING_FEATURED', 'no', 'left',  22, '0000-00-00 00:00:00', now(), 'Featured', 'infobox', '#F39800');
+INSERT INTO infobox_configuration VALUES( 12,  98, 'affiliate.php', 'BOX_HEADING_AFFILIATE', 'no', 'left',  23, '0000-00-00 00:00:00', now(), 'Affiliate Info', 'infobox', '#F39800');
+INSERT INTO infobox_configuration VALUES( 12,  99, 'shop_by_price.php', 'BOX_HEADING_SHOP_BY_PRICE', 'no', 'left',  21, '0000-00-00 00:00:00', now(), 'Shop by Price', 'infobox', '#F39800');
+INSERT INTO infobox_configuration VALUES( 12,  100, 'whats_new.php', 'BOX_HEADING_WHATS_NEW', 'no', 'left',  20, '0000-00-00 00:00:00', now(), 'Latest products', 'infobox', '#F39800');
+INSERT INTO infobox_configuration VALUES( 12,  101, 'tell_a_friend.php', 'BOX_HEADING_TELL_A_FRIEND', 'no', 'left',  19, '0000-00-00 00:00:00', now(), 'Tell A Friend', 'infobox', '#F39800');
+INSERT INTO infobox_configuration VALUES( 12,  102, 'product_notifications.php', 'BOX_HEADING_NOTIFICATIONS', 'no', 'left',  18, '0000-00-00 00:00:00', now(), 'Notifications', 'infobox', '#F39800');
+INSERT INTO infobox_configuration VALUES( 12,  103, 'manufacturer_info.php', 'BOX_HEADING_MANUFACTURER_INFO', 'no', 'left',  17, '0000-00-00 00:00:00', now(), 'Manufacturers Info', 'infobox', '#F39800');
+INSERT INTO infobox_configuration VALUES( 12,  104, 'manufacturers.php', 'BOX_HEADING_MANUFACTURERS', 'no', 'left',  16, '0000-00-00 00:00:00', now(), 'Manufacturers', 'infobox', '#F39800');
+INSERT INTO infobox_configuration VALUES( 12,  105, 'search.php', 'BOX_HEADING_SEARCH', 'no', 'left',  15, '0000-00-00 00:00:00', now(), 'Quick Find', 'infobox', '#F39800');
+INSERT INTO infobox_configuration VALUES( 12,  106, 'reviews.php', 'BOX_HEADING_REVIEWS', 'no', 'left',  9, '0000-00-00 00:00:00', now(), 'Reviews', 'infobox', '#F39800');
+INSERT INTO infobox_configuration VALUES( 12,  107, 'specials.php', 'BOX_HEADING_SPECIALS', 'yes', 'left',  10, '0000-00-00 00:00:00', now(), 'Specials', 'infobox', '#F39800');
+INSERT INTO infobox_configuration VALUES( 12,  108, 'categories3.php', 'BOX_HEADING_CATEGORIES3', 'no', 'left',  7, '0000-00-00 00:00:00', now(), 'Categories', 'infobox', '#F39800');
+INSERT INTO infobox_configuration VALUES( 12,  109, 'categories4.php', 'BOX_HEADING_CATEGORIES4', 'no', 'left',  8, '0000-00-00 00:00:00', now(), 'Categories', 'infobox', '#F39800');
+INSERT INTO infobox_configuration VALUES( 12,  110, 'categories1.php', 'BOX_HEADING_CATEGORIES1', 'no', 'left',  5, '0000-00-00 00:00:00', now(), 'Categories', 'infobox', '#F39800');
+INSERT INTO infobox_configuration VALUES( 12,  111, 'categories2.php', 'BOX_HEADING_CATEGORIES2', 'no', 'left',  6, '0000-00-00 00:00:00', now(), 'Categories', 'infobox', '#F39800');
+INSERT INTO infobox_configuration VALUES( 12,  112, 'categories.php', 'BOX_HEADING_CATEGORIES', 'yes', 'left',  1, '0000-00-00 00:00:00', now(), 'Categories', 'infobox', '#F39800');
+INSERT INTO infobox_configuration VALUES( 12,  113, 'articles.php', 'BOX_HEADING_ARTICLES', 'no', 'left',  27, '0000-00-00 00:00:00', now(), 'Articles', 'infobox', '#F39800'); 
+INSERT INTO infobox_configuration VALUES( 12,  114, 'faq.php', 'BOX_HEADING_FAQ', 'no', 'left',  30, '0000-00-00 00:00:00', now(), 'Faq', 'infobox', '#F39800');
+INSERT INTO infobox_configuration VALUES( 12,  115, 'authors.php', 'BOX_HEADING_AUTHORS', 'no', 'left',  29, '0000-00-00 00:00:00', now(), 'Authors', 'infobox', '#F39800');
+INSERT INTO infobox_configuration VALUES( 12,  116, 'asearch.php', 'BOX_HEADING_ASEARCH', 'no', 'left',  31, '0000-00-00 00:00:00', now(), 'Article Search', 'infobox', '#F39800');
+INSERT INTO infobox_configuration VALUES( 12,  117, 'wishlist.php', 'BOX_HEADING_WISHLIST', 'no', 'right',  9, '0000-00-00 00:00:00', now(), 'Wishlist', 'infobox', '#F39800');
+INSERT INTO infobox_configuration VALUES( 12,  118, 'boxad.php', 'BOX_AD_LP_HEADING', 'yes', 'left',  10, '0000-00-00 00:00:00', now(), 'Loaded Payments', 'infobox', '#F39800');
+INSERT INTO infobox_configuration VALUES( 12,  119, 'search1.php', 'BOX_HEADING_SEARCH1', 'no', 'right',  8, '0000-00-00 00:00:00', now(), 'Advanced Search', 'infobox', '#F39800');
+INSERT INTO infobox_configuration VALUES( 12,  120, 'buysafe.php', 'BOX_HEADING_BUYSAFE', 'no', 'left',  14, '0000-00-00 00:00:00', now(), '', 'infobox', '#F39800');
+INSERT INTO infobox_configuration VALUES( 12,  121, 'example.php', 'BOX_HEADING_EXAMPLE', 'no', 'left',  13, '0000-00-00 00:00:00', now(), 'Example', 'infobox', '#F39800');
+INSERT INTO infobox_configuration VALUES( 12,  122, 'we_accept.php', 'BOX_HEADING_WE_ACCEPT', 'no', 'left',  12, '0000-00-00 00:00:00', now(), 'Cards We Accept', 'infobox', '#F39800');
+INSERT INTO infobox_configuration VALUES( 12,  123, 'pages.php', 'BOX_HEADING_PAGES', 'yes', 'left',  11, '0000-00-00 00:00:00', now(), 'Information', 'infobox', '#F39800');
+INSERT INTO infobox_configuration VALUES( 12,  124, 'chatstat.php', 'BOX_HEADING_CHATSTAT', 'no', 'left',  3, '0000-00-00 00:00:00', now(), '', 'infobox', '#FFFFFF');
+INSERT INTO infobox_configuration VALUES( 12,  125, 'controlscan.php', 'BOX_HEADING_CONTROLSCAN', 'no', 'left',  4, '0000-00-00 00:00:00', now(), '', 'infobox', '#FFFFFF');
+INSERT INTO infobox_configuration VALUES( 12,  126, 'best_sellers_scroll.php', 'BOX_HEADING_BESTSELLER_SCROLL', 'no', 'left',  32, '0000-00-00 00:00:00', now(), '', 'infobox', '#FFFFFF');
+INSERT INTO infobox_configuration VALUES( 12,  127, 'affiliate_branding.php', 'BOX_HEADING_AFFILIATE', 'no', 'left',  33, '0000-00-00 00:00:00', now(), '', 'infobox', '#FFFFFF');
+INSERT INTO infobox_configuration VALUES( 12,  128, 'fdm_file_library.php', 'BOX_HEADING_FDMS', 'no', 'left',  34, '0000-00-00 00:00:00', now(), '', 'infobox', '#FFFFFF');
+INSERT INTO infobox_configuration VALUES( 12,  129, 'forms.php', 'BOX_HEADING_FORMS', 'no', 'left',  35, '0000-00-00 00:00:00', now(), '', 'infobox', '#FFFFFF');
 
 
 #
@@ -701,6 +745,7 @@ INSERT INTO pages_to_categories VALUES( 3,  1,  30);
 #
 INSERT INTO template VALUES( 9, 'Original_ats', now(), '0000-00-00 00:00:00', 'Original.gif', '3', '8', '3', '3', '100%', 'yes', 'yes', '130', '130', 'yes', '1', 'yes', 'no', 'no', 'yes', 'mainpage.php', 'featured.php', '', '', '', '', 'yes', '', '', '',  1,  1);
 INSERT INTO template VALUES( 11, 'cre65_ats', now(), '0000-00-00 00:00:00', 'preview.gif', '0', '5', '0', '0', '980', 'yes', 'yes', '194', '194', 'yes', '1', 'yes', 'no', 'no', 'yes', 'mainpage.php', '', '', '', '', '', 'yes', '', '', '',  1,  1);
+INSERT INTO template VALUES( 12, 'sevenofsix', now(), '0000-00-00 00:00:00', 'sevenofsix.gif', '0', '5', '0', '0', '980', 'yes', 'yes', '194', '194', 'yes', '1', 'yes', 'no', 'no', 'yes', 'mainpage.php', 'new_products.php', '', '', '', '', 'yes', '', '', '',  1,  1);
 
 
 #

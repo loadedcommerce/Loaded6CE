@@ -574,6 +574,8 @@ require(DIR_FS_FUNCTIONS . 'password_funcs.php');
 require(DIR_FS_FUNCTIONS . 'validations.php');
 // split-page-results
 require(DIR_FS_CLASSES . 'split_page_results.php');
+// split-page-results-responsive
+require(DIR_FS_CLASSES . 'split_page_results_rspv.php');
 // template application_top
 require(DIR_FS_INCLUDES . 'template_application_top.php');
 // initialize the message stack for output messages

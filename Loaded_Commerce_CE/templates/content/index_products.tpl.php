@@ -1,48 +1,27 @@
 <?php
-/*
-  $Id: index_products.tpl.php,v 1.2.0.0 2008/01/22 13:41:11 datazen Exp $
-
-  CRE Loaded, Open Source E-Commerce Solutions
-  http://www.creloaded.com
-
-  Copyright (c) 2008 CRE Loaded
-  Copyright (c) 2003 osCommerce
-
-  Released under the GNU General Public License
-*/
-// RCI code start
-echo $cre_RCI->get('global', 'top');
-echo $cre_RCI->get('indexproducts', 'top');
-// RCI code eof
-// added for CDS CDpath support
-$params = (isset($_SESSION['CDpath'])) ? '&CDpath=' . $_SESSION['CDpath'] : ''; 
-  
+    // RCI code start
+    echo $cre_RCI->get('global', 'top');
+    echo $cre_RCI->get('indexproducts', 'top');
+    // RCI code eof
     // Get the category information
-    $category_query = tep_db_query("select cd.categories_name, cd.categories_heading_title, cd.categories_description, c.categories_image from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.categories_id = '" . (int)$current_category_id . "' and cd.categories_id = '" . (int)$current_category_id . "' and cd.language_id = '" . $languages_id . "'"); 
-    $category = tep_db_fetch_array($category_query); 
-    
-    // Get the manufactur name
-    $manufactures_query = tep_db_query("select manufacturers_name from " . TABLE_MANUFACTURERS . " where manufacturers_id = '" . (int)$_GET['manufacturers_id'] . "'"); 
-    $manufactures = tep_db_fetch_array($manufactures_query); 
-    
-    if (tep_not_null($manufactures['manufacturers_name'])) { 
-      $heading_text = $manufactures['manufacturers_name']; 
-    } elseif ((ALLOW_CATEGORY_DESCRIPTIONS == 'true') && (tep_not_null($category['categories_heading_title']))) { 
-      $heading_text = $category['categories_heading_title']; 
-    } else if(tep_not_null($category['categories_name'])) {
-      $heading_text = $category['categories_name'];
+    $category_query = tep_db_query("select cd.categories_name, cd.categories_heading_title, cd.categories_description, c.categories_image from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.categories_id = '" . (int)$current_category_id . "' and cd.categories_id = '" . (int)$current_category_id . "' and cd.language_id = '" . $languages_id . "'");
+    $category = tep_db_fetch_array($category_query);
+
+    if(tep_not_null($category['categories_heading_title'])){
+        $heading_text = $category['categories_heading_title'];
+    } else if(tep_not_null($category['categories_name'])){
+        $heading_text = $category['categories_name'];
     } else {
-      $heading_text = HEADING_TITLE;
+        $heading_text = HEADING_TITLE;
     }
     ?>
     <!-- bof content.index_products.tpl.php-->
-    <table border="0" width="100%" cellspacing="0" cellpadding="<?php echo CELLPADDING_SUB;?>">
-      <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
-          <tr>
-            <td><h1 class="pageHeading"><?php echo $heading_text; ?></h1>
+<div class="row">
+<h1 class="no-margin-top"><?php echo $heading_text; ?></h1>
+  <div id="content-product-listing-category-description-container">
               <?php if ( (ALLOW_CATEGORY_DESCRIPTIONS == 'true') && (isset($category) && tep_not_null($category['categories_description'])) ) {  echo '<span class="category_desc">' . $category['categories_description'] . '</span>'; } ?>
-            </td>
+   </div>
+  <div class="clearfix"></div>
 <?php
 // optional Product List Filter
     if (PRODUCT_LIST_FILTER > 0) {
@@ -64,7 +43,7 @@ $params = (isset($_SESSION['CDpath'])) ? '&CDpath=' . $_SESSION['CDpath'] : '';
       }
       $filterlist_query = tep_db_query($filterlist_sql);
       if (tep_db_num_rows($filterlist_query) > 1) {
-        echo '            <td align="center" class="main">' . tep_draw_form('filter', FILENAME_DEFAULT, 'get') . TEXT_SHOW . '&nbsp;';
+        echo '            <div>' . tep_draw_form('filter', FILENAME_DEFAULT, 'get') . TEXT_SHOW . '&nbsp;';
         if (isset($_GET['manufacturers_id'])) {
           echo tep_draw_hidden_field('manufacturers_id', (int)$_GET['manufacturers_id']);
           $options = array(array('id' => '', 'text' => TEXT_ALL_CATEGORIES));
@@ -76,8 +55,8 @@ $params = (isset($_SESSION['CDpath'])) ? '&CDpath=' . $_SESSION['CDpath'] : '';
         while ($filterlist = tep_db_fetch_array($filterlist_query)) {
           $options[] = array('id' => $filterlist['id'], 'text' => $filterlist['name']);
         }
-        echo tep_draw_pull_down_menu('filter_id', $options, (isset($_GET['filter_id']) ? $_GET['filter_id'] : ''), 'onchange="this.form.submit()"');
-        echo '</form></td>' . "\n";
+        echo '<select class="box-manufacturers-select form-control form-input-width"'.tep_draw_pull_down_menu('filter_id', $options, (isset($_GET['filter_id']) ? $_GET['filter_id'] : ''), 'onchange="this.form.submit()"');
+        echo '</form></div>' . "\n";
       }
     }
 
@@ -96,24 +75,15 @@ $params = (isset($_SESSION['CDpath'])) ? '&CDpath=' . $_SESSION['CDpath'] : '';
       $image = $image['categories_image'];
     }
 ?>
-            <td align="right"><?php echo tep_image(DIR_WS_IMAGES . $image, $heading_text, HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
-          </tr>
-        </table></td>
-      </tr>
-      <tr>
-        <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
-      </tr>
+
+
+<div class="clear-both"></div>
+<div class="product-listing-module-container">
+
       <!--manufacture list in index product.php-->
-<?php
-// BOF: Lango Added for template index_products .tpl MOD
-if (MAIN_TABLE_BORDER == 'yes'){
-table_image_border_top(false, false, $heading_text);
-}
-// EOF: Lango Added for template MOD
-?>
-      <tr>
-        <td>
-        <?php 
+
+
+ <?php
   //Product Listing Fix - Begin
   //decide which product listing to use
    if (PRODUCT_LIST_CONTENT_LISTING == 'column'){
@@ -122,7 +92,7 @@ table_image_border_top(false, false, $heading_text);
   $listing_method = FILENAME_PRODUCT_LISTING;
   }
   //Then show product listing
- // include(DIR_WS_MODULES . $listing_method); 
+  //include(DIR_WS_MODULES . $listing_method);
          if ( file_exists(TEMPLATE_FS_CUSTOM_MODULES . $listing_method)) {
             require(TEMPLATE_FS_CUSTOM_MODULES . $listing_method);
         } else {
@@ -130,16 +100,9 @@ table_image_border_top(false, false, $heading_text);
         }
   //Product Listing Fix - End
 ?>
-        </td>
-      </tr>
-<?php
-// BOF: Lango Added for template MOD
-if (MAIN_TABLE_BORDER == 'yes'){
-table_image_border_bottom();
-}
-// EOF: Lango Added for template content indexproducts.tlpMOD
-?>
-    </table>
+</div>
+  </div>
+
     <?php
     // RCI code start
     echo $cre_RCI->get('indexproducts', 'bottom');

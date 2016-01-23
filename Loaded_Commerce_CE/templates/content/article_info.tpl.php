@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
   $Id: article_info.tpl.php,v 2.1.0.0 2008/01/21 11:21:11 datazen Exp $
 
@@ -15,7 +15,7 @@ echo $cre_RCI->get('global', 'top');
 echo $cre_RCI->get('articleinfo', 'top');
 // RCI code eof
 // added for CDS CDpath support
-$CDpath = (isset($_SESSION['CDpath'])) ? '&CDpath=' . $_SESSION['CDpath'] : ''; 
+$CDpath = (isset($_SESSION['CDpath'])) ? '&CDpath=' . $_SESSION['CDpath'] : '';
 ?>
 <table border="0" width="100%" cellspacing="0" cellpadding="<?php echo CELLPADDING_SUB;?>">
   <?php
@@ -118,7 +118,7 @@ $CDpath = (isset($_SESSION['CDpath'])) ? '&CDpath=' . $_SESSION['CDpath'] : '';
       $reviews = tep_db_fetch_array($reviews_query);
       ?>
       <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="0"> 
+        <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
             <td class="main"><?php echo TEXT_CURRENT_REVIEWS . ' ' . $reviews['count']; ?></td>
             <?php
@@ -141,35 +141,31 @@ $CDpath = (isset($_SESSION['CDpath'])) ? '&CDpath=' . $_SESSION['CDpath'] : '';
     }
     ?>
     <!-- tell_a_friend //-->
+
+
+
+
+
+
+
     <tr>
       <td>
+      <div style=" border:1px solid #D3D3D3;margin-top:20px;">
         <?php
         if (ENABLE_TELL_A_FRIEND_ARTICLE == 'true') {
           if (isset($_GET['articles_id'])) {
-            $info_box_contents = array();
-            $info_box_contents[] = array('text' => BOX_TEXT_TELL_A_FRIEND);
-            new contentBoxHeading($info_box_contents);
+echo BOX_TEXT_TELL_A_FRIEND;
             $info_box_contents = array();
             $info_box_contents[] = array('form' => tep_draw_form('tell_a_friend_article', tep_href_link(FILENAME_TELL_A_FRIEND_ARTICLE, '', 'NONSSL', false), 'get'),
                                           'align' => 'left',
                                           'text' => TEXT_TELL_A_FRIEND . '&nbsp;' . tep_draw_input_field('to_email_address', '', 'size="40" maxlength="40" style="width: ' . (BOX_WIDTH-30) . 'px"') . '&nbsp;' . tep_draw_hidden_field('articles_id', $_GET['articles_id']) . tep_hide_session_id() . tep_template_image_submit('button_tell_a_friend.gif', BOX_HEADING_TELL_A_FRIEND) );
-            
             new contentBox($info_box_contents, true, true, $column_location);
-          }
-          if (TEMPLATE_INCLUDE_CONTENT_FOOTER =='true'){ 
-              $info_box_contents = array();
-              $info_box_contents[] = array('align' => 'left',
-                                'text'  => tep_draw_separator('pixel_trans.gif', '100%', '1')
-                              );
-              new contentBoxFooter($info_box_contents);
           }
         }
         ?>
+        </div>
       </td>
     </tr>
-    <tr>
-      <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
-    </tr>          
     <!-- tell_a_friend_eof //-->
     <tr>
       <td>
@@ -184,7 +180,7 @@ $CDpath = (isset($_SESSION['CDpath'])) ? '&CDpath=' . $_SESSION['CDpath'] : '';
       </td>
     </tr>
     <!-- body_text_eof //-->
-    <?php 
+    <?php
   }
   ?>
 </table>

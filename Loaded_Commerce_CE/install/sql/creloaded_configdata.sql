@@ -86,7 +86,7 @@ INSERT INTO configuration VALUES( 405, 'State', 'ACCOUNT_STATE', 'true', 'Displa
 INSERT INTO configuration VALUES( 406, 'Require E-mail Confirmation', 'ACCOUNT_EMAIL_CONFIRMATION', 'false', 'Require E-mail confirmation on account creation.',  5,  6, '0000-00-00 00:00:00', now(), '', 'tep_cfg_select_option(array(\'true\', \'false\'),');
 INSERT INTO configuration VALUES( 501, 'Default Currency', 'DEFAULT_CURRENCY', 'USD', 'Default Currency',  6,  0, '0000-00-00 00:00:00', now(), '', '');
 INSERT INTO configuration VALUES( 502, 'Default Language', 'DEFAULT_LANGUAGE', 'en', 'Default Language',  6,  0, '0000-00-00 00:00:00', now(), '', '');
-INSERT INTO configuration VALUES( 503, 'Default theme', 'DEFAULT_TEMPLATE', 'cre65_ats', 'Default theme, set in Design Controls',  6,  0, '0000-00-00 00:00:00', now(), '', 'tep_cfg_pull_down_template_list(');
+INSERT INTO configuration VALUES( 503, 'Default theme', 'DEFAULT_TEMPLATE', 'sevenofsix', 'Default responsive theme, set in Design Controls',  6,  0, '0000-00-00 00:00:00', now(), '', 'tep_cfg_pull_down_template_list(');
 INSERT INTO configuration VALUES( 504, 'Default Order Status For New Orders', 'DEFAULT_ORDERS_STATUS_ID', '1', 'When a new order is created, this order status will be assigned to it.',  6,  0, '0000-00-00 00:00:00', now(), '', '');
 INSERT INTO configuration VALUES( 505, 'Last Database Restore', 'DB_LAST_RESTORE', '', 'Last database restore file',  6,  0, '0000-00-00 00:00:00', now(), '', '');
 INSERT INTO configuration VALUES( 506, 'Shop By Price Ranges', 'MODULE_SHOPBYPRICE_RANGES', '0', 'How many ranges does the Shop by Price module support?',  6,  0, '0000-00-00 00:00:00', now(), '', '');

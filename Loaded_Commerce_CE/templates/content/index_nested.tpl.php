@@ -10,12 +10,13 @@
 
   Released under the GNU General Public License
 */
+
 // RCI code start
 echo $cre_RCI->get('global', 'top');
 echo $cre_RCI->get('indexnested', 'top');
 // RCI code eof
 // added for CDS CDpath support
-$params = (isset($_GET['CDpath'])) ? '&CDpath=' . $_GET['CDpath'] : ''; 
+$params = (isset($_SESSION['CDpath'])) ? '&CDpath=' . $_SESSION['CDpath'] : '';
     // Get the category information
     $category_query = tep_db_query("select cd.categories_name, cd.categories_heading_title, cd.categories_description, c.categories_image from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.categories_id = '" . (int)$current_category_id . "' and cd.categories_id = '" . (int)$current_category_id . "' and cd.language_id = '" . $languages_id . "'");
     $category = tep_db_fetch_array($category_query);
@@ -29,25 +30,14 @@ $params = (isset($_GET['CDpath'])) ? '&CDpath=' . $_GET['CDpath'] : '';
     }
 ?>
   <!-- Bof content.index_nested.tpl.php-->
-   <table border="0" width="100%" cellspacing="0" cellpadding="<?php echo CELLPADDING_SUB; ?>">
-      <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
-          <tr> 
-            <td><h1 class="pageHeading"><?php echo $heading_text; ?></h1>
-              <?php if ( (ALLOW_CATEGORY_DESCRIPTIONS == 'true') && (isset($category) && tep_not_null($category['categories_description'])) ) {  echo '<span class="category_desc">' . $category['categories_description'] . '</span>'; } ?>
-            </td>
-            <td class="pageHeading" align="right"><?php echo tep_image(DIR_WS_IMAGES . $category['categories_image'], $heading_text, HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
-          </tr>
-        </table></td>
-      </tr>
-      <tr>
-        <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
-      </tr>
-      <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
-          <tr>
-            <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
-              <tr>
+<div class="row">
+<h1 class="no-margin-top"><?php echo $heading_text; ?></h1>
+  <div id="content-product-listing-category-description-container">
+    <?php if ( (ALLOW_CATEGORY_DESCRIPTIONS == 'true') && (isset($category) && tep_not_null($category['categories_description'])) ) {  echo '<div id="content-product-listing-category-description">' . $category['categories_description'] . '</div>'; } ?>
+   </div>
+  <div class="clearfix"></div>
+  <div class="content-product-listing-div">
+
 <?php
     if (isset($cPath) && strpos('_', $cPath)) {
 // check to see if there are deeper categories within the current category
@@ -73,40 +63,31 @@ $params = (isset($_GET['CDpath'])) ? '&CDpath=' . $_GET['CDpath'] : '';
       $rows++;
       $cPath_new = tep_get_path($categories['categories_id'] . $params);
       $width = (int)(100 / MAX_DISPLAY_CATEGORIES_PER_ROW) . '%';
-      echo '                <td align="center" class="smallText" width="' . $width . '" valign="top"><a href="' . tep_href_link(FILENAME_DEFAULT, $cPath_new) . '">' . tep_image(DIR_WS_IMAGES . $categories['categories_image'], $categories['categories_name'], SUBCATEGORY_IMAGE_WIDTH, SUBCATEGORY_IMAGE_HEIGHT) . '<br>' . $categories['categories_name'] . '</a></td>' . "\n";
+      echo '                      <div class="product-listing-module-container"><div class="product-listing-module-items"><div class="col-sm-4 col-lg-4 with-padding"><div class="thumbnail align-center large-padding-top" style="height: 220px;"><h3 style="line-height:1.1;"><a href="' . tep_href_link(FILENAME_DEFAULT, $cPath_new) . '">' . tep_image(DIR_WS_IMAGES . $categories['categories_image'], $categories['categories_name'], 200) . '<br>' . $categories['categories_name'] . '</a></h3></div></div></div></div>' . "\n";
       if ((($rows / MAX_DISPLAY_CATEGORIES_PER_ROW) == floor($rows / MAX_DISPLAY_CATEGORIES_PER_ROW)) && ($rows != $number_of_categories)) {
-        echo '              </tr>' . "\n";
-        echo '              <tr>' . "\n";
       }
     }
 
 // needed for the new products module shown below
     $new_products_category_id = $current_category_id;
 ?>
-              </tr>
-            </table></td>
-          </tr>
-          <tr>
-            <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
-          </tr>
-          <tr>
-            <td><?php
+ </div>  <div class="clearfix"></div>
+<?php
            if ((INCLUDE_MODULE_ONE == 'new_products.php') ||
                (INCLUDE_MODULE_TWO == 'new_products.php') ||
                (INCLUDE_MODULE_THREE == 'new_products.php') ||
                (INCLUDE_MODULE_FOUR == 'new_products.php') ||
                (INCLUDE_MODULE_FIVE == 'new_products.php') ||
-               (INCLUDE_MODULE_SIX == 'new_products.php') ) { 
+               (INCLUDE_MODULE_SIX == 'new_products.php') ) {
+
         if ( file_exists(TEMPLATE_FS_CUSTOM_MODULES . FILENAME_NEW_PRODUCTS)) {
             require(TEMPLATE_FS_CUSTOM_MODULES . FILENAME_NEW_PRODUCTS);
         } else {
             require(DIR_FS_TEMPLATE_MAINPAGES . FILENAME_NEW_PRODUCTS);
         }
-     }?></td>
-          </tr>
-        </table></td>
-      </tr>
-    </table>
+     }?>
+
+    </div>
 <?php
 // RCI code start
 echo $cre_RCI->get('indexnested', 'bottom');

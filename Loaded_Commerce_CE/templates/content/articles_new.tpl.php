@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
   $Id: articles_new.tpl.php,v 2.1.0.0 2008/01/21 11:21:11 datazen Exp $
 
@@ -15,7 +15,7 @@ echo $cre_RCI->get('global', 'top');
 echo $cre_RCI->get('articlesnew', 'top');
 // RCI code eof
 // added for CDS CDpath support
-$CDpath = (isset($_SESSION['CDpath'])) ? '&CDpath=' . $_SESSION['CDpath'] : ''; 
+$CDpath = (isset($_SESSION['CDpath'])) ? '&CDpath=' . $_SESSION['CDpath'] : '';
 ?>
 <table border="0" width="100%" cellspacing="0" cellpadding="<?php echo CELLPADDING_SUB;?>">
   <?php
@@ -25,7 +25,7 @@ $CDpath = (isset($_SESSION['CDpath'])) ? '&CDpath=' . $_SESSION['CDpath'] : '';
     <tr>
       <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
         <tr>
-          <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
+          <td class="pageHeading"><h1><?php echo HEADING_TITLE; ?></h1></td>
         </tr>
       </table></td>
     </tr>
@@ -38,8 +38,24 @@ $CDpath = (isset($_SESSION['CDpath'])) ? '&CDpath=' . $_SESSION['CDpath'] : '';
   }
   ?>
   <tr>
-    <td class="main"><table border="0" width="100%" cellspacing="0" cellpadding="0">
+    <td class="main main-border" style="padding-top:25px;padding-left:30px;"><table border="0" width="100%" cellspacing="0" cellpadding="0">
       <?php
+
+     if (isset($_SESSION['customer_id']) && INSTALLED_VERSION_TYPE == 'B2B') {
+      $customer_group_array = tep_get_customers_access_group($_SESSION['customer_id']);
+    } else {
+      $customer_group_array[] = 'G';
+    }
+    if(INSTALLED_VERSION_TYPE == 'B2B')
+	{
+	  $group_access_new_articles = tep_get_access_sql('a.products_group_access', $customer_group_array);
+	}else{
+		$group_access_new_articles = '';
+	}
+
+
+
+
       $articles_new_array = array();
       $articles_new_query_raw = "select a.articles_id, a.articles_date_added, ad.articles_name, ad.articles_head_desc_tag, au.authors_id, au.authors_name, td.topics_id, td.topics_name
                                  from " . TABLE_ARTICLES . " a,
@@ -55,7 +71,7 @@ $CDpath = (isset($_SESSION['CDpath'])) ? '&CDpath=' . $_SESSION['CDpath'] : '';
                                    and a.articles_id = a2t.articles_id
                                    and a2t.topics_id = td.topics_id
                                    and ad.language_id = '" . (int)$languages_id . "'
-                                   and td.language_id = '" . (int)$languages_id . "'
+                                   and td.language_id = '" . (int)$languages_id . "' " . $group_access_new_articles . "
                                  order by a.articles_date_added desc, ad.articles_name";
 
       $articles_new_split = new splitPageResults($articles_new_query_raw, MAX_NEW_ARTICLES_PER_PAGE);
@@ -64,7 +80,7 @@ $CDpath = (isset($_SESSION['CDpath'])) ? '&CDpath=' . $_SESSION['CDpath'] : '';
         <tr>
           <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
             <tr>
-              <td class="smallText"><?php echo $articles_new_split->display_count(TEXT_DISPLAY_NUMBER_OF_ARTICLES_NEW); ?></td>
+              <td class="smallText"><h1><?php echo $articles_new_split->display_count(TEXT_DISPLAY_NUMBER_OF_ARTICLES_NEW); ?></h1></td>
               <td align="right" class="smallText"><?php echo TEXT_RESULT_PAGE . ' ' . $articles_new_split->display_links(MAX_DISPLAY_PAGE_LINKS, tep_get_all_get_params(array('page', 'info', 'x', 'y'))); ?></td>
             </tr>
           </table></td>
@@ -169,7 +185,7 @@ $CDpath = (isset($_SESSION['CDpath'])) ? '&CDpath=' . $_SESSION['CDpath'] : '';
     </table></td>
   </tr>
 </table>
-<?php 
+<?php
 // RCI code start
 echo $cre_RCI->get('articlesnew', 'bottom');
 echo $cre_RCI->get('global', 'bottom');

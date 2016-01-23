@@ -4,41 +4,11 @@ echo $cre_RCI->get('global', 'top');
 echo $cre_RCI->get('allprodcats', 'top');
 // RCI code eof
 ?>
-<table border="0" width="100%" cellspacing="0" cellpadding="<?php echo CELLPADDING_SUB;?>">
-<?php
-// BOF: Lango Added for template MOD
-if (SHOW_HEADING_TITLE_ORIGINAL == 'yes') {
-$header_text = '&nbsp;'
-//EOF: Lango Added for template MOD
-?>
-      <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
-          <tr>
-            <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
-            <td class="pageHeading" align="right"><?php echo tep_image(DIR_WS_IMAGES . 'table_background_default.gif', HEADING_TITLE, HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
-          </tr>
-        </table></td>
-       </tr>
-      <tr>
-        <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
-      </tr>
-<?php
-// BOF: Lango Added for template MOD
-}else{
-$header_text = HEADING_TITLE;
-}
-// EOF: Lango Added for template MOD
-?>
+<h1 class="no-margin-top"><?php echo HEADING_TITLE; ?></h1>
 
-<?php
-// BOF: Lango Added for template MOD
-if (MAIN_TABLE_BORDER == 'yes'){
-table_image_border_top(false, false, $header_text);
-}
-// EOF: Lango Added for template MOD
-?>
+<table border="0" width="100%" cellspacing="0" cellpadding="<?php echo CELLPADDING_SUB;?>">
       <tr>
-        <td><table width="100%" cellspacing="0" cellpadding="0" border="0">
+        <td><table width="100%" cellspacing="0" cellpadding="0" border="0" class="table table-striped table-hover">
         <tr class="productListing-heading">
         <td align="left" class="productListing-heading"><?php echo HEADING_ALL_CATSUB; ?></td>
        <td align="center" class="productListing-heading"><?php echo HEADING_ALL_PRODUCTS; ?></td>
@@ -101,11 +71,6 @@ while($products = tep_db_fetch_array($products_query)) {
 // RCI code start
 echo $cre_RCI->get('allprodcats', 'menu');
 // RCI code eof
-// BOF: Lango Added for template MOD
-if (MAIN_TABLE_BORDER == 'yes'){
-table_image_border_bottom();
-}
-// EOF: Lango Added for template MOD
 ?>
       <tr>
         <td><table border="0" width="100%" cellspacing="1" cellpadding="2" class="infoBox">
