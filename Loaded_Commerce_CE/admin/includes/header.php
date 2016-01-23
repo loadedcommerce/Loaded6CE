@@ -21,7 +21,7 @@ for ($i = 0, $n = sizeof($languages); $i < $n; $i++) {
   }
 }                   
 
-        $my_account_query = tep_db_query ("select admin_id, admin_firstname, admin_lastname from " . TABLE_ADMIN . " where admin_id= " . $_SESSION['login_id']);
+$my_account_query = tep_db_query ("select admin_id, admin_firstname, admin_lastname from " . TABLE_ADMIN . " where admin_id= " . $_SESSION['login_id']);
 $myAccount = tep_db_fetch_array($my_account_query);
 $store_admin_name = $myAccount['admin_firstname'] . ' ' . $myAccount['admin_lastname'];
 // RCI top
