@@ -63,10 +63,7 @@
     <link href="assets/css/style-responsive.min.css" rel="stylesheet" />
     <link href="assets/css/theme/blue.css" rel="stylesheet" id="theme" />
     <!-- ================== END BASE CSS STYLE ================== -->
-    
-    <!-- ================== BEGIN BASE JS ================== -->
-    <script src="assets/plugins/pace/pace.min.js"></script>
-    <!-- ================== END BASE JS ================== -->
+
 </head>
 <body onload="document.getElementById('email_address').focus()">
    <body class="pace-top">
@@ -169,65 +166,18 @@
         <script src="assets/crossbrowserjs/excanvas.min.js"></script>
     <![endif]-->
     <script src="assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-    <script src="assets/plugins/jquery-cookie/jquery.cookie.js"></script>
     <!-- ================== END BASE JS ================== -->
     
     <!-- ================== BEGIN PAGE LEVEL JS ================== -->
-    <script src="assets/js/login-v2.demo.min.js"></script>
     <script src="assets/js/apps.min.js"></script>
     <!-- ================== END PAGE LEVEL JS ================== -->
 
     <script>
         $(document).ready(function() {
             App.init();
-            LoginV2.init();
         });
     </script>
 
-<?php
-require('includes/application_bottom.php');
-?>
-</body>
-</html>
-
-<table border="0" cellpadding="0" cellspacing="0" width="600" style="margin: 45px auto;">
-  <tr>
-    <td class="box-top-left">&nbsp;</td>
-    <td class="box-top">&nbsp;</td>
-    <td class="box-top-right">&nbsp;</td>
-  </tr>
-   <tr>
-      <td class="box-left">&nbsp;</td>
-      <td class="box-content">
-        <?php echo tep_draw_form('login', FILENAME_PASSWORD_FORGOTTEN, 'action=process');?>
-        <table border="0" cellpadding="0" cellspacing="0">
-        
-
-          <tr>
-            <td class="form-label"><label for="email_address"><?php echo ENTRY_EMAIL_ADDRESS; ?></label></td><td class="form-value"><?php echo tep_draw_input_field('email_address','','id="email_address" class="string"'); ?></td>
-          </tr>
-          <tr>
-            <td class="form-label"></td>
-            <td class="form-value button-container">
-              <input type="submit" name="button" id="button" class="cssButtonSubmit" value="" />
-              <a href="./index.php"><?php echo IMAGE_CANCEL;?></a>
-            </td>
-          </tr>
-        
-        </table>
-        </form>
-      </td>
-      <td class="box-right">&nbsp;</td>
-   </tr>
-   <tr>
-      <td class="box-bottom-left">&nbsp;</td><td class="box-bottom">&nbsp;</td><td class="box-bottom-right">&nbsp;</td>
-   </tr>
-   <tr>
-      <td></td>
-      <td align="left" style="font-size: 11px; color: #444;"><a href="http://www.loadedcommerce.com/" target="_blank"><?php echo PROJECT_VERSION;?></a></td>
-      <td></td>
-   </tr>
-</table>
 <?php
 require('includes/application_bottom.php');
 ?>
