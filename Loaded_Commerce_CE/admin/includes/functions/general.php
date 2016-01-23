@@ -348,6 +348,8 @@ function tep_selected_file($filename) {
     }
 
     $select_string = '<select name="' . $name . '"';
+    
+    $select_string .= ' class="form-control" ';
 
     if ($parameters) {
       $select_string .= ' ' . $parameters;

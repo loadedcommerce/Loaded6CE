@@ -76,9 +76,6 @@
     <link href="assets/css/theme/blue.css" rel="stylesheet" id="theme" />
     <!-- ================== END BASE CSS STYLE ================== -->
     
-    <!-- ================== BEGIN BASE JS ================== -->
-    <script src="assets/plugins/pace/pace.min.js"></script>
-    <!-- ================== END BASE JS ================== -->
 </head>
 <body onload="document.getElementById('email_address').focus()">
    <body class="pace-top">
@@ -149,18 +146,15 @@
         <script src="assets/crossbrowserjs/excanvas.min.js"></script>
     <![endif]-->
     <script src="assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-    <script src="assets/plugins/jquery-cookie/jquery.cookie.js"></script>
     <!-- ================== END BASE JS ================== -->
     
     <!-- ================== BEGIN PAGE LEVEL JS ================== -->
-    <script src="assets/js/login-v2.demo.min.js"></script>
     <script src="assets/js/apps.min.js"></script>
     <!-- ================== END PAGE LEVEL JS ================== -->
 
     <script>
         $(document).ready(function() {
             App.init();
-            LoginV2.init();
         });
     </script>
 

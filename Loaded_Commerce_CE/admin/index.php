@@ -19,11 +19,7 @@ $my_account_query = tep_db_query ("select admin_id, admin_firstname, admin_lastn
 $myAccount = tep_db_fetch_array($my_account_query);
 $store_admin_name = $myAccount['admin_firstname'] . ' ' . $myAccount['admin_lastname'];
 ?>
-    <!DOCTYPE html>
-    <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
-    <!--[if !IE]><!-->
-    <html lang="en">
-    <!--<![endif]-->
+<!DOCTYPE html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
 <title><?php echo TITLE; ?></title>
@@ -48,19 +44,12 @@ $store_admin_name = $myAccount['admin_firstname'] . ' ' . $myAccount['admin_last
   <link href="assets/plugins/jquery-jvectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" />
   <link href="assets/plugins/bootstrap-datepicker/css/datepicker.css" rel="stylesheet" />
   <link href="assets/plugins/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet" />
-    <link href="assets/plugins/gritter/css/jquery.gritter.css" rel="stylesheet" />  
-      <script language="javascript" src="includes/general.js"></script>
-  <script type="text/javascript" src="includes/menu.js"></script>
+    
   <!-- ================== END PAGE LEVEL STYLE ================== -->
-
-
-
-<!--[if IE]>
-<link rel="stylesheet" type="text/css" href="includes/stylesheet-ie.css">
-<![endif]-->
+  <script language="javascript" src="includes/general.js"></script>
+  <script type="text/javascript" src="includes/menu.js"></script>
 </head>
-<body>    
-<!-- header //-->
+<body>
     <!-- begin #page-container -->
     <div id="page-container" class="fade page-sidebar-fixed page-header-fixed gradient-enabled">
     <!-- header //-->
@@ -75,161 +64,48 @@ $store_admin_name = $myAccount['admin_firstname'] . ' ' . $myAccount['admin_last
     <div id="content" class="content">
       <!-- begin breadcrumb -->
       <ol class="breadcrumb pull-right">
-        <li><a href="javascript:;">Home</a></li>
-        <li><a href="javascript:;">Tools</a></li>
-        <li class="active"><?php echo HEADING_TITLE; ?></li>
-      </ol>
+        <li>Create &nbsp; <a title="<?php echo BOX_MANUAL_ORDER_CREATE_ACCOUNT;?>" href="<?php echo tep_href_link(FILENAME_CREATE_ACCOUNT,'','SSL');?>" class="btn btn-xs btn-header"><i class="fa fa-user"></i><span class="label">+</span></a> <a title="<?php echo BOX_MANUAL_ORDER_CREATE_ORDER;?>" href="<?php echo tep_href_link(FILENAME_CREATE_ORDER,'','SSL');?>" class="btn btn-xs btn-header"><i class="fa fa-shopping-cart"></i><span class="label">+</span></a></li>
+        <li>Search &nbsp; <a href="javascript:;" class="btn btn-header btn-xs header-popover" id="ProductsPopover">Products</a> <a href="javascript:;" class="btn btn-header btn-xs header-popover" id="CustomerPopover">Customers</a> <a href="javascript:;" class="btn btn-header btn-xs header-popover" id="OrdersPopover">Orders</a> <a href="javascript:;" class="btn btn-header btn-xs header-popover" id="PagesPopover">Pages</a></li>
+      </ol>   
+      
       <!-- end breadcrumb -->
       <!-- begin page-header -->
-      <h1 class="page-header"><?php echo HEADING_TITLE; ?></h1>
+      <h1 class="page-header"><i class="fa fa-laptop"></i> <?php echo 'Dashboard';//sprintf(TEXT_WELCOME,$store_admin_name); ?></h1>
       <!-- end page-header -->
       
+    <!-- begin panel -->
+    
+    <div class="row">
+        <!-- box -->
+        <div class="col-md-6">
+            <?php
+              // RCI include left admin blocks
+               echo $cre_RCI->get('index', 'blockleft');
+             ?>
+        </div>
+        <!-- box eof -->
+        <!-- box -->
+        <div class="col-md-6">
+        <?php 
+          // RCI include right admin blocks
+          echo $cre_RCI->get('index', 'blockright');
+        ?>
+        </div>
+        <!-- box eof -->
+    </div>
 
-<!-- header_eof //-->
-      <table width="100%" border="0" cellpadding="0" cellspacing="0">
-        <tr>
-          <td colspan="2" style="padding-bottom: 1em;">
-            <table width="100%" border="0" cellpadding="0" cellspacing="0">
-              <tr>
-                <td>
-                  <?php echo sprintf(TEXT_WELCOME,$store_admin_name); ?>
-                </td>
-                <td align="right" style="padding-right: 12px;">
-                  Version: <?php echo PROJECT_VERSION;?>
-                </td>
-              </tr>
-            </table>
-          </td>
-        </tr>
-        <tr>
-          <td valign="top">
-            
-            <table border="0" cellpadding="0" cellspacing="0" width="100%">
-              <tr>
-                <td width="50%" valign="top"><?php 
-                  // RCI include left admin blocks
-                  echo $cre_RCI->get('index', 'blockleft');
-                  ?>
-                </td>
-                <td width="50%" valign="top"><?php 
-                  // RCI include right admin blocks
-                  echo $cre_RCI->get('index', 'blockright');
-                  ?>
-                </td>
-              </tr>
-            </table>
-          
-          </td>
-          <?php /*
-          <td width="180" valign="top">
-            <?php echo $cre_RCI->get('index', 'rightcolumn'); ?>
-            <!-- CRE Forge & Loaded Commerce News -->
-            <table border="0" cellpadding="0" cellspacing="0" width="100%">
-              <tr>
-                <td class="box-top-left">&nbsp;</td><td class="box-top">&nbsp;</td><td class="box-top-right">&nbsp;</td>
-              </tr>
-              <tr>
-                <td class="box-left">&nbsp;</td><td class="box-content">
-                  <div style="font-weight: bold; margin-bottom: .5em; font-size: 12px;">
-                  <?php echo  BLOCK_TITLE_CRE_LOADED_ORG?>
-                  </div>
-                  <a class="adminLink" href="http://www.creloaded.org/index.php?option=com_jmrphpbb&Itemid=56" target="_blank"><?php echo  BLOCK_CONTENT_CRE_ORG_FORUMS;?></a> <br>
-                  <a class="adminLink" href="http://www.creloaded.org/index.php?option=com_mtree&Itemid=55" target="_blank"><?php echo  BLOCK_CONTENT_CRE_ORG_EXTENSIONS?></a> <br>
-                  
-                  <a class="adminLink" href="http://forge.loadedcommerce.com/gf/project/loaded65/tracker/?action=TrackerItemBrowse&tracker_id=23" target="_blank"><?php echo  BLOCK_CONTENT_CRE_FORGE_BUG_TRACKER;?></a><br>
-                  
-                  <a class="adminLink" href="http://www.loadedcommerce.com/" target="_blank"><?php echo TEXT_PURCHASE_SUPPORT;?></a><br>
-                  
-                  <a class="adminLink" href="http://www.cresecure.com/from_admin" target="_blank"><?php echo TEXT_CRE_SECURE;?></a><br>
-                 
-                </td><td class="box-right">&nbsp;</td>
-              </tr>
-              <tr>
-                <td class="box-bottom-left">&nbsp;</td><td class="box-bottom">&nbsp;</td><td class="box-bottom-right">&nbsp;</td>
-              </tr>
-            </table>
-            <?php 
-            // RCO override index newsfeed
-            if ($cre_RCO->get('index', 'newsfeed') !== true) {  
-              ?>
-              <table border="0" cellpadding="0" cellspacing="0" width="100%" style="margin-top: 1em;">
-              <tr>
-                <td class="box-top-left">&nbsp;</td><td class="box-top">&nbsp;</td><td class="box-top-right">&nbsp;</td>
-              </tr>
-              <tr>
-                <td class="box-left">&nbsp;</td><td class="box-content">
-                  <div style="font-weight: bold; margin-bottom: .5em; font-size: 12px;"><?php echo  BLOCK_TITLE_CRE_NEWS?></div>
-                  <?php
-                  include_once('includes/functions/rss2html.php');
-                  parseRDF("http://www.loadedcommerce.com/rss/", 4);
-                  ?>
-                  <a href="http://www.loadedcommerce.com/articles_new.php" target="_blank">more...</a>
-                </td><td class="box-right">&nbsp;</td>
-              </tr>
-              <tr>
-                <td class="box-bottom-left">&nbsp;</td><td class="box-bottom">&nbsp;</td><td class="box-bottom-right">&nbsp;</td>
-              </tr>
-            </table>
-              </div>
-              <?php
-            }
-            // RCO eof
-            ?>
-          </td>
-          */
-          ?>
-        </tr>
-      </table>
-      </div>
     </div>
     <!-- end panel -->
     </div>
     <!-- end #content -->
       
       <!-- begin #footer -->
-      <div id="footer" class="footer">
-        <?php echo FOOTER_TEXT_BODY;?>
-      </div>
-      <!-- end #footer -->
-      
-      <!-- begin scroll to top btn -->
-      <a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top">
-        <i class="fa fa-angle-up"></i>
-      </a>
-      <!-- end scroll to top btn -->
-    </div>
-    <!-- end page container -->
-       
-    <!-- ================== BEGIN BASE JS ================== -->
-    <script src="assets/plugins/jquery/jquery-1.9.1.min.js"></script>
-    <script src="assets/plugins/jquery/jquery-migrate-1.1.0.min.js"></script>
-    <script src="assets/plugins/jquery-ui/ui/minified/jquery-ui.min.js"></script>
-    <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-    <!--[if lt IE 9]>
-        <script src="assets/crossbrowserjs/html5shiv.js"></script>
-        <script src="assets/crossbrowserjs/respond.min.js"></script>
-        <script src="assets/crossbrowserjs/excanvas.min.js"></script>
-    <![endif]-->
-    <script src="assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-    <script src="assets/plugins/jquery-cookie/jquery.cookie.js"></script>
-    <!-- ================== END BASE JS ================== -->
-    
-    <!-- ================== BEGIN PAGE LEVEL JS ================== -->
-    <script src="assets/js/apps.min.js"></script>
-    <!-- ================== END PAGE LEVEL JS ================== -->
-    
-    <script>
-        $(document).ready(function() {
-            App.init();
-        });
-    </script>
-    <?php
-// RCI top
-echo $cre_RCI->get('index', 'bottom'); 
+  <?php
+  require(DIR_WS_INCLUDES . 'footer.php');
+  // RCI include right admin blocks
+  echo $cre_RCI->get('index', 'bottom');
 ?>
-    <?php require(DIR_WS_INCLUDES . 'application_bottom.php'); ?>
-
-
 
 </body>
 </html>
+<?php require(DIR_WS_INCLUDES . 'application_bottom.php'); ?>

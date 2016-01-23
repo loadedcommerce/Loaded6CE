@@ -206,7 +206,7 @@
     } elseif (tep_not_null($value)) {
       $field .= ' value="' . tep_output_string($value) . '"';
     }
-
+    $field .= ' class="form-control" ';
     if (tep_not_null($parameters)) $field .= ' ' . $parameters;
 
     $field .= '>';

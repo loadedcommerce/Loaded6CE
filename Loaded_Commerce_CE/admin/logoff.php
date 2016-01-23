@@ -90,11 +90,10 @@ unset($_SESSION['login_groups_id']);
         <script src="assets/crossbrowserjs/excanvas.min.js"></script>
     <![endif]-->
     <script src="assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-    <script src="assets/plugins/jquery-cookie/jquery.cookie.js"></script>
     <!-- ================== END BASE JS ================== -->
     
     <!-- ================== BEGIN PAGE LEVEL JS ================== -->
-    <script src="assets/js/login-v2.demo.min.js"></script>
+
     <script src="assets/js/apps.min.js"></script>
     <!-- ================== END PAGE LEVEL JS ================== -->
 
