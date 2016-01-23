@@ -12,14 +12,12 @@
 */
 ?>
 <!-- tools //-->
-          <tr>
-            <td>
 <?php
 $heading = array();
 $contents = array();
 $heading[] = array('text'  => BOX_HEADING_TOOLS,
                    'link'  => tep_href_link(FILENAME_BACKUP_MYSQL, 'selected_box=tools'));
-if ($_SESSION['selected_box'] == 'tools' || MENU_DHTML == 'True') {
+
   //RCI to include links
   $returned_rci_top = $cre_RCI->get('tools', 'boxestop');
   $returned_rci_bottom = $cre_RCI->get('tools', 'boxesbottom');
@@ -33,10 +31,8 @@ if ($_SESSION['selected_box'] == 'tools' || MENU_DHTML == 'True') {
                                  tep_admin_files_boxes(FILENAME_SERVER_INFO, BOX_TOOLS_SERVER_INFO, 'SSL','','2') . 
                                  tep_admin_files_boxes(FILENAME_WHOS_ONLINE, BOX_TOOLS_WHOS_ONLINE, 'SSL','','2') .
                                  $returned_rci_bottom);
-  }
+
   $box = new box;
   echo $box->menuBox($heading, $contents);
 ?>
-            </td>
-          </tr>
 <!-- tools_eof //-->

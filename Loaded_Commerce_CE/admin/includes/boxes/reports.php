@@ -12,14 +12,12 @@
 */
 ?>
 <!-- reports //-->
-          <tr>
-            <td>
 <?php
 $heading = array();
 $contents = array();
 $heading[] = array('text'  => BOX_HEADING_REPORTS,
                    'link'  => tep_href_link(FILENAME_STATS_PRODUCTS_VIEWED, 'selected_box=reports'));
-if ($_SESSION['selected_box'] == 'reports' || MENU_DHTML == 'True') {
+
   //RCI to include links 
   $returned_rci_top = $cre_RCI->get('reports', 'boxestop');
   $returned_rci_bottom = $cre_RCI->get('reports', 'boxesbottom');
@@ -55,10 +53,8 @@ if ($_SESSION['selected_box'] == 'reports' || MENU_DHTML == 'True') {
                                  $returned_rci_bottom5 .
                                  tep_admin_files_boxes(FILENAME_STATS_MONTHLY_SALES, BOX_REPORTS_MONTHLY_SALES, 'SSL','','2') .
                                  $returned_rci_bottom6);  
-  }
+
   $box = new box;
   echo $box->menuBox($heading, $contents);
 ?>
-            </td>
-          </tr>
 <!-- reports_eof //-->

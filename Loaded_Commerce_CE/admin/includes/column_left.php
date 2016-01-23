@@ -1,6 +1,6 @@
 <?php
 /*
-  $Id: column_left.php,v 1.1 2008/06/11 00:18:17 datazen Exp $
+  $Id: column_left.php,v 2.1 2015/06/11 00:18:17 Kiran Exp $
 
   CRE Loaded, Open Source E-Commerce Solutions
   http://www.creloaded.com
@@ -10,73 +10,66 @@
 
   Released under the GNU General Public License
 */
-if (MENU_DHTML == 'False') {
+
+  $SideBoxFiles = array(array('catalog', 'catalog.php', BOX_HEADING_CATALOG,'fa-tasks'),
+                        array('configuration', 'configuration.php', BOX_HEADING_CONFIGURATION,'fa-gear'),
+                        array('customers', 'customers.php' , BOX_HEADING_CUSTOMERS,'fa-users'),
+                        array('marketing', 'marketing.php', BOX_HEADING_MARKETING,'fa-signal'),
+                        array('gv_admin', 'gv_admin.php' , BOX_HEADING_GV_ADMIN,'fa-gift'),
+                        array('reports', 'reports.php' , BOX_HEADING_REPORTS,'fa-bar-chart-o'),
+                        array('data', 'data.php' , BOX_HEADING_DATA,'fa-database'),
+                        array('information', 'information.php', BOX_HEADING_INFORMATION,'fa-info'),
+                        array('articles', 'articles.php' , BOX_HEADING_ARTICLES,'fa-book'),
+                        array('design_controls' , 'design_controls.php' , BOX_HEADING_DESIGN_CONTROLS,'fa-archive'),
+                        array('links', 'links.php' , BOX_HEADING_LINKS,'fa-external-link-square'),
+                        array('modules', 'modules.php' , BOX_HEADING_MODULES,'fa-cubes'),
+                        array('taxes', 'taxes.php' , BOX_HEADING_LOCATION_AND_TAXES,'fa-bank'),
+                        array('localization', 'localization.php' , BOX_HEADING_LOCALIZATION,'fa-language'),
+                        array('tools','tools.php',BOX_HEADING_TOOLS,'fa-wrench')
+                        );
   ?>
-  <td valign="top" class="menu-container" width="200"><table border="0" cellspacing="0" cellpadding="0" width="100%" class="columnLeft menu-table">
-    <?php
-    if (tep_admin_check_boxes('administrator.php') == true) {
-      require(DIR_WS_BOXES . 'administrator.php');
-    }
-    if (tep_admin_check_boxes('configuration.php') == true) {
-      require(DIR_WS_BOXES . 'configuration.php');
-    }
-    if (tep_admin_check_boxes('catalog.php') == true) {
-      require(DIR_WS_BOXES . 'catalog.php');
-    }
-    if (tep_admin_check_boxes('customers.php') == true) {
-      require(DIR_WS_BOXES . 'customers.php');
-    }
-    if (tep_admin_check_boxes('marketing.php') == true) {
-      require(DIR_WS_BOXES . 'marketing.php');
-    }
-    if (tep_admin_check_boxes('gv_admin.php') == true) {
-      require(DIR_WS_BOXES . 'gv_admin.php');
-    }
-    if (tep_admin_check_boxes('reports.php') == true) {
-      require(DIR_WS_BOXES . 'reports.php');
-    }
-    if (tep_admin_check_boxes('data.php') == true) {
-      require(DIR_WS_BOXES . 'data.php');
-    }
-    if (tep_admin_check_boxes('information.php') == true) {
-      require(DIR_WS_BOXES . 'information.php');
-    }
-    if (tep_admin_check_boxes('articles.php') == true) {
-      require(DIR_WS_BOXES . 'articles.php');
-    }
-    if (tep_admin_check_boxes('design_controls.php') == true) {
-      require(DIR_WS_BOXES . 'design_controls.php');
-    }
-    // RCI include RCI menus
-    echo $cre_RCI->get('boxes', 'menu');
-   
-    if (tep_admin_check_boxes('links.php') == true) {
-      require(DIR_WS_BOXES . 'links.php');
-    }
-    if (tep_admin_check_boxes('modules.php') == true) {
-      require(DIR_WS_BOXES . 'modules.php');
-    }
-    if (tep_admin_check_boxes('taxes.php') == true) {
-      require(DIR_WS_BOXES . 'taxes.php');
-    }
-    if (tep_admin_check_boxes('localization.php') == true) {
-      require(DIR_WS_BOXES . 'localization.php');
-    }
-    if (tep_admin_check_boxes('tools.php') == true) {
-      require(DIR_WS_BOXES . 'tools.php');
-    }
-    if (file_exists('includes/boxes/newsdesk.php')) {
-       if (tep_admin_check_boxes('newsdesk.php') == true) {
-         require(DIR_WS_BOXES . 'newsdesk.php');
-       }
-    }
-    if (file_exists('includes/boxes/faqdesk.php')) {
-      if (tep_admin_check_boxes('faqdesk.php') == true) {
-        require(DIR_WS_BOXES . 'faqdesk.php');
-      }
-    }
-    ?>
-  </table></td>
-  <?php
-}
-?>
+    <!-- begin #sidebar -->
+    <div id="sidebar" class="sidebar">
+      <!-- begin sidebar scrollbar -->
+      <div data-scrollbar="true" data-height="100%">
+        <!-- begin sidebar user -->
+        <ul class="nav">
+          <li class="nav-profile">
+            <div class="image">
+              <a href="javascript:;"><img src="assets/img/user-11.jpg" alt="" /></a>
+            </div>
+            <div class="info">
+              <?php echo $store_admin_name;?>
+            </div>
+          </li>
+        </ul>
+        <!-- end sidebar user -->
+        <!-- begin sidebar nav -->
+        <ul class="nav">
+          <li class="nav-header">Navigation</li>
+          <li>
+            <a href="<?php echo tep_href_link(FILENAME_INDEX,'','SSL');?>"><i class="fa fa-laptop"></i> <span>Dashboard</span></a>
+          </l>
+          <?php
+          foreach($SideBoxFiles as $item_menu) {
+              if (tep_admin_check_boxes($item_menu[1]) == true) {
+                  echo '<li class="has-sub">
+                        <a href="javascript:;">
+                            <i class="fa '.$item_menu[3]. '"></i> 
+                            <b class="caret pull-right"></b>
+                            <span>'.$item_menu[2]. '</span> 
+                        </a>';
+                  require(DIR_WS_BOXES . $item_menu[1]);
+              }
+          }
+          ?>
+          <!-- begin sidebar minify button -->
+          <li><a href="javascript:;" class="sidebar-minify-btn" data-click="sidebar-minify"><i class="fa fa-angle-double-left"></i></a></li>
+          <!-- end sidebar minify button -->
+        </ul>
+        <!-- end sidebar nav -->
+      </div>
+      <!-- end sidebar scrollbar -->
+    </div>
+    <div class="sidebar-bg"></div>
+    <!-- end #sidebar -->

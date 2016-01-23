@@ -12,14 +12,12 @@
 */
 ?>
 <!-- data //-->
-          <tr>
-            <td>
 <?php
 $heading = array();
 $contents = array();
 $heading[] = array('text'  => BOX_HEADING_DATA,
                    'link'  => tep_href_link(FILENAME_EASYPOPULATE_EXPORT, 'selected_box=data'));
-if ($_SESSION['selected_box'] == 'data' || MENU_DHTML == 'True') {
+
   //RCI to include links  
   $returned_rci_top = $cre_RCI->get('data', 'boxestop');
   $returned_rci_bottom = $cre_RCI->get('data', 'boxesbottom');
@@ -46,10 +44,8 @@ if ($_SESSION['selected_box'] == 'data' || MENU_DHTML == 'True') {
                                  //tep_admin_files_boxes(FILENAME_GOOGLE_ADMIN, BOX_FEEDERS_GOOGLE, 'NONSSL','','2') .
                                  tep_admin_files_boxes(FILENAME_DATA, BOX_DATA_HELP, 'NONSSL','','2') .
                                  $returned_rci_bottom);
-  }
+
   $box = new box;
   echo $box->menuBox($heading, $contents);
 ?>
-            </td>
-          </tr>
 <!-- data_eof //-->

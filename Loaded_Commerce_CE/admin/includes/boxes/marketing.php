@@ -12,14 +12,12 @@
 */
 ?>
 <!-- marketing //-->
-          <tr>
-            <td>
 <?php
 $heading = array();
 $contents = array();
 $heading[] = array('text'  => BOX_HEADING_MARKETING,
                    'link'  => tep_href_link(FILENAME_BANNER_MANAGER, 'selected_box=marketing'));
-if ($_SESSION['selected_box'] == 'marketing' || MENU_DHTML == 'True') {
+
   //RCI to include links  
   $returned_rci_top = $cre_RCI->get('marketing', 'boxestop');
   $returned_rci_bottom = $cre_RCI->get('marketing', 'boxesbottom');
@@ -29,10 +27,8 @@ if ($_SESSION['selected_box'] == 'marketing' || MENU_DHTML == 'True') {
                                  tep_admin_files_boxes(FILENAME_SPECIALSBYCAT, BOX_MARKETING_SPECIALSBYCAT, 'SSL', '', '2') .
                                  tep_admin_files_boxes(FILENAME_NEWSLETTERS, BOX_TOOLS_NEWSLETTER_MANAGER, 'SSL', '', '2') .
                                  $returned_rci_bottom);
-  }
+
   $box = new box;
   echo $box->menuBox($heading, $contents);
 ?>
-            </td>
-          </tr>
 <!-- marketing_eof //-->

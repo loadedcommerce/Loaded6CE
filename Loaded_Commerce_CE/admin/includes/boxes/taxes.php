@@ -12,14 +12,12 @@
 */
 ?>
 <!-- taxes //-->
-          <tr>
-            <td>
 <?php
 $heading = array();
 $contents = array();
 $heading[] = array('text'  => BOX_HEADING_LOCATION_AND_TAXES,
                    'link'  => tep_href_link(FILENAME_COUNTRIES, 'selected_box=taxes'));
-if ($_SESSION['selected_box'] == 'taxes' || MENU_DHTML == 'True') {
+
   //RCI to include links  
   $returned_rci_top = $cre_RCI->get('taxes', 'boxestop');
   $returned_rci_bottom = $cre_RCI->get('taxes', 'boxesbottom');
@@ -30,10 +28,8 @@ if ($_SESSION['selected_box'] == 'taxes' || MENU_DHTML == 'True') {
                                  tep_admin_files_boxes(FILENAME_TAX_CLASSES, BOX_TAXES_TAX_CLASSES, 'SSL','','2') .
                                  tep_admin_files_boxes(FILENAME_TAX_RATES, BOX_TAXES_TAX_RATES, 'SSL','','2') .
                                  $returned_rci_bottom);
-  }
+
   $box = new box;
   echo $box->menuBox($heading, $contents);
 ?>
-            </td>
-          </tr>
 <!-- taxes_eof //-->

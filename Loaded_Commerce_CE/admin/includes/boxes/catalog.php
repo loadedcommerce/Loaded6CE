@@ -12,14 +12,12 @@
 */
 ?>
 <!-- catalog //-->
-          <tr>
-            <td>
 <?php
 $heading = array();
 $contents = array();
 $heading[] = array('text'  => BOX_HEADING_CATALOG,
                    'link'  => tep_href_link(FILENAME_CATEGORIES, 'selected_box=catalog'));
-if ($_SESSION['selected_box'] == 'catalog' || MENU_DHTML == 'True') {
+
   // RCO start
   if ($cre_RCO->get('categories', 'columnleft') !== true) {     
     //RCI to include links  
@@ -39,10 +37,8 @@ if ($_SESSION['selected_box'] == 'catalog' || MENU_DHTML == 'True') {
                                    $returned_rci_bottom);                                     
   }
   // RCO eof
-}
+
 $box = new box;
 echo $box->menuBox($heading, $contents);
 ?>
-            </td>
-          </tr>
 <!-- catalog_eof //-->

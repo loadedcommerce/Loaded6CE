@@ -54,42 +54,17 @@
     function menuBox($heading, $contents) {
 
     global $selected;              // add for dhtml_menu
-    if (MENU_DHTML == 'False' ) {     // add for dhtml_menu
-
-      if ($contents) {
-        $this->table_data_parameters = 'class="menuBoxHeading menuBoxHeadingSelected"';
-    } else {
-        $this->table_data_parameters = 'class="menuBoxHeading"';
-    }
-      if (isset($heading[0]['link']) && $heading[0]['link']) {
-        $this->table_data_parameters .= ' onmouseover="this.style.cursor=\'hand\'" onclick="document.location.href=\'' . $heading[0]['link'] . '\'"';
-        $heading[0]['text'] = '<a href="' . $heading[0]['link'] . '" class="menuBoxHeadingLink">' . $heading[0]['text'] . '</a>';
-      } else {
-        $heading[0]['text'] = '' . $heading[0]['text'] . '';
-      }
-      $this->heading = $this->tableBlock($heading);
-      $this->table_data_parameters = 'class="menuBoxContent"';
-      $this->contents = $this->tableBlock($contents);
-      if ($contents) {
-        return $this->heading . $this->contents;
-    } else {
-      return $this->heading;
-    }
-// ## add for dhtml_menu
-    } else {
-     // populate $selected variable
+   // populate $selected variable
     //trim everthing left selected box
       $selected1 = substr(strstr($heading[0]['link'], 'selected_box='), 13);
       //if sid is present remove it
       $selected = str_replace(strstr($selected1, '&osCAdminID='), '', $selected1 );
-      
       $dhtml_contents = $contents[0]['text'];
-      $change_style = array ('<br>'=>' ','<br>'=>' ', 'a href='=> 'a class="menuItem" href=','class="menuBoxContentLink"'=>' ');
+      //$change_style = array ('<br>'=>' ','<br>'=>' ', 'a href='=> 'a class="menuItem" href=','class="menuBoxContentLink"'=>' ');
+      $change_style = array ('<br>'=>' ','<br>'=>' ','class="menuBoxContentLink"'=>'', '<nobr>' => '', '</nobr>' => '');
       $dhtml_contents = strtr($dhtml_contents,$change_style);
-      $dhtml_contents = '<div id="'.$selected.'Menu" class="menu">'. $dhtml_contents . '</div>';
+      $dhtml_contents = '<ul id="'.$selected.'Menu" class="sub-menu">' . "\n" .  $dhtml_contents . '</ul></li>';
       return $dhtml_contents;
-      }
-// ## eof add for dhtml_menu
     }
         function menuBox2($heading, $contents) {
     

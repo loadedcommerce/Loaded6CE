@@ -150,12 +150,12 @@ function tep_admin_files_boxes ($filename = '', $sub_box_name = '', $connection 
     if ( $_SESSION['login_groups_id'] != 1 ) {
       $dbquery = tep_db_query("select admin_files_name from " . TABLE_ADMIN_FILES . " where FIND_IN_SET( '" . $_SESSION['login_groups_id'] . "', admin_groups_id) and admin_files_is_boxes = '0' and admin_files_name = '" . $filename . "'");
       if (tep_db_num_rows($dbquery)) {
-        $sub_boxes = '<a href="' . tep_href_link($filename, $parameters, $connection) . '" class="menuBoxContentLink"><nobr>' . $sub_box_name . '</nobr></a><br>';
+        $sub_boxes = '<li><a href="' . tep_href_link($filename, $parameters, $connection) . '">' . $sub_box_name . '</a></li>' . "\n";
       } else if ( (tep_db_num_rows($dbquery)) || ($connection == '') ) {
-        $sub_boxes = '<a href="' . tep_href_link($filename, $parameters, $connection) . '" class="menuBoxContentLink"><nobr>' . $sub_box_name . '</nobr></a><br>';
+        $sub_boxes = '<li><a href="' . tep_href_link($filename, $parameters, $connection) . '">' . $sub_box_name . '</a></li>' . "\n";
       }
     } else {
-      $sub_boxes = '<a href="' . tep_href_link($filename, $parameters, $connection) . '" class="menuBoxContentLink"><nobr>' . $sub_box_name . '</nobr></a><br>';
+      $sub_boxes = '<li><a href="' . tep_href_link($filename, $parameters, $connection) . '">' . $sub_box_name . '</a></li>' . "\n";
     }
   } else  if ($filename == ''){
     $sub_boxes = '<div class="menuBoxSubhead"><nobr>' . $sub_box_name . '</nobr></div>';

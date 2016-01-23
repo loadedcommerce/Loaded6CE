@@ -12,14 +12,12 @@
 */
 ?>
 <!-- customers //-->
-          <tr>
-            <td>
 <?php
 $heading = array();
 $contents = array();
 $heading[] = array('text'  => BOX_HEADING_CUSTOMERS,
                    'link'  => tep_href_link(FILENAME_ORDERS, 'selected_box=customers', 'SSL'));
-if ($_SESSION['selected_box'] == 'customers' || MENU_DHTML == 'True') {
+
   // RCO start
   if ($cre_RCO->get('customers', 'columnleft') !== true) {   
     //RCI to include links  
@@ -40,10 +38,8 @@ if ($_SESSION['selected_box'] == 'customers' || MENU_DHTML == 'True') {
                                    $returned_rci_customers_bottom);
     }
     // RCO eof
-  }
+
   $box = new box;
   echo $box->menuBox($heading, $contents);
 ?>
-            </td>
-          </tr>
 <!-- customers_eof //-->
