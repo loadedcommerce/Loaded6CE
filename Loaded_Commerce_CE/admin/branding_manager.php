@@ -62,6 +62,14 @@
            $store_brand_support_phone = (isset($_POST['store_brand_support_phone' . $languages[$i]['id']]) ? $_POST['store_brand_support_phone' . $languages[$i]['id']] : '');
            $store_brand_image_existing = (isset($_POST['store_brand_image_existing' . $languages[$i]['id']]) ? $_POST['store_brand_image_existing' . $languages[$i]['id']] : '');
            $delete_image = (isset($_POST['delete_image' . $languages[$i]['id']]) ? $_POST['delete_image' . $languages[$i]['id']] : '');
+
+           $facebook_link = (isset($_POST['facebook_link' . $languages[$i]['id']]) ? $_POST['facebook_link' . $languages[$i]['id']] : '');
+           $twitter_link = (isset($_POST['twitter_link' . $languages[$i]['id']]) ? $_POST['twitter_link' . $languages[$i]['id']] : '');
+           $pinterest_link = (isset($_POST['pinterest_link' . $languages[$i]['id']]) ? $_POST['pinterest_link' . $languages[$i]['id']] : '');
+           $google_link = (isset($_POST['google_link' . $languages[$i]['id']]) ? $_POST['google_link' . $languages[$i]['id']] : '');
+           $youtube_link = (isset($_POST['youtube_link' . $languages[$i]['id']]) ? $_POST['youtube_link' . $languages[$i]['id']] : '');
+           $linkedin_link = (isset($_POST['linkedin_link' . $languages[$i]['id']]) ? $_POST['linkedin_link' . $languages[$i]['id']] : '');
+           $store_brand_address = (isset($_POST['store_brand_address' . $languages[$i]['id']]) ? $_POST['store_brand_address' . $languages[$i]['id']] : '');
            
            //delete image
            $deleted_image = false;
@@ -98,6 +106,13 @@
                                         'store_brand_name' => tep_db_prepare_input($store_brand_name),
                                         'store_brand_support_email' => tep_db_prepare_input($store_brand_support_email),
                                         'store_brand_support_phone' => tep_db_prepare_input($store_brand_support_phone),
+                                        'store_brand_address' => tep_db_prepare_input($store_brand_address),
+                                        'facebook_link' => tep_db_prepare_input($facebook_link),
+                                        'twitter_link' => tep_db_prepare_input($twitter_link),
+                                        'pinterest_link' => tep_db_prepare_input($pinterest_link),
+                                        'google_link' => tep_db_prepare_input($google_link),
+                                        'youtube_link' => tep_db_prepare_input($youtube_link),
+                                        'linkedin_link' => tep_db_prepare_input($linkedin_link),
                                         'language_id' => tep_db_input($languages[$i]['id'])
                                         );
                cre_db_update(TABLE_BRANDING_DESCRIPTION, $sql_data_array);
@@ -268,6 +283,35 @@ $store_brand_info = tep_db_fetch_array($store_brand_info_qry);
           <tr>
             <td><?php echo STORE_BRAND_BRANDING_SUPPORT_PHONE; ?></td>
             <td><?php echo tep_draw_input_field('store_brand_support_phone' . $languages[$i]['id'],$store_brand_info['store_brand_support_phone'],'class="form-control"'); ?></td>
+          </tr>
+          <tr>
+            <td class="main"><?php echo STORE_BRAND_BRANDING_ADDRESS; ?></td>
+            <td class="main"><?php echo tep_draw_textarea_field('store_brand_address' . $languages[$i]['id'],true, 40, 10, $store_brand_info['store_brand_address']); ?></td>
+          </tr>
+
+          <tr>
+            <td class="main"><?php echo STORE_BRAND_BRANDING_FACEBOOK_LINK; ?></td>
+            <td class="main"><?php echo tep_draw_input_field('facebook_link' . $languages[$i]['id'],$store_brand_info['facebook_link']); ?></td>
+          </tr>
+          <tr>
+            <td class="main"><?php echo STORE_BRAND_BRANDING_TWITTER_LINK; ?></td>
+            <td class="main"><?php echo tep_draw_input_field('twitter_link' . $languages[$i]['id'],$store_brand_info['twitter_link']); ?></td>
+          </tr>
+          <tr>
+            <td class="main"><?php echo STORE_BRAND_BRANDING_PINTEREST_LINK; ?></td>
+            <td class="main"><?php echo tep_draw_input_field('pinterest_link' . $languages[$i]['id'],$store_brand_info['pinterest_link']); ?></td>
+          </tr>
+          <tr>
+            <td class="main"><?php echo STORE_BRAND_BRANDING_GOOGLEPLUS_LINK; ?></td>
+            <td class="main"><?php echo tep_draw_input_field('google_link' . $languages[$i]['id'],$store_brand_info['google_link']); ?></td>
+          </tr>
+          <tr>
+            <td class="main"><?php echo STORE_BRAND_BRANDING_YOUTUBE_LINK; ?></td>
+            <td class="main"><?php echo tep_draw_input_field('youtube_link' . $languages[$i]['id'],$store_brand_info['youtube_link']); ?></td>
+          </tr>
+          <tr>
+            <td class="main"><?php echo STORE_BRAND_BRANDING_LINKEDIN_LINK; ?></td>
+            <td class="main"><?php echo tep_draw_input_field('linkedin_link' . $languages[$i]['id'],$store_brand_info['linkedin_link']); ?></td>
           </tr>
 
           </table>
