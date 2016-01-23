@@ -334,9 +334,6 @@ echo $cre_RCI->get('orders', 'javascript');
           echo $cre_RCI->get('orders', 'transaction'); 
 ?>
 </table>
-<?php
-  require(DIR_WS_MODULES . 'afs_v1.0/algo_fraud_screener.php');
-?> 
         </td>
       </tr>
       <tr>

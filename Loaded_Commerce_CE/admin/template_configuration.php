@@ -438,10 +438,6 @@ case 'insert':
   }
 ?>
               <tr>
-                <td colspan="5"><?php //require('includes/modules/ez_installer/template_installer.php'); ?>
-                </td>
-              </tr>
-              <tr>
                 <td><?php
 // as more error messages are added this will change into a case statement
 //if ($error == 'error1'){
