@@ -59,7 +59,7 @@ unset($_SESSION['login_groups_id']);
             <!-- begin brand -->
             <div class="login-header">
                 <div class="brand">
-                    <span class="logo"></span> Admin Login
+                    <span class="logo-sm"><img src="images/logo-sm.png" border="0"></span> Admin Login
                     <small><a href="http://www.loadedcommerce.com/" target="_blank"><?php echo PROJECT_VERSION; ?></a> | <a href="<?php echo HTTP_CATALOG_SERVER . DIR_WS_HTTP_CATALOG; ?>" target="_blank"><?php echo TEXT_VIEW_CATALOG; ?></a></small>
                 </div>
                 <div class="icon">
