@@ -22,11 +22,11 @@ $heading[] = array('text'  => BOX_HEADING_GV_ADMIN,
   $returned_rci_top = $cre_RCI->get('gvadmin', 'boxestop');
   $returned_rci_bottom = $cre_RCI->get('gvadmin', 'boxesbottom');
   $contents[] = array('text'  => $returned_rci_top .
-                                 tep_admin_files_boxes(FILENAME_COUPON_ADMIN , BOX_COUPON_ADMIN, 'SSL','','2') .
-                                 tep_admin_files_boxes(FILENAME_GV_REPORT , BOX_GV_REPORT, 'SSL','','2') .
-                                 tep_admin_files_boxes(FILENAME_GV_QUEUE , BOX_GV_ADMIN_QUEUE, 'SSL','','2') .
-                                 tep_admin_files_boxes(FILENAME_GV_MAIL , BOX_GV_ADMIN_MAIL, 'SSL','','2') .
-                                 tep_admin_files_boxes(FILENAME_GV_SENT , BOX_GV_ADMIN_SENT, 'SSL','','2') .
+                                 tep_admin_files_boxes(FILENAME_COUPON_ADMIN , BOX_COUPON_ADMIN, 'SSL','selected_box=gv_admin','2') .
+                                 tep_admin_files_boxes(FILENAME_GV_REPORT , BOX_GV_REPORT, 'SSL','selected_box=gv_admin','2') .
+                                 tep_admin_files_boxes(FILENAME_GV_QUEUE , BOX_GV_ADMIN_QUEUE, 'SSL','selected_box=gv_admin','2') .
+                                 tep_admin_files_boxes(FILENAME_GV_MAIL , BOX_GV_ADMIN_MAIL, 'SSL','selected_box=gv_admin','2') .
+                                 tep_admin_files_boxes(FILENAME_GV_SENT , BOX_GV_ADMIN_SENT, 'SSL','selected_box=gv_admin','2') .
                                  $returned_rci_bottom);
 
   $box = new box;

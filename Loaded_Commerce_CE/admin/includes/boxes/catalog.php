@@ -24,16 +24,16 @@ $heading[] = array('text'  => BOX_HEADING_CATALOG,
     $returned_rci_top = $cre_RCI->get('catalog', 'boxestop');
     $returned_rci_bottom = $cre_RCI->get('catalog', 'boxesbottom');
     $contents[] = array('text'  => $returned_rci_top .
-                                   tep_admin_files_boxes(FILENAME_CATEGORIES, BOX_CATALOG_CATEGORIES_PRODUCTS, 'SSL','','2') .
-                                   tep_admin_files_boxes(FILENAME_PRODUCTS_ATTRIBUTES, BOX_CATALOG_CATEGORIES_PRODUCTS_ATTRIBUTES, 'SSL','','2') .
-                                   tep_admin_files_boxes(FILENAME_PRODUCTS_MULTI, BOX_CATALOG_CATEGORIES_PRODUCTS_MULTI, 'SSL','','2') .
-                                   tep_admin_files_boxes(FILENAME_MANUFACTURERS, BOX_CATALOG_MANUFACTURERS, 'SSL','','2') .
-                                   tep_admin_files_boxes(FILENAME_REVIEWS, BOX_CATALOG_REVIEWS, 'SSL','','2') .
-                                   tep_admin_files_boxes(FILENAME_SHOPBYPRICE, BOX_CATALOG_SHOP_BY_PRICE, 'SSL','','2') .
-                                   tep_admin_files_boxes(FILENAME_XSELL_PRODUCTS, BOX_CATALOG_XSELL_PRODUCTS, 'SSL','','2') .
-                                   tep_admin_files_boxes(FILENAME_FEATURED, BOX_CATALOG_FEATURED, 'SSL','','2') .
-                                   tep_admin_files_boxes(FILENAME_PRODUCTS_EXPECTED, BOX_CATALOG_PRODUCTS_EXPECTED, 'SSL','','2') .
-                                   tep_admin_files_boxes(FILENAME_PRODUCTS_EXTRA_FIELDS,BOX_CATALOG_PRODUCTS_EXTRA_FIELDS, 'SSL','','2') .
+                                   tep_admin_files_boxes(FILENAME_CATEGORIES, BOX_CATALOG_CATEGORIES_PRODUCTS, 'SSL','selected_box=catalog','2') .
+                                   tep_admin_files_boxes(FILENAME_PRODUCTS_ATTRIBUTES, BOX_CATALOG_CATEGORIES_PRODUCTS_ATTRIBUTES, 'SSL','selected_box=catalog','2') .
+                                   tep_admin_files_boxes(FILENAME_PRODUCTS_MULTI, BOX_CATALOG_CATEGORIES_PRODUCTS_MULTI, 'SSL','selected_box=catalog','2') .
+                                   tep_admin_files_boxes(FILENAME_MANUFACTURERS, BOX_CATALOG_MANUFACTURERS, 'SSL','selected_box=catalog','2') .
+                                   tep_admin_files_boxes(FILENAME_REVIEWS, BOX_CATALOG_REVIEWS, 'SSL','selected_box=catalog','2') .
+                                   tep_admin_files_boxes(FILENAME_SHOPBYPRICE, BOX_CATALOG_SHOP_BY_PRICE, 'SSL','selected_box=catalog','2') .
+                                   tep_admin_files_boxes(FILENAME_XSELL_PRODUCTS, BOX_CATALOG_XSELL_PRODUCTS, 'SSL','selected_box=catalog','2') .
+                                   tep_admin_files_boxes(FILENAME_FEATURED, BOX_CATALOG_FEATURED, 'SSL','selected_box=catalog','2') .
+                                   tep_admin_files_boxes(FILENAME_PRODUCTS_EXPECTED, BOX_CATALOG_PRODUCTS_EXPECTED, 'SSL','selected_box=catalog','2') .
+                                   tep_admin_files_boxes(FILENAME_PRODUCTS_EXTRA_FIELDS,BOX_CATALOG_PRODUCTS_EXTRA_FIELDS, 'SSL','selected_box=catalog','2') .
                                    $returned_rci_bottom);                                     
   }
   // RCO eof

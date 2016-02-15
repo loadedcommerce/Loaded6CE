@@ -22,11 +22,11 @@ $heading[] = array('text'  => BOX_HEADING_ARTICLES,
   $returned_rci_top = $cre_RCI->get('articles', 'boxestop');
   $returned_rci_bottom = $cre_RCI->get('articles', 'boxesbottom');
   $contents[] = array('text'  => $returned_rci_top .
-                                 tep_admin_files_boxes(FILENAME_ARTICLES,  BOX_TOPICS_ARTICLES, 'SSL','','2')  .
-                                 tep_admin_files_boxes(FILENAME_ARTICLES_CONFIG,  BOX_ARTICLES_CONFIG, 'SSL','','2')  .
-                                 tep_admin_files_boxes(FILENAME_AUTHORS, BOX_ARTICLES_AUTHORS, 'SSL','','2')  .
-                                 tep_admin_files_boxes(FILENAME_ARTICLE_REVIEWS,  BOX_ARTICLES_REVIEWS, 'SSL','','2')  .
-                                 tep_admin_files_boxes(FILENAME_ARTICLES_XSELL,  BOX_ARTICLES_XSELL, 'SSL','','2') .
+                                 tep_admin_files_boxes(FILENAME_ARTICLES,  BOX_TOPICS_ARTICLES, 'SSL','selected_box=articles','2')  .
+                                 tep_admin_files_boxes(FILENAME_ARTICLES_CONFIG,  BOX_ARTICLES_CONFIG, 'SSL','selected_box=articles','2')  .
+                                 tep_admin_files_boxes(FILENAME_AUTHORS, BOX_ARTICLES_AUTHORS, 'SSL','selected_box=articles','2')  .
+                                 tep_admin_files_boxes(FILENAME_ARTICLE_REVIEWS,  BOX_ARTICLES_REVIEWS, 'SSL','selected_box=articles','2')  .
+                                 tep_admin_files_boxes(FILENAME_ARTICLES_XSELL,  BOX_ARTICLES_XSELL, 'SSL','selected_box=articles','2') .
                                  $returned_rci_bottom);
 
   $box = new box;

@@ -22,9 +22,9 @@ $heading[] = array('text'  => BOX_HEADING_HEADER_TAGS_CONTROLLER,
   $returned_rci_top = $cre_RCI->get('headertagscontroller', 'boxestop');
   $returned_rci_bottom = $cre_RCI->get('headertagscontroller', 'boxesbottom');
   $contents[] = array('text'  => $returned_rci_top .
-                                 tep_admin_files_boxes(FILENAME_HEADER_TAGS_CONTROLLER, BOX_HEADER_TAGS_ADD_A_PAGE, 'SSL','','2') .
-                                 tep_admin_files_boxes(FILENAME_HEADER_TAGS_ENGLISH, BOX_HEADER_TAGS_ENGLISH, 'SSL','','2').
-                                 tep_admin_files_boxes(FILENAME_HEADER_TAGS_FILL_TAGS,  BOX_HEADER_TAGS_FILL_TAGS, 'SSL','','2') .
+                                 tep_admin_files_boxes(FILENAME_HEADER_TAGS_CONTROLLER, BOX_HEADER_TAGS_ADD_A_PAGE, 'SSL','selected_box=header tags','2') .
+                                 tep_admin_files_boxes(FILENAME_HEADER_TAGS_ENGLISH, BOX_HEADER_TAGS_ENGLISH, 'SSL','selected_box=header tags','2').
+                                 tep_admin_files_boxes(FILENAME_HEADER_TAGS_FILL_TAGS,  BOX_HEADER_TAGS_FILL_TAGS, 'SSL','selected_box=header tags','2') .
                                  $returned_rci_bottom);
 
   $box = new box;

@@ -29,20 +29,20 @@ $heading[] = array('text'  => BOX_HEADING_DATA,
   $contents[] = array('text'  => $returned_rci_top .
                                  tep_admin_files_boxes('', BOX_DATA_EASYPOPULATE) .
                                  $returned_rci_top2 .
-                                 tep_admin_files_boxes(FILENAME_EASYPOPULATE_EXPORT, BOX_DATA_EASYPOPULATE_EXPORT, 'NONSSL' , '', '2') .
-                                 tep_admin_files_boxes(FILENAME_EASYPOPULATE_IMPORT, BOX_DATA_EASYPOPULATE_IMPORT, 'NONSSL' , '', '2') .
-                                 tep_admin_files_boxes(FILENAME_EASYPOPULATE_OPTIONS_EXPORT, BOX_DATA_EASYPOPULATE_OPTIONS_EXPORT, 'NONSSL' , '', '2') .
-                                 tep_admin_files_boxes(FILENAME_EASYPOPULATE_OPTIONS_IMPORT, BOX_DATA_EASYPOPULATE_OPTIONS_IMPORT, 'NONSSL' , '', '2') .
+                                 tep_admin_files_boxes(FILENAME_EASYPOPULATE_EXPORT, BOX_DATA_EASYPOPULATE_EXPORT, 'NONSSL' , 'selected_box=data', '2') .
+                                 tep_admin_files_boxes(FILENAME_EASYPOPULATE_IMPORT, BOX_DATA_EASYPOPULATE_IMPORT, 'NONSSL' , 'selected_box=data', '2') .
+                                 tep_admin_files_boxes(FILENAME_EASYPOPULATE_OPTIONS_EXPORT, BOX_DATA_EASYPOPULATE_OPTIONS_EXPORT, 'NONSSL' , 'selected_box=data', '2') .
+                                 tep_admin_files_boxes(FILENAME_EASYPOPULATE_OPTIONS_IMPORT, BOX_DATA_EASYPOPULATE_OPTIONS_IMPORT, 'NONSSL' , 'selected_box=data', '2') .
                                  $returned_rci_bottom2 .
                                  tep_admin_files_boxes('', BOX_DATA_EASYPOPULATE_BASIC) .
                                  $returned_rci_top3 .
-                                 tep_admin_files_boxes(FILENAME_EASYPOPULATE_BASIC_EXPORT, BOX_DATA_EASYPOPULATE_BASIC_EXPORT, 'NONSSL' , '', '2') .
-                                 tep_admin_files_boxes(FILENAME_EASYPOPULATE_BASIC_IMPORT, BOX_DATA_EASYPOPULATE_BASIC_IMPORT, 'NONSSL' , '', '2') .
+                                 tep_admin_files_boxes(FILENAME_EASYPOPULATE_BASIC_EXPORT, BOX_DATA_EASYPOPULATE_BASIC_EXPORT, 'NONSSL' , 'selected_box=data', '2') .
+                                 tep_admin_files_boxes(FILENAME_EASYPOPULATE_BASIC_IMPORT, BOX_DATA_EASYPOPULATE_BASIC_IMPORT, 'NONSSL' , 'selected_box=data', '2') .
                                  $returned_rci_bottom3 .
                                  tep_admin_files_boxes('', BOX_DATA) .
                                  $returned_rci_top4 .
                                  //tep_admin_files_boxes(FILENAME_GOOGLE_ADMIN, BOX_FEEDERS_GOOGLE, 'NONSSL','','2') .
-                                 tep_admin_files_boxes(FILENAME_DATA, BOX_DATA_HELP, 'NONSSL','','2') .
+                                 tep_admin_files_boxes(FILENAME_DATA, BOX_DATA_HELP, 'NONSSL','selected_box=data','2') .
                                  $returned_rci_bottom);
 
   $box = new box;

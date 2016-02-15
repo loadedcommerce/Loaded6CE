@@ -23,14 +23,14 @@ if (defined('PROJECT_VERSION') && preg_match('/6.2/', PROJECT_VERSION)) {
     $returned_rci_top = $cre_RCI->get('information', 'boxestop');
     $returned_rci_bottom = $cre_RCI->get('information', 'boxesbottom');
     $contents[] = array('text'  => $returned_rci_top . 
-                                   tep_admin_files_boxes(FILENAME_CDS_PAGE_MANAGER, BOX_CDS_PAGE_MANAGER, 'SSL', '', '0') . 
-                                   tep_admin_files_boxes(FILENAME_CDS_CONFIGURATION, BOX_CDS_CONFIGUARION, 'SSL', 'gID=480', '0') .
-                                   tep_admin_files_boxes(FILENAME_CDS_BACKUP_RESTORE, BOX_CDS_BACKUP_RESTORE, 'SSL' , '', '0') .
+                                   tep_admin_files_boxes(FILENAME_CDS_PAGE_MANAGER, BOX_CDS_PAGE_MANAGER, 'SSL', 'selected_box=information', '0') . 
+                                   tep_admin_files_boxes(FILENAME_CDS_CONFIGURATION, BOX_CDS_CONFIGUARION, 'SSL', 'selected_box=information&gID=480', '0') .
+                                   tep_admin_files_boxes(FILENAME_CDS_BACKUP_RESTORE, BOX_CDS_BACKUP_RESTORE, 'SSL' , 'selected_box=information', '0') .
                                    tep_admin_files_boxes('', BOX_CDS_FAQ) .
-                                   tep_admin_files_boxes(FILENAME_FAQ_MANAGER, BOX_FAQ_MANAGER, 'SSL' , '', '2') .
-                                   tep_admin_files_boxes(FILENAME_FAQ_CATEGORIES, BOX_FAQ_CATEGORIES, 'SSL' , '', '2') .
-                                   tep_admin_files_boxes(FILENAME_DEFINE_MAINPAGE, BOX_CATALOG_DEFINE_MAINPAGE, 'SSL', '', '0') .
-                                   tep_admin_files_boxes(FILENAME_INFORMATION_MANAGER, BOX_INFORMATION_MANAGER, 'SSL', '', '0')  .
+                                   tep_admin_files_boxes(FILENAME_FAQ_MANAGER, BOX_FAQ_MANAGER, 'SSL' , 'selected_box=information', '2') .
+                                   tep_admin_files_boxes(FILENAME_FAQ_CATEGORIES, BOX_FAQ_CATEGORIES, 'SSL' , 'selected_box=information', '2') .
+                                   tep_admin_files_boxes(FILENAME_DEFINE_MAINPAGE, BOX_CATALOG_DEFINE_MAINPAGE, 'SSL', 'selected_box=information', '0') .
+                                   tep_admin_files_boxes(FILENAME_INFORMATION_MANAGER, BOX_INFORMATION_MANAGER, 'SSL', 'selected_box=information', '0')  .
                                    $returned_rci_bottom);
     //RCI eof
       
@@ -39,13 +39,13 @@ if (defined('PROJECT_VERSION') && preg_match('/6.2/', PROJECT_VERSION)) {
     $returned_rci_top = $cre_RCI->get('information', 'boxestop');
     $returned_rci_bottom = $cre_RCI->get('information', 'boxesbottom');
     $contents[] = array('text'  => $returned_rci_top . 
-                                   tep_admin_files_boxes(FILENAME_CDS_PAGE_MANAGER, BOX_CDS_PAGE_MANAGER, 'SSL', '', '2') . 
-                                   tep_admin_files_boxes(FILENAME_CDS_CONFIGURATION, BOX_CDS_CONFIGUARION, 'SSL', 'gID=480', '2') .
-                                   tep_admin_files_boxes(FILENAME_CDS_BACKUP_RESTORE, BOX_CDS_BACKUP_RESTORE, 'SSL' , '', '2') .
+                                   tep_admin_files_boxes(FILENAME_CDS_PAGE_MANAGER, BOX_CDS_PAGE_MANAGER, 'SSL', 'selected_box=information', '2') . 
+                                   tep_admin_files_boxes(FILENAME_CDS_CONFIGURATION, BOX_CDS_CONFIGUARION, 'SSL', 'selected_box=information&gID=480', '2') .
+                                   tep_admin_files_boxes(FILENAME_CDS_BACKUP_RESTORE, BOX_CDS_BACKUP_RESTORE, 'SSL' , 'selected_box=information', '2') .
                                    tep_admin_files_boxes('', '&nbsp;&nbsp;' . BOX_CDS_FAQ) .
-                                   tep_admin_files_boxes(FILENAME_FAQ_MANAGER, BOX_FAQ_MANAGER, 'SSL' , '', '4') .
-                                   tep_admin_files_boxes(FILENAME_FAQ_CATEGORIES, BOX_FAQ_CATEGORIES, 'SSL' , '', '4') .
-                                   tep_admin_files_boxes(FILENAME_DEFINE_MAINPAGE, BOX_CATALOG_DEFINE_MAINPAGE, 'SSL', '', '2') .
+                                   tep_admin_files_boxes(FILENAME_FAQ_MANAGER, BOX_FAQ_MANAGER, 'SSL' , 'selected_box=information', '4') .
+                                   tep_admin_files_boxes(FILENAME_FAQ_CATEGORIES, BOX_FAQ_CATEGORIES, 'SSL' , 'selected_box=information', '4') .
+                                   tep_admin_files_boxes(FILENAME_DEFINE_MAINPAGE, BOX_CATALOG_DEFINE_MAINPAGE, 'SSL', 'selected_box=information', '2') .
                                    $returned_rci_bottom);
     //RCI eof
   } 

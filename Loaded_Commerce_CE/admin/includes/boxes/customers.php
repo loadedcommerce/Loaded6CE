@@ -26,15 +26,15 @@ $heading[] = array('text'  => BOX_HEADING_CUSTOMERS,
     $returned_rci_customers_top = $cre_RCI->get('customers', 'boxestop');
     $returned_rci_customers_bottom = $cre_RCI->get('customers', 'boxesbottom');
     $contents[] = array('text'  => $returned_rci_orders_top .
-                                   tep_admin_files_boxes(FILENAME_ORDERS, BOX_CUSTOMERS_ORDERS, 'SSL','','2') .
-                                   tep_admin_files_boxes(FILENAME_CREATE_ORDER, BOX_MANUAL_ORDER_CREATE_ORDER, 'SSL','','2') .
-                                   tep_admin_files_boxes(FILENAME_CREATE_ORDERS_ADMIN, BOX_CREATE_ORDERS_ADMIN, 'SSL','','2') .
+                                   tep_admin_files_boxes(FILENAME_ORDERS, BOX_CUSTOMERS_ORDERS, 'SSL','selected_box=customers','2') .
+                                   tep_admin_files_boxes(FILENAME_CREATE_ORDER, BOX_MANUAL_ORDER_CREATE_ORDER, 'SSL','selected_box=customers','2') .
+                                   tep_admin_files_boxes(FILENAME_CREATE_ORDERS_ADMIN, BOX_CREATE_ORDERS_ADMIN, 'SSL','selected_box=customers','2') .
                                    $returned_rci_orders_bottom .
                                    tep_admin_files_boxes('', BOX_CUSTOMERS_MENU) .
                                    $returned_rci_customers_top .
-                                   tep_admin_files_boxes(FILENAME_CUSTOMERS, BOX_CUSTOMERS_CUSTOMERS, 'SSL','','2') .
-                                   tep_admin_files_boxes(FILENAME_CREATE_ACCOUNT, BOX_MANUAL_ORDER_CREATE_ACCOUNT, 'SSL','','2') .
-                                   tep_admin_files_boxes(FILENAME_CRE_MARKETPLACE, BOX_CRE_MARKETPLACE, 'SSL','','2') .
+                                   tep_admin_files_boxes(FILENAME_CUSTOMERS, BOX_CUSTOMERS_CUSTOMERS, 'SSL','selected_box=customers','2') .
+                                   tep_admin_files_boxes(FILENAME_CREATE_ACCOUNT, BOX_MANUAL_ORDER_CREATE_ACCOUNT, 'SSL','selected_box=customers','2') .
+                                   tep_admin_files_boxes(FILENAME_CRE_MARKETPLACE, BOX_CRE_MARKETPLACE, 'SSL','selected_box=customers','2') .
                                    $returned_rci_customers_bottom);
     }
     // RCO eof

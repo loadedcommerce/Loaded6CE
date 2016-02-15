@@ -22,10 +22,10 @@ $heading[] = array('text'  => BOX_HEADING_FAQ,
   $returned_rci_top = $cre_RCI->get('faq', 'boxestop');
   $returned_rci_bottom = $cre_RCI->get('faq', 'boxesbottom');
   $contents[] = array('text'  => $returned_rci_top .
-                                 tep_admin_files_boxes(FILENAME_FAQ_MANAGER, BOX_FAQ_MANAGER, 'SSL','','2') .
-                                 tep_admin_files_boxes(FILENAME_FAQ_CATEGORIES, BOX_FAQ_CATEGORIES, 'SSL','','2') .
-                                 tep_admin_files_boxes(FILENAME_FAQ_VIEW, BOX_FAQ_VIEW, 'SSL','','2') .
-                                 tep_admin_files_boxes(FILENAME_FAQ_VIEW_ALL,BOX_FAQ_VIEW_ALL, 'SSL','','2') .
+                                 tep_admin_files_boxes(FILENAME_FAQ_MANAGER, BOX_FAQ_MANAGER, 'SSL','selected_box=faq','2') .
+                                 tep_admin_files_boxes(FILENAME_FAQ_CATEGORIES, BOX_FAQ_CATEGORIES, 'SSL','selected_box=faq','2') .
+                                 tep_admin_files_boxes(FILENAME_FAQ_VIEW, BOX_FAQ_VIEW, 'SSL','selected_box=faq','2') .
+                                 tep_admin_files_boxes(FILENAME_FAQ_VIEW_ALL,BOX_FAQ_VIEW_ALL, 'SSL','selected_box=faq','2') .
                                  $returned_rci_bottom);
 
 $box = new box;

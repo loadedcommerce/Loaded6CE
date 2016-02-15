@@ -22,11 +22,11 @@ $heading[] = array('text'  => BOX_HEADING_MODULES,
   $returned_rci_top = $cre_RCI->get('modules', 'boxestop');
   $returned_rci_bottom = $cre_RCI->get('modules', 'boxesbottom');
   $contents[] = array('text'  => $returned_rci_top .
-                                 tep_admin_files_boxes(FILENAME_MODULES, BOX_MODULES_PAYMENT, 'SSL' , 'set=payment', '2') .
-                                 tep_admin_files_boxes(FILENAME_MODULES, BOX_MODULES_SHIPPING, 'NONSSL' , 'set=shipping', '2') . 
-                                 tep_admin_files_boxes(FILENAME_MODULES, BOX_MODULES_ORDER_TOTAL, 'NONSSL' , 'set=ordertotal', '2') . 
-                                 tep_admin_files_boxes(FILENAME_MODULES, BOX_MODULES_CHECKOUT_SUCCESS, 'NONSSL' , 'set=checkout_success', '2') .
-                                 tep_admin_files_boxes(FILENAME_MODULES, BOX_MODULES_ADDONS, 'NONSSL' , 'set=addons', '2') .
+                                 tep_admin_files_boxes(FILENAME_MODULES, BOX_MODULES_PAYMENT, 'SSL' , 'set=payment&selected_box=modules', '2') .
+                                 tep_admin_files_boxes(FILENAME_MODULES, BOX_MODULES_SHIPPING, 'NONSSL' , 'set=shipping&selected_box=modules', '2') . 
+                                 tep_admin_files_boxes(FILENAME_MODULES, BOX_MODULES_ORDER_TOTAL, 'NONSSL' , 'set=ordertotal&selected_box=modules', '2') . 
+                                 tep_admin_files_boxes(FILENAME_MODULES, BOX_MODULES_CHECKOUT_SUCCESS, 'NONSSL' , 'set=checkout_success&selected_box=modules', '2') .
+                                 tep_admin_files_boxes(FILENAME_MODULES, BOX_MODULES_ADDONS, 'NONSSL' , 'set=addons&selected_box=modules', '2') .
                                  $returned_rci_bottom);
 
 $box = new box;

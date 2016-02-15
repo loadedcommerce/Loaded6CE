@@ -22,14 +22,14 @@ $heading[] = array('text'  => BOX_HEADING_TOOLS,
   $returned_rci_top = $cre_RCI->get('tools', 'boxestop');
   $returned_rci_bottom = $cre_RCI->get('tools', 'boxesbottom');
   $contents[] = array('text'  => $returned_rci_top .
-                                 tep_admin_files_boxes(FILENAME_BACKUP_MYSQL, BOX_TOOLS_MYSQL_BACKUP, 'SSL','','2') .
-                                 tep_admin_files_boxes(FILENAME_BACKUP,BOX_TOOLS_BACKUP, 'SSL','','2') .
-                                 tep_admin_files_boxes(FILENAME_CACHE, BOX_TOOLS_CACHE, 'SSL','','2') .
-                                 tep_admin_files_boxes(FILENAME_EDIT_LANGUAGES, BOX_TOOLS_DEFINE_LANGUAGE, 'SSL','','2') .
-                                 tep_admin_files_boxes(FILENAME_EMAIL_SUBJECTS, BOX_TOOLS_EMAIL_SUBJECTS, 'SSL','','2') .
-                                 tep_admin_files_boxes(FILENAME_MAIL, BOX_TOOLS_MAIL, 'SSL','','2') .
-                                 tep_admin_files_boxes(FILENAME_SERVER_INFO, BOX_TOOLS_SERVER_INFO, 'SSL','','2') . 
-                                 tep_admin_files_boxes(FILENAME_WHOS_ONLINE, BOX_TOOLS_WHOS_ONLINE, 'SSL','','2') .
+                                 tep_admin_files_boxes(FILENAME_BACKUP_MYSQL, BOX_TOOLS_MYSQL_BACKUP, 'SSL','selected_box=tools','2') .
+                                 tep_admin_files_boxes(FILENAME_BACKUP,BOX_TOOLS_BACKUP, 'SSL','selected_box=tools','2') .
+                                 tep_admin_files_boxes(FILENAME_CACHE, BOX_TOOLS_CACHE, 'SSL','selected_box=tools','2') .
+                                 tep_admin_files_boxes(FILENAME_EDIT_LANGUAGES, BOX_TOOLS_DEFINE_LANGUAGE, 'SSL','selected_box=tools','2') .
+                                 tep_admin_files_boxes(FILENAME_EMAIL_SUBJECTS, BOX_TOOLS_EMAIL_SUBJECTS, 'SSL','selected_box=tools','2') .
+                                 tep_admin_files_boxes(FILENAME_MAIL, BOX_TOOLS_MAIL, 'SSL','selected_box=tools','2') .
+                                 tep_admin_files_boxes(FILENAME_SERVER_INFO, BOX_TOOLS_SERVER_INFO, 'SSL','selected_box=tools','2') . 
+                                 tep_admin_files_boxes(FILENAME_WHOS_ONLINE, BOX_TOOLS_WHOS_ONLINE, 'SSL','selected_box=tools','2') .
                                  $returned_rci_bottom);
 
   $box = new box;

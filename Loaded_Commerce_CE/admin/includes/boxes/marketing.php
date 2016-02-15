@@ -22,10 +22,10 @@ $heading[] = array('text'  => BOX_HEADING_MARKETING,
   $returned_rci_top = $cre_RCI->get('marketing', 'boxestop');
   $returned_rci_bottom = $cre_RCI->get('marketing', 'boxesbottom');
   $contents[] = array('text'  => $returned_rci_top .
-                                 tep_admin_files_boxes(FILENAME_BANNER_MANAGER, BOX_MARKETING_BANNER_MANAGER, 'SSL', '', '2') .
-                                 tep_admin_files_boxes(FILENAME_SPECIALS, BOX_MARKETING_SPECIALS, 'SSL', '', '2') .
-                                 tep_admin_files_boxes(FILENAME_SPECIALSBYCAT, BOX_MARKETING_SPECIALSBYCAT, 'SSL', '', '2') .
-                                 tep_admin_files_boxes(FILENAME_NEWSLETTERS, BOX_TOOLS_NEWSLETTER_MANAGER, 'SSL', '', '2') .
+                                 tep_admin_files_boxes(FILENAME_BANNER_MANAGER, BOX_MARKETING_BANNER_MANAGER, 'SSL', 'selected_box=marketing', '2') .
+                                 tep_admin_files_boxes(FILENAME_SPECIALS, BOX_MARKETING_SPECIALS, 'SSL', 'selected_box=marketing', '2') .
+                                 tep_admin_files_boxes(FILENAME_SPECIALSBYCAT, BOX_MARKETING_SPECIALSBYCAT, 'SSL', 'selected_box=marketing', '2') .
+                                 tep_admin_files_boxes(FILENAME_NEWSLETTERS, BOX_TOOLS_NEWSLETTER_MANAGER, 'SSL', 'selected_box=marketing', '2') .
                                  $returned_rci_bottom);
 
   $box = new box;

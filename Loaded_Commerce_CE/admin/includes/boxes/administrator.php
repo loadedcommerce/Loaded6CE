@@ -22,10 +22,10 @@ $heading[] = array('text'  => BOX_HEADING_ADMINISTRATOR,
   $returned_rci_top = $cre_RCI->get('administrator', 'boxestop');
   $returned_rci_bottom = $cre_RCI->get('administrator', 'boxesbottom');
   $contents[] = array('text'  => $returned_rci_top .
-                                 tep_admin_files_boxes(FILENAME_ADMIN_MEMBERS, BOX_ADMINISTRATOR_MEMBERS, 'NONSSL','','2') .
-                                 tep_admin_files_boxes(FILENAME_ADMIN_MEMBERS, BOX_ADMINISTRATOR_GROUPS,'NONSSL','gID=groups','2') .
-                                 tep_admin_files_boxes(FILENAME_ADMIN_ACCOUNT, BOX_ADMINISTRATOR_ACCOUNT_UPDATE, 'NONSSL','','2') .
-                                 tep_admin_files_boxes(FILENAME_ADMIN_FILES, BOX_ADMINISTRATOR_BOXES, 'NONSSL','','2') .
+                                 tep_admin_files_boxes(FILENAME_ADMIN_MEMBERS, BOX_ADMINISTRATOR_MEMBERS, 'NONSSL','selected_box=administrator','2') .
+                                 tep_admin_files_boxes(FILENAME_ADMIN_MEMBERS, BOX_ADMINISTRATOR_GROUPS,'NONSSL','gID=groups&selected_box=administrator','2') .
+                                 tep_admin_files_boxes(FILENAME_ADMIN_ACCOUNT, BOX_ADMINISTRATOR_ACCOUNT_UPDATE, 'NONSSL','selected_box=administrator','2') .
+                                 tep_admin_files_boxes(FILENAME_ADMIN_FILES, BOX_ADMINISTRATOR_BOXES, 'NONSSL','selected_box=administrator','2') .
                                  $returned_rci_bottom);
 
   $box = new box;

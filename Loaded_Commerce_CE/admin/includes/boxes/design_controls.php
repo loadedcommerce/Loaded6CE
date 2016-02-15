@@ -42,22 +42,22 @@ $heading[] = array('text'  => BOX_HEADING_DESIGN_CONTROLS,
   $contents[] = array('text'  => $returned_rci_top .
                                  tep_admin_files_boxes('',BOX_HEADING_TEMPLATE_HEADER_TAGS ) .
                                  $returned_rci_top2 . 
-                                 tep_admin_files_boxes(FILENAME_HEADER_TAGS_CONTROLLER, BOX_HEADER_TAGS_ADD_A_PAGE, 'NONSSL' , '', '2' ) .
-                                 tep_admin_files_boxes(FILENAME_HEADER_TAGS_ENGLISH, BOX_HEADER_TAGS_ENGLISH, 'NONSSL' , '', '2' ).
-                                 tep_admin_files_boxes(FILENAME_HEADER_TAGS_FILL_TAGS,  BOX_HEADER_TAGS_FILL_TAGS, 'NONSSL' , '', '2') .
+                                 tep_admin_files_boxes(FILENAME_HEADER_TAGS_CONTROLLER, BOX_HEADER_TAGS_ADD_A_PAGE, 'NONSSL' , 'selected_box=design_controls', '2' ) .
+                                 tep_admin_files_boxes(FILENAME_HEADER_TAGS_ENGLISH, BOX_HEADER_TAGS_ENGLISH, 'NONSSL' , 'selected_box=design_controls', '2' ).
+                                 tep_admin_files_boxes(FILENAME_HEADER_TAGS_FILL_TAGS,  BOX_HEADER_TAGS_FILL_TAGS, 'NONSSL' , 'selected_box=design_controls', '2') .
                                  $returned_rci_bottom2 . 
                                  tep_admin_files_boxes('', BOX_HEADING_BRANDING_MANAGER) .
                                  $returned_rci_top3 .
-                                 tep_admin_files_boxes(FILENAME_BRANDING_MANAGER,BOX_HEADING_BRANDING_MANAGER, 'NONSSL', '', '2') . 
+                                 tep_admin_files_boxes(FILENAME_BRANDING_MANAGER,BOX_HEADING_BRANDING_MANAGER, 'NONSSL', 'selected_box=design_controls', '2') . 
                                  $returned_rci_bottom3 .
                                  tep_admin_files_boxes('', BOX_HEADING_DESIGN_TEMPLATE) .
                                  $returned_rci_top4 .
-                                 tep_admin_files_boxes(FILENAME_TEMPLATE_ADMIN, BOX_HEADING_TEMPLATE_MANAGEMENT , 'NONSSL' , '', '2') .
-                                 tep_admin_files_boxes(FILENAME_TEMPLATE_CONFIGURATION, BOX_HEADING_TEMPLATE_CONFIGURATION, 'NONSSL' ,'cID=' . $template_id_select['template_id'],'2') .
+                                 tep_admin_files_boxes(FILENAME_TEMPLATE_ADMIN, BOX_HEADING_TEMPLATE_MANAGEMENT , 'NONSSL' , 'selected_box=design_controls', '2') .
+                                 tep_admin_files_boxes(FILENAME_TEMPLATE_CONFIGURATION, BOX_HEADING_TEMPLATE_CONFIGURATION, 'NONSSL' ,'selected_box=design_controls&cID=' . $template_id_select['template_id'],'2') .
                                  $returned_rci_bottom4 .
                                  tep_admin_files_boxes('', BOX_HEADING_DESIGN_INFOBOX) .
                                  $returned_rci_top5 .
-                                 tep_admin_files_boxes(FILENAME_INFOBOX_CONFIGURATION, BOX_HEADING_BOXES_ADMIN, 'NONSSL', 'gID=' . $template_id_select['template_id'],'2') .
+                                 tep_admin_files_boxes(FILENAME_INFOBOX_CONFIGURATION, BOX_HEADING_BOXES_ADMIN, 'NONSSL', 'selected_box=design_controls&gID=' . $template_id_select['template_id'],'2') .
                                  $returned_rci_bottom);
 
   $box = new box;

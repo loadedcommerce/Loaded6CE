@@ -28,30 +28,30 @@ $heading[] = array('text'  => BOX_HEADING_REPORTS,
   $returned_rci_bottom5 = $cre_RCI->get('reports', 'boxesbottom6');    
   $contents[] = array('text'  => $returned_rci_top .
                                  // top viewed
-                                 tep_admin_files_boxes(FILENAME_STATS_PRODUCTS_VIEWED, BOX_REPORTS_PRODUCTS_VIEWED, 'SSL','','2') .
-                                 tep_admin_files_boxes(FILENAME_STATS_PRODUCTS_PURCHASED, BOX_REPORTS_PRODUCTS_PURCHASED, 'SSL','','2') .
-                                 tep_admin_files_boxes(FILENAME_STATS_ARTICLES_VIEWED,BOX_REPORTS_ARTICLES_VIEWED, 'SSL','','2') .
+                                 tep_admin_files_boxes(FILENAME_STATS_PRODUCTS_VIEWED, BOX_REPORTS_PRODUCTS_VIEWED, 'SSL','selected_box=reports','2') .
+                                 tep_admin_files_boxes(FILENAME_STATS_PRODUCTS_PURCHASED, BOX_REPORTS_PRODUCTS_PURCHASED, 'SSL','selected_box=reports','2') .
+                                 tep_admin_files_boxes(FILENAME_STATS_ARTICLES_VIEWED,BOX_REPORTS_ARTICLES_VIEWED, 'SSL','selected_box=reports','2') .
                                  $returned_rci_bottom .
                                  // customer
-                                 tep_admin_files_boxes(FILENAME_STATS_WISHLIST, BOX_REPORTS_CUSTOMER_WISHLIST, 'SSL','','2') .
-                                 tep_admin_files_boxes(FILENAME_STATS_CUSTOMERS_ORDERS, BOX_REPORTS_CUSTOMERS_ORDERS, 'SSL','','2') .   
-                                 tep_admin_files_boxes(FILENAME_STATS_CUSTOMERS, BOX_REPORTS_ORDERS_TOTAL, 'SSL','','2') .
-                                 tep_admin_files_boxes(FILENAME_STATS_NOT_VALID_USER, BOX_REPORTS_NOT_VALID_USER, 'SSL','','2') .
+                                 tep_admin_files_boxes(FILENAME_STATS_WISHLIST, BOX_REPORTS_CUSTOMER_WISHLIST, 'SSL','selected_box=reports','2') .
+                                 tep_admin_files_boxes(FILENAME_STATS_CUSTOMERS_ORDERS, BOX_REPORTS_CUSTOMERS_ORDERS, 'SSL','selected_box=reports','2') .   
+                                 tep_admin_files_boxes(FILENAME_STATS_CUSTOMERS, BOX_REPORTS_ORDERS_TOTAL, 'SSL','selected_box=reports','2') .
+                                 tep_admin_files_boxes(FILENAME_STATS_NOT_VALID_USER, BOX_REPORTS_NOT_VALID_USER, 'SSL','selected_box=reports','2') .
                                  $returned_rci_bottom2 .
                                  // sales
-                                 tep_admin_files_boxes(FILENAME_STATS_SALES_REPORT2, BOX_REPORTS_SALES_REPORT2, 'SSL','','2') .             
-                                 tep_admin_files_boxes(FILENAME_STATS_DAILY_SALES_REPORT, BOX_REPORTS_DAILY_PRODUCTS_ORDERS, 'SSL','','2') .
-                                 tep_admin_files_boxes(FILENAME_STATS_MANUFACTURERS, BOX_REPORTS_SALES_MANUFACTURERS, 'SSL','','2') .
+                                 tep_admin_files_boxes(FILENAME_STATS_SALES_REPORT2, BOX_REPORTS_SALES_REPORT2, 'SSL','selected_box=reports','2') .             
+                                 tep_admin_files_boxes(FILENAME_STATS_DAILY_SALES_REPORT, BOX_REPORTS_DAILY_PRODUCTS_ORDERS, 'SSL','selected_box=reports','2') .
+                                 tep_admin_files_boxes(FILENAME_STATS_MANUFACTURERS, BOX_REPORTS_SALES_MANUFACTURERS, 'SSL','selected_box=reports','2') .
                                  $returned_rci_bottom3 . 
                                  // products
-                                 tep_admin_files_boxes(FILENAME_STATS_PRODUCTS_NOTIFICATIONS, BOX_REPORTS_PRODUCTS_NOTIFICATIONS, 'SSL','','2') .
-                                 tep_admin_files_boxes(FILENAME_STATS_LOW_STOCK, BOX_LOW_STOCK_REPORT, 'SSL','','2') .
+                                 tep_admin_files_boxes(FILENAME_STATS_PRODUCTS_NOTIFICATIONS, BOX_REPORTS_PRODUCTS_NOTIFICATIONS, 'SSL','selected_box=reports','2') .
+                                 tep_admin_files_boxes(FILENAME_STATS_LOW_STOCK, BOX_LOW_STOCK_REPORT, 'SSL','selected_box=reports','2') .
                                  $returned_rci_bottom4 .
                                  // orders
-                                 tep_admin_files_boxes(FILENAME_ORDERLIST, BOX_REPORTS_ORDERLIST, 'SSL','','2') . 
+                                 tep_admin_files_boxes(FILENAME_ORDERLIST, BOX_REPORTS_ORDERLIST, 'SSL','selected_box=reports','2') . 
                                  // other
                                  $returned_rci_bottom5 .
-                                 tep_admin_files_boxes(FILENAME_STATS_MONTHLY_SALES, BOX_REPORTS_MONTHLY_SALES, 'SSL','','2') .
+                                 tep_admin_files_boxes(FILENAME_STATS_MONTHLY_SALES, BOX_REPORTS_MONTHLY_SALES, 'SSL','selected_box=reports','2') .
                                  $returned_rci_bottom6);  
 
   $box = new box;

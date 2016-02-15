@@ -22,11 +22,11 @@ $heading[] = array('text'  => BOX_HEADING_LOCATION_AND_TAXES,
   $returned_rci_top = $cre_RCI->get('taxes', 'boxestop');
   $returned_rci_bottom = $cre_RCI->get('taxes', 'boxesbottom');
   $contents[] = array('text'  => $returned_rci_top .
-                                 tep_admin_files_boxes(FILENAME_COUNTRIES, BOX_TAXES_COUNTRIES, 'SSL','','2') .
-                                 tep_admin_files_boxes(FILENAME_ZONES, BOX_TAXES_ZONES, 'SSL','','2') .
-                                 tep_admin_files_boxes(FILENAME_GEO_ZONES, BOX_TAXES_GEO_ZONES, 'SSL','','2') .
-                                 tep_admin_files_boxes(FILENAME_TAX_CLASSES, BOX_TAXES_TAX_CLASSES, 'SSL','','2') .
-                                 tep_admin_files_boxes(FILENAME_TAX_RATES, BOX_TAXES_TAX_RATES, 'SSL','','2') .
+                                 tep_admin_files_boxes(FILENAME_COUNTRIES, BOX_TAXES_COUNTRIES, 'SSL','selected_box=taxes','2') .
+                                 tep_admin_files_boxes(FILENAME_ZONES, BOX_TAXES_ZONES, 'SSL','selected_box=taxes','2') .
+                                 tep_admin_files_boxes(FILENAME_GEO_ZONES, BOX_TAXES_GEO_ZONES, 'SSL','selected_box=taxes','2') .
+                                 tep_admin_files_boxes(FILENAME_TAX_CLASSES, BOX_TAXES_TAX_CLASSES, 'SSL','selected_box=taxes','2') .
+                                 tep_admin_files_boxes(FILENAME_TAX_RATES, BOX_TAXES_TAX_RATES, 'SSL','selected_box=taxes','2') .
                                  $returned_rci_bottom);
 
   $box = new box;

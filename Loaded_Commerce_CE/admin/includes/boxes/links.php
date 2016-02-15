@@ -21,9 +21,9 @@ $heading[] = array('text'  => BOX_HEADING_LINKS,
   $returned_rci_top = $cre_RCI->get('links', 'boxestop');
   $returned_rci_bottom = $cre_RCI->get('links', 'boxesbottom');
   $contents[] = array('text'  => $returned_rci_top .
-                                 tep_admin_files_boxes(FILENAME_LINKS, BOX_LINKS_LINKS, 'SSL','','2') .
-                                 tep_admin_files_boxes(FILENAME_LINK_CATEGORIES, BOX_LINKS_LINK_CATEGORIES, 'SSL','','2') .
-                                 tep_admin_files_boxes(FILENAME_LINKS_CONTACT, BOX_LINKS_LINKS_CONTACT, 'SSL','','2') .
+                                 tep_admin_files_boxes(FILENAME_LINKS, BOX_LINKS_LINKS, 'SSL','selected_box=links','2') .
+                                 tep_admin_files_boxes(FILENAME_LINK_CATEGORIES, BOX_LINKS_LINK_CATEGORIES, 'SSL','selected_box=links','2') .
+                                 tep_admin_files_boxes(FILENAME_LINKS_CONTACT, BOX_LINKS_LINKS_CONTACT, 'SSL','selected_box=links','2') .
                                  $returned_rci_bottom);
   $box = new box;
   echo $box->menuBox($heading, $contents);
