@@ -84,22 +84,22 @@
       $db_link = '';
       if ($error == '') {
         osc_db_connect($db_server, $db_username, $db_password, 'db_link');
-        if (mysql_select_db($db_database,  $db_link) === false) {
-          $error = mysql_errno($db_link) . ' - ' . mysql_error($db_link);
+        if (mysqli_select_db($db_database,  $db_link) === false) {
+          $error = mysqli_errno($db_link) . ' - ' . mysqli_error($db_link);
         } else {
           $sql = "SELECT admin_firstname, admin_lastname FROM admin WHERE admin_groups_id = 1 ORDER BY admin_id";
-          $admin_query = mysql_query($sql, $db_link);
+          $admin_query = mysqli_query($db_link, $sql);
           if ($admin_query === false) {
-            $error = mysql_errno($db_link) . ' - ' . mysql_error($db_link);
+            $error = mysqli_errno($db_link) . ' - ' . mysqli_error($db_link);
           } else {
-            $admin = mysql_fetch_assoc($admin_query);
+            $admin = mysqli_fetch_assoc($admin_query);
         
             $sql = "SELECT configuration_value FROM configuration WHERE configuration_key = 'STORE_NAME' ";
-            $config_query = mysql_query($sql, $db_link);
+            $config_query = mysqli_query($db_link, $sql);
             if ($config_query === false) {
-              $error = mysql_errno($db_link) . ' - ' . mysql_error($db_link);
+              $error = mysqli_errno($db_link) . ' - ' . mysqli_error($db_link);
             } else {
-              $config = mysql_fetch_assoc($config_query);
+              $config = mysqli_fetch_assoc($config_query);
             }
           }
         }

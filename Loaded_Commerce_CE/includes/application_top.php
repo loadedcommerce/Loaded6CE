@@ -63,7 +63,10 @@ require(DIR_FS_CLASSES . 'email.php');
 require(DIR_FS_FUNCTIONS . 'general.php'); 
 require(DIR_FS_FUNCTIONS . 'sessions.php');
 require(DIR_FS_FUNCTIONS . 'compatibility.php');
-require(DIR_FS_FUNCTIONS . 'database.php');
+if(function_exists('mysqli_connect'))
+  require(DIR_FS_FUNCTIONS . 'database_mysqli.php');
+else
+  require(DIR_FS_FUNCTIONS . 'database.php');
 
 // set up the PHP and error message log
 define('ERROR_MESSAGE_LOG', DIR_FS_CATALOG . 'debug/php_error_log.txt');

@@ -20,27 +20,28 @@
       return 'true';
     }
 
-    $$link = @mysql_connect($server, $username, $password) or $db_error = mysql_error();
+    $$link = @mysqli_connect($server, $username, $password) or $db_error = mysqli_error();
 
     return $$link;
   }
  function osc_db_connect1($server = DB_SERVER, $username = DB_SERVER_USERNAME, $password = DB_SERVER_PASSWORD, $database = DB_DATABASE, $link = 'db_link') {
     global $$link;
-      $$link = mysql_connect($server, $username, $password);
+      $$link = mysqli_connect($server, $username, $password);
 
-    if ($$link) mysql_select_db($database);
+    if ($$link) mysqli_select_db($$link, $database);
 
     return $$link;
   }
 
-  function osc_db_select_db($database) {
-    return mysql_select_db($database);
+  function osc_db_select_db($database, $link = 'db_link') {
+    global $$link;
+    return mysqli_select_db($$link, $database);
   }
 
   function osc_db_close($link = 'db_link') {
     global $$link;
 
-    return mysql_close($$link);
+    return mysqli_close($$link);
   }
 
 function osc_db_error($query, $errno, $error) {
@@ -51,25 +52,25 @@ function osc_db_error($query, $errno, $error) {
 
   function osc_db_query($query, $link = 'db_link') {
     global $$link;
-  $result = mysql_query($query, $$link) or osc_db_error($query, mysql_errno(), mysql_error());
+    $result = mysqli_query($$link, $query) or osc_db_error($query, mysqli_errno($$link), mysqli_error($$link));
 
    return $result;
   }
 
   function osc_db_fetch_array($db_query) {
-    return mysql_fetch_array($db_query);
+    return mysqli_fetch_array($db_query);
   }
 
   function osc_db_num_rows($db_query) {
-    return mysql_num_rows($db_query);
+    return mysqli_num_rows($db_query);
   }
 
   function osc_db_data_seek($db_query, $row_number) {
-    return mysql_data_seek($db_query, $row_number);
+    return mysqli_data_seek($db_query, $row_number);
   }
 
   function osc_db_insert_id() {
-    return mysql_insert_id();
+    return mysqli_insert_id();
   }
 
 
@@ -78,27 +79,33 @@ function osc_db_input($string) {
   }
 
   function osc_db_free_result($db_query) {
-    return mysql_free_result($db_query);
+    return mysqli_free_result($db_query);
   }
 
+function get_tables($database, $link = 'db_link')
+{
+	global $$link;
+  $tableList = array();
+  $res = mysqli_query($$link,"SHOW TABLES FROM ".$database);
+  while($cRow = mysqli_fetch_array($res))
+  {
+    $tableList[] = $cRow[0];
+  }
+  return $tableList;
+}
 
   function osc_db_test_db_empty($database) {
     global $db_error, $data_error;
 
     $db_error = 'false';
+    $table_list = get_tables($database);
 
-    if ( $table_list = @mysql_list_tables($database) ) {
-      if ( osc_db_num_rows($table_list) > 0 ) {
+      if ( count($table_list) > 0 ) {
         $db_error = DB_ERROR_09;
         return 'false';
       } else {
         return 'true';
       }
-    } else {
-      $db_error = DB_ERROR_01;
-      $data_error = mysql_error();
-      return 'true';
-    }
   }
 
 
@@ -117,10 +124,10 @@ function osc_db_input($string) {
       if (osc_db_select_db($database)) {
         $db_created = 'true';
         $db_error = DB_ERROR_01;
-        $data_error = mysql_error();
+        $data_error = mysqli_error();
         if (!@osc_db_query('create database ' . $database)) {
           $db_error = DB_ERROR_07 ;
-          $data_error = mysql_error();
+          $data_error = mysqli_error();
         }
       } else {
 
@@ -133,20 +140,20 @@ function osc_db_input($string) {
                 if (@osc_db_query('drop database ' . $database)) {
                 } else {
                   $db_error = DB_ERROR_05;
-                  $data_error = mysql_error();
+                  $data_error = mysqli_error();
                 }
               }
             } else {
                $db_error = DB_ERROR_02;
-               $data_error = mysql_error();
+               $data_error = mysqli_error();
             }
           } else {
              $db_error = DB_ERROR_04;
-             $data_error = mysql_error();
+             $data_error = mysqli_error();
           }
         } else {
             $db_error = DB_ERROR_03;
-            $data_error = mysql_error();
+            $data_error = mysqli_error();
         }
       }
     }
@@ -177,14 +184,14 @@ function osc_db_input($string) {
         //db exists but has no configuration table
         $db_error = 'true';
         $data_error = DB_ERROR_10 . $database;
-        $db_error = mysql_error();
+        $db_error = mysqli_error();
         return $data_error;
         return $db_error;
         } else {
         //db exists but has configuration table
          $db_error = 'true';
          $data_error = DB_ERROR_11 . $database;
-         $db_error = mysql_error();
+         $db_error = mysqli_error();
          return $data_error;
          return $db_error;
         }
@@ -206,7 +213,7 @@ function osc_db_input($string) {
         } else {
         return 'true';
         $data_error = DB_ERROR_12 . $database;
-        $db_error = mysql_error();
+        $db_error = mysqli_error();
         return $data_error;
         return $db_error;
      //  }
@@ -220,7 +227,7 @@ function osc_db_input($string) {
         fclose($fd);
       } else {
         $db_error = DB_ERROR_13 . $sql_file;
-        $data_error = mysql_error();
+        $data_error = mysqli_error();
 
         return 'true';
         return $data_error;

@@ -8,7 +8,7 @@
 */
   
 //catalog version
-  define('VERSION', 'Loaded Commerce CE v6.5.2');
+  define('VERSION', 'Loaded Commerce CE v6.5.3');
 //install logo
   define('INSTALL_LOGO', 'cre62_std_title.png');
 // install sql file

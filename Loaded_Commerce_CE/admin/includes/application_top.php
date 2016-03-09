@@ -76,7 +76,10 @@ include('includes/version.php');
   define('CURRENCY_SERVER_BACKUP', 'xe');
 
 // include select functions
-  require(DIR_FS_FUNCTIONS . 'database.php');
+  if(function_exists('mysqli_connect'))
+    require(DIR_FS_FUNCTIONS . 'database_mysqli.php');
+  else
+    require(DIR_FS_FUNCTIONS . 'database.php');
   require(DIR_FS_CLASSES . 'logger.php');
 
 // make a connection to the database... now

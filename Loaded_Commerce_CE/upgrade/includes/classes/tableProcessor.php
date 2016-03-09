@@ -14,13 +14,13 @@
     // this rouitne accepts a database name and returns an XML string that defines the DB
     function getTableStructure($db_server, $db_username, $db_password, $database) {
       
-      $link = mysql_connect($db_server, $db_username, $db_password);
-      if ($link) mysql_select_db($database, $link) or die(mysql_error($link));
+      $link = mysqli_connect($db_server, $db_username, $db_password);
+      if ($link) mysqli_select_db($database, $link) or die(mysqli_error($link));
       
       // datbase connectivity has been established, now find out all the table names
       $tableNames = array();
-      $result = mysql_query("SHOW TABLES", $link);
-      while ($row = mysql_fetch_row($result)) {
+      $result = mysqli_query($link, "SHOW TABLES");
+      while ($row = mysqli_fetch_row($result)) {
         $tableNames[] = $row[0];
       }
       
@@ -30,8 +30,8 @@
       
       // Loop thru all the tables found and build the "create" mode for each
       foreach ($tableNames as $table) {
-        $result = mysql_query("SHOW TABLE STATUS LIKE '$table'", $link);
-        $tableStatus = mysql_fetch_assoc($result);
+        $result = mysqli_query($link, "SHOW TABLE STATUS LIKE '$table'");
+        $tableStatus = mysqli_fetch_assoc($result);
         // work around for older Database Engines
         if ( ! isset($tableStatus['Engine'])) {
           if (isset($tableStatus['Type'])) $tableStatus['Engine'] = $tableStatus['Type'];
@@ -47,8 +47,8 @@
         }
         
         // to the table node, add the column nodes
-        $result = mysql_query("SHOW COLUMNS FROM $table", $link);
-        while ($row = mysql_fetch_assoc($result)) {
+        $result = mysqli_query($link, "SHOW COLUMNS FROM $table");
+        while ($row = mysqli_fetch_assoc($result)) {
           $rowdefault = is_null($row['Default']) ? 'isNULL' : $row['Default'];  // a true null converted to a string
           $columnNode =& $tableNode->addChild($row['Field'], $rowdefault);
           if ($row['Extra'] != '') $columnNode->addAttribute('increment', 'yes');
@@ -105,8 +105,8 @@
         $index_primary = array();
         $index_unique = array();
         $index_index = array();
-        $result = mysql_query("SHOW INDEXES FROM $table", $link);
-        while ($row = mysql_fetch_assoc($result)) {
+        $result = mysqli_query($link, "SHOW INDEXES FROM $table");
+        while ($row = mysqli_fetch_assoc($result)) {
           if ($row['Key_name'] == 'PRIMARY') {
             $index_primary[] = $row['Column_name'];
           } elseif ($row['Non_unique'] == '1') {
@@ -611,8 +611,8 @@
     
     
     function applyTableChanges($changes, $db_server, $db_username, $db_password, $database) {
-      $link = mysql_connect($db_server, $db_username, $db_password);
-      if ($link) mysql_select_db($database, $link) or die(mysql_error($link));
+      $link = mysqli_connect($db_server, $db_username, $db_password);
+      if ($link) mysqli_select_db($database, $link) or die(mysqli_error($link));
       
       $actions_array = array();
       $dropped_columns = array();  // needed for checking for possible column/index conflicts in drops
@@ -696,9 +696,9 @@
               // ok, strip off the exrta comma and close the statement
               $sql = substr($sql, 0, -2);
               $sql .= ' ) ENGINE=' . $engine . ';';
-              if (mysql_query($sql, $link) ===  false) {
+              if (mysqli_query($link, $sql) ===  false) {
                 $result = 'FALSE';
-                $msg = mysql_errno($link) . ' - ' . mysql_error($link);
+                $msg = mysqli_errno($link) . ' - ' . mysqli_error($link);
               } else {
                 $result = 'TRUE';
                 $msg = '';
@@ -708,7 +708,7 @@
               // process the auto increment if need, but do not report error or success on it
               if ($auto_increment != '') {
                 $sql = "ALTER TABLE $table_name AUTO_INCREMENT = $auto_increment";
-                mysql_query($sql, $link);
+                mysqli_query($link, $sql);
               }
             }
             break;
@@ -780,9 +780,9 @@
                       } else {
                         $sql = "ALTER TABLE $table_name ADD COLUMN $column_name $attr_type $attr_signed $attr_null $column_default $attr_increment ";
                       }
-                      if (mysql_query($sql, $link) ===  false) {
+                      if (mysqli_query($link, $sql) ===  false) {
                         $result = 'FALSE';
-                        $msg = mysql_errno($link) . ' - ' . mysql_error($link);
+                        $msg = mysqli_errno($link) . ' - ' . mysqli_error($link);
                       } else {
                         $result = 'TRUE';
                         $msg = '';
@@ -812,9 +812,9 @@
                         $sql = "ALTER TABLE $table_name DROP COLUMN $column_name ";
                       }
                       if ($sql != '') {
-                        if (mysql_query($sql, $link) ===  false) {
+                        if (mysqli_query($link, $sql) ===  false) {
                           $result = 'FALSE';
-                          $msg = mysql_errno($link) . ' - ' . mysql_error($link);
+                          $msg = mysqli_errno($link) . ' - ' . mysqli_error($link);
                         } else {
                           $result = 'TRUE';
                           $msg = '';
@@ -825,9 +825,9 @@
                     
                     case 'modify':
                       $sql = "ALTER TABLE $table_name MODIFY COLUMN $column_name $attr_type $attr_signed $attr_null $column_default $attr_increment ";
-                      if (mysql_query($sql, $link) ===  false) {
+                      if (mysqli_query($link, $sql) ===  false) {
                         $result = 'FALSE';
-                        $msg = mysql_errno($link) . ' - ' . mysql_error($link);
+                        $msg = mysqli_errno($link) . ' - ' . mysqli_error($link);
                       } else {
                         $result = 'TRUE';
                         $msg = '';
@@ -838,9 +838,9 @@
                     case 'alter':  // special case to allow auto increment value to be altered
                       $column_value = $column->tagData;
                       $sql = "ALTER TABLE $table_name $column_name = $column_value ";
-                      if (mysql_query($sql, $link) ===  false) {
+                      if (mysqli_query($link, $sql) ===  false) {
                         $result = 'FALSE';
-                        $msg = mysql_errno($link) . ' - ' . mysql_error($link);
+                        $msg = mysqli_errno($link) . ' - ' . mysqli_error($link);
                       } else {
                         $result = 'TRUE';
                         $msg = '';
@@ -860,9 +860,9 @@
               
               // build the sql and apply it
               $sql = "DROP TABLE $table_name ";
-              if (mysql_query($sql, $link) ===  false) {
+              if (mysqli_query($link, $sql) ===  false) {
                 $result = 'FALSE';
-                $msg = mysql_errno($link) . ' - ' . mysql_error($link);
+                $msg = mysqli_errno($link) . ' - ' . mysqli_error($link);
               } else {
                 $result = 'TRUE';
                 $msg = '';
@@ -884,29 +884,29 @@
     
     // find any missing or modified configuration table entries
     function diffConfigEntries($oldDB_server, $oldDB_username, $oldDB_password, $oldDB, $newDB_server, $newDB_username, $newDB_password, $newDB){
-      $oDB = mysql_connect($oldDB_server, $oldDB_username, $oldDB_password);
-      if ($oDB) mysql_select_db($oldDB, $oDB) or die(mysql_error($oDB));
+      $oDB = mysqli_connect($oldDB_server, $oldDB_username, $oldDB_password);
+      if ($oDB) mysqli_select_db($oldDB, $oDB) or die(mysqli_error($oDB));
 
-      $nDB = mysql_connect($newDB_server, $newDB_username, $newDB_password);
-      if ($nDB) mysql_select_db($newDB, $nDB) or die(mysql_error($nDB));
+      $nDB = mysqli_connect($newDB_server, $newDB_username, $newDB_password);
+      if ($nDB) mysqli_select_db($newDB, $nDB) or die(mysqli_error($nDB));
       
       // database connectivity has been established
       $oConfigData = array();
       $oConfigDataValue = array();
       $oConfigGroupData = array();
-      $result = mysql_query("SELECT * FROM configuration_group ORDER BY configuration_group_title ", $oDB);
-      while ($row = mysql_fetch_assoc($result)) {
+      $result = mysqli_query($oDB, "SELECT * FROM configuration_group ORDER BY configuration_group_title ");
+      while ($row = mysqli_fetch_assoc($result)) {
         $oConfigGroupData[$row['configuration_group_title']] = array('configuration_group_description' => $row['configuration_group_description'],
                                                                      'sort_order' => $row['sort_order'],
                                                                      'visible' => $row['visible']
                                                                     );
       }
       
-      $result = mysql_query("SELECT c.*, cg.configuration_group_title 
+      $result = mysqli_query($oDB, "SELECT c.*, cg.configuration_group_title 
                              FROM configuration c
                              LEFT JOIN configuration_group cg using(configuration_group_id)
-                             ORDER BY configuration_key ", $oDB);
-      while ($row = mysql_fetch_assoc($result)) {
+                             ORDER BY configuration_key ");
+      while ($row = mysqli_fetch_assoc($result)) {
         if (substr($row['configuration_key'], 0, 7) == 'MODULE_') continue;
         $oConfigData[$row['configuration_key']] = array('configuration_title' => trim($row['configuration_title']),
                                                         'configuration_description' => trim($row['configuration_description']),
@@ -921,19 +921,19 @@
       $nConfigData = array();
       $nConfigDataValue = array();
       $nConfigGroupData = array();
-      $result = mysql_query("SELECT * FROM configuration_group ORDER BY configuration_group_title ", $nDB);
-      while ($row = mysql_fetch_assoc($result)) {
+      $result = mysqli_query($nDB, "SELECT * FROM configuration_group ORDER BY configuration_group_title ");
+      while ($row = mysqli_fetch_assoc($result)) {
         $nConfigGroupData[$row['configuration_group_title']] = array('configuration_group_description' => $row['configuration_group_description'],
                                                                      'sort_order' => $row['sort_order'],
                                                                      'visible' => $row['visible']
                                                                     );
       }
 
-      $result = mysql_query("SELECT c.*, cg.configuration_group_title 
+      $result = mysqli_query($nDB, "SELECT c.*, cg.configuration_group_title 
                              FROM configuration c
                              LEFT JOIN configuration_group cg using(configuration_group_id)
-                             ORDER BY configuration_key ", $nDB);
-      while ($row = mysql_fetch_assoc($result)) {
+                             ORDER BY configuration_key ");
+      while ($row = mysqli_fetch_assoc($result)) {
         if (substr($row['configuration_key'], 0, 7) == 'MODULE_') continue;
         $nConfigData[$row['configuration_key']] = array('configuration_title' => trim($row['configuration_title']),
                                                         'configuration_description' => trim($row['configuration_description']),
@@ -1069,8 +1069,8 @@
     
     
     function applyConfigChanges($changes, $db_server, $db_username, $db_password, $database) {
-      $link = mysql_connect($db_server, $db_username, $db_password);
-      mysql_select_db($database, $link);
+      $link = mysqli_connect($db_server, $db_username, $db_password);
+      mysqli_select_db($database, $link);
       
       $actions_array = array();
       $parser = new XMLParser($changes);
@@ -1090,17 +1090,17 @@
                   foreach ( $sqlaction->tagChildren as $key ) {
                     $key_value = $key->tagData;
                     // if the configuration_key already exists, it canot be created, so check
-                    $result = mysql_query("SELECT configuration_key FROM configuration WHERE configuration_key = '$key_value' ", $link);
-                    if (mysql_num_rows($result) < 1) {  // no entry was found
+                    $result = mysqli_query($link, "SELECT configuration_key FROM configuration WHERE configuration_key = '$key_value' ");
+                    if (mysqli_num_rows($result) < 1) {  // no entry was found
                       
                       $column_values = '';
                       $conf_group_id = '';
                       foreach ( $key->tagChildren as $column ) {
                         if ($column->tagName == 'configuration_group_title') {
                           $conf_group_title = addslashes($this->strip_CDATA($column->tagData));
-                          $result = mysql_query("SELECT configuration_group_id FROM configuration_group WHERE configuration_group_title = '$conf_group_title' ", $link);
-                          if (mysql_num_rows($result) > 0) {
-                            $row = mysql_fetch_assoc($result);
+                          $result = mysqli_query($link, "SELECT configuration_group_id FROM configuration_group WHERE configuration_group_title = '$conf_group_title' ");
+                          if (mysqli_num_rows($result) > 0) {
+                            $row = mysqli_fetch_assoc($result);
                             $conf_group_id = $row['configuration_group_id'];
                           }
                         } else {
@@ -1111,9 +1111,9 @@
                       $column_values .= $key_column . " = '" . $key_value . "'";
                       $sql = "INSERT INTO $table_name SET $column_values ";
                       if ($conf_group_id != '') {
-                        if (mysql_query($sql, $link) ===  false) {
+                        if (mysqli_query($link, $sql) ===  false) {
                           $result = 'FALSE';
-                          $msg = mysql_errno($link) . ' - ' . mysql_error($link);
+                          $msg = mysqli_errno($link) . ' - ' . mysqli_error($link);
                         } else {
                           $result = 'TRUE';
                           $msg = '';
@@ -1136,9 +1136,9 @@
                     foreach ( $key->tagChildren as $column ) {
                       if ($column->tagName == 'configuration_group_title') {
                         $conf_group_title = addslashes($this->strip_CDATA($column->tagData));
-                        $result = mysql_query("SELECT configuration_group_id FROM configuration_group WHERE configuration_group_title = '$conf_group_title' ", $link);
-                        if (mysql_num_rows($result) > 0) {
-                          $row = mysql_fetch_assoc($result);
+                        $result = mysqli_query($link, "SELECT configuration_group_id FROM configuration_group WHERE configuration_group_title = '$conf_group_title' ");
+                        if (mysqli_num_rows($result) > 0) {
+                          $row = mysqli_fetch_assoc($result);
                           $conf_group_id = $row['configuration_group_id'];
                         }
                         unset($result);
@@ -1149,9 +1149,9 @@
                     if ($conf_group_id != '') $column_values .= 'configuration_group_id = ' . $conf_group_id . ', ';
                     $column_values = substr($column_values, 0, strlen($column_values)-2);
                     $sql = "UPDATE $table_name SET $column_values WHERE $key_column = '$key_value' ";
-                    if (mysql_query($sql, $link) ===  false) {
+                    if (mysqli_query($link, $sql) ===  false) {
                       $result = 'FALSE';
-                      $msg = mysql_errno($link) . ' - ' . mysql_error($link);
+                      $msg = mysqli_errno($link) . ' - ' . mysqli_error($link);
                     } else {
                       $result = 'TRUE';
                       $msg = '';
@@ -1164,9 +1164,9 @@
                   foreach ( $sqlaction->tagChildren as $key ) {
                     $key_value = $key->tagData;
                     $sql = "DELETE FROM $table_name WHERE $key_column = '$key_value' ";
-                    if (mysql_query($sql, $link) ===  false) {
+                    if (mysqli_query($link, $sql) ===  false) {
                       $result = 'FALSE';
-                      $msg = mysql_errno($link) . ' - ' . mysql_error($link);
+                      $msg = mysqli_errno($link) . ' - ' . mysqli_error($link);
                     } else {
                       $result = 'TRUE';
                       $msg = '';
@@ -1187,8 +1187,8 @@
                   foreach ( $sqlaction->tagChildren as $key ) {
                     $key_value = $key->tagData;
                     // if the configuration_group_title already exists, it canot be created, so check
-                    $result = mysql_query("SELECT configuration_group_title FROM configuration_group WHERE configuration_group_title = '$key_value' ", $link);
-                    if (mysql_num_rows($result) < 1) {  // no entry was found
+                    $result = mysqli_query($link, "SELECT configuration_group_title FROM configuration_group WHERE configuration_group_title = '$key_value' ");
+                    if (mysqli_num_rows($result) < 1) {  // no entry was found
                       
                       $column_values = '';
                       foreach ( $key->tagChildren as $column ) {
@@ -1196,9 +1196,9 @@
                       }
                       $column_values .= $key_column . " = '" . $key_value . "'";
                       $sql = "INSERT INTO $table_name SET $column_values ";
-                      if (mysql_query($sql, $link) ===  false) {
+                      if (mysqli_query($link, $sql) ===  false) {
                         $result = 'FALSE';
-                        $msg = mysql_errno($link) . ' - ' . mysql_error($link);
+                        $msg = mysqli_errno($link) . ' - ' . mysqli_error($link);
                       } else {
                         $result = 'TRUE';
                         $msg = '';
@@ -1219,9 +1219,9 @@
                     }
                     $column_values = substr($column_values, 0, strlen($column_values)-2);
                     $sql = "UPDATE $table_name SET $column_values WHERE $key_column = '$key_value' ";
-                    if (mysql_query($sql, $link) ===  false) {
+                    if (mysqli_query($link, $sql) ===  false) {
                       $result = 'FALSE';
-                      $msg = mysql_errno($link) . ' - ' . mysql_error($link);
+                      $msg = mysqli_errno($link) . ' - ' . mysqli_error($link);
                     } else {
                       $result = 'TRUE';
                       $msg = '';
@@ -1234,9 +1234,9 @@
                   foreach ( $sqlaction->tagChildren as $key ) {
                     $key_value = $key->tagData;
                     $sql = "DELETE FROM $table_name WHERE $key_column = '$key_value' ";
-                    if (mysql_query($sql, $link) ===  false) {
+                    if (mysqli_query($link, $sql) ===  false) {
                       $result = 'FALSE';
-                      $msg = mysql_errno($link) . ' - ' . mysql_error($link);
+                      $msg = mysqli_errno($link) . ' - ' . mysqli_error($link);
                     } else {
                       $result = 'TRUE';
                       $msg = '';
