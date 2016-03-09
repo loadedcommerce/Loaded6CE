@@ -107,11 +107,11 @@
            //delete og image
            $deleted_store_og_image = false;
            if($delete_store_og_image !='' && $store_og_image_existing !='' || $store_og_image != ''){
-             $favicon_query = tep_db_query("SELECT store_brand_image FROM " . TABLE_BRANDING_DESCRIPTION . " WHERE store_og_image = '" . $store_og_image_existing . "' AND language_id <> '" . $languages[$i]['id'] . "' and web_id = '".$web_id."'");
+             $favicon_query = tep_db_query("SELECT store_brand_image FROM " . TABLE_BRANDING_DESCRIPTION . " WHERE store_og_image = '" . $store_og_image_existing . "' AND language_id <> '" . $languages[$i]['id'] . "'");
              if (tep_db_num_rows($favicon_query) == 0) {
                unlink(DIR_FS_LOGO . $store_og_image_existing);
              }
-               $delete_store_og_image = "Update " . TABLE_BRANDING_DESCRIPTION . " set store_og_image = '' where language_id = '" . $languages[$i]['id'] . "' and web_id = '".$web_id."'";
+               $delete_store_og_image = "Update " . TABLE_BRANDING_DESCRIPTION . " set store_og_image = '' where language_id = '" . $languages[$i]['id'] . "'";
                tep_db_query($delete_store_og_image);
                $deleted_store_og_image = true;
            }

@@ -54,41 +54,44 @@ if(defined('TEMPLATE_BUTTONS_USE_CSS') && TEMPLATE_BUTTONS_USE_CSS == 'true'){
 <?php
 }
 ?>
-  	<!-- New Responsive section start CSS -->
-		 <link rel="stylesheet" href="<?=DIR_WS_TEMPLATES . TEMPLATE_NAME . '/'?>css/bootstrap/css/bootstrap.css">
-		 <link rel="stylesheet" href="<?=DIR_WS_TEMPLATES . TEMPLATE_NAME . '/'?>css/css/template.css?v=<?php echo rand();?>">
-		 <link href="<?=DIR_WS_TEMPLATES . TEMPLATE_NAME . '/'?>css/font-awesome.css" rel="stylesheet">
-	<!--Googlefont-->
-	     <script src="<?=DIR_WS_TEMPLATES . TEMPLATE_NAME . '/'?>jquery/jquery-2.1.1.min.js"></script>
-         <script src="<?=DIR_WS_TEMPLATES . TEMPLATE_NAME . '/'?>css/bootstrap/js/bootstrap.min.js"></script>
-         <script src="<?=DIR_WS_TEMPLATES . TEMPLATE_NAME . '/'?>jquery/respond.min.js"></script>
-	     <script src="<?=DIR_WS_TEMPLATES . TEMPLATE_NAME . '/'?>css/bootstrap/bootstrap-datepicker.js"></script>
-	     <script src="<?=DIR_WS_TEMPLATES . TEMPLATE_NAME . '/'?>css/bootstrap/js/bootstrap-fileinput.js"></script>
-	     <script src="<?=DIR_WS_TEMPLATES . TEMPLATE_NAME . '/'?>jquery/jquery.loadmask.js"></script>
-	     <link rel="stylesheet" href="<?=DIR_WS_TEMPLATES . TEMPLATE_NAME . '/'?>css/bootstrap/css/bootstrap-datepicker.css">
+<!-- New Responsive section start CSS -->
+<link rel="stylesheet" href="<?=DIR_WS_TEMPLATES . TEMPLATE_NAME . '/'?>css/bootstrap/css/bootstrap.css">
+<link rel="stylesheet" href="<?=DIR_WS_TEMPLATES . TEMPLATE_NAME . '/'?>css/css/template.css?v=<?php echo rand();?>">
+<link href="<?=DIR_WS_TEMPLATES . TEMPLATE_NAME . '/'?>css/font-awesome.css" rel="stylesheet">
+<!--Googlefont-->
+<script src="<?=DIR_WS_TEMPLATES . TEMPLATE_NAME . '/'?>jquery/jquery-2.1.1.min.js"></script>
+<script src="<?=DIR_WS_TEMPLATES . TEMPLATE_NAME . '/'?>css/bootstrap/js/bootstrap.min.js"></script>
+<script src="<?=DIR_WS_TEMPLATES . TEMPLATE_NAME . '/'?>jquery/respond.min.js"></script>
+<script src="<?=DIR_WS_TEMPLATES . TEMPLATE_NAME . '/'?>css/bootstrap/bootstrap-datepicker.js"></script>
+<script src="<?=DIR_WS_TEMPLATES . TEMPLATE_NAME . '/'?>css/bootstrap/js/bootstrap-fileinput.js"></script>
+<script src="<?=DIR_WS_TEMPLATES . TEMPLATE_NAME . '/'?>jquery/jquery.loadmask.js"></script>
+<link rel="stylesheet" href="<?=DIR_WS_TEMPLATES . TEMPLATE_NAME . '/'?>css/bootstrap/css/bootstrap-datepicker.css">
 
-       	<!-- New Responsive section end CSS -->
-		<link href="<?=DIR_WS_TEMPLATES . TEMPLATE_NAME . '/'?>css/stylesheet.css" rel="stylesheet" />
-		<link rel="stylesheet" type="text/css" href="<?=DIR_WS_TEMPLATES . TEMPLATE_NAME . '/'?>css/lightbox.css" />
-		<link rel="stylesheet" type="text/css" href="<?=DIR_WS_TEMPLATES . TEMPLATE_NAME . '/'?>css/carousel.css" />
+<!-- New Responsive section end CSS -->
+<link href="<?=DIR_WS_TEMPLATES . TEMPLATE_NAME . '/'?>css/stylesheet.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="<?=DIR_WS_TEMPLATES . TEMPLATE_NAME . '/'?>css/lightbox.css" />
+<link rel="stylesheet" type="text/css" href="<?=DIR_WS_TEMPLATES . TEMPLATE_NAME . '/'?>css/carousel.css" />
 
-		<!-- Megnor www.templatemela.com - Start -->
-		<script type="text/javascript" src="<?=DIR_WS_TEMPLATES . TEMPLATE_NAME . '/'?>jquery/custom.js"></script>
-		<script type="text/javascript" src="<?=DIR_WS_TEMPLATES . TEMPLATE_NAME . '/'?>jquery/jstree.min.js"></script>
-		<script type="text/javascript" src="<?=DIR_WS_TEMPLATES . TEMPLATE_NAME . '/'?>jquery/carousel.min.js"></script>
-		<script type="text/javascript" src="<?=DIR_WS_TEMPLATES . TEMPLATE_NAME . '/'?>jquery/megnor.min.js"></script>
-		<script type="text/javascript" src="<?=DIR_WS_TEMPLATES . TEMPLATE_NAME . '/'?>jquery/jquery.custom.min.js"></script>
-		<script type="text/javascript" src="includes/javascript/fancyBox/jquery.fancybox.js?v=2.1.5"></script>
-		<link rel="stylesheet" type="text/css" href="includes/javascript/fancyBox/jquery.fancybox.css?v=2.1.5" media="screen" />
+<!-- Megnor www.templatemela.com - Start -->
+<script type="text/javascript" src="<?=DIR_WS_TEMPLATES . TEMPLATE_NAME . '/'?>jquery/custom.js"></script>
+<script type="text/javascript" src="<?=DIR_WS_TEMPLATES . TEMPLATE_NAME . '/'?>jquery/jstree.min.js"></script>
+<script type="text/javascript" src="<?=DIR_WS_TEMPLATES . TEMPLATE_NAME . '/'?>jquery/carousel.min.js"></script>
+<script type="text/javascript" src="<?=DIR_WS_TEMPLATES . TEMPLATE_NAME . '/'?>jquery/megnor.min.js"></script>
+<script type="text/javascript" src="<?=DIR_WS_TEMPLATES . TEMPLATE_NAME . '/'?>jquery/jquery.custom.min.js"></script>
+<script type="text/javascript" src="includes/javascript/fancyBox/jquery.fancybox.js?v=2.1.5"></script>
+<link rel="stylesheet" type="text/css" href="includes/javascript/fancyBox/jquery.fancybox.css?v=2.1.5" media="screen" />
+<?php if(file_exists(DIR_WS_IMAGES . 'logo/custom.css')) { ?>
+<link href="images/logo/custom.css" rel="stylesheet">
+<?php } ?>
 
-        <script type="text/javascript">
-        $(document).ready(function() {
-			$(".fancybox").fancybox({
-				openEffect	: 'none',
-				closeEffect	: 'none'
-			});
-		});
-        </script>
+<script type="text/javascript">
+$(document).ready(function() {
+	$(".fancybox").fancybox({
+		openEffect	: 'none',
+		closeEffect	: 'none'
+	});
+});
+</script>
 
 <script type="text/javascript">
 $(document).ready(function() {
@@ -113,46 +116,6 @@ function setQty(mode) {
 
 function refreshPrice() {
   // disable checkout button until ajax finishes loading
-<?php /* ?>
-  var href = $('#btn-buy-now').attr('onclick');
-  $('#btn-buy-now').attr('onclick', '');
-  $('.message-stack-container').delay(5000).slideUp();
-
-  var stockCheck = '-1'
-  var disableAddToCart = '-1'
-
-  var group = '0';
-  var id = '56';
-  var module = 'products';
-  var isPro = '1';
-  var nvp = $('#cart_quantity').serialize();
-  var jsonLink = 'http://reactorworks.webtenet.com/sunshinejoy/rpc.php?products&action=getPriceInfo&id=PID&group=GROUP&NVP&lCsid=b10e67fea8a13cac8bd210d00bbc88cc';
-  $.getJSON(jsonLink.replace('PID', id).replace('GROUP', group).replace('NVP', nvp).split('amp;').join(''),
-    function (data) {
-    var currencySymbolLeft = '&euro;';
-      var basePrice = currencySymbolLeft + data.price;
-      if (data.formatted != null) {
-        $('.content-products-info-price').html(data.formatted);
-      } else {
-        $('.content-products-info-price').html(basePrice);
-      }
-      if (data.qpbData != undefined && isPro == 1) {
-        $('#qpb-message').html('<div class=""><div class="col-sm-4 col-lg-4"></div><div class="col-sm-8 col-lg-8" style="padding:0 15px;"><div class="alert alert-warning small-margin-bottom"><span class="text-left"><i class="fa fa-caret-right"></i> Buy ' + data.qpbData.nextBreak + ' for <b>' + currencySymbolLeft + data.qpbData.nextPrice + '</b> each and <b><i>save ' + data.qpbData.youSave + '</span></i></b></span></div></div></div>');
-      }
-      $('#btn-buy-now').attr('onclick', href);
-      if (stockCheck == true) {
-        if (disableAddToCart == true) {
-          if (data.qoh < $("#Qty1").val()) {
-            $('#lowqoh').modal();
-            $("#btn-buy-now").attr('disabled', 'disabled');
-          } else {
-            $("#btn-buy-now").removeAttr('disabled');
-    }
-        }
-      }
-    }
-  );
-<?php */ ?>
 }
 </script>
 </head>
