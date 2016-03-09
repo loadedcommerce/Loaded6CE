@@ -11,7 +11,7 @@
 */
 
   require('includes/application_top.php');
-  
+
       if(!function_exists('cre_db_update')){
     function cre_db_update($table, $data, $link = 'db_link') {
     reset($data);
@@ -40,7 +40,7 @@
   define('DIR_WS_LOGO',HTTP_SERVER . DIR_WS_CATALOG . DIR_WS_IMAGES . 'logo/');
     // get languages
   $languages = tep_get_languages();
-  
+
     if (isset($_GET['action'])) {
     $action = $_GET['action'] ;
     }else if (isset($_POST['action'])){
@@ -50,7 +50,7 @@
    }
 
    if (isset($action) && $action == 'upload') {
-       
+
        for ($i=0; $i<sizeof($languages); $i++) {
            $store_brand_telephone = (isset($_POST['store_brand_telephone' . $languages[$i]['id']]) ? $_POST['store_brand_telephone' . $languages[$i]['id']] : '');
            $store_brand_fax = (isset($_POST['store_brand_fax' . $languages[$i]['id']]) ? $_POST['store_brand_fax' . $languages[$i]['id']] : '');
@@ -63,6 +63,14 @@
            $store_brand_image_existing = (isset($_POST['store_brand_image_existing' . $languages[$i]['id']]) ? $_POST['store_brand_image_existing' . $languages[$i]['id']] : '');
            $delete_image = (isset($_POST['delete_image' . $languages[$i]['id']]) ? $_POST['delete_image' . $languages[$i]['id']] : '');
 
+           $store_brand_favicon = (isset($_POST['store_brand_favicon' . $languages[$i]['id']]) ? $_POST['store_brand_favicon' . $languages[$i]['id']] : '');
+           $store_brand_favicon_existing = (isset($_POST['store_brand_favicon_existing' . $languages[$i]['id']]) ? $_POST['store_brand_favicon_existing' . $languages[$i]['id']] : '');
+           $delete_favicon = (isset($_POST['delete_favicon' . $languages[$i]['id']]) ? $_POST['delete_favicon' . $languages[$i]['id']] : '');
+
+           $store_og_image = (isset($_POST['store_og_image' . $languages[$i]['id']]) ? $_POST['store_og_image' . $languages[$i]['id']] : '');
+           $store_og_image_existing = (isset($_POST['store_og_image_existing' . $languages[$i]['id']]) ? $_POST['store_og_image_existing' . $languages[$i]['id']] : '');
+           $delete_store_og_image = (isset($_POST['delete_store_og_image' . $languages[$i]['id']]) ? $_POST['delete_store_og_image' . $languages[$i]['id']] : '');
+
            $facebook_link = (isset($_POST['facebook_link' . $languages[$i]['id']]) ? $_POST['facebook_link' . $languages[$i]['id']] : '');
            $twitter_link = (isset($_POST['twitter_link' . $languages[$i]['id']]) ? $_POST['twitter_link' . $languages[$i]['id']] : '');
            $pinterest_link = (isset($_POST['pinterest_link' . $languages[$i]['id']]) ? $_POST['pinterest_link' . $languages[$i]['id']] : '');
@@ -70,7 +78,8 @@
            $youtube_link = (isset($_POST['youtube_link' . $languages[$i]['id']]) ? $_POST['youtube_link' . $languages[$i]['id']] : '');
            $linkedin_link = (isset($_POST['linkedin_link' . $languages[$i]['id']]) ? $_POST['linkedin_link' . $languages[$i]['id']] : '');
            $store_brand_address = (isset($_POST['store_brand_address' . $languages[$i]['id']]) ? $_POST['store_brand_address' . $languages[$i]['id']] : '');
-           
+           $custom_css = (isset($_POST['custom_css' . $languages[$i]['id']]) ? $_POST['custom_css' . $languages[$i]['id']] : '');
+
            //delete image
            $deleted_image = false;
            if($delete_image !='' && $store_brand_image_existing !='' || $store_brand_image != ''){
@@ -82,8 +91,40 @@
                tep_db_query($delete_logo);
                $deleted_image = true;
            }
-           
-           //upload image        
+
+           //delete favicon
+           $deleted_favicon = false;
+           if($delete_favicon !='' && $store_brand_favicon_existing !='' || $store_brand_favicon != ''){
+             $favicon_query = tep_db_query("SELECT store_brand_image FROM " . TABLE_BRANDING_DESCRIPTION . " WHERE store_brand_favicon = '" . $store_brand_favicon_existing . "' AND language_id <> '" . $languages[$i]['id'] . "'");
+             if (tep_db_num_rows($favicon_query) == 0) {
+               unlink(DIR_FS_LOGO . $store_brand_favicon_existing);
+             }
+               $delete_favicon = "Update " . TABLE_BRANDING_DESCRIPTION . " set store_brand_favicon = '' where language_id = '" . $languages[$i]['id'] . "'";
+               tep_db_query($delete_favicon);
+               $deleted_favicon = true;
+           }
+
+           //delete og image
+           $deleted_store_og_image = false;
+           if($delete_store_og_image !='' && $store_og_image_existing !='' || $store_og_image != ''){
+             $favicon_query = tep_db_query("SELECT store_brand_image FROM " . TABLE_BRANDING_DESCRIPTION . " WHERE store_og_image = '" . $store_og_image_existing . "' AND language_id <> '" . $languages[$i]['id'] . "' and web_id = '".$web_id."'");
+             if (tep_db_num_rows($favicon_query) == 0) {
+               unlink(DIR_FS_LOGO . $store_og_image_existing);
+             }
+               $delete_store_og_image = "Update " . TABLE_BRANDING_DESCRIPTION . " set store_og_image = '' where language_id = '" . $languages[$i]['id'] . "' and web_id = '".$web_id."'";
+               tep_db_query($delete_store_og_image);
+               $deleted_store_og_image = true;
+           }
+
+           @unlink(DIR_FS_LOGO.'custom.css');
+           if(trim($custom_css) != "")
+           {
+           	 $fp = fopen(DIR_FS_LOGO.'custom.css', 'w');
+           	 fwrite($fp, $custom_css);
+           	 fclose($fp);
+           }
+
+           //upload image
                $store_brand_image_tmp = '';
                $store_brand_image_name = '';
                $store_brand_image_tmp = new upload('store_brand_image' . $languages[$i]['id']);
@@ -97,8 +138,40 @@
                    $store_brand_image_name = $store_brand_image_existing;
                }
                if($deleted_image) $store_brand_image_name = '';
-               
+
+           //upload favicon
+               $store_brand_favicon_tmp = '';
+               $store_brand_favicon_name = '';
+               $store_brand_favicon_tmp = new upload('store_brand_favicon' . $languages[$i]['id']);
+               $store_brand_favicon_tmp->set_destination(DIR_FS_LOGO);
+               #$store_brand_favicon_tmp->set_extensions('gif','jpg','png');
+               if ($store_brand_favicon_tmp->parse() && $store_brand_favicon_tmp->save()) {
+                   $store_brand_favicon_name = $store_brand_favicon_tmp->filename;
+               } else if (is_file(DIR_FS_LOGO . $store_brand_favicon)){
+                   $store_brand_favicon_name = $store_brand_favicon;
+               } else {
+                   $store_brand_favicon_name = $store_brand_favicon_existing;
+               }
+               if($deleted_favicon) $store_brand_favicon_name = '';
+
+           //upload og image
+               $store_og_image_tmp = '';
+               $store_og_image_name = '';
+               $store_og_image_tmp = new upload('store_og_image' . $languages[$i]['id']);
+               $store_og_image_tmp->set_destination(DIR_FS_LOGO);
+               #$store_og_image_tmp->set_extensions('gif','jpg','png');
+               if ($store_og_image_tmp->parse() && $store_og_image_tmp->save()) {
+                   $store_og_image_name = $store_og_image_tmp->filename;
+               } else if (is_file(DIR_FS_LOGO . $store_og_image)){
+                   $store_og_image_name = $store_og_image;
+               } else {
+                   $store_og_image_name = $store_og_image_existing;
+               }
+               if($deleted_store_og_image) $store_og_image_name = '';
+
                $sql_data_array = array( 'store_brand_image' =>   $store_brand_image_name,
+               							'store_brand_favicon' =>   $store_brand_favicon_name,
+               							'store_og_image' =>   $store_og_image_name,
                                         'store_brand_slogan' =>    tep_db_prepare_input($store_brand_slogan),
                                         'store_brand_telephone' =>  tep_db_prepare_input($store_brand_telephone),
                                         'store_brand_fax' => tep_db_prepare_input($store_brand_fax),
@@ -107,6 +180,7 @@
                                         'store_brand_support_email' => tep_db_prepare_input($store_brand_support_email),
                                         'store_brand_support_phone' => tep_db_prepare_input($store_brand_support_phone),
                                         'store_brand_address' => tep_db_prepare_input($store_brand_address),
+                                        'custom_css' => tep_db_prepare_input($custom_css),
                                         'facebook_link' => tep_db_prepare_input($facebook_link),
                                         'twitter_link' => tep_db_prepare_input($twitter_link),
                                         'pinterest_link' => tep_db_prepare_input($pinterest_link),
@@ -116,11 +190,11 @@
                                         'language_id' => tep_db_input($languages[$i]['id'])
                                         );
                cre_db_update(TABLE_BRANDING_DESCRIPTION, $sql_data_array);
-    
+
    }// language loop end
     tep_redirect(tep_href_link(FILENAME_BRANDING_MANAGER));
  }// action end
- 
+
   //check directory is exists and writable
   $error = false;
   if (is_dir(DIR_FS_LOGO)) {
@@ -131,7 +205,7 @@
   } else {
     $messageStack->add('search',ERROR_LOGO_IMAGE_DIRECTORY_DOES_NOT_EXIST, 'error');
     $error = true;
-  } 
+  }
 ?>
 <!DOCTYPE html>
 <head>
@@ -192,11 +266,11 @@
     <!-- header //-->
     <?php require(DIR_WS_INCLUDES . 'header.php'); ?>
     <!-- header_eof //-->
-      
+
     <!-- left_navigation //-->
     <?php require(DIR_WS_INCLUDES . 'column_left.php'); ?>
     <!-- left_navigation_eof //-->
-      
+
     <!-- begin #content -->
     <div id="content" class="content">
       <!-- begin breadcrumb -->
@@ -208,7 +282,7 @@
       <!-- begin page-header -->
       <h1 class="page-header"><?php echo HEADING_TITLE; ?></h1>
       <!-- end page-header -->
-      
+
     <!-- begin panel -->
     <div class="panel panel-inverse"><table border="0" width="100%" cellspacing="0" cellpadding="0" class="data-table">
         <tr>
@@ -223,7 +297,7 @@
 for ($i=0; $i<sizeof($languages); $i++) {
 //get existing brand info
 $store_brand_info_qry = tep_db_query("SELECT * from " . TABLE_BRANDING_DESCRIPTION ." where language_id = '" . $languages[$i]['id'] . "'");
-$store_brand_info = tep_db_fetch_array($store_brand_info_qry); 
+$store_brand_info = tep_db_fetch_array($store_brand_info_qry);
 
 ?>
                     <div class="tab-page" id="<?php echo $languages[$i]['name'];?>">
@@ -257,8 +331,8 @@ $store_brand_info = tep_db_fetch_array($store_brand_info_qry);
           ?>
           <tr>
             <td></td>
-            <td valign="middle"><?php 
-            if( file_exists( DIR_FS_LOGO . $store_brand_info['store_brand_image'] )) { 
+            <td valign="middle"><?php
+            if( file_exists( DIR_FS_LOGO . $store_brand_info['store_brand_image'] )) {
                 echo tep_image(DIR_WS_LOGO . $store_brand_info['store_brand_image']) ;
             } else {
                 echo '<span class="errorText">' . BRANDING_ERROR_IMAGE_MISSING .'</span>';
@@ -284,11 +358,58 @@ $store_brand_info = tep_db_fetch_array($store_brand_info_qry);
             <td><?php echo STORE_BRAND_BRANDING_SUPPORT_PHONE; ?></td>
             <td><?php echo tep_draw_input_field('store_brand_support_phone' . $languages[$i]['id'],$store_brand_info['store_brand_support_phone'],'class="form-control"'); ?></td>
           </tr>
+
+          <tr>
+            <td><?php echo STORE_BRAND_COMPANY_FAVICON; ?></td>
+            <td><?php echo tep_draw_file_field('store_brand_favicon' . $languages[$i]['id']);  if (tep_not_null($store_brand_info['store_brand_favicon']) && file_exists( DIR_FS_LOGO . $store_brand_info['store_brand_favicon'] )) { echo '<br>' . DIR_FS_LOGO . $store_brand_info['store_brand_favicon']; }?>
+            </td>
+          </tr>
+          <?php
+          if (tep_not_null($store_brand_info['store_brand_favicon']) ) {
+          ?>
+          <tr>
+            <td></td>
+            <td valign="middle"><?php
+            if( file_exists( DIR_FS_LOGO . $store_brand_info['store_brand_favicon'] )) {
+                echo tep_image(DIR_WS_LOGO . $store_brand_info['store_brand_favicon']) ;
+            } else {
+                echo '<span class="errorText">' . BRANDING_ERROR_FAVICON_MISSING .'</span>';
+            }
+            echo ' &nbsp; ' . tep_draw_hidden_field('store_brand_favicon_existing' . $languages[$i]['id'], $store_brand_info['store_brand_favicon']) . tep_draw_checkbox_field('delete_favicon' . $languages[$i]['id'],'yes') . '&nbsp;' .  DELETE_STORE_BRANDING_COMPANY_FAVICON;?></td>
+          </tr>
+          <?php
+          }
+          ?>
+          <tr>
+            <td class="main"><?php echo STORE_BRAND_OG_IMGE; ?></td>
+            <td class="main"><?php echo tep_draw_file_field('store_og_image' . $languages[$i]['id']);  if (tep_not_null($store_brand_info['store_og_image']) && file_exists( DIR_FS_LOGO . $store_brand_info['store_og_image'] )) { echo '<br>' . DIR_FS_LOGO . $store_brand_info['store_og_image']; }?>
+            </td>
+          </tr>
+          <?php
+          if (tep_not_null($store_brand_info['store_og_image']) ) {
+          ?>
+          <tr>
+            <td class="main"></td>
+            <td class="main" valign="middle"><?php
+            if( file_exists( DIR_FS_LOGO . $store_brand_info['store_og_image'] )) {
+                echo tep_image(DIR_WS_LOGO . $store_brand_info['store_og_image']) ;
+            } else {
+                echo '<span class="errorText">' . BRANDING_ERROR_OG_IMAGE_MISSING .'</span>';
+            }
+            echo ' &nbsp; ' . tep_draw_hidden_field('store_og_image_existing' . $languages[$i]['id'], $store_brand_info['store_og_image']) . tep_draw_checkbox_field('delete_store_og_image' . $languages[$i]['id'],'yes') . '&nbsp;' .  DELETE_STORE_BRANDING_OG_IMAGE;?></td>
+          </tr>
+          <?php
+          }
+          ?>
+
           <tr>
             <td class="main"><?php echo STORE_BRAND_BRANDING_ADDRESS; ?></td>
             <td class="main"><?php echo tep_draw_textarea_field('store_brand_address' . $languages[$i]['id'],true, 40, 10, $store_brand_info['store_brand_address']); ?></td>
           </tr>
-
+          <tr>
+            <td class="main"><?php echo STORE_BRAND_BRANDING_CUSTOM_CSS; ?></td>
+            <td class="main"><?php echo tep_draw_textarea_field('custom_css' . $languages[$i]['id'],true, 40, 10, $store_brand_info['custom_css']); ?></td>
+          </tr>
           <tr>
             <td class="main"><?php echo STORE_BRAND_BRANDING_FACEBOOK_LINK; ?></td>
             <td class="main"><?php echo tep_draw_input_field('facebook_link' . $languages[$i]['id'],$store_brand_info['facebook_link']); ?></td>
@@ -333,12 +454,12 @@ $store_brand_info = tep_db_fetch_array($store_brand_info_qry);
                 </td>
               </tr>
               <tr>
-                <td align="right" colspan="2"><?php 
+                <td align="right" colspan="2"><?php
         if (isset($_GET[tep_session_name()])) {
           echo tep_draw_hidden_field(tep_session_name(), $_GET[tep_session_name()]);
         }
-if (!$error) { 
-  echo tep_image_submit('button_update.gif', IMAGE_UPDATE_STORE_BRANDING); 
+if (!$error) {
+  echo tep_image_submit('button_update.gif', IMAGE_UPDATE_STORE_BRANDING);
 }
 ?></td>
               </tr>

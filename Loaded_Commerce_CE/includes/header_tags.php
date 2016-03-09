@@ -584,6 +584,7 @@ switch (true) {
 echo $cre_RCI->get('headertags', 'addswitch');
 //RCI end
 
+$favicon_path = cre_site_branding_rspv('favicon');
 echo ' <meta http-equiv="Content-Type" content="text/html; charset=' . CHARSET  . '">'."\n";
 echo ' <title>' . $tags_array['title'] . '</title>' . "\n";
 echo ' <meta name="Description" content="' . $tags_array['desc'] . '">' . "\n";
@@ -591,5 +592,8 @@ echo ' <meta name="Keywords" content="' . $tags_array['keywords'] . '">' . "\n";
 echo ' <meta name="robots" content="noodp">' . "\n";
 echo ' <meta name="revisit-after" content="30 days">' . "\n";
 echo ' <meta name="generator" content="' . PROJECT_VERSION . '">' . "\n";
+echo ' <link rel="shortcut icon" href="'. $favicon_path .'" />' . "\n";
+echo ' <link rel="icon" href="'. $favicon_path .'" type="image/vnd.microsoft.icon" />' . "\n";
+echo ' <link rel="icon" type="image/png" href="'. $favicon_path .'" />' . "\n";
 echo ' <!-- EOF: Generated Meta Tags -->' . "\n";
 ?>

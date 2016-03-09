@@ -262,6 +262,7 @@ CREATE TABLE banners_history (
 #
 CREATE TABLE branding_description (
   store_brand_image varchar(64) NOT NULL DEFAULT '',
+  store_brand_favicon varchar(255) NOT NULL DEFAULT '',
   store_brand_slogan varchar(96) NOT NULL DEFAULT '',
   store_brand_telephone varchar(16) NOT NULL DEFAULT '',
   store_brand_fax varchar(16) NOT NULL DEFAULT '',
