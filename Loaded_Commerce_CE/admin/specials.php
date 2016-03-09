@@ -122,7 +122,7 @@
 </head>
 <body>
 <div id="popupcalendar" class="text"></div>
-<body>
+    <!-- begin #page-container -->
     <div id="page-container" class="fade page-sidebar-fixed page-header-fixed gradient-enabled">
     <!-- header //-->
     <?php require(DIR_WS_INCLUDES . 'header.php'); ?>
@@ -136,25 +136,16 @@
     <div id="content" class="content">
       <!-- begin breadcrumb -->
       <ol class="breadcrumb pull-right">
-        <li><a href="javascript:;">Home</a></li>
-        <li><a href="javascript:;">Tools</a></li>
-        <li class="active"><?php echo $cfg_group['configuration_group_title']; ?></li>
+        <li>Create &nbsp; <a title="<?php echo BOX_MANUAL_ORDER_CREATE_ACCOUNT;?>" href="<?php echo tep_href_link(FILENAME_CREATE_ACCOUNT,'','SSL');?>" class="btn btn-xs btn-header"><i class="fa fa-user"></i><span class="label">+</span></a> <a title="<?php echo BOX_MANUAL_ORDER_CREATE_ORDER;?>" href="<?php echo tep_href_link(FILENAME_CREATE_ORDER,'','SSL');?>" class="btn btn-xs btn-header"><i class="fa fa-shopping-cart"></i><span class="label">+</span></a></li>
+        <li>Search &nbsp; <a href="javascript:;" class="btn btn-header btn-xs header-popover" id="ProductsPopover">Products</a> <a href="javascript:;" class="btn btn-header btn-xs header-popover" id="CustomerPopover">Customers</a> <a href="javascript:;" class="btn btn-header btn-xs header-popover" id="OrdersPopover">Orders</a> <a href="javascript:;" class="btn btn-header btn-xs header-popover" id="PagesPopover">Pages</a></li>
       </ol>
       <!-- end breadcrumb -->
       <!-- begin page-header -->
-      <h1 class="page-header"><?php echo $cfg_group['configuration_group_title']; ?></h1>
+      <h1 class="page-header"><?php echo HEADING_TITLE; ?></h1>
       <!-- end page-header -->
       
     <!-- begin panel -->
     <div class="panel panel-inverse"><table border="0" width="100%" cellspacing="0" cellpadding="0">
-      <tr>
-        <td width="100%"><table border="0" width="100%" cellspacing="0" cellpadding="0">
-          <tr>
-            <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
-            <td class="pageHeading" align="right"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-          </tr>
-        </table></td>
-      </tr>
 <?php
   if ( ($action == 'new') || ($action == 'edit') ) {
     $form_action = 'insert';
