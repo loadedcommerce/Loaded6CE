@@ -76,7 +76,7 @@
   <table border="0" cellpadding="0" cellspacing="0" style="margin: 1em auto; width: 600px;" align="center">
     <tr>
        <td></td>
-       <td style="padding-bottom: 1em;" align="left"><a href="http://www.creloaded.com/products/shoppingcarts/" target="_blank"><img border="0" src="images/window-logo.png" /></a></td>
+       <td style="padding-bottom: 1em;" align="left"><a href="http://store.loadedcommerce.com" target="_blank"><img border="0" src="images/window-logo.png" /></a></td>
        <td></td>
     </tr>
      <tr>
@@ -97,7 +97,7 @@
         <td class="box-content" valign="top">
           <div class="box-text" style="padding: 1em 0; line-height: 1.8em; font-size: 14px; color: #333;">
           <p>
-          This feature is not available with your current CRE Loaded product.  If you'd like to upgrade, you'll get additional features, support, and flexibility.</p><p><a href="http://www.creloaded.com/products/shoppingcarts/creloadedpro/" target="_blank">CRE Loaded Professional</a> and <a href="http://www.creloaded.com/creloaded/products/shoppingcarts/creloadedb2b/" target="_blank">CRE Loaded Professional B2B</a> include a complete Content Management System, automatic URL search engine optimization and additional email and phone support.  Plus, they have increased capabilities with additional features such as one page checkout and abandoned cart recovery.
+          This feature is not available with your current Loaded Commerce product.  If you'd like to upgrade, you'll get additional features, support, and flexibility.</p><p><a href="http://www.creloaded.com/products/shoppingcarts/creloadedpro/" target="_blank">Loaded Commerce Professional</a> and <a href="http://www.creloaded.com/creloaded/products/shoppingcarts/creloadedb2b/" target="_blank">Loaded Commerce Professional B2B</a> include a complete Content Management System, automatic URL search engine optimization and additional email and phone support.  Plus, they have increased capabilities with additional features such as one page checkout and abandoned cart recovery.
           </p>
           </div>
         </td> 
@@ -107,7 +107,7 @@
         <td class="box-left">&nbsp;</td>
         <td align="right" class="box-content" valign="bottom">
         <div style="padding-top: 1em;">
-        <a href="http://www.creloaded.com/products/shoppingcarts/" target="_blank"><img src="images/window-more.png" /></a>
+        <a href="http://store.loadedcommerce.com" target="_blank"><img src="images/window-more.png" /></a>
         </div>
         </td>
         <td class="box-right" style="width: 48px;">&nbsp;</td>
