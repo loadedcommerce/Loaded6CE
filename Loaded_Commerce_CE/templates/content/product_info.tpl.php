@@ -14,7 +14,9 @@
 echo $cre_RCI->get('global', 'top');
 echo $cre_RCI->get('productinfotabs', 'top');
 // RCI code eof
-echo tep_draw_form('cart_quantity', tep_href_link(FILENAME_PRODUCT_INFO, tep_get_all_get_params(array('action', 'products_id', 'id')) . 'action=add_product' . '&' . $params), 'post', 'enctype="multipart/form-data"'); ?>
+echo tep_draw_form('cart_quantity', tep_href_link(FILENAME_PRODUCT_INFO, tep_get_all_get_params(array('action', 'products_id', 'id')) . 'action=add_product' . '&' . $params), 'post', 'enctype="multipart/form-data"');
+echo tep_draw_hidden_field('products_id', $product_info['products_id']);
+?>
 
 <div class="row" id="content">
 <?php
