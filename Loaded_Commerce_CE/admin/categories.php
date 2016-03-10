@@ -1325,7 +1325,7 @@ function trim(str) {
                       <?php
                       for ($i=0; $i<sizeof($languages); $i++) {
                         ?>
-                        <li><a aria-expanded="true" href="#default-tab-<?php echo $languages[$i]['id'];?>" data-toggle="tab"><?php echo tep_image(HTTP_SERVER . DIR_WS_CATALOG_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], $languages[$i]['name'],'align="absmiddle" style="height:16px; width:30px;"') . '&nbsp;' .$languages[$i]['name'];?></a></li>
+                        <li <?php echo (($languages[$i]['id'] == 1)? 'class="active"':'');?>><a aria-expanded="true" href="#default-tab-<?php echo $languages[$i]['id'];?>" data-toggle="tab" style="border-top:1px solid #C1CCD1 !important; border-left:1px solid #C1CCD1 !important;"><?php echo tep_image(HTTP_SERVER . DIR_WS_CATALOG_LANGUAGES . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], $languages[$i]['name'],'align="absmiddle" style="height:16px; width:30px;"') . '&nbsp;' .$languages[$i]['name'];?></a></li>
                     <?php
                       }
                     echo '</ul>';
