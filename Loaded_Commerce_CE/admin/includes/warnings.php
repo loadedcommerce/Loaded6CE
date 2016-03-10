@@ -89,28 +89,4 @@
   if (function_exists('ini_get') && ((bool)ini_get('file_uploads') == false) ) {
     $messageStack->add(WARNING_FILE_UPLOADS_DISABLED, 'warning');
   }
-
-  if ($messageStack->size('header') > 0) {
-    echo $messageStack->output('header');
-  }
-
-  if (isset($_GET['error_message']) && tep_not_null($_GET['error_message'])) {
-?>
-<table border="0" width="100%" cellspacing="0" cellpadding="2">
-  <tr class="headerError">
-    <td class="headerError"><?php echo htmlspecialchars(urldecode($_GET['error_message'])); ?></td>
-  </tr>
-</table>
-<?php
-  }
-
-  if (isset($_GET['info_message']) && tep_not_null($_GET['info_message'])) {
-?>
-<table border="0" width="100%" cellspacing="0" cellpadding="2">
-  <tr class="headerInfo">
-    <td class="headerInfo"><?php echo htmlspecialchars($_GET['info_message']); ?></td>
-  </tr>
-</table>
-<?php
-  }
 ?>

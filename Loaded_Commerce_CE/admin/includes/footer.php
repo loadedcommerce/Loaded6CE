@@ -165,8 +165,3 @@ $('body').on('click', function (e) {
 // RCI bottom
 echo $cre_RCI->get('footer', 'bottom');
 ?>
-<!-- warnings //-->
-<div style="position:absolute; top:0; width:100%;">
-<?php require(DIR_WS_INCLUDES . 'warnings.php'); ?>
-</div>
-<!-- warning_eof //-->
