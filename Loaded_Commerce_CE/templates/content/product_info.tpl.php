@@ -184,33 +184,6 @@ echo tep_draw_form('cart_quantity', tep_href_link(FILENAME_PRODUCT_INFO, tep_get
     </div>
   <script type="text/javascript">var addthis_config = {"data_track_clickback":true};</script>
   <script type="text/javascript" src="https://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4d9b61612caae177"></script>
-<hr class="small-margin-top small-margin-bottom">
-    	            <!-- attributes -->
-		            <?php
-		              $products_id_tmp = $product_info['products_id'];
-		            if(tep_subproducts_parent($products_id_tmp)){
-		              $products_id_query = tep_subproducts_parent($products_id_tmp);
-		            } else {
-		              $products_id_query = $products_id_tmp;
-		            }
-		            if($product_has_sub > '0') {
-		              if ((defined('PRODUCT_INFO_SUB_PRODUCT_ATTRIBUTES') && PRODUCT_INFO_SUB_PRODUCT_ATTRIBUTES == 'False')) {
-		                // 2.a) PRODUCT_INFO_SUB_PRODUCT_ATTRIBUTES = False
-		                //        -- Show attributes to main product only
-		                $load_attributes_for = $products_id_query;
-		                //$load_attributes_for = $products_id_query;
-		                include(DIR_WS_MODULES . 'product_info/product_attributes.php');
-		              } else {
-		                // 2.b) PRODUCT_INFO_SUB_PRODUCT_ATTRIBUTES = True
-		                //        -- Show attributes to sub product only
-		              }
-		            } else {
-		              // show attributes for parent only
-		              $load_attributes_for = $products_id_query;
-		              include(DIR_WS_MODULES . 'product_info/product_attributes.php');
-		            }
-		            ?>
-		            <!-- attributes eof -->
 		            <!-- sub products -->
 		            <?php
 		    // sub product start
@@ -251,8 +224,12 @@ echo tep_draw_form('cart_quantity', tep_href_link(FILENAME_PRODUCT_INFO, tep_get
 
 <div class="well large-margin-top margin-bottom">
 <div class="content-products-info-price-container clearfix">
-<span class="content-products-info-price pull-left lt-blue"><?php echo $products_price; ?></span>
-    </div>
+	<?php
+		$load_attributes_for = $product_info['products_id'];
+		include(DIR_WS_MODULES . 'product_info/product_attributes.php');
+	?>
+</div>
+	<div class="content-products-info-price-container clearfix"> <span class="content-products-info-price pull-left lt-blue"><?php echo $products_price; ?></span> </div>
       <div class="content-products-info-reviews-container large-margin-bottom">
        <label class="content-products-info-reviews-rating-label with-padding-no-top-bottom">Model:&nbsp;<?php echo $product_info['products_model']; ?></label><br/>
        <label class="content-products-info-reviews-rating-label with-padding-no-top-bottom">Manufacturers:&nbsp;<?php echo tep_get_manufacturers_name($product_info['manufacturers_id']); ?></label>
