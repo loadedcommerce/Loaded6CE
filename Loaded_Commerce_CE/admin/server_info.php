@@ -88,8 +88,8 @@ function checkINI($option) {
       <!-- end page-header -->
       
     <!-- begin panel -->
-    <div class="panel panel-inverse"> <table cellpadding="2" cellspacing="2" border="0" width="100%">
-            <tr><td colspan="3"><a href="http://www.creloaded.com/" target="_blank"><img border="0" src="images/loaded_header_logo.gif" alt="CRE Loaded"  /></a><h1 class="p"><?php echo PROJECT_VERSION . ' at revision:' . INSTALLED_VERSION_REVISION; ?></h1></td></tr>
+    <div class="panel panel-inverse" style="background-color:#FFFFFF !important"> <table cellpadding="2" cellspacing="2" border="0" width="100%">
+            <tr><td colspan="3"><a href="http://www.loadedcommerce.com/" target="_blank"><?php echo tep_image(DIR_WS_CATALOG_IMAGES . STORE_LOGO ,STORE_NAME,'','','style="height:64px"');?></a><h1 class="p"><?php echo PROJECT_VERSION . ' at revision:' . INSTALLED_VERSION_REVISION; ?></h1></td></tr>
             <?php
             // RCI include version files
             $returned_rci = $cre_RCI->get('serverinfo', 'version');
