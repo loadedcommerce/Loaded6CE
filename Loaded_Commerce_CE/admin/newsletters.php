@@ -96,16 +96,20 @@
     }
   }
 ?>
-<!DOCTYPE html>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html <?php echo HTML_PARAMS; ?>>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
 <title><?php echo TITLE; ?></title>
-<link rel="icon" type="image/png" href="favicon.ico" />
 <script type="text/javascript" src="<?php echo (($request_type == 'SSL') ? 'https:' : 'http:'); ?>//ajax.googleapis.com/ajax/libs/jquery/<?php echo JQUERY_VERSION; ?>/jquery.min.js"></script>
-
-
+<script type="text/javascript">
+  if (typeof jQuery == 'undefined') {
+    //alert('You are running a local copy of jQuery!');
+    document.write(unescape("%3Cscript src='includes/javascript/jquery-1.6.2.min.js' type='text/javascript'%3E%3C/script%3E"));
+  }
+</script>
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
-                                                             <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
+  <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
   <!-- ================== BEGIN BASE CSS STYLE ================== -->
   <link href="<?php echo (($request_type == 'SSL') ? 'https:' : 'http:'); ?>//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
   <link href="assets/plugins/jquery-ui/themes/base/minified/jquery-ui.min.css" rel="stylesheet" />
@@ -122,80 +126,80 @@
   <link href="assets/plugins/bootstrap-datepicker/css/datepicker.css" rel="stylesheet" />
   <link href="assets/plugins/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet" />
     <link href="assets/plugins/gritter/css/jquery.gritter.css" rel="stylesheet" />  
+    <link href="assets/plugins/DataTables/media/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/plugins/DataTables/extensions/Select/css/select.bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/plugins/DataTables/extensions/Responsive/css/responsive.bootstrap.min.css" rel="stylesheet" />
   <!-- ================== END PAGE LEVEL STYLE ================== -->
   <script language="javascript" src="includes/general.js"></script>
   <script type="text/javascript" src="includes/menu.js"></script>
-</head>
+
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
 <!--[if IE]>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet-ie.css">
 <![endif]-->
-<?php 
+<?php
 // Load Editor
 echo tep_load_html_editor();
 echo tep_insert_html_editor('content','advanced','500');
 ?>
-<body>
+<script language="javascript" src="includes/general.js"></script>
+<link rel="stylesheet" type="text/css" href="includes/headernavmenu.css">
+<script type="text/javascript" src="includes/menu.js"></script>
+</head>
+<body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF">
 <div id="spiffycalendar" class="text"></div>
-<body>
+    <!-- begin #page-container -->
     <div id="page-container" class="fade page-sidebar-fixed page-header-fixed gradient-enabled">
     <!-- header //-->
     <?php require(DIR_WS_INCLUDES . 'header.php'); ?>
     <!-- header_eof //-->
-      
+
     <!-- left_navigation //-->
     <?php require(DIR_WS_INCLUDES . 'column_left.php'); ?>
     <!-- left_navigation_eof //-->
-      
+
     <!-- begin #content -->
-    <div id="content" class="content">
+    <div id="contentt" class="content">
       <!-- begin breadcrumb -->
       <ol class="breadcrumb pull-right">
-        <li><a href="javascript:;">Home</a></li>
-        <li><a href="javascript:;">Tools</a></li>
-        <li class="active"><?php echo $cfg_group['configuration_group_title']; ?></li>
+        <li>Create &nbsp; <a title="<?php echo BOX_MANUAL_ORDER_CREATE_ACCOUNT;?>" href="<?php echo tep_href_link(FILENAME_CREATE_ACCOUNT,'','SSL');?>" class="btn btn-xs btn-header"><i class="fa fa-user"></i><span class="label">+</span></a> <a title="<?php echo BOX_MANUAL_ORDER_CREATE_ORDER;?>" href="<?php echo tep_href_link(FILENAME_CREATE_ORDER,'','SSL');?>" class="btn btn-xs btn-header"><i class="fa fa-shopping-cart"></i><span class="label">+</span></a></li>
+        <li>Search &nbsp; <a href="javascript:;" class="btn btn-header btn-xs header-popover" id="ProductsPopover">Products</a> <a href="javascript:;" class="btn btn-header btn-xs header-popover" id="CustomerPopover">Customers</a> <a href="javascript:;" class="btn btn-header btn-xs header-popover" id="OrdersPopover">Orders</a> <a href="javascript:;" class="btn btn-header btn-xs header-popover" id="PagesPopover">Pages</a></li>
       </ol>
       <!-- end breadcrumb -->
       <!-- begin page-header -->
-      <h1 class="page-header"><?php echo $cfg_group['configuration_group_title']; ?></h1>
+      <h1 class="page-header"><?php echo HEADING_TITLE; ?></h1>
       <!-- end page-header -->
-      
+
     <!-- begin panel -->
-    <div class="panel panel-inverse"><table border="0" width="100%" cellspacing="0" cellpadding="0">
-      <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
-          <tr>
-            <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
-            <td class="pageHeading" align="right"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-          </tr>
-        </table></td>
-      </tr>
+
+    <div class="row">
+
 <?php
   if ($action == 'new') {
     $form_action = 'insert';
-    
+
     $parameters = array('title' => '',
                         'content' => '',
                         'module' => '');
-    
+
     $nInfo = new objectInfo($parameters);
-    
+
     if (isset($_GET['nID'])) {
       $form_action = 'update';
-      
+
       $nID = tep_db_prepare_input($_GET['nID']);
-      
+
       $newsletter_query = tep_db_query("select title, content, module from " . TABLE_NEWSLETTERS . " where newsletters_id = '" . (int)$nID . "'");
       $newsletter = tep_db_fetch_array($newsletter_query);
-      
+
       $nInfo->objectInfo($newsletter);
     } elseif ($_POST) {
       $nInfo->objectInfo($_POST);
     }
-    
+
     $file_extension = substr($PHP_SELF, strrpos($PHP_SELF, '.'));
     $directory_array = array();
-  
+
     if ($dir = dir(DIR_WS_MODULES . 'newsletters/')) {
       while ($file = $dir->read()) {
         if (!is_dir(DIR_WS_MODULES . 'newsletters/' . $file)) {
@@ -207,11 +211,13 @@ echo tep_insert_html_editor('content','advanced','500');
       sort($directory_array);
       $dir->close();
     }
-    
+
     for ($i=0, $n=sizeof($directory_array); $i<$n; $i++) {
       $modules_array[] = array('id' => substr($directory_array[$i], 0, strrpos($directory_array[$i], '.')), 'text' => substr($directory_array[$i], 0, strrpos($directory_array[$i], '.')));
     }
 ?>
+     <div class="col-md-12">
+     <table border="0" cellspacing="0" cellpadding="2" width="100%" class="table">
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
       </tr>
@@ -247,6 +253,8 @@ echo tep_insert_html_editor('content','advanced','500');
           </tr>
         </table></td>
       </form></tr>
+     </table>
+   </div>
 <?php
   } elseif ($action == 'preview') {
     $nID = tep_db_prepare_input($_GET['nID']);
@@ -255,7 +263,24 @@ echo tep_insert_html_editor('content','advanced','500');
     $newsletter = tep_db_fetch_array($newsletter_query);
 
     $nInfo = new objectInfo($newsletter);
+
+    $module_name = $nInfo->module;
+    if($module_name == "newsletter") {
+      $frm_action =  'page=' . $_GET['page'] . '&nID=' . $_GET['nID'] . '&action=confirm';
+      $s_module_name = TEXT_CUSTOMER_NEWSLETTER_NAME;
+    } else if($module_name == "product_notification") {
+      $frm_action =  'page=' . $_GET['page'] . '&nID=' . $_GET['nID'] . '&action=confirm' ;
+      $s_module_name = TEXT_PRODUCT_NOTIFICATIONS_NEWSLETTER_NAME;
+    } else if($module_name == "affiliate_newsletter") {
+      $s_module_name = TEXT_AFFILIATE_NEWSLETTER_NAME;
+    }
 ?>
+     <div class="col-md-12">
+     <table border="0" cellspacing="0" cellpadding="2" width="100%" class="table">
+
+      <tr>
+        <td class="main"><B><?php echo TEXT_NEWSLETTER_MODULE;?></B><?php echo $s_module_name;?></td>
+      </tr>
       <tr>
         <td align="right"><?php echo '<a href="' . tep_href_link(FILENAME_NEWSLETTERS, 'page=' . $_GET['page'] . '&nID=' . $_GET['nID']) . '">' . tep_image_button('button_back.gif', IMAGE_BACK) . '</a>'; ?></td>
       </tr>
@@ -265,51 +290,253 @@ echo tep_insert_html_editor('content','advanced','500');
       <tr>
         <td align="right"><?php echo '<a href="' . tep_href_link(FILENAME_NEWSLETTERS, 'page=' . $_GET['page'] . '&nID=' . $_GET['nID']) . '">' . tep_image_button('button_back.gif', IMAGE_BACK) . '</a>'; ?></td>
       </tr>
+     </table></div>
 <?php
   } elseif ($action == 'send') {
     $nID = tep_db_prepare_input($_GET['nID']);
-    
+
+    if ( ($action == 'preview') && isset($_POST['customers_email_address']) ) {
+      switch ($_POST['customers_email_address']) {
+        case '***':
+          $mail_sent_to = TEXT_ALL_CUSTOMERS;
+          break;
+        case '**D':
+          $mail_sent_to = TEXT_NEWSLETTER_CUSTOMERS;
+          break;
+        default:
+          $mail_sent_to = $_POST['customers_email_address'];
+          break;
+        }
+    }
+
     $newsletter_query = tep_db_query("select title, content, module from " . TABLE_NEWSLETTERS . " where newsletters_id = '" . (int)$nID . "'");
     $newsletter = tep_db_fetch_array($newsletter_query);
     $nInfo = new objectInfo($newsletter);
-    
+
     include(DIR_WS_LANGUAGES . $language . '/modules/newsletters/' . $nInfo->module . substr($PHP_SELF, strrpos($PHP_SELF, '.')));
     include(DIR_WS_MODULES . 'newsletters/' . $nInfo->module . substr($PHP_SELF, strrpos($PHP_SELF, '.')));
     $module_name = $nInfo->module;
     $module = new $module_name($nInfo->title, $nInfo->content);
+
+    $customers = array();
+    $customers[] = array('id' => '***', 'text' => TEXT_ALL_CUSTOMERS);
+    $customers[] = array('id' => '**D', 'text' => TEXT_NEWSLETTER_CUSTOMERS);
+    $frm_para = '';
+    if($module_name == "newsletter") {
+      $frm_action =  'page=' . $_GET['page'] . '&nID=' . $_GET['nID'] . '&action=confirm';
+      $s_module_name = TEXT_CUSTOMER_NEWSLETTER_NAME;
+    } else if($module_name == "product_notification") {
+      $frm_action =  'page=' . $_GET['page'] . '&nID=' . $_GET['nID'] . '&action=confirm' ;
+      $s_module_name = TEXT_PRODUCT_NOTIFICATIONS_NEWSLETTER_NAME;
+    } else if($module_name == "affiliate_newsletter") {
+      $s_module_name = TEXT_AFFILIATE_NEWSLETTER_NAME;
+    }
+    $frm_para = ' onSubmit="return selectAll_group(\'notifications\', \'chosen_group[]\')"';
 ?>
+     <div class="col-md-12">
+     <table border="0" cellspacing="0" cellpadding="2" width="100%" class="table">
+
       <tr>
-        <td><?php if ($module->show_choose_audience) { echo $module->choose_audience(); } else { echo $module->confirm(); } ?></td>
+        <td class="main"><B><?php echo TEXT_NEWSLETTER_MODULE;?></B><?php echo $s_module_name;?></td>
       </tr>
+      <!-- /***********************/ -->
+      <table cellpadding = "3" cellspacing = "3" border = "0" align = "center" width = "60%">
+        <tr>
+        <td width  = "100%" align = "center">
+          <?php echo tep_draw_form('notifications',FILENAME_NEWSLETTERS,$frm_action,'POST',$frm_para); ?>
+
+            <?php
+              $group = array();
+              $group_query = tep_db_query("select customers_group_name,customers_group_id from " . TABLE_CUSTOMERS_GROUPS . " order by customers_group_name");
+              while($group_values = tep_db_fetch_array($group_query)) {
+                $group[] = array('id' => $group_values['customers_group_id'],
+                                 'text' => $group_values['customers_group_name']);
+              }
+              $button_name_tmp = "button_send.gif";
+              $button_alt_tmp = IMAGE_SEND;
+              if($module_name == "newsletter") {
+                global $button_name_tmp,$button_alt_tmp;
+                $button_name_tmp = "button_send.gif";
+                $button_alt_tmp = IMAGE_SEND;
+           ?>
+            <tr>
+              <td><?php echo tep_draw_pull_down_menu('customers_email_address', $customers, (isset($_GET['customer']) ? $_GET['customer'] : ''));?></td>
+            </tr>
+            <?php
+              } else if($module_name == "product_notification") {
+                echo tep_draw_hidden_field('customers_email_address','***');
+            }
+            if($module_name == "newsletter" || $module_name == "product_notification") {
+              $choose_group_string = '<script language="javascript"><!--
+              function mover_group(move) {
+                if (move == \'remove\') {
+                  for (x=0; x<(document.notifications.groups_dropdown.length); x++) {
+                    if (document.notifications.groups_dropdown.options[x].selected) {
+                      with(document.notifications.elements[\'chosen_group[]\']) {
+                        options[options.length] = new Option(document.notifications.groups_dropdown.options[x].text,document.notifications.groups_dropdown.options[x].value);
+                      }
+                      document.notifications.groups_dropdown.options[x] = null;
+                      x = -1;
+                    }
+                  }
+                }
+                if (move == \'add\') {
+                  for (x=0; x<(document.notifications.elements[\'chosen_group[]\'].length); x++) {
+                    if (document.notifications.elements[\'chosen_group[]\'].options[x].selected) {
+                      with(document.notifications.groups_dropdown) {
+                        options[options.length] = new Option(document.notifications.elements[\'chosen_group[]\'].options[x].text,document.notifications.elements[\'chosen_group[]\'].options[x].value);
+                      }
+                      document.notifications.elements[\'chosen_group[]\'].options[x] = null;
+                      x = -1;
+                    }
+                  }
+                }
+                return true;
+              }
+
+
+              function moveAllGroups(){
+                  for (x=0; x<(document.notifications.groups_dropdown.length); x++) {
+                      with(document.notifications.elements[\'chosen_group[]\']) {
+                        options[options.length] = new Option(document.notifications.groups_dropdown.options[x].text,document.notifications.groups_dropdown.options[x].value);
+                      }
+                      document.notifications.groups_dropdown.options[x] = null;
+                      x = -1;
+                  }
+                }
+
+              function selectAll_group(FormName, SelectBox) {
+                temp = "document." + FormName + ".elements[\'" + SelectBox + "\']";
+                Source = eval(temp);
+                for (x=0; x<(Source.length); x++) {
+                  Source.options[x].selected = "true";
+                }
+                selectAll(\'notifications\', \'chosen[]\');
+                if ( x < 1 ) {
+                  alert(\'Please select any group\');
+                  return false;
+                } else {
+                  return true;
+                }
+              }
+              //--></script>';
+
+              /* $choose_group_string .= '<table border="0" cellspacing="0" cellpadding="2">' . "\n" .
+                                      '  <tr>' . "\n" .
+                                      '  <td align="center" class="main"><b>' . TEXT_GROUPS . '</b><br>' . tep_draw_pull_down_menu('groups_dropdown', $group, '','size="10" style="width: 20em;" multiple') . '</td>' . "\n" .
+                                      '    <td align="center" class="main" colspan="2">&nbsp;<br>' . (isset($global_button) ? $global_button : '') . '<br><br><br><input type="button" value="' . BUTTON_SELECT . '" style="width: 8em;" onClick="mover_group(\'remove\');"><br><br><input type="button" value="' . BUTTON_UNSELECT . '" style="width: 8em;" onClick="mover_group(\'add\');"><br><br><br></td>' . "\n" .
+                                      '    <td align="center" class="main"><b>' . TEXT_SELECTED_GROUPS . '</b><br>' . tep_draw_pull_down_menu('chosen_group[]', array(), '', 'size="10" style="width: 20em;" multiple') . '</td>' . "\n" .
+                                      '  </tr>' . "\n" .
+                                      '</table>';*/
+              $choose_group_string .= '<table border="0" cellspacing="0" cellpadding="2" align="center" width="75%">' . "\n" .
+                                      '  <tr>' . "\n" .
+                                      '    <td align="center" class="main" width="25%"><b>' . TEXT_GROUPS . '</b><br>' . tep_draw_pull_down_menu('groups_dropdown', $group, '','size="10" style="width: 15em;" multiple') . '</td>' . "\n" .
+                                      '    <td align="center" class="main" colspan="2" width="25%" valign="top"><table border="0"><tr><td align="left"><br>' . (isset($global_button) ? $global_button : '') . '<input type="button" value="' . BUTTON_SELECT . '" style="width: 8em;" onClick="mover_group(\'remove\');"></td></tr><br><tr><td align="left"><input type="button" value="' . BUTTON_UNSELECT . '" style="width: 8em;" onClick="mover_group(\'add\');"><br>&nbsp;<br><input type="button" value="All Groups" style="width: 8em;" onClick="moveAllGroups();"></td></tr><tr><td align="left">';
+                                      if($module_name == "newsletter") {
+                                       $choose_group_string .=  $module->confirm1();
+                                            };
+                                      $choose_group_string .= '</td></tr></table>' . "\n" .
+                                      '    <td align="center" class="main" width="25%"><b>' . TEXT_SELECTED_GROUPS . '</b><br>' . tep_draw_pull_down_menu('chosen_group[]', array(), '', 'size="10" style="width: 15em;" multiple') . '</td>' . "\n" .
+                                      '  </tr>' . "\n" .
+                                      '</table>';
+
+              echo $choose_group_string;
+            }
+          ?>
+
+      <!-- /***********************/ -->
+      <tr>
+        <td>
+        <?php
+        if ($module->show_choose_audience) {
+          echo $module->choose_audience();
+        } else if($module_name == "affiliate_newsletter") {
+          echo $module->confirm();
+        } ?></td>
+      </tr>
+      </table>
+    </div>
+
 <?php
   } elseif ($action == 'confirm') {
     $nID = tep_db_prepare_input($_GET['nID']);
-    
+
     $newsletter_query = tep_db_query("select title, content, module from " . TABLE_NEWSLETTERS . " where newsletters_id = '" . (int)$nID . "'");
     $newsletter = tep_db_fetch_array($newsletter_query);
     $nInfo = new objectInfo($newsletter);
-    
+
     include(DIR_WS_LANGUAGES . $language . '/modules/newsletters/' . $nInfo->module . substr($PHP_SELF, strrpos($PHP_SELF, '.')));
     include(DIR_WS_MODULES . 'newsletters/' . $nInfo->module . substr($PHP_SELF, strrpos($PHP_SELF, '.')));
     $module_name = $nInfo->module;
     $module = new $module_name($nInfo->title, $nInfo->content);
+
+    if($module_name == "newsletter") {
+      $s_module_name = TEXT_CUSTOMER_NEWSLETTER_NAME;
+    } else if($module_name == "product_notification") {
+      $s_module_name = TEXT_PRODUCT_NOTIFICATIONS_NEWSLETTER_NAME;
+    } else if($module_name == "affiliate_newsletter") {
+      $s_module_name = TEXT_AFFILIATE_NEWSLETTER_NAME;
+    }
 ?>
+     <div class="col-md-12">
+     <table border="0" cellspacing="0" cellpadding="2" width="100%" class="table">
+
       <tr>
-        <td><?php echo $module->confirm(); ?></td>
+        <td class="main"> <B><?php echo TEXT_NEWSLETTER_MODULE;?></B>  <?php echo $s_module_name;?>  </td>
       </tr>
+      <tr>
+        <td>
+        <?php
+            if($module_name == "newsletter") {
+              $frm_action =  'page=' . $_GET['page'] . '&nID=' . $_GET['nID'] . '&action=confirm_send';
+              echo tep_draw_form('notifications',FILENAME_NEWSLETTERS,$frm_action,'POST',$frm_para);
+
+              $customers_email_address = $_POST["customers_email_address"];
+              echo tep_draw_hidden_field('customers_email_address', $customers_email_address);
+
+              $chosen_group = $_POST["chosen_group"];
+              for ($i = 0, $n = sizeof($chosen_group); $i < $n; $i++) {
+                echo tep_draw_hidden_field('chosen_group[]', $chosen_group[$i]);
+              }
+              global $button_name_tmp,$button_alt_tmp;
+              $button_name_tmp = "button_send.gif";
+              $button_alt_tmp = IMAGE_SEND;
+            }
+            echo $module->confirm();
+            if($module_name == "newsletter") {
+              echo '</form>';
+            }
+        ?>
+        </td>
+      </tr>
+      </table></div>
 <?php
   } elseif ($action == 'confirm_send') {
     $nID = tep_db_prepare_input($_GET['nID']);
-    
+
     $newsletter_query = tep_db_query("select newsletters_id, title, content, module from " . TABLE_NEWSLETTERS . " where newsletters_id = '" . (int)$nID . "'");
     $newsletter = tep_db_fetch_array($newsletter_query);
     $nInfo = new objectInfo($newsletter);
-    
+
     include(DIR_WS_LANGUAGES . $language . '/modules/newsletters/' . $nInfo->module . substr($PHP_SELF, strrpos($PHP_SELF, '.')));
     include(DIR_WS_MODULES . 'newsletters/' . $nInfo->module . substr($PHP_SELF, strrpos($PHP_SELF, '.')));
     $module_name = $nInfo->module;
     $module = new $module_name($nInfo->title, $nInfo->content);
+
+    if($module_name == "newsletter") {
+      $s_module_name = TEXT_CUSTOMER_NEWSLETTER_NAME;
+    } else if($module_name == "product_notification") {
+      $s_module_name = TEXT_PRODUCT_NOTIFICATIONS_NEWSLETTER_NAME;
+    } else if($module_name == "affiliate_newsletter") {
+      $s_module_name = TEXT_AFFILIATE_NEWSLETTER_NAME;
+    }
 ?>
+     <div class="col-md-12">
+     <table border="0" cellspacing="0" cellpadding="2" width="100%" class="table">
+
+      <tr>
+        <td class="main"> <B><?php echo TEXT_NEWSLETTER_MODULE;?></B>  <?php echo $s_module_name;?>  </td>
+      </tr>
       <tr>
         <td><table border="0" cellspacing="0" cellpadding="2">
           <tr>
@@ -318,6 +545,7 @@ echo tep_insert_html_editor('content','advanced','500');
           </tr>
         </table></td>
       </tr>
+
 <?php
   tep_set_time_limit(0);
   flush();
@@ -335,13 +563,14 @@ echo tep_insert_html_editor('content','advanced','500');
       <tr>
         <td><?php echo '<a href="' . tep_href_link(FILENAME_NEWSLETTERS, 'page=' . $_GET['page'] . '&nID=' . $_GET['nID']) . '">' . tep_image_button('button_back.gif', IMAGE_BACK) . '</a>'; ?></td>
       </tr>
+    </table></div>
 <?php
   } else {
 ?>
-      <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
-          <tr>
-            <td valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2" class="data-table">
+     <div class="col-md-9">
+ 		<div class="table-responsive">
+			<table class="table table-bordered">
+			 <thead>
               <tr class="dataTableHeadingRow">
                 <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_NEWSLETTERS; ?></td>
                 <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_SIZE; ?></td>
@@ -350,6 +579,8 @@ echo tep_insert_html_editor('content','advanced','500');
                 <td class="dataTableHeadingContent" align="center"><?php echo TABLE_HEADING_STATUS; ?></td>
                 <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_ACTION; ?>&nbsp;</td>
               </tr>
+             </thead>
+             <tbody>
 <?php
     $newsletters_query_raw = "select newsletters_id, title, length(content) as content_length, module, date_added, date_sent, status, locked from " . TABLE_NEWSLETTERS . " order by date_added desc";
     $newsletters_split = new splitPageResults($_GET['page'], MAX_DISPLAY_SEARCH_RESULTS, $newsletters_query_raw, $newsletters_query_numrows);
@@ -375,7 +606,9 @@ echo tep_insert_html_editor('content','advanced','500');
 <?php
     }
 ?>
-            </table>
+				</tbody>
+              </table>
+             </div>
             <table border="0" cellpadding="0" cellspacing="0" width="100%" class="data-table-foot">
               <tr>
                 <td colspan="6"><table border="0" width="100%" cellspacing="0" cellpadding="2">
@@ -388,7 +621,8 @@ echo tep_insert_html_editor('content','advanced','500');
                   </tr>
                 </table></td>
               </tr>
-            </table></td>
+            </table>
+         </div><!--col-sm-9 end here-->
 <?php
   $heading = array();
   $contents = array();
@@ -417,35 +651,33 @@ echo tep_insert_html_editor('content','advanced','500');
       break;
   }
 
-  if ( (tep_not_null($heading)) && (tep_not_null($contents)) ) {
-    echo '            <td width="25%" valign="top">' . "\n";
+ if ( (tep_not_null($heading)) && (tep_not_null($contents)) ) {
+    echo '            <div class="col-md-3">' . "\n";
 
     $box = new box;
     echo $box->infoBox($heading, $contents);
 
-    echo '            </td>' . "\n";
+    echo '            </div>' . "\n";
   }
 ?>
-          </tr>
-        </table></td>
-      </tr>
 <?php
   }
   // RCI code start
-  echo $cre_RCI->get('newsletters', 'bottom');
+//  echo $cre_RCI->get('newsletters', 'bottom');
   // RCI code eof
 ?>
-    </table></td>
-<!-- body_text_eof //-->
-  </tr>
-</table>
-</div>
-<!-- body_eof //-->
+		</div><!--End row-->
 
-<!-- footer //-->
-<?php require(DIR_WS_INCLUDES . 'footer.php'); ?>
-<!-- footer_eof //-->
-<br>
-</body>
-</html>
-<?php require(DIR_WS_INCLUDES . 'application_bottom.php'); ?>
+		</div>
+		<!-- end panel -->
+		</div>
+		<!-- end #content -->
+
+		  <!-- begin #footer -->
+	  <?php
+	  require(DIR_WS_INCLUDES . 'footer.php');
+	?>
+
+	</body>
+	</html>
+	<?php require(DIR_WS_INCLUDES . 'application_bottom.php'); ?>
