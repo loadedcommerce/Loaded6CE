@@ -10,7 +10,7 @@
   Released under the GNU General Public License
 */ 
 ?>
-<script type="text/javascript" src="<?php echo (($request_type == 'SSL') ? 'https:' : 'http:'); ?>//ajax.googleapis.com/ajax/libs/jquery/<?php echo JQUERY_VERSION; ?>/jquery.min.js"></script>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/<?php echo JQUERY_VERSION; ?>/jquery.min.js"></script>
 <script type="text/javascript">
   if (typeof jQuery == 'undefined') {
     //alert('You are running a local copy of jQuery!');
