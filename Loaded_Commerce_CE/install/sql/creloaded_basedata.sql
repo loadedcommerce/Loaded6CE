@@ -183,7 +183,7 @@ INSERT INTO admin_groups VALUES( 1, 'Top Administrator');
 #
 # Data for table: branding_description
 #
-INSERT INTO branding_description VALUES('LoadedCommerceSiteLogo.png', 'loaded-favicon-64.gif', '', '216.220.8766', '216.220.8768', 'http://www.loadedcommerce.com/', 'Loaded Commerce Professional B2B', 'sales@loadedcommerce.com', '800.609.2141', 'Loaded Commerce, LLC\n1211 CR 436\nLake Panasoffkee, FL 33538\nPhone: 216.220.8766\nToll-Free: 800.609.2141\nFax: 216.220.8768', 'https://www.facebook.com/loadedcommerce', 'https://twitter.com/loadedcommerce', '', '', '', '', '', '',1);
+INSERT INTO branding_description VALUES('LoadedCommerceSiteLogo.png', 'loaded-favicon-64.gif', '', '', '216.220.8766', '216.220.8768', 'http://www.loadedcommerce.com/', 'Loaded Commerce Professional CE', 'sales@loadedcommerce.com', '800.609.2141', 'Loaded Commerce, LLC\n1211 CR 436\nLake Panasoffkee, FL 33538\nPhone: 216.220.8766\nToll-Free: 800.609.2141\nFax: 216.220.8768', 'https://www.facebook.com/loadedcommerce', 'https://twitter.com/loadedcommerce', '', '', '', '', '', '',1);
 
 
 #
