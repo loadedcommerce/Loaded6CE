@@ -58,7 +58,7 @@
     return $result;
   }
   
-  function browse_faq ($language,$_GET) {
+  function browse_faq ($language) {
     global $languages_id;
     
     $faq_lang = (isset($_GET['faq_lang']) ? $_GET['faq_lang'] : '');
