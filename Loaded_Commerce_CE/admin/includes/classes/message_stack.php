@@ -29,7 +29,7 @@
 
 // class constructor
     function tableBoxMessagestack($contents, $direct_output = false) {
-      $tableBox1_string = '<table border="' . tep_output_string($this->table_border) . '" width="' . tep_output_string($this->table_width) . '" cellspacing="' . tep_output_string($this->table_cellspacing) . '" cellpadding="' . tep_output_string($this->table_cellpadding) . '"';
+      $tableBox1_string = '<table class="table" border="' . tep_output_string($this->table_border) . '" width="' . tep_output_string($this->table_width) . '" cellspacing="' . tep_output_string($this->table_cellspacing) . '" cellpadding="' . tep_output_string($this->table_cellpadding) . '"';
       if (tep_not_null($this->table_parameters)) $tableBox1_string .= ' ' . $this->table_parameters;
       $tableBox1_string .= '>' . "\n";
 
@@ -83,7 +83,7 @@
 
   class messageStack extends tableBoxMessagestack {
 //Lango Added for template mod: EOF
-    
+
 // class constructor
     function messageStack() {
 
@@ -123,7 +123,7 @@
     }
 
     function output($class) {
-      $this->table_data_parameters = 'class="messageBox"';
+      $this->table_data_parameters = 'class="messageBox table"';
 
       $output = array();
       for ($i=0, $n=sizeof($this->messages); $i<$n; $i++) {

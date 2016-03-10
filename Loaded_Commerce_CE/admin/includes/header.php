@@ -19,7 +19,7 @@ for ($i = 0, $n = sizeof($languages); $i < $n; $i++) {
   if ($languages[$i]['directory'] == $language) {
     $languages_selected = $languages[$i]['code'];
   }
-}                   
+}
 
 $my_account_query = tep_db_query ("select admin_id, admin_firstname, admin_lastname from " . TABLE_ADMIN . " where admin_id= " . $_SESSION['login_id']);
 $myAccount = tep_db_fetch_array($my_account_query);
@@ -36,14 +36,14 @@ for (var i = 0; i < imgs.length; i++) {
 }
 
 </script>
-
+<?php require(DIR_WS_INCLUDES . 'warnings.php'); ?>
     <!-- begin #header -->
-    <div id="header" class="header navbar navbar-default navbar-fixed-top">
+    <div id="header" class="header navbar navbar-default navbar-fixed-top" style="min-height:78px">
       <!-- begin container-fluid -->
       <div class="container-fluid">
         <!-- begin mobile sidebar expand / collapse button -->
         <div class="navbar-header">
-          <a href="<?php echo tep_href_link(FILENAME_DEFAULT);?>" class="navbar-brand"><span class="logo-sm"><img src="images/logo-sm.png" border="0"></span><?php echo PROJECT_VERSION;?></a>
+          <a href="<?php echo tep_href_link(FILENAME_DEFAULT);?>" class="navbar-brand"><span class="logo-sm"><img src="images/logo-sm.png" border="0" style="height:64px"></span></a>
           <button type="button" class="navbar-toggle" data-click="sidebar-toggled">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -51,17 +51,50 @@ for (var i = 0; i < imgs.length; i++) {
           </button>
         </div>
         <!-- end mobile sidebar expand / collapse button -->
-        
+
         <!-- begin header navigation right -->
         <ul class="nav navbar-nav navbar-right">
           <li>
-          <iframe src="messages.php?s=header" frameborder="0" width="462" height="40" scrolling="No"  allowtransparency="true"></iframe>
+          	<div class="hide-on-mobile"><iframe src="messages.php?s=header" frameborder="0" width="462" height="60" scrolling="No"  allowtransparency="true"></iframe></div>
           </li>
 
+			<li class="dropdown open" >
+				<a class="dropdown-toggle f-s-14" data-toggle="dropdown" href="javascript:;" aria-expanded="true">
+					<i class="fa fa-bell-o"></i>
+					<span class="label"><?php echo $messageStack->size('header');?></span>
+				</a>
+				<ul class="dropdown-menu media-list pull-right animated fadeInDown" style="width:450px">
+					<li class="media">
+					<div class="media-body" style="width:450px">
+						<!-- warnings //-->
+						<?php
+							if ($messageStack->size('header') > 0) {
+							  echo $messageStack->output('header');
+							}
+							if (isset($_GET['error_message']) && tep_not_null($_GET['error_message'])) {
+							?>
+							<table border="0" width="100%" cellspacing="0" cellpadding="2" class="table">
+							  <tr class="headerError"> <td class="headerError"><?php echo htmlspecialchars(urldecode($_GET['error_message'])); ?></td> </tr>
+							</table>
+							<?php
+							}
 
-          <li class="dropdown navbar-user">
+							if (isset($_GET['info_message']) && tep_not_null($_GET['info_message'])) {
+							?>
+							<table border="0" width="100%" cellspacing="0" cellpadding="2" class="table">
+							  <tr class="headerInfo"> <td class="headerInfo"><?php echo htmlspecialchars($_GET['info_message']); ?></td> </tr>
+							</table>
+							<?php
+							}
+							?>
+						<!-- warning_eof //-->
+					  </div>
+					</li>
+				</ul>
+			</li>
+	<li class="dropdown navbar-user">
             <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
-              <!-- img src="assets/img/user-11.jpg" alt="" / -->  
+              <!-- img src="assets/img/user-11.jpg" alt="" / -->
               <span class="hidden-xs"><?php echo $store_admin_name;?></span> <b class="caret"></b>
             </a>
             <ul class="dropdown-menu animated fadeInLeft">
