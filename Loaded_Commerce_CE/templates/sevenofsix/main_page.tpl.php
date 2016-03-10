@@ -80,9 +80,6 @@ if(defined('TEMPLATE_BUTTONS_USE_CSS') && TEMPLATE_BUTTONS_USE_CSS == 'true'){
 <script type="text/javascript" src="<?=DIR_WS_TEMPLATES . TEMPLATE_NAME . '/'?>jquery/jquery.custom.min.js"></script>
 <script type="text/javascript" src="includes/javascript/fancyBox/jquery.fancybox.js?v=2.1.5"></script>
 <link rel="stylesheet" type="text/css" href="includes/javascript/fancyBox/jquery.fancybox.css?v=2.1.5" media="screen" />
-<?php if(file_exists(DIR_WS_IMAGES . 'logo/custom.css')) { ?>
-<link href="images/logo/custom.css" rel="stylesheet">
-<?php } ?>
 
 <script type="text/javascript">
 $(document).ready(function() {
@@ -115,7 +112,6 @@ function setQty(mode) {
 }
 
 function refreshPrice() {
-  // disable checkout button until ajax finishes loading
 }
 </script>
 </head>
@@ -145,13 +141,50 @@ if(file_exists(TEMPLATE_FS_CUSTOM_INCLUDES . FILENAME_WARNINGS)){
 <?php
 // RCI top
 echo $cre_RCI->get('mainpage', 'top');
+if(DISPLAY_COLUMN_LEFT == 'yes' && DISPLAY_COLUMN_RIGHT == 'yes') {
+	$left_col_div = (BOX_WIDTH_LEFT > 0)?BOX_WIDTH_LEFT:2;
+	$right_col_div = (BOX_WIDTH_RIGHT > 0)?BOX_WIDTH_RIGHT:2;
+	$content_col_div = (12 - ($left_col_div + $right_col_div));
+} elseif(DISPLAY_COLUMN_LEFT == 'yes' || DISPLAY_COLUMN_RIGHT == 'yes') {
+	if(DISPLAY_COLUMN_LEFT == 'yes')
+		$left_col_div = (BOX_WIDTH_LEFT > 0)?BOX_WIDTH_LEFT:3;
+	else
+		$left_col_div = 0;
+	if(DISPLAY_COLUMN_RIGHT == 'yes')
+		$right_col_div = (BOX_WIDTH_RIGHT > 0)?BOX_WIDTH_RIGHT:3;
+	else
+		$right_col_div = 0;
+	$content_col_div = (12 - ($left_col_div + $right_col_div));
+} else {
+	$content_col_div = 12;
+}
 ?>
 <!-- header //-->
 <?php require(DIR_WS_TEMPLATES . TEMPLATE_NAME . '/' . FILENAME_HEADER); ?>
 <!-- header_eof //-->
 <!-- body //-->
   <div class="container" id="content-container">
-   <div id="content-center-container" class="col-sm-9 col-lg-9  main_c">
+	 <?php
+	 if (DISPLAY_COLUMN_LEFT == 'yes' && (DOWN_FOR_MAINTENANCE =='false' || DOWN_FOR_MAINTENANCE_COLUMN_LEFT_OFF =='false'))  {
+		 $column_location = 'Left_';
+	 ?>
+   <div class="col-sm-<?php echo $left_col_div; ?> col-lg-<?php echo $left_col_div; ?> hide-on-mobile no-padding-left" id="content-left-container">
+
+		 <?php ob_start();?>
+		   <!-- left_navigation //-->
+		   <?php require(DIR_WS_INCLUDES . FILENAME_COLUMN_LEFT); ?>
+		   <!-- left_navigation_eof //-->
+		   <?php  $var = ob_get_clean();
+			 echo $var;
+		   ?>
+	</div>
+
+	   <?php
+	   $column_location = '';
+	 }
+	 ?>
+
+   <div id="content-center-container" class="col-sm-<?php echo $content_col_div; ?> col-lg-<?php echo $content_col_div; ?>">
     <!-- content //-->
       <?php //echo (DIR_WS_TEMPLATES . TEMPLATE_NAME.'/content/'. $content . '.tpl.php');
       if (isset($content_template) && file_exists(DIR_WS_TEMPLATES . TEMPLATE_NAME.'/content/'.  basename($content_template))) {
@@ -165,20 +198,35 @@ echo $cre_RCI->get('mainpage', 'top');
       }
       ?>
    </div>
-       <div class="col-sm-3 col-lg-3 left_c" id="content-left-container">
-         <?php
-         if (DISPLAY_COLUMN_LEFT == 'yes' && (DOWN_FOR_MAINTENANCE =='false' || DOWN_FOR_MAINTENANCE_COLUMN_LEFT_OFF =='false'))  {
-             $column_location = 'Left_';
-         ?>
-             <!-- left_navigation //-->
-             <?php require(DIR_WS_INCLUDES . FILENAME_COLUMN_LEFT); ?>
-             <!-- left_navigation_eof //-->
 
-           <?php
-           $column_location = '';
-         }
-         ?>
-        </div>
+	   <?php
+	   if (DISPLAY_COLUMN_LEFT == 'yes' && (DOWN_FOR_MAINTENANCE =='false' || DOWN_FOR_MAINTENANCE_COLUMN_LEFT_OFF =='false'))  {
+		   $column_location = 'Left_';
+	   ?>
+		<div class="col-sm-<?php echo $left_col_div; ?> col-lg-<?php echo $left_col_div; ?> large-margin-top show-on-mobile" id="content-left-container">
+		   <?php echo $var;   ?>
+		</div>
+		 <?php
+		 $column_location = '';
+	   }
+	   ?>
+
+    <!-- content_eof //-->
+    <?php
+    if (DISPLAY_COLUMN_RIGHT == 'yes' && (DOWN_FOR_MAINTENANCE =='false' || DOWN_FOR_MAINTENANCE_COLUMN_LEFT_OFF =='false'))  {
+        $column_location = 'Right_';
+      ?>
+       <div class="col-sm-<?php echo $right_col_div; ?> col-lg-<?php echo $right_col_div; ?> no-padding-right" id="content-right-container">
+        <!-- right_navigation //-->
+        <?php require(DIR_WS_INCLUDES . FILENAME_COLUMN_RIGHT); ?>
+        <!-- right_navigation_eof //-->
+      </div>
+
+      <?php
+      $column_location = '';
+    }
+    ?>
+
 
    </div>
 

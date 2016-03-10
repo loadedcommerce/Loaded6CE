@@ -788,7 +788,7 @@ INSERT INTO pages_to_categories VALUES( 3,  1,  30);
 #
 INSERT INTO template VALUES( 9, 'Original_ats', now(), '0000-00-00 00:00:00', 'Original.gif', '3', '8', '3', '3', '100%', 'yes', 'yes', '130', '130', 'yes', '1', 'yes', 'no', 'no', 'yes', 'mainpage.php', 'featured.php', '', '', '', '', 'yes', '', '', '',  1,  1);
 INSERT INTO template VALUES( 11, 'cre65_ats', now(), '0000-00-00 00:00:00', 'preview.gif', '0', '5', '0', '0', '980', 'yes', 'yes', '194', '194', 'yes', '1', 'yes', 'no', 'no', 'yes', 'mainpage.php', '', '', '', '', '', 'yes', '', '', '',  1,  1);
-INSERT INTO template VALUES( 12, 'sevenofsix', now(), '0000-00-00 00:00:00', 'sevenofsix.gif', '0', '5', '0', '0', '980', 'yes', 'yes', '194', '194', 'yes', '1', 'yes', 'no', 'no', 'yes', 'mainpage.php', 'new_products.php', '', '', '', '', 'yes', '', '', '',  1,  1);
+INSERT INTO template VALUES( 12, 'sevenofsix', now(), '0000-00-00 00:00:00', 'sevenofsix.gif', '0', '5', '0', '0', '980', 'yes', 'yes', '2', '2', 'yes', '1', 'yes', 'no', 'no', 'yes', 'mainpage.php', 'new_products.php', '', '', '', '', 'yes', '', '', '',  1,  1);
 
 
 #
