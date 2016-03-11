@@ -57,7 +57,9 @@
       $sql_start = microtime(true);
     }
 
-    $result = mysqli_query($$link, $query) or tep_db_error($query, mysqli_errno(), mysqli_error());
+    $result = mysqli_query($$link, $query);
+	if(mysqli_errno($$link) > 0)
+		tep_db_error($query, mysqli_errno($$link), mysqli_error($$link));
 
     if (defined('STORE_DB_TRANSACTIONS') && (STORE_DB_TRANSACTIONS == 'true')) {
       $sql_end = microtime(true);

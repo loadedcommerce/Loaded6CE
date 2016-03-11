@@ -38,10 +38,12 @@
       $logger->write($query, 'QUERY');
     }
 
-    $result = mysqli_query($$link, $query) or tep_db_error($query, mysqli_errno(), mysqli_error());
+    $result = mysqli_query($$link, $query);
+    if(mysqli_errno($$link) > 0)
+    	tep_db_error($query, mysqli_errno($$link), mysqli_error($$link));
 
     if (defined('STORE_DB_TRANSACTIONS') && (STORE_DB_TRANSACTIONS == 'true')) {
-      if (mysqli_error()) $logger->write(mysqli_error(), 'ERROR');
+      if (mysqli_error($$link)) $logger->write(mysqli_error($$link), 'ERROR');
     }
 
     return $result;
