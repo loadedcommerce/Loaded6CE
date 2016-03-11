@@ -19,10 +19,7 @@
 
     <div id="footer">
       <div id="footernav" style="height: auto; padding-top: 25px; padding-bottom: 5px;">
-        <div id="navFooter">
-    Copyright 2003 - 2009 Chain Reaction Ecommerce, Inc. <a href="http://www.loadedcommerce.com">www.loadedcommerce.com</a>
-   
-        </div>
+        <div id="navFooter">Copyright 2003 - <?php echo date("Y");?> Loaded Commerce LLC <a href="http://www.loadedcommerce.com">www.loadedcommerce.com</a></div>
       </div>
     </div>
     
