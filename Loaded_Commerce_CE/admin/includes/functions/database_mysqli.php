@@ -141,6 +141,11 @@
     return mysqli_insert_id($$link);
   }
 
+  function tep_db_real_escape_string($string, $link = 'db_link') {
+    global $$link;
+    return mysqli_real_escape_string($$link, $string);
+  }
+
   function tep_db_free_result($db_query) {
     return mysqli_free_result($db_query);
   }

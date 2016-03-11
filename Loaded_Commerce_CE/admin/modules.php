@@ -76,7 +76,7 @@ if (tep_not_null($action)) {
           $value = implode( ", ", $value);
           $value = preg_replace ("/, --none--/", "", $value);
         }
-        tep_db_query("update " . TABLE_CONFIGURATION . " set configuration_value = '" . mysql_real_escape_string($value) . "' where configuration_key = '" . $key . "'");
+        tep_db_query("update " . TABLE_CONFIGURATION . " set configuration_value = '" . tep_db_real_escape_string($value) . "' where configuration_key = '" . $key . "'");
       }
       $cre_RCI->get('modules', 'action');
       tep_redirect(tep_href_link(FILENAME_MODULES, 'set=' . $set . '&module=' . $_GET['module'], $SSL));

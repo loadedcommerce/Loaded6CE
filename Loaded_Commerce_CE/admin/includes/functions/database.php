@@ -143,6 +143,10 @@
     return mysql_insert_id();
   }
 
+  function tep_db_real_escape_string($string) {
+    return mysql_real_escape_string($string);
+  }
+
   function tep_db_free_result($db_query) {
     return mysql_free_result($db_query);
   }

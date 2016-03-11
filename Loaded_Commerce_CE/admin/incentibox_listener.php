@@ -104,12 +104,12 @@ function create_new_coupons(){
 function update_incentibox_coupons($new_rewards_array){
 	foreach($new_rewards_array as $c_idx => $coupon){
 		$insert_query = sprintf("INSERT INTO incentibox_coupons (incentibox_coupon_id, coupon_code, coupon_amount, order_minimum, date_redeemed, emailed_to, date_created) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', now())", 
-			mysql_real_escape_string($coupon['id']),
-			mysql_real_escape_string($coupon['code']),
-			mysql_real_escape_string($coupon['amount']),
-			mysql_real_escape_string($coupon['order_minimum']),
+			tep_db_real_escape_string($coupon['id']),
+			tep_db_real_escape_string($coupon['code']),
+			tep_db_real_escape_string($coupon['amount']),
+			tep_db_real_escape_string($coupon['order_minimum']),
 			date('Y-m-d H:i:s', strtotime($coupon['redeemed_at'])),
-			mysql_real_escape_string($coupon['email'])
+			tep_db_real_escape_string($coupon['email'])
 			);
 		tep_db_query($insert_query);	
 	}

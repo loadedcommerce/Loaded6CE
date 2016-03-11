@@ -936,10 +936,10 @@ function insert_record_for_languages_id($i_default_language_id,$i_languages_id,$
   for($iloop = 0 ;$iloop < count($arr_default_language_fields); $iloop++) {
     if($iloop == (count($arr_default_language_fields) - 1 )) {
       $s_fields = $s_fields.$arr_default_language_fields[$iloop];
-      $s_data = $s_data."'".mysql_real_escape_string($arr_default_language_data[$iloop])."'";
+      $s_data = $s_data."'".tep_db_real_escape_string($arr_default_language_data[$iloop])."'";
     } else {
       $s_fields = $s_fields.$arr_default_language_fields[$iloop].",";
-      $s_data = $s_data."'".mysql_real_escape_string($arr_default_language_data[$iloop])."' , ";
+      $s_data = $s_data."'".tep_db_real_escape_string($arr_default_language_data[$iloop])."' , ";
     }
   }
   // insert data in table for missing language
@@ -1018,9 +1018,9 @@ function update_record_for_missing_languages_id($i_default_language_id,$i_langua
   // generate fields string and values string for insert query
   for($iloop = 0 ;$iloop < count($arr_default_language_fields); $iloop++) {
     if($iloop == (count($arr_default_language_fields) - 1 )) {
-      $s_update_string = $s_update_string.$arr_default_language_fields[$iloop]." = '".mysql_real_escape_string($arr_default_language_data[$iloop])."'";
+      $s_update_string = $s_update_string.$arr_default_language_fields[$iloop]." = '".tep_db_real_escape_string($arr_default_language_data[$iloop])."'";
     } else {
-      $s_update_string = $s_update_string.$arr_default_language_fields[$iloop]." = '".mysql_real_escape_string($arr_default_language_data[$iloop])."',";
+      $s_update_string = $s_update_string.$arr_default_language_fields[$iloop]." = '".tep_db_real_escape_string($arr_default_language_data[$iloop])."',";
     }
   }
   // update data in table for missing language
