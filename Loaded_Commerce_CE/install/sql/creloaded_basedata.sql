@@ -536,7 +536,6 @@ INSERT INTO infobox_configuration VALUES( 11,  77, 'we_accept.php', 'BOX_HEADING
 INSERT INTO infobox_configuration VALUES( 11,  78, 'pages.php', 'BOX_HEADING_PAGES', 'yes', 'left',  11, '0000-00-00 00:00:00', now(), 'Information', 'infobox', '#F39800');
 INSERT INTO infobox_configuration VALUES( 11,  80, 'chatstat.php', 'BOX_HEADING_CHATSTAT', 'no', 'left',  3, '0000-00-00 00:00:00', now(), '', 'infobox', '#FFFFFF');
 INSERT INTO infobox_configuration VALUES( 11,  81, 'controlscan.php', 'BOX_HEADING_CONTROLSCAN', 'no', 'left',  4, '0000-00-00 00:00:00', now(), '', 'infobox', '#FFFFFF');
-INSERT INTO infobox_configuration VALUES( 11,  82, 'best_sellers_scroll.php', 'BOX_HEADING_BESTSELLER_SCROLL', 'no', 'left',  32, '0000-00-00 00:00:00', now(), '', 'infobox', '#FFFFFF');
 INSERT INTO infobox_configuration VALUES( 11,  83, 'affiliate_branding.php', 'BOX_HEADING_AFFILIATE', 'no', 'left',  33, '0000-00-00 00:00:00', now(), '', 'infobox', '#FFFFFF');
 INSERT INTO infobox_configuration VALUES( 11,  84, 'fdm_file_library.php', 'BOX_HEADING_FDMS', 'no', 'left',  34, '0000-00-00 00:00:00', now(), '', 'infobox', '#FFFFFF');
 INSERT INTO infobox_configuration VALUES( 11,  85, 'forms.php', 'BOX_HEADING_FORMS', 'no', 'left',  35, '0000-00-00 00:00:00', now(), '', 'infobox', '#FFFFFF');
@@ -579,11 +578,6 @@ INSERT INTO infobox_configuration VALUES( 12,  121, 'example.php', 'BOX_HEADING_
 INSERT INTO infobox_configuration VALUES( 12,  122, 'we_accept.php', 'BOX_HEADING_WE_ACCEPT', 'no', 'left',  12, '0000-00-00 00:00:00', now(), 'Cards We Accept', 'infobox', '#F39800');
 INSERT INTO infobox_configuration VALUES( 12,  123, 'pages.php', 'BOX_HEADING_PAGES', 'yes', 'left',  11, '0000-00-00 00:00:00', now(), 'Information', 'infobox', '#F39800');
 INSERT INTO infobox_configuration VALUES( 12,  124, 'chatstat.php', 'BOX_HEADING_CHATSTAT', 'no', 'left',  3, '0000-00-00 00:00:00', now(), '', 'infobox', '#FFFFFF');
-INSERT INTO infobox_configuration VALUES( 12,  125, 'controlscan.php', 'BOX_HEADING_CONTROLSCAN', 'no', 'left',  4, '0000-00-00 00:00:00', now(), '', 'infobox', '#FFFFFF');
-INSERT INTO infobox_configuration VALUES( 12,  126, 'best_sellers_scroll.php', 'BOX_HEADING_BESTSELLER_SCROLL', 'no', 'left',  32, '0000-00-00 00:00:00', now(), '', 'infobox', '#FFFFFF');
-INSERT INTO infobox_configuration VALUES( 12,  127, 'affiliate_branding.php', 'BOX_HEADING_AFFILIATE', 'no', 'left',  33, '0000-00-00 00:00:00', now(), '', 'infobox', '#FFFFFF');
-INSERT INTO infobox_configuration VALUES( 12,  128, 'fdm_file_library.php', 'BOX_HEADING_FDMS', 'no', 'left',  34, '0000-00-00 00:00:00', now(), '', 'infobox', '#FFFFFF');
-INSERT INTO infobox_configuration VALUES( 12,  129, 'forms.php', 'BOX_HEADING_FORMS', 'no', 'left',  35, '0000-00-00 00:00:00', now(), '', 'infobox', '#FFFFFF');
 
 
 #
@@ -710,11 +704,6 @@ INSERT INTO infobox_heading VALUES( 121,  1, 'Example');
 INSERT INTO infobox_heading VALUES( 122,  1, 'Cards We Accept');
 INSERT INTO infobox_heading VALUES( 123,  1, 'Information');
 INSERT INTO infobox_heading VALUES( 124,  1, 'Chat Stat');
-INSERT INTO infobox_heading VALUES( 125,  1, 'Control Scan');
-INSERT INTO infobox_heading VALUES( 126,  1, 'Best Sellers');
-INSERT INTO infobox_heading VALUES( 127,  1, 'Affiliate Branding');
-INSERT INTO infobox_heading VALUES( 128,  1, 'FDMS');
-INSERT INTO infobox_heading VALUES( 129,  1, 'Forms and Surveys');
 
 #
 # Data for table: languages
