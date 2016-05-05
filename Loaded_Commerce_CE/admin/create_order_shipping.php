@@ -128,7 +128,7 @@
       <!-- end page-header -->
       
     <!-- begin panel -->
-    <div class="panel panel-inverse"><table border="0" width="100%" cellspacing="0" cellpadding="0" class="data-table">
+    <div class="panel panel-inverse"><table border="0" width="100%" cellspacing="0" cellpadding="0" class="table table-striped">
           <tr>
             <td valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
               <tr class="dataTableHeadingRow">

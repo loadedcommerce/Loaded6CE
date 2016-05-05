@@ -83,12 +83,12 @@ if (!isset($account)) {
   $account['customers_newsletter'] = isset($newsletter) ? $newsletter : '1';
 }
 ?>
-<table border="0" width="100%" cellspacing="0" cellpadding="2">
+<table border="0" width="100%" cellspacing="0" cellpadding="2" class="table">
   <tr>
     <td class="formAreaTitle"><?php echo CATEGORY_PERSONAL; ?></td>
   </tr>
   <tr>
-    <td class="main"><table border="0" width="100%" cellspacing="0" cellpadding="2" class="formArea">
+    <td class="main"><table border="0" width="100%" cellspacing="0" cellpadding="2">
       <tr>
         <td class="main"><table border="0" cellspacing="0" cellpadding="2">
           <?php
@@ -214,7 +214,7 @@ if (!isset($account)) {
       <td class="formAreaTitle"><br><?php echo CATEGORY_COMPANY; ?></td>
     </tr>
     <tr>
-      <td class="main"><table border="0" width="100%" cellspacing="0" cellpadding="2" class="formArea">
+      <td class="main"><table border="0" width="100%" cellspacing="0" cellpadding="2" class="table">
         <tr>
           <td class="main"><table border="0" cellspacing="0" cellpadding="2">
             <tr>
@@ -246,7 +246,7 @@ if (!isset($account)) {
     <td class="formAreaTitle"><br><?php echo CATEGORY_ADDRESS; ?></td>
   </tr>
   <tr>
-    <td class="main"><table border="0" width="100%" cellspacing="0" cellpadding="2" class="formArea">
+    <td class="main"><table border="0" width="100%" cellspacing="0" cellpadding="2" class="table">
       <tr>
         <td class="main"><table border="0" cellspacing="0" cellpadding="2">
           <tr>
@@ -392,7 +392,7 @@ if (!isset($account)) {
     <td class="formAreaTitle"><br><?php echo CATEGORY_CONTACT; ?></td>
   </tr>
   <tr>
-    <td class="main"><table border="0" width="100%" cellspacing="0" cellpadding="2" class="formArea">
+    <td class="main"><table border="0" width="100%" cellspacing="0" cellpadding="2" class="table">
       <tr>
         <td class="main"><table border="0" cellspacing="0" cellpadding="2">
           <tr>
@@ -439,7 +439,7 @@ if (!isset($account)) {
     <td class="formAreaTitle"><br><?php echo CATEGORY_OPTIONS; ?></td>
   </tr>
   <tr>
-    <td class="main"><table border="0" width="100%" cellspacing="0" cellpadding="2" class="formArea">
+    <td class="main"><table border="0" width="100%" cellspacing="0" cellpadding="2" class="table">
       <tr>
         <td class="main"><table border="0" cellspacing="0" cellpadding="2">
           <tr>

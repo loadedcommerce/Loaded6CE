@@ -531,12 +531,11 @@ TD.headerInfo {
   .formArea { border: 1px solid rgb(123, 158, 189);
     background-color: rgb(241, 249, 254);
     }
-
+                      */
   .formAreaTitle { 
-    font-size: 12px;
-    font-weight: bold;
+    font-weight: bold !important;
     }
-                   */
+                   
   .attributes-odd { background-color: rgb(244, 247, 253);
     }
 

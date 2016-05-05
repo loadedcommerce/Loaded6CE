@@ -914,44 +914,67 @@ if(isset($add_product_options)){
     $start_year[] = array('id' => strftime('%y',mktime(0,0,0,1,1,$i)), 'text' => strftime('%Y',mktime(0,0,0,1,1,$i)));
   }
 ?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html <?php echo HTML_PARAMS; ?>>
+<!DOCTYPE html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
 <title><?php echo TITLE; ?></title>
-<script type="text/javascript" src="<?php echo (($request_type == 'SSL') ? 'https:' : 'http:'); ?>//ajax.googleapis.com/ajax/libs/jquery/<?php echo JQUERY_VERSION; ?>/jquery.min.js"></script>
-<script type="text/javascript">
-  if (typeof jQuery == 'undefined') {
-    //alert('You are running a local copy of jQuery!');
-    document.write(unescape("%3Cscript src='includes/javascript/jquery-1.6.2.min.js' type='text/javascript'%3E%3C/script%3E"));
-  }
-</script>
-<link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
-<!--[if IE]>
-<link rel="stylesheet" type="text/css" href="includes/stylesheet-ie.css">
-<![endif]-->
-<script language="javascript" src="includes/general.js"></script>
+<link rel="icon" type="image/png" href="favicon.ico" />
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+  <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
+  <!-- ================== BEGIN BASE CSS STYLE ================== -->
+  <link href="<?php echo (($request_type == 'SSL') ? 'https:' : 'http:'); ?>//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+  <link href="assets/plugins/jquery-ui/themes/base/minified/jquery-ui.min.css" rel="stylesheet" />
+  <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+  <link href="assets/css/animate.min.css" rel="stylesheet" />
+  <link href="assets/css/style.min.css" rel="stylesheet" />
+  <link href="assets/css/style-responsive.min.css" rel="stylesheet" />
+  <link href="assets/css/theme/blue.css" rel="stylesheet" id="theme" />
+  <!-- ================== END BASE CSS STYLE ================== -->
+  
+  <!-- ================== BEGIN PAGE LEVEL STYLE ================== -->
+  <link href="assets/plugins/jquery-jvectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" />
+  <link href="assets/plugins/bootstrap-datepicker/css/datepicker.css" rel="stylesheet" />
+  <link href="assets/plugins/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet" />
+    <link href="assets/plugins/gritter/css/jquery.gritter.css" rel="stylesheet" />  
+    <link href="assets/plugins/DataTables/media/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/plugins/DataTables/extensions/Select/css/select.bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/plugins/DataTables/extensions/Responsive/css/responsive.bootstrap.min.css" rel="stylesheet" />
+  <!-- ================== END PAGE LEVEL STYLE ================== -->
+  <script language="javascript" src="includes/general.js"></script>
+  <script type="text/javascript" src="includes/menu.js"></script>
+</head>
 <script language="javascript"><!--
 function popupWindow(url) {
   window.open(url,'popupWindow','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=yes,copyhistory=no,width=650,height=500,screenX=150,screenY=150,top=150,left=150')
 }
 //--></script>
-<link rel="stylesheet" type="text/css" href="includes/headernavmenu.css">
-<script type="text/javascript" src="includes/menu.js"></script>
 </head>
-<body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF">
-<!-- header //-->
-<?php require(DIR_WS_INCLUDES . 'header.php'); ?>
-<!-- header_eof //-->
-<!-- body //-->
-<div id="body">
-<table border="0" width="100%" cellspacing="0" cellpadding="0" class="body-table">
-  <tr>
+<body>
+    <!-- begin #page-container -->
+    <div id="page-container" class="fade page-sidebar-fixed page-header-fixed gradient-enabled">
+    <!-- header //-->
+    <?php require(DIR_WS_INCLUDES . 'header.php'); ?>
+    <!-- header_eof //-->
+      
     <!-- left_navigation //-->
     <?php require(DIR_WS_INCLUDES . 'column_left.php'); ?>
     <!-- left_navigation_eof //-->
-    <!-- body_text //-->
-    <td valign="top" class="page-container"><table border="0" width="100%" cellspacing="0" cellpadding="0">
+      
+    <!-- begin #content -->
+    <div id="content" class="content">
+      <!-- begin breadcrumb -->
+      <ol class="breadcrumb pull-right">
+        <li>Create &nbsp; <a title="<?php echo BOX_MANUAL_ORDER_CREATE_ACCOUNT;?>" href="<?php echo tep_href_link(FILENAME_CREATE_ACCOUNT,'','SSL');?>" class="btn btn-xs btn-header"><i class="fa fa-user"></i><span class="label">+</span></a> <a title="<?php echo BOX_MANUAL_ORDER_CREATE_ORDER;?>" href="<?php echo tep_href_link(FILENAME_CREATE_ORDER,'','SSL');?>" class="btn btn-xs btn-header"><i class="fa fa-shopping-cart"></i><span class="label">+</span></a></li>
+        <li>Search &nbsp; <a href="javascript:;" class="btn btn-header btn-xs header-popover" id="ProductsPopover">Products</a> <a href="javascript:;" class="btn btn-header btn-xs header-popover" id="CustomerPopover">Customers</a> <a href="javascript:;" class="btn btn-header btn-xs header-popover" id="OrdersPopover">Orders</a> <a href="javascript:;" class="btn btn-header btn-xs header-popover" id="PagesPopover">Pages</a></li>
+      </ol>
+      <!-- end breadcrumb -->
+      <!-- begin page-header -->
+      <h1 class="page-header"><?php echo HEADING_STEP2; ?></h1>
+      <!-- end page-header -->
+      
+    <!-- begin panel -->
+    <div class="panel panel-inverse"><table border="0" width="100%" cellspacing="0" cellpadding="0">
 <?php
    $order = new order($oID);
   if (($action == 'edit') && ($order_exists == 1)) {
@@ -1002,11 +1025,11 @@ function popupWindow(url) {
           echo tep_draw_form('edit_order', FILENAME_EDIT_ORDERS, tep_get_all_get_params(array('action','paycc'), 'post', '', 'SSL') . 'action=update_order', 'post', '', 'SSL'); 
         }
         ?>
-        <td><table width="100%" border="0" cellspacing="0" cellpadding="2">
+        <td><table width="100%" border="0" cellspacing="0" cellpadding="2" class="table">
     <tr>
       <td valign="top">
       <!-- Customer Info Block -->
-    <table border="0" cellspacing="0" cellpadding="2">
+    <table border="0" cellspacing="0" cellpadding="2" class="table">
     <tr>
     <td colspan='2' class="main" valign="top"><b><?php echo ENTRY_CUSTOMER; ?></b></td>
     <td colspan='2' class="main" valign="top"><b><?php echo ENTRY_BILLING_ADDRESS; ?></b></td>
@@ -1199,7 +1222,7 @@ function popupWindow(url) {
 
 <!-- Begin Phone/Email Block -->
       <tr>
-        <td><table border="0" cellspacing="0" cellpadding="2" class="infoBox">
+        <td><table border="0" cellspacing="0" cellpadding="2" class="table">
           <tr>
             <td class="main"><b><?php echo ENTRY_TELEPHONE_NUMBER; ?></b></td>
             <td class="main"><input name='update_customer_telephone' size='15' value='<?php echo $order->customer['telephone']; ?>'></td>
@@ -1233,7 +1256,7 @@ function popupWindow(url) {
       if (strtolower($order->info['payment_method']) == 'ignore') {
       } else {
         ?>
-        <td><table border="0" cellspacing="0" cellpadding="2" class="infoBox">
+        <td><table border="0" cellspacing="0" cellpadding="2" class="table">
           <tr valine="middle">
             <td class="main"><b><?php echo ENTRY_PAYMENT_METHOD; ?></b></td>
             <?php
@@ -1300,7 +1323,7 @@ function popupWindow(url) {
       </tr>
 <!-- Begin Products Listing Block -->
       <tr>
-  <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
+  <td><table border="0" width="100%" cellspacing="0" cellpadding="2" class="table table-striped">
     <tr class="dataTableHeadingRow">
       <td class="dataTableHeadingContent" colspan="2" style="white-space:nowrap;"><?php echo TABLE_HEADING_PRODUCTS; ?></td>
       <td class="dataTableHeadingContent" style="white-space:nowrap;"><?php echo TABLE_HEADING_PRODUCTS_MODEL; ?></td>
@@ -1512,7 +1535,7 @@ if (ORDER_EDIT_EDT_PRICE == '1'){
       </tr>
 
       <tr>
-        <td class="main"><table border="1" cellspacing="0" cellpadding="5">
+        <td class="main"><table border="1" cellspacing="0" cellpadding="5" class="table table-striped">
           <tr>
             <td class="smallText" align="center"><b><?php echo TABLE_HEADING_DATE_ADDED; ?></b></td>
             <td class="smallText" align="center"><b><?php echo TABLE_HEADING_CUSTOMER_NOTIFIED; ?></b></td>
@@ -1631,9 +1654,9 @@ if($action == "add_product")
   $customer_id = $order->customer['id'];
 ?>
       <tr>
-        <td width="100%"><table border="0" width="100%" cellspacing="0" cellpadding="0">
+        <td width="100%"><table border="0" width="100%" cellspacing="0" cellpadding="0" class="table">
           <tr>
-            <td class="pageHeading"><?php echo ADDING_TITLE; ?> #<?php echo $oID; ?></td>
+            <td class="pageHeading"><h4><?php echo ADDING_TITLE; ?> #<?php echo $oID; ?></h4></td>
             <td class="pageHeading" align="right"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
             <td align="right"><?php echo '<a href="' . tep_href_link(FILENAME_EDIT_ORDERS, tep_get_all_get_params(array('action', 'add_product')), 'SSL') . '">' . tep_image_button('button_back.gif', IMAGE_BACK) . '</a>'; ?></td>
           </tr>
@@ -1704,10 +1727,10 @@ if($action == "add_product")
   //   Add Products Steps
   // ############################################################################
 
-    echo '<tr><td><table border=\'0\'>' . "\n";
+    echo '<tr><td><table border=\'0\' class="table">' . "\n";
     ?>
       <tr>
-        <td width="100%"><table class="main" border="0" width="100%" cellspacing="0" cellpadding="0">
+        <td width="100%"><table border="0" width="100%" cellspacing="5" cellpadding="5" class="table m-b-10">
           <tr>
             <td class="main" align="right"><b><?php echo ADDPRODUCT_TEXT_PROGRESS ;?> </B></td>
             <td class="main" align="left">
@@ -1743,8 +1766,8 @@ if($action == "add_product")
     // Step 1: Choose Category
     if(($step >= 1) && ($step < 3)){
       echo '<tr><td><table border=\'0\'>' . "\n";
-      print "<tr class=\"dataTableRow\"><form action='" . tep_href_link(FILENAME_EDIT_ORDERS, 'oID='.$oID.'&action=add_product') . "' method='POST'>\n";
-      echo "<td class=\"dataTableContent\" valign=\"top\">";
+      print "<tr class=\"dataTableRow\"><form class=\"form-horizontal\" action='" . tep_href_link(FILENAME_EDIT_ORDERS, 'oID='.$oID.'&action=add_product') . "' method='POST'>\n";
+      echo "<td valign=\"top\">";
 
      $tree = tep_get_category_tree('0');
       $dropdown= tep_draw_pull_down_menu('add_product_categories_id', $tree, '', ''); //single
@@ -1753,7 +1776,7 @@ if($action == "add_product")
       $CategoryOptions = str_replace("value='$add_product_categories_id'","value='$add_product_categories_id' selected", $CategoryOptions);
       print $CategoryOptions;
       print "</td>\n";
-      print "<td class='dataTableContent' align='center'><input type='submit' value='" . TEXT_SELECT_CAT . "'>";
+      print "<td class='p-l-10' align='center'><input class=\"btn btn-sm btn-primary m-l-5\" type='submit' value='" . TEXT_SELECT_CAT . "'>";
       print "<input type='hidden' name='step' value='2'>";
       print "</td>\n";
       print "</form></tr>\n";
@@ -1762,8 +1785,8 @@ if($action == "add_product")
     }
     // Step 2: Choose Product
     if(($step > 1) && ($step < 3)) {
-      print "<tr class=\"dataTableRow\"><form action='" . tep_href_link(FILENAME_EDIT_ORDERS, 'oID='.$oID.'&action='.$action) . "' method='POST'>\n";
-      print "<td class='dataTableContent' valign='top'><select name='add_product_products_id'>";
+      print "<tr class=\"dataTableRow\"><form class=\"form-horizontal\" action='" . tep_href_link(FILENAME_EDIT_ORDERS, 'oID='.$oID.'&action='.$action) . "' method='POST'>\n";
+      print "<td valign='top'><select class=\"form-control\" name='add_product_products_id'>";
       $ProductOptions = "<option value='0'> " . TEXT_ADD_PROD_CHOOSE;
       asort($ProductList[$add_product_categories_id]);
       foreach($ProductList[$add_product_categories_id] as $ProductID => $ProductName)
@@ -1773,7 +1796,7 @@ if($action == "add_product")
       $ProductOptions = str_replace("value='$add_product_products_id'","value='$add_product_products_id' selected", $ProductOptions);
       print $ProductOptions;
       print "</select></td>\n";
-      print "<td class='dataTableContent' align='center'><input type='submit' value='" . TEXT_SELECT_PROD . "'>";
+      print "<td class='dataTableContent' align='center'><input class=\"btn btn-sm btn-primary m-l-5\" type='submit' value='" . TEXT_SELECT_PROD . "'>";
       print "<input type='hidden' name='add_product_categories_id' value='$add_product_categories_id'>";
       print "<input type='hidden' name='step' value='3'>";
       print "</td>\n";
@@ -1826,10 +1849,10 @@ if(tep_db_num_rows($result_attributes) > 0) {
 $product_has_attributes = 1;
 }
 
-  echo tep_draw_form('add_product', FILENAME_EDIT_ORDERS, 'oID='.$oID . '&action=add_product', 'post', '', 'SSL');
+  echo tep_draw_form('add_product', FILENAME_EDIT_ORDERS, 'oID='.$oID . '&action=add_product', 'post', 'class="form-horizontal"', 'SSL');
 
 ;?>
-<td width="100%" align="left"><table border="0" width="100%" cellspacing="0" cellpadding="0">
+<td width="100%" align="left"><table border="0" width="100%" cellspacing="0" cellpadding="0" class="table">
         <tr>
          <td class="main" align="left">
          <?php    echo '<b>' .TEXT_ADD_PROD. '</b>' .$add_product_products_id . '&nbsp;&nbsp;<b>' . TEXT_ADD_PROD_NAME .'</b>&nbsp;' . $products_name_step . '&nbsp;&nbsp;<b>' . TEXT_ADD_PROD_PRICE .'</b>&nbsp;' . $p_products_price. '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>'; ?>
@@ -2041,7 +2064,7 @@ $cols = '';
 
         </tr>
         <tr>
-           <td class="dataTableContent" align='center'><input type="submit" value="<?php echo SELECT_THESE_OPTIONS ;?>">
+           <td align='center'><input class=\"btn btn-sm btn-primary m-l-5\" type="submit" value="<?php echo SELECT_THESE_OPTIONS ;?>">
              <input type="hidden" name="oID" value="<?php echo $oID ;?>">
               <input type="hidden" name="step" value="4">
               <input type="hidden" name="add_product_products_id" value="<?php echo $add_product_products_id ;?>">
@@ -2057,7 +2080,7 @@ $cols = '';
 ;?>
         <tr>
             <td class="dataTableContent" align='center' colspan = '3'>
-              <input type="submit" value="<?php echo ADDPRODUCT_TEXT_OPTIONS_NOTEXIST ;?>">
+              <input class="btn btn-sm btn-primary m-l-5" type="submit" value="<?php echo ADDPRODUCT_TEXT_OPTIONS_NOTEXIST ;?>">
               <input type="hidden" name="oID" value="<?php echo $oID ;?>">
               <input type="hidden" name="step" value="4">
               <input type="hidden" name="add_product_products_id" value="<?php echo $add_product_products_id ;?>">
@@ -2079,22 +2102,22 @@ $cols = '';
    if (isset($_POST['add_products_price'])){
    $p_products_price = $_POST['add_products_price'];
    }
-     ;?>    <td width="100%"><table border="0" width="100%" cellspacing="0" cellpadding="0">
+     ;?>    <td width="100%"><table border="0" width="100%" cellspacing="5" cellpadding="5" class="table">
       <tr class="dataTableRow">
             <?php
-            echo  tep_draw_form('select_product', FILENAME_EDIT_ORDERS, 'oID='.$oID . '&action=add_product', 'post', '', 'SSL');
+            echo  tep_draw_form('select_product', FILENAME_EDIT_ORDERS, 'oID='.$oID . '&action=add_product', 'post', 'class="form-horizontal"', 'SSL');
             ;?>
-    <td width="100%" colspan= "3"><table border="0" width="100%" cellspacing="0" cellpadding="0">
+    <td width="100%" colspan= "3"><table border="0" width="100%" cellspacing="5" cellpadding="5">
         <tr>
-        <td class="main" align="left">
-        <?php    echo '<b>' .TEXT_ADD_PROD. ':</b>&nbsp;' .$add_product_products_id . '&nbsp;&nbsp;<b>&nbsp;' . TEXT_ADD_PROD_NAME .':</b>&nbsp;' . $products_name_step . '&nbsp;&nbsp;<b>' . TEXT_ADD_PROD_PRICE .':</b>&nbsp;' . $p_products_price. '&nbsp;&nbsp;<b>';?>
+        <td align="left">
+        <?php    echo '<h4>' .TEXT_ADD_PROD. ':</h4><br>' .$add_product_products_id . '&nbsp;&nbsp;<b>&nbsp;' . TEXT_ADD_PROD_NAME .':</b>&nbsp;' . $products_name_step . '&nbsp;&nbsp;<b>' . TEXT_ADD_PROD_PRICE .':</b>&nbsp;' . $p_products_price. '&nbsp;&nbsp;<b>';?>
          </td></tr>
       </table></td>
      </tr><tr>
 
             <td class="dataTableContent" align="left"></td>
             <td class="dataTableContent" valign="top"><input name="add_product_quantity" size="2" value="1"><?php echo TEXT_ADD_QUANTITY ;?></td>
-            <td class="dataTableContent" align="center"><input type="submit" value="<?php echo TEXT_ADD_NOW ;?>">
+            <td class="dataTableContent" align="center"><input class="btn btn-sm btn-primary m-l-5" type="submit" value="<?php echo TEXT_ADD_NOW ;?>">
       <?php
   $product_options = $_POST['product_options'];
   $add_product_options = (isset($_POST['add_product_options']) ? $_POST['add_product_options'] :'') ;
@@ -2136,10 +2159,7 @@ $value = '';
 ?>
     </table></td>
     </tr>
-</table></td>
-<!-- body_text_eof //-->
-  </tr>
-</table>
+</table></div></div>
 </div>
 <!-- body_eof //-->
 <!-- footer //-->

@@ -103,11 +103,11 @@
       </ol>
       <!-- end breadcrumb -->
       <!-- begin page-header -->
-      <h1 class="page-header"><?php echo $HEADING_STEP1; ?></h1>
+      <h1 class="page-header"><?php echo HEADING_STEP1; ?></h1>
       <!-- end page-header -->
       
     <!-- begin panel -->
-    <div class="panel panel-inverse"><table border="0" width="100%" cellspacing="0" cellpadding="0">
+    <div class="panel panel-inverse"><table border="0" width="100%" cellspacing="0" cellpadding="0" class="table">
               <tr>
                 <td class="main" valign="top"><?php
                 echo tep_draw_form('select_customer', FILENAME_CREATE_ORDER, tep_get_all_get_params(array('action','select_customer')) . '', 'get', '', 'SSL') ;

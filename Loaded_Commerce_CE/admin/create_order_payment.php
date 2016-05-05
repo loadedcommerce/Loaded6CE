@@ -136,7 +136,7 @@ Header("Pragma: no-cache");
     <!-- begin panel -->
     <div class="panel panel-inverse"><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
-            <td valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2" class="data-table">
+            <td valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2" class="table table-striped">
               <tr class="dataTableHeadingRow">
                 <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_CREATE_ORDERS_ADMIN; ?></td>
                 <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_CREATE_ORDERS_SORT; ?></td>
