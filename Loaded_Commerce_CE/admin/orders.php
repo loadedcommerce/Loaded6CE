@@ -207,7 +207,7 @@ echo $cre_RCI->get('orders', 'javascript');
       <!-- end page-header -->
       
     <!-- begin panel -->
-    <div class="panel panel-inverse"><table border="0" width="100%" cellspacing="0" cellpadding="0">
+    <div class="panel panel-inverse"><table border="0" width="100%" cellspacing="0" cellpadding="0" class="table">
 <?php
   if (($action == 'edit') && ($order_exists == true)) {
     $order = new order($oID);
@@ -279,9 +279,6 @@ echo $cre_RCI->get('orders', 'javascript');
       // RCI code eof
 ?>      
       <tr>
-        <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-      </tr>
-      <tr>
         <td><table border="0" cellspacing="0" cellpadding="2">
           <!-- add Order # // -->
           <tr>
@@ -305,9 +302,6 @@ echo $cre_RCI->get('orders', 'javascript');
           <?php
              if ($order->info['payment_method'] == 'Purchase Order') {
         ?>
-        <tr>
-          <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-        </tr>
         <tr>
           <td class="main" valign="top" align="left"><b><?php echo TEXT_INFO_PO ?></b></td>
           <td><table border="0" cellspacing="0" cellpadding="2">
@@ -336,12 +330,9 @@ echo $cre_RCI->get('orders', 'javascript');
 </table>
         </td>
       </tr>
-      <tr>
-        <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-      </tr>
       <!-- Begin Products Listings Block -->
       <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
+        <td><table border="0" width="100%" cellspacing="0" cellpadding="2" class="table">
           <tr class="dataTableHeadingRow">
             <td class="dataTableHeadingContent" colspan="2" style="white-space:nowrap;"><?php echo TABLE_HEADING_PRODUCTS; ?></td>
             <td class="dataTableHeadingContent" style="white-space:nowrap;"><?php echo TABLE_HEADING_PRODUCTS_MODEL; ?></td>
@@ -375,7 +366,7 @@ echo $cre_RCI->get('orders', 'javascript');
     }
 ?>
           <tr>
-            <td align="right" colspan="8"><table border="0" cellspacing="0" cellpadding="2">
+            <td align="right" colspan="8"><div style="width:30%"><table border="0" cellspacing="0" cellpadding="2" class="table">
 <?php
     for ($i = 0, $n = sizeof($order->totals); $i < $n; $i++) {
       echo '              <tr>' . "\n" .
@@ -384,20 +375,17 @@ echo $cre_RCI->get('orders', 'javascript');
            '              </tr>' . "\n";
     }
 ?>
-            </table></td>
+            </table></div></td>
           </tr>
         </table></td>
       </tr>
       <tr>
-        <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-      </tr>
-      <tr>
-        <td class="main"><table border="1" cellspacing="0" cellpadding="5">
-          <tr>
-            <td class="smallText" align="center"><b><?php echo TABLE_HEADING_DATE_ADDED; ?></b></td>
-            <td class="smallText" align="center"><b><?php echo TABLE_HEADING_CUSTOMER_NOTIFIED; ?></b></td>
-            <td class="smallText" align="center"><b><?php echo TABLE_HEADING_STATUS; ?></b></td>
-            <td class="smallText" align="center"><b><?php echo TABLE_HEADING_COMMENTS; ?></b></td>
+        <td class="main"><div style="width:50%"><table border="1" cellspacing="0" cellpadding="5" class="table">
+          <tr class="dataTableHeadingRow">
+            <td class="dataTableHeadingContent" align="center"><b><?php echo TABLE_HEADING_DATE_ADDED; ?></b></td>
+            <td class="dataTableHeadingContent" align="center"><b><?php echo TABLE_HEADING_CUSTOMER_NOTIFIED; ?></b></td>
+            <td class="dataTableHeadingContent" align="center"><b><?php echo TABLE_HEADING_STATUS; ?></b></td>
+            <td class="dataTableHeadingContent" align="center"><b><?php echo TABLE_HEADING_COMMENTS; ?></b></td>
           </tr>
 <?php
     $orders_history_query = tep_db_query("select orders_status_id, date_added, customer_notified, comments from " . TABLE_ORDERS_STATUS_HISTORY . " where orders_id = '" . tep_db_input($oID) . "' order by date_added");
@@ -421,13 +409,10 @@ echo $cre_RCI->get('orders', 'javascript');
              '          </tr>' . "\n";
     }
 ?>
-        </table></td>
+        </table></div></td>
       </tr>
       <tr>
         <td class="main"><br><b><?php echo TABLE_HEADING_COMMENTS; ?></b></td>
-      </tr>
-      <tr>
-        <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '5'); ?></td>
       </tr>
       <tr>
         <?php 
@@ -437,10 +422,7 @@ echo $cre_RCI->get('orders', 'javascript');
           echo tep_draw_form('status', FILENAME_ORDERS, tep_get_all_get_params(array('action')) . 'action=update_order', 'post', '', 'SSL');
         }
         ?>
-        <td class="main"><?php echo tep_draw_textarea_field('comments', 'soft', '60', '5'); ?></td>
-      </tr>
-      <tr>
-        <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+        <td class="main"><div style="width:50%"><?php echo tep_draw_textarea_field('comments', 'soft', '60', '5'); ?></div></td>
       </tr>
       <tr>
         <td><table border="0" cellspacing="0" cellpadding="2">
@@ -484,13 +466,13 @@ echo $cre_RCI->get('orders', 'javascript');
                     echo tep_draw_form('orders', FILENAME_ORDERS, '', 'get', '', 'SSL'); 
                     tep_hide_session_id();
                   ?>
-                  <td class="smallText" align="right"><?php echo HEADING_TITLE_SEARCH . ' ' . tep_draw_input_field('SoID', '', 'size="12"') . tep_draw_hidden_field('action', 'edit'); ?></td>
+                  <td class="smallText" align="right" style="padding-bottom:5px;"><?php echo HEADING_TITLE_SEARCH . ' ' . tep_draw_input_field('SoID', '', 'size="12" style="width:20%;display:inline-block"') . tep_draw_hidden_field('action', 'edit'); ?></td>
                   </form>
                 </tr>
                 <tr>
                   <?php echo tep_draw_form('status', FILENAME_ORDERS, '', 'get', '', 'SSL'); ?>
                   <td class="smallText" align="right">
-                    <?php echo HEADING_TITLE_STATUS . ' ' . tep_draw_pull_down_menu('status', array_merge(array(array('id' => '', 'text' => TEXT_ALL_ORDERS)), $orders_statuses), '', 'onChange="this.form.submit();"');
+                    <?php echo HEADING_TITLE_STATUS . ' ' . tep_draw_pull_down_menu('status', array_merge(array(array('id' => '', 'text' => TEXT_ALL_ORDERS)), $orders_statuses), '', 'style="width:20%;display:inline-block" onChange="this.form.submit();"');
                   tep_hide_session_id(); ?>
                   </td>
                   </form>

@@ -17,10 +17,10 @@
 <div class="box-header small-margin-bottom small-margin-left">Loaded Payment</div>
 <ul class="box-information_pages-ul list-unstyled list-indent-large">
 <li>
-<a href="http://www.loadedcommerce.com/loaded-payments-pg-381.html?CDpath=0_282" target="_blank"><img src="http://store.loadedcommerce.com/images/LPlogoWideGreen.png" border="0" width="150" alt="Loaded Payments - The Easiest Way to Accept Credit Cards Online" title="An all-in-one payment solution for Loaded Commerce Clients" /></a>
+<a href="http://www.loadedcommerce.com/loaded-payments-pg-381.html?CDpath=0_282" target="_blank"><img class="img-responsive" src="http://store.loadedcommerce.com/images/LPlogoWideGreen.png" border="0" width="150" alt="Loaded Payments - The Easiest Way to Accept Credit Cards Online" title="An all-in-one payment solution for Loaded Commerce Clients" /></a>
 </li>
 <li>
-                                               <p>The Easiest Way to Accept Credit Cards Online</p>
+	<p>The Easiest Way to Accept Credit Cards Online</p>
 </li>
 </ul>
 </div>
