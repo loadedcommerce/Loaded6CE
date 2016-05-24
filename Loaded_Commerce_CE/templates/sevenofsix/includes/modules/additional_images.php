@@ -17,10 +17,6 @@ if (($product_info['products_image_sm_1'] != '') && ($product_info['products_ima
 <div class="product-block">
 <?php
     echo '<a rel="'.$product_info['products_name'] .'" class="thumbnail elevatezoom-gallery fancybox" title="'.$product_info['products_name'].'" href="'.DIR_WS_IMAGES . $product_info['products_image_xl_1'].'">'.tep_image(DIR_WS_IMAGES . $product_info['products_image_sm_1'], $product_info['products_name'], '', '','class="img-responsive"').'</a>';
-
-
-
-/* echo tep_image(DIR_WS_IMAGES . $product_info['products_image_sm_1'], $product_info['products_name'], ULT_THUMB_IMAGE_WIDTH, ULT_THUMB_IMAGE_HEIGHT, 'hspace="1" vspace="1"class="img-responsive"'); */?>
 ?>
 </div>
 </div>
@@ -232,9 +228,6 @@ if (($product_info['products_image_sm_6'] != '') && ($product_info['products_ima
 </div>
 </div>
 <?php
-}
-?>
-
-<?php
+  }
 } // end of initial IF
 ?>
