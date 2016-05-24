@@ -87,11 +87,8 @@ $column = 0;
 
               if ($valid_to_checkout == true) {
 
-                $hide_add_to_cart = hide_add_to_cart();
                 $lc_text = '';
-                if ($hide_add_to_cart == 'false' && group_hide_show_prices() == 'true') {
                   $lc_text = '<div class="col-sm-6 col-lg-6 no-margin-left product-listing-module-buy-now buy-btn-div"><a href="' . tep_href_link(basename($PHP_SELF), tep_get_all_get_params(array('action','cPath','products_id')) . 'action=buy_now&amp;products_id=' . $listing[$x]['products_id'] . '&amp;cPath=' . tep_get_product_path($listing[$x]['products_id']) . $params) . '"><button class="product-listing-module-buy-now-button btn btn-success btn-block">' . IMAGE_BUTTON_BUY_NOW . '</button></a></div>';
-                }
               }
               $lc_text .= '</div>';
               break;
