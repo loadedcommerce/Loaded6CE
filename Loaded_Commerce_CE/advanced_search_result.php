@@ -57,7 +57,8 @@
     }
 
     if (isset($_GET['keywords'])) {
-      $keywords = $InputFilter->process($_GET['keywords']);
+      //$keywords = $InputFilter->process($_GET['keywords']); // For some reason Input filter class is not workin in PHP7. We are working on it to fix it asap.
+      $keywords = $_GET['keywords'];
     }
 
     $date_check_error = false;
