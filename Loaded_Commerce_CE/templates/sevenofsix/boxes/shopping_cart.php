@@ -83,14 +83,14 @@ function couponpopupWindow(url) {
       $gv_query = tep_db_query("select amount from " . TABLE_COUPON_GV_CUSTOMER . " where customer_id = '" . $_SESSION['customer_id'] . "'");
       $gv_result = tep_db_fetch_array($gv_query);
       if ($gv_result['amount'] > 0 ) {
-        echo VOUCHER_BALANCE . '' . $currencies->format($gv_result['amount']) . '';
-        echo '<a href="'. tep_href_link(FILENAME_GV_SEND) . '">' . BOX_SEND_TO_FRIEND . '</a>';
+        echo '<br><br>'.VOUCHER_BALANCE . ': ' . $currencies->format($gv_result['amount']) . '';
+        echo '<br><a href="'. tep_href_link(FILENAME_GV_SEND) . '">' . BOX_SEND_TO_FRIEND . '</a>';
       }
     }
     if (isset($_SESSION['gv_id']) ) {
       $gv_query = tep_db_query("select coupon_amount from " . TABLE_COUPONS . " where coupon_id = '" . $_SESSION['gv_id'] . "'");
       $coupon = tep_db_fetch_array($gv_query);
-echo  VOUCHER_REDEEMED . '' . $currencies->format($coupon['coupon_amount']) . '';
+	echo  VOUCHER_REDEEMED . '' . $currencies->format($coupon['coupon_amount']) . '';
     }
     if (isset($_SESSION['cc_id']) && tep_not_null($_SESSION['cc_id'])) {
       $cart_coupon_query = tep_db_query("select coupon_code, coupon_type from " . TABLE_COUPONS . " where coupon_id = '" . (int)$_SESSION['cc_id'] . "'");

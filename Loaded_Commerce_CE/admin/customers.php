@@ -163,7 +163,15 @@
           if (ACCOUNT_DOB == 'true') $sql_data_array['customers_dob'] = tep_date_raw($customers_dob);
 
           tep_db_perform(TABLE_CUSTOMERS, $sql_data_array, 'update', "customers_id = '" . (int)$customers_id . "'");
-          tep_db_query("update ".TABLE_COUPON_GV_CUSTOMER." set amount = " . $customers_voucher_amount . " where customer_id = " . (int)$customers_id . "");
+
+			$str = tep_db_query("select * from ".TABLE_COUPON_GV_CUSTOMER." where customer_id = ".(int)$customers_id."");
+			$number_of_customer = tep_db_num_rows($str);
+			if($number_of_customer == 0){
+				tep_db_query("insert into ".TABLE_COUPON_GV_CUSTOMER." (customer_id,amount) values (".(int)$customers_id.",".$customers_voucher_amount.")");
+			} else {
+				tep_db_query("update ".TABLE_COUPON_GV_CUSTOMER." set amount = ".$customers_voucher_amount." where customer_id = ".(int)$customers_id."");
+			}
+          
           tep_db_query("update " . TABLE_CUSTOMERS_INFO . " set customers_info_date_account_last_modified = now() where customers_info_id = '" . (int)$customers_id . "'");
 
           if ($entry_zone_id > 0) $entry_state = '';
@@ -413,11 +421,11 @@ if ($action == 'edit' || $action == 'update') {
       </ol>
       <!-- end breadcrumb -->
       <!-- begin page-header -->
-      <h1 class="page-header"><?php echo $heading_title; ?></h1>
+      <h1 class="page-header"><?php echo HEADING_TITLE; ?></h1>
       <!-- end page-header -->
       
     <!-- begin panel -->
-    <div class="panel panel-inverse"><table border="0" width="100%" cellspacing="0" cellpadding="0">
+    <div class="panel panel-inverse"><table border="0" width="100%" cellspacing="0" cellpadding="0" class="table">
       <?php
       if ($action == 'edit' || $action == 'update') {
         $newsletter_array = array(array('id' => '0', 'text' => ENTRY_NEWSLETTER_NO),
@@ -426,16 +434,6 @@ if ($action == 'edit' || $action == 'update') {
         $emailvalidated_array = array(array('id' => '0', 'text' => ENTRY_EMAILVALIDATE_NO),
                                       array('id' => '1', 'text' => ENTRY_EMAILVALIDATE_YES));               
         ?>
-        <tr>
-          <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
-            <tr>
-              <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
-            </tr>
-          </table></td>
-        </tr>
-        <tr>
-          <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '2'); ?></td>
-        </tr>
         <tr>          
           <?php 
           if (isset($_SESSION['is_std']) && $_SESSION['is_std'] === true) {
@@ -806,7 +804,7 @@ if ($action == 'edit' || $action == 'update') {
                 if ($processed == true) {
                   echo $cInfo->customers_voucher_amount . tep_draw_hidden_field('customers_voucher_amount');
                 } else {
-                  echo "<input type = 'text' name = 'customers_voucher_amount' value = ". $cInfo->customers_voucher_amount ." size='22'>";
+                  echo "<input type = 'text' name = 'customers_voucher_amount' class='form-control' value = ". $cInfo->customers_voucher_amount ." size='22'>";
                 }
                 ?>
               </td>
@@ -862,7 +860,7 @@ if ($action == 'edit' || $action == 'update') {
               }          
             ?>
               <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
-              <td class="smallText" align="right"><?php echo HEADING_TITLE_SEARCH . ' ' . tep_draw_input_field('search'); ?></td>
+              <td class="smallText" align="right"><?php echo HEADING_TITLE_SEARCH . ' ' . tep_draw_input_field('search', '', 'style="width:30%;display:inline-block;"'); ?></td>
             </form></tr>
           </table></td>
         </tr>
@@ -1085,7 +1083,9 @@ if ($action == 'edit' || $action == 'update') {
       ?>
     </table></div></div>
 </div>
-<!-- body_eof //-->
+<style>
+td, th{padding:5px;}
+</style><!-- body_eof //-->
 <!-- footer //-->
 <?php require(DIR_WS_INCLUDES . 'footer.php'); ?>
 <!-- footer_eof //-->
