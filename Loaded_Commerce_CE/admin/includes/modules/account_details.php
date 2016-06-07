@@ -90,7 +90,7 @@ if (!isset($account)) {
   <tr>
     <td class="main"><table border="0" width="100%" cellspacing="0" cellpadding="2">
       <tr>
-        <td class="main"><table border="0" cellspacing="0" cellpadding="2">
+        <td class="main"><table border="0" cellspacing="0" cellpadding="2" width="100%">
           <?php
           if (!isset($account['customers_gender'])) {
             $account['customers_gender'] = '';
@@ -122,7 +122,7 @@ if (!isset($account)) {
           }
           ?>
           <tr>
-            <td class="main">&nbsp;<?php echo ENTRY_FIRST_NAME; ?></td>
+            <td class="main" width="240">&nbsp;<?php echo ENTRY_FIRST_NAME; ?></td>
             <td class="main">&nbsp;
               <?php
               if ($is_read_only) {
@@ -214,11 +214,11 @@ if (!isset($account)) {
       <td class="formAreaTitle"><br><?php echo CATEGORY_COMPANY; ?></td>
     </tr>
     <tr>
-      <td class="main"><table border="0" width="100%" cellspacing="0" cellpadding="2" class="table">
+      <td class="main"><table border="0" width="100%" cellspacing="0" cellpadding="2">
         <tr>
-          <td class="main"><table border="0" cellspacing="0" cellpadding="2">
+          <td class="main"><table border="0" cellspacing="0" cellpadding="2" width="100%">
             <tr>
-              <td class="main">&nbsp;<?php echo ENTRY_COMPANY; ?></td>
+              <td class="main" width="240">&nbsp;<?php echo ENTRY_COMPANY; ?></td>
               <td class="main">&nbsp;
                 <?php
                 if ($is_read_only) {
@@ -246,11 +246,11 @@ if (!isset($account)) {
     <td class="formAreaTitle"><br><?php echo CATEGORY_ADDRESS; ?></td>
   </tr>
   <tr>
-    <td class="main"><table border="0" width="100%" cellspacing="0" cellpadding="2" class="table">
+    <td class="main"><table border="0" width="100%" cellspacing="0" cellpadding="2">
       <tr>
-        <td class="main"><table border="0" cellspacing="0" cellpadding="2">
+        <td class="main"><table border="0" cellspacing="0" cellpadding="2" width="100%">
           <tr>
-            <td class="main">&nbsp;<?php echo ENTRY_STREET_ADDRESS; ?></td>
+            <td class="main" width="240">&nbsp;<?php echo ENTRY_STREET_ADDRESS; ?></td>
             <td class="main">&nbsp;
               <?php
               if ($is_read_only) {
@@ -392,11 +392,11 @@ if (!isset($account)) {
     <td class="formAreaTitle"><br><?php echo CATEGORY_CONTACT; ?></td>
   </tr>
   <tr>
-    <td class="main"><table border="0" width="100%" cellspacing="0" cellpadding="2" class="table">
+    <td class="main"><table border="0" width="100%" cellspacing="0" cellpadding="2">
       <tr>
-        <td class="main"><table border="0" cellspacing="0" cellpadding="2">
+        <td class="main"><table border="0" cellspacing="0" cellpadding="2" width="100%">
           <tr>
-            <td class="main">&nbsp;<?php echo ENTRY_TELEPHONE_NUMBER; ?></td>
+            <td class="main" width="240">&nbsp;<?php echo ENTRY_TELEPHONE_NUMBER; ?></td>
             <td class="main">&nbsp;
               <?php
               if ($is_read_only) {
@@ -439,11 +439,11 @@ if (!isset($account)) {
     <td class="formAreaTitle"><br><?php echo CATEGORY_OPTIONS; ?></td>
   </tr>
   <tr>
-    <td class="main"><table border="0" width="100%" cellspacing="0" cellpadding="2" class="table">
+    <td class="main"><table border="0" width="100%" cellspacing="0" cellpadding="2">
       <tr>
-        <td class="main"><table border="0" cellspacing="0" cellpadding="2">
+        <td class="main"><table border="0" cellspacing="0" cellpadding="2" width="100%">
           <tr>
-            <td class="main">&nbsp;<?php echo ENTRY_NEWSLETTER; ?></td>
+            <td class="main" width="240">&nbsp;<?php echo ENTRY_NEWSLETTER; ?></td>
             <td class="main">&nbsp;
               <?php
               if ($is_read_only) {
@@ -522,3 +522,6 @@ if (!isset($account)) {
   */
 ?>
 </table>
+<style>
+td, th{padding:2px;}
+</style>

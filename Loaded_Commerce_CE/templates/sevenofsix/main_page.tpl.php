@@ -122,10 +122,6 @@ if ($cre_RCO->get('mainpage', 'body') !== true) {
 }
 // RCO end
 //include languages if avaible for template
-
-if(file_exists(TEMPLATE_FS_CUSTOM_INCLUDES . 'languages/' . $language . '/menu.php')){
-require(TEMPLATE_FS_CUSTOM_INCLUDES . 'languages/' . $language . '/menu.php');
-}
 ?>
 <!-- warnings //-->
 <?php
@@ -137,7 +133,6 @@ if(file_exists(TEMPLATE_FS_CUSTOM_INCLUDES . FILENAME_WARNINGS)){
 ?>
 <!-- warning_eof //-->
 <div id="loaded7" class="loadedcommerce-main-wrapper">
-
 <?php
 // RCI top
 echo $cre_RCI->get('mainpage', 'top');
@@ -226,10 +221,7 @@ if(DISPLAY_COLUMN_LEFT == 'yes' && DISPLAY_COLUMN_RIGHT == 'yes') {
       $column_location = '';
     }
     ?>
-
-
    </div>
-
     <!-- content_eof //-->
 </div>
 <!-- body_eof //-->

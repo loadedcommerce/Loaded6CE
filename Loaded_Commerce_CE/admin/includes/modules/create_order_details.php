@@ -64,9 +64,9 @@ if (isset($account['customers_id'])) {
     <td class="formAreaTitle"><?php echo CATEGORY_CORRECT; ?></td>
   </tr>
   <tr>
-    <td class="main"><table border="0" width="100%" cellspacing="0" cellpadding="2" class="formArea">
+    <td class="main"><table border="0" cellspacing="0" cellpadding="2" class="formArea">
       <tr>
-        <td class="main"><table border="0" cellspacing="0" cellpadding="2">
+        <td class="main"><table border="0" cellspacing="0" cellpadding="2" class="table">
           <tr>
             <td class="main">&nbsp;<?php echo ENTRY_CUSTOMERS_ID; ?></td>
             <td class="main">&nbsp;
@@ -126,7 +126,7 @@ if (isset($account['customers_id'])) {
       <td class="formAreaTitle"><br><?php echo CATEGORY_COMPANY; ?></td>
     </tr>
     <tr>
-      <td class="main"><table border="0" width="100%" cellspacing="0" cellpadding="2" class="formArea">
+      <td class="main"><table border="0" width="100%" cellspacing="0" cellpadding="2" class="table">
         <tr>
           <td class="main"><table border="0" cellspacing="0" cellpadding="2">
             <tr>
@@ -152,9 +152,9 @@ if (isset($account['customers_id'])) {
     <td class="formAreaTitle"><br><?php echo CATEGORY_ADDRESS; ?></td>
   </tr>
   <tr>
-    <td class="main"><table border="0" width="100%" cellspacing="0" cellpadding="2" class="formArea">
+    <td class="main"><table border="0" cellspacing="0" cellpadding="2">
       <tr>
-        <td class="main"><table border="0" cellspacing="0" cellpadding="2">
+        <td class="main"><table border="0" cellspacing="0" cellpadding="2" class="table">
           <tr>
             <td class="main">&nbsp;<?php echo ENTRY_STREET_ADDRESS; ?></td>
             <td class="main">&nbsp;
@@ -250,7 +250,7 @@ if (isset($account['customers_id'])) {
       <?php echo CATEGORY_CONTACT; ?></td>
   </tr>
   <tr>
-    <td class="main"><table border="0" width="100%" cellspacing="0" cellpadding="2" class="formArea">
+    <td class="main"><table border="0" width="100%" cellspacing="0" cellpadding="2" class="table">
       <tr>
         <td class="main"><table border="0" cellspacing="0" cellpadding="2">
           <tr>

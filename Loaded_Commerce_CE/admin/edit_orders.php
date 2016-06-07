@@ -974,7 +974,7 @@ function popupWindow(url) {
       <!-- end page-header -->
       
     <!-- begin panel -->
-    <div class="panel panel-inverse"><table border="0" width="100%" cellspacing="0" cellpadding="0">
+    <div class="panel panel-inverse"><table border="0" width="100%" cellspacing="0" cellpadding="0" class="table">
 <?php
    $order = new order($oID);
   if (($action == 'edit') && ($order_exists == 1)) {
@@ -1025,7 +1025,7 @@ function popupWindow(url) {
           echo tep_draw_form('edit_order', FILENAME_EDIT_ORDERS, tep_get_all_get_params(array('action','paycc'), 'post', '', 'SSL') . 'action=update_order', 'post', '', 'SSL'); 
         }
         ?>
-        <td><table width="100%" border="0" cellspacing="0" cellpadding="2" class="table">
+        <td><table width="100%" border="0" cellspacing="0" cellpadding="2">
     <tr>
       <td valign="top">
       <!-- Customer Info Block -->
@@ -1039,7 +1039,7 @@ function popupWindow(url) {
     <table border="0" cellspacing="0" cellpadding="2" class="infoBox">
       <tr>
       <td class="editOrder"><b><?php echo ENTRY_NAME ?></b></font></td>
-      <td><input name='update_customer_name' size='37' value='<?php echo tep_html_quotes($order->customer['name']); ?>'></td>
+      <td><input class="form-control" name='update_customer_name' size='37' value='<?php echo tep_html_quotes($order->customer['name']); ?>'></td>
       </tr>
       <tr>
        <td  class="editOrder"><?php echo TABLE_HEADING_CUSTOMER_ID ?>  </td>
@@ -1053,31 +1053,31 @@ function popupWindow(url) {
       </tr>
       <tr>
         <td class="editOrder"><b><?php echo ENTRY_COMPANY ?></b></font></td>
-        <td><input name='update_customer_company' size='37' value='<?php echo tep_html_quotes($order->customer['company']); ?>'></td>
+        <td><input class="form-control" name='update_customer_company' size='37' value='<?php echo tep_html_quotes($order->customer['company']); ?>'></td>
       </tr>
       <tr>
         <td class="editOrder"><b><?php echo ENTRY_CUSTOMER_ADDRESS ?></b></font></td>
-        <td><input name='update_customer_street_address' size='37' value='<?php echo tep_html_quotes($order->customer['street_address']); ?>'></td>
+        <td><input class="form-control" name='update_customer_street_address' size='37' value='<?php echo tep_html_quotes($order->customer['street_address']); ?>'></td>
       </tr>
       <tr>
         <td class="editOrder"><b><?php echo ENTRY_SUBURB ?></b></font></td>
-        <td><input name='update_customer_suburb' size='37' value='<?php echo tep_html_quotes($order->customer['suburb']); ?>'></td>
+        <td><input class="form-control" name='update_customer_suburb' size='37' value='<?php echo tep_html_quotes($order->customer['suburb']); ?>'></td>
       </tr>
       <tr>
         <td class="editOrder"><b><?php echo ENTRY_CITY ?></b></font></td>
-        <td><input name='update_customer_city' size='15' value='<?php echo tep_html_quotes($order->customer['city']); ?>'> </td>
+        <td><input class="form-control" name='update_customer_city' size='15' value='<?php echo tep_html_quotes($order->customer['city']); ?>'> </td>
       </tr>
       <tr>
         <td class="editOrder"><b><?php echo ENTRY_STATE ?></b></font></td>
-        <td><input name='update_customer_state' size='15' value='<?php echo tep_html_quotes($order->customer['state']); ?>'> </td>
+        <td><input class="form-control" name='update_customer_state' size='15' value='<?php echo tep_html_quotes($order->customer['state']); ?>'> </td>
       </tr>
       <tr>
         <td class="editOrder"><b><?php echo ENTRY_POST_CODE ?></b></font></td>
-        <td><input name='update_customer_postcode' size='5' value='<?php echo $order->customer['postcode']; ?>'></td>
+        <td><input class="form-control" name='update_customer_postcode' size='5' value='<?php echo $order->customer['postcode']; ?>'></td>
       </tr>
       <tr>
         <td class="editOrder"><b><?php echo ENTRY_COUNTRY ?></b></font></td>
-        <td><input name='update_customer_country' size='37' value='<?php echo tep_html_quotes($order->customer['country']); ?>'></td>
+        <td><input class="form-control" name='update_customer_country' size='37' value='<?php echo tep_html_quotes($order->customer['country']); ?>'></td>
       </tr>
      </table>
     </td>
@@ -1093,47 +1093,47 @@ function popupWindow(url) {
           <table border="0" cellspacing="0" cellpadding="2" class="infoBox">
           <tr>
             <td class="editOrder"><b><?php echo ENTRY_NAME ?></b></font></td>
-              <td><input name='update_billing_name' size='37' value='<?php echo tep_html_quotes($order->billing['name']); ?>'></td>
+              <td><input class="form-control" name='update_billing_name' size='37' value='<?php echo tep_html_quotes($order->billing['name']); ?>'></td>
             </tr>
             <tr>
               <td class="editOrder"><b><?php echo ENTRY_COMPANY ?></b></font></td>
-              <td><input name='update_billing_company' size='37' value='<?php echo tep_html_quotes($order->billing['company']); ?>'></td>
+              <td><input class="form-control" name='update_billing_company' size='37' value='<?php echo tep_html_quotes($order->billing['company']); ?>'></td>
             </tr>
             <tr>
               <td class="editOrder"><b><?php echo ENTRY_CUSTOMER_ADDRESS ?></b></font></td>
-              <td><input name='update_billing_street_address' size='37' value='<?php echo tep_html_quotes($order->billing['street_address']); ?>'></td>
+              <td><input class="form-control" name='update_billing_street_address' size='37' value='<?php echo tep_html_quotes($order->billing['street_address']); ?>'></td>
             </tr>
             <tr>
               <td class="editOrder"><b><?php echo ENTRY_SUBURB ?></b></font></td>
-              <td><input name='update_billing_suburb' size='37' value='<?php echo tep_html_quotes($order->billing['suburb']); ?>'></td>
+              <td><input class="form-control" name='update_billing_suburb' size='37' value='<?php echo tep_html_quotes($order->billing['suburb']); ?>'></td>
             </tr>
             <tr>
               <td class="editOrder"><b><?php echo ENTRY_CITY ?></b></font></td>
-              <td><input name='update_billing_city' size='15' value='<?php echo tep_html_quotes($order->billing['city']); ?>'> </td>
+              <td><input class="form-control" name='update_billing_city' size='15' value='<?php echo tep_html_quotes($order->billing['city']); ?>'> </td>
             </tr>
             <tr>
               <td class="editOrder"><b><?php echo ENTRY_STATE ?></b></font></td>
-              <td><input name='update_billing_state' size='15' value='<?php echo tep_html_quotes($order->billing['state']); ?>'> </td>
+              <td><input class="form-control" name='update_billing_state' size='15' value='<?php echo tep_html_quotes($order->billing['state']); ?>'> </td>
             </tr>
             <tr>
               <td class="editOrder"><b><?php echo ENTRY_POST_CODE ?></b></font></td>
-              <td><input name='update_billing_postcode' size='5' value='<?php echo $order->billing['postcode']; ?>'></td>
+              <td><input class="form-control" name='update_billing_postcode' size='5' value='<?php echo $order->billing['postcode']; ?>'></td>
             </tr>
             <tr>
               <td class="editOrder"><b><?php echo ENTRY_COUNTRY ?></b></font></td>
-              <td><input name='update_billing_country' size='37' value='<?php echo tep_html_quotes($order->billing['country']); ?>'></td>
+              <td><input class="form-control" name='update_billing_country' size='37' value='<?php echo tep_html_quotes($order->billing['country']); ?>'></td>
             </tr>
             <tr>
               <td class="editOrder"><b><?php echo ENTRY_TELEPHONE_NUMBER ?></b></td>
-              <td><input name='update_billing_telephone' size='37' value='<?php echo tep_html_quotes($order->billing['telephone']); ?>'></td>
+              <td><input class="form-control" name='update_billing_telephone' size='37' value='<?php echo tep_html_quotes($order->billing['telephone']); ?>'></td>
             </tr>
             <tr>
               <td class="editOrder"><b><?php echo ENTRY_FAX_NUMBER ?></b></td>
-              <td><input name='update_billing_fax' size='37' value='<?php echo tep_html_quotes($order->billing['fax']); ?>'></td>
+              <td><input class="form-control" name='update_billing_fax' size='37' value='<?php echo tep_html_quotes($order->billing['fax']); ?>'></td>
             </tr>
             <tr>
               <td class="editOrder"><b><?php echo ENTRY_EMAIL_ADDRESS ?></b></td>
-              <td><input name='update_billing_email_address' size='37' value='<?php echo tep_html_quotes($order->billing['email_address']); ?>'></td>
+              <td><input class="form-control" name='update_billing_email_address' size='37' value='<?php echo tep_html_quotes($order->billing['email_address']); ?>'></td>
             </tr>
           </table>
         </td>
@@ -1159,47 +1159,47 @@ function popupWindow(url) {
           <table border="0" cellspacing="0" cellpadding="2" class="infoBox">
           <tr>
             <td class="editOrder"><b><?php echo ENTRY_NAME ?></b></font></td>
-              <td><input name='update_delivery_name' size='37' value='<?php echo tep_html_quotes($order->delivery['name']); ?>'></td>
+              <td><input class="form-control" name='update_delivery_name' size='37' value='<?php echo tep_html_quotes($order->delivery['name']); ?>'></td>
             </tr>
             <tr>
               <td class="editOrder"><b><?php echo ENTRY_COMPANY ?></b></font></td>
-              <td><input name='update_delivery_company' size='37' value='<?php echo tep_html_quotes($order->delivery['company']); ?>'></td>
+              <td><input class="form-control" name='update_delivery_company' size='37' value='<?php echo tep_html_quotes($order->delivery['company']); ?>'></td>
             </tr>
             <tr>
               <td class="editOrder"><b><?php echo ENTRY_CUSTOMER_ADDRESS ?></b></font></td>
-              <td><input name='update_delivery_street_address' size='37' value='<?php echo tep_html_quotes($order->delivery['street_address']); ?>'></td>
+              <td><input class="form-control" name='update_delivery_street_address' size='37' value='<?php echo tep_html_quotes($order->delivery['street_address']); ?>'></td>
             </tr>
             <tr>
               <td class="editOrder"><b><?php echo ENTRY_SUBURB ?></b></font></td>
-              <td><input name='update_delivery_suburb' size='37' value='<?php echo tep_html_quotes($order->delivery['suburb']); ?>'></td>
+              <td><input class="form-control" name='update_delivery_suburb' size='37' value='<?php echo tep_html_quotes($order->delivery['suburb']); ?>'></td>
             </tr>
             <tr>
               <td class="editOrder"><b><?php echo ENTRY_CITY ?></b></font></td>
-              <td><input name='update_delivery_city' size='15' value='<?php echo tep_html_quotes($order->delivery['city']); ?>'> </td>
+              <td><input class="form-control" name='update_delivery_city' size='15' value='<?php echo tep_html_quotes($order->delivery['city']); ?>'> </td>
             </tr>
             <tr>
               <td class="editOrder"><b><?php echo ENTRY_STATE ?></b></font></td>
-              <td><input name='update_delivery_state' size='15' value='<?php echo tep_html_quotes($order->delivery['state']); ?>'> </td>
+              <td><input class="form-control" name='update_delivery_state' size='15' value='<?php echo tep_html_quotes($order->delivery['state']); ?>'> </td>
             </tr>
             <tr>
               <td class="editOrder"><b><?php echo ENTRY_POST_CODE ?></b></font></td>
-              <td><input name='update_delivery_postcode' size='5' value='<?php echo $order->delivery['postcode']; ?>'></td>
+              <td><input class="form-control" name='update_delivery_postcode' size='5' value='<?php echo $order->delivery['postcode']; ?>'></td>
             </tr>
             <tr>
               <td class="editOrder"><b><?php echo ENTRY_COUNTRY ?></b></font></td>
-              <td><input name='update_delivery_country' size='37' value='<?php echo tep_html_quotes($order->delivery['country']); ?>'></td>
+              <td><input class="form-control" name='update_delivery_country' size='37' value='<?php echo tep_html_quotes($order->delivery['country']); ?>'></td>
             </tr>
             <tr>
               <td class="editOrder"><b><?php echo ENTRY_TELEPHONE_NUMBER ?></b></td>
-              <td><input name='update_delivery_telephone' size='37' value='<?php echo tep_html_quotes($order->delivery['telephone']); ?>'></td>
+              <td><input class="form-control" name='update_delivery_telephone' size='37' value='<?php echo tep_html_quotes($order->delivery['telephone']); ?>'></td>
             </tr>
             <tr>
               <td class="editOrder"><b><?php echo ENTRY_FAX_NUMBER ?></b></td>
-              <td><input name='update_delivery_fax' size='37' value='<?php echo tep_html_quotes($order->delivery['fax']); ?>'></td>
+              <td><input class="form-control" name='update_delivery_fax' size='37' value='<?php echo tep_html_quotes($order->delivery['fax']); ?>'></td>
             </tr>
             <tr>
               <td class="editOrder"><b><?php echo ENTRY_EMAIL_ADDRESS ?></b></font></td>
-              <td><input name='update_delivery_email_address' size='37' value='<?php echo tep_html_quotes($order->delivery['email_address']); ?>'></td>
+              <td><input class="form-control" name='update_delivery_email_address' size='37' value='<?php echo tep_html_quotes($order->delivery['email_address']); ?>'></td>
             </tr>
           </table>
         </td>
@@ -1222,14 +1222,14 @@ function popupWindow(url) {
 
 <!-- Begin Phone/Email Block -->
       <tr>
-        <td><table border="0" cellspacing="0" cellpadding="2" class="table">
+        <td><table border="0" cellspacing="0" cellpadding="2">
           <tr>
             <td class="main"><b><?php echo ENTRY_TELEPHONE_NUMBER; ?></b></td>
-            <td class="main"><input name='update_customer_telephone' size='15' value='<?php echo $order->customer['telephone']; ?>'></td>
+            <td class="main"><input class="form-control" name='update_customer_telephone' size='15' value='<?php echo $order->customer['telephone']; ?>'></td>
           </tr>
           <tr>
             <td class="main"><b><?php echo ENTRY_EMAIL_ADDRESS; ?></b></td>
-            <td class="main"><input name='update_customer_email_address' size='35' value='<?php echo $order->customer['email_address']; ?>'></td>
+            <td class="main"><input class="form-control" name='update_customer_email_address' size='35' value='<?php echo $order->customer['email_address']; ?>'></td>
           </tr>
                <tr>
                 <td class="main"><b><?php echo ENTRY_IPADDRESS; ?></b></td>
@@ -1256,7 +1256,7 @@ function popupWindow(url) {
       if (strtolower($order->info['payment_method']) == 'ignore') {
       } else {
         ?>
-        <td><table border="0" cellspacing="0" cellpadding="2" class="table">
+        <td><table border="0" cellspacing="0" cellpadding="2">
           <tr valine="middle">
             <td class="main"><b><?php echo ENTRY_PAYMENT_METHOD; ?></b></td>
             <?php
@@ -1377,11 +1377,11 @@ function popupWindow(url) {
 
     echo '    <tr class="dataTableRow">' . "\n" ;
  if (ORDER_EDIT_EDT_PRICE == '1'){
-   echo   '      <td class="' . $RowStyle . '" valign="top" align="right">' . "<input name='update_products[$orders_products_id][qty]' type='input' size='2' value='" . $order->products[$i]['qty'] . "'>&nbsp;x</td>\n" .
-          '      <td class="' . $RowStyle . '" valign="top">' . "<input name='update_products[$orders_products_id][name]' type='input' size='25' value='" . $order->products[$i]['name'] . "'>";
+   echo   '      <td class="' . $RowStyle . '" valign="top" align="right">' . "<input class='form-control' name='update_products[$orders_products_id][qty]' type='input' size='2' value='" . $order->products[$i]['qty'] . "'>&nbsp;x</td>\n" .
+          '      <td class="' . $RowStyle . '" valign="top">' . "<input class='form-control' name='update_products[$orders_products_id][name]' type='input' size='25' value='" . $order->products[$i]['name'] . "'>";
   }else{
-   echo   '      <td class="' . $RowStyle . '" valign="top" align="right">' . "<input name='update_products[$orders_products_id][qty]' size='2' value='" . $order->products[$i]['qty'] . "'>&nbsp;x</td>\n" .
-        '      <td class="' . $RowStyle . '" valign="top">' . $order->products[$i]['name'] . "<input name='update_products[$orders_products_id][name]' type='hidden' size='25' value='" . $order->products[$i]['name'] . "'>";
+   echo   '      <td class="' . $RowStyle . '" valign="top" align="right">' . "<input class='form-control' name='update_products[$orders_products_id][qty]' size='2' value='" . $order->products[$i]['qty'] . "'>&nbsp;x</td>\n" .
+        '      <td class="' . $RowStyle . '" valign="top">' . $order->products[$i]['name'] . "<input class='form-control' name='update_products[$orders_products_id][name]' type='hidden' size='25' value='" . $order->products[$i]['name'] . "'>";
 }
     // Has Attributes?
    if (isset($order->products[$i]['attributes'])){
@@ -1394,17 +1394,17 @@ function popupWindow(url) {
     }
   }
 if (ORDER_EDIT_EDT_PRICE == '1'){
-  $edit_price =   ('      <td class="' . $RowStyle . '" align="right" valign="top">' . "<input name='update_products[$orders_products_id][final_price]' size='5' value='" . number_format($order->products[$i]['final_price'], 2, '.', '') . "'>" . '</td>');
+  $edit_price =   ('      <td class="' . $RowStyle . '" align="right" valign="top">' . "<input class='form-control' name='update_products[$orders_products_id][final_price]' size='5' value='" . number_format($order->products[$i]['final_price'], 2, '.', '') . "'>" . '</td>');
 
 
 } else {
-  $edit_price =   ('      <td class="' . $RowStyle . '" align="right" valign="top">' . $currencies->format($order->products[$i]['final_price'], 1, $order->info['currency'], $order->info['currency_value']) . "<input name='update_products[$orders_products_id][final_price]' type='hidden' size='5' value='" . number_format($order->products[$i]['final_price'], 2, '.', '') . "'>" . '</td>' );
+  $edit_price =   ('      <td class="' . $RowStyle . '" align="right" valign="top">' . $currencies->format($order->products[$i]['final_price'], 1, $order->info['currency'], $order->info['currency_value']) . "<input class='form-control' name='update_products[$orders_products_id][final_price]' type='hidden' size='5' value='" . number_format($order->products[$i]['final_price'], 2, '.', '') . "'>" . '</td>' );
 }
 
     echo '      </td>' . "\n" .
-         '      <td class="' . $RowStyle . '" valign="top">' . $order->products[$i]['model'] . "<input name='update_products[$orders_products_id][model]' type='hidden' size='12' value='" . $order->products[$i]['model'] . "'>" . '</td>' . "\n" .
-         '      <td class="' . $RowStyle . '" align="center" valign="top">' . "<input name='update_products[$orders_products_id][tax]' size='3' value='" . tep_display_tax_value($order->products[$i]['tax']) . "'>" . '</td>' . "\n" .
-         '      <td class="' . $RowStyle . '" align="right" valign="top">' . $currencies->format($order->products[$i]['price'], 1, $order->info['currency'], $order->info['currency_value']). "<input name='update_products[$orders_products_id][price]' type='hidden' size='5' value='" . number_format($order->products[$i]['price'], 2, '.', '') . "'>" . '</td>' . "\n" .
+         '      <td class="' . $RowStyle . '" valign="top">' . $order->products[$i]['model'] . "<input class='form-control' name='update_products[$orders_products_id][model]' type='hidden' size='12' value='" . $order->products[$i]['model'] . "'>" . '</td>' . "\n" .
+         '      <td class="' . $RowStyle . '" align="center" valign="top">' . "<input class='form-control' name='update_products[$orders_products_id][tax]' size='3' value='" . tep_display_tax_value($order->products[$i]['tax']) . "'>" . '</td>' . "\n" .
+         '      <td class="' . $RowStyle . '" align="right" valign="top">' . $currencies->format($order->products[$i]['price'], 1, $order->info['currency'], $order->info['currency_value']). "<input class='form-control' name='update_products[$orders_products_id][price]' type='hidden' size='5' value='" . number_format($order->products[$i]['price'], 2, '.', '') . "'>" . '</td>' . "\n" .
          $edit_price . "\n" .
          '      <td class="' . $RowStyle . '" align="right" valign="top">' . $currencies->format($order->products[$i]['final_price'] * $order->products[$i]['qty'], 1, $order->info['currency'], $order->info['currency_value']) . '</td>' . "\n" ;
      if ( DISPLAY_PRICE_WITH_TAX == 'true'){
@@ -1422,7 +1422,7 @@ if (ORDER_EDIT_EDT_PRICE == '1'){
         <tr>
         <td align='center' valign='top'><br><?php echo '<a href="' . tep_href_link(FILENAME_EDIT_ORDERS, 'oID=' . $_GET['oID'] . '&action=add_product&step=1') . '">'. tep_image_button('button_add_product.gif', 'Add a product') . '&nbsp;</a></td>' ;?>
         <td align='right'>
-        <table border="0" cellspacing="0" cellpadding="2">
+        <table border="0" cellspacing="0" cellpadding="2" class="table" style="width:40%">
 <?php
 
         // Override order.php Class's Field Limitations
@@ -1445,9 +1445,9 @@ if (ORDER_EDIT_EDT_PRICE == '1'){
       echo  '       <tr>' . "\n" .
         '   <td class="main" align="right"><b>' . $TotalDetails["Name"] . '</b></td>' .
         '   <td class="main" align="right"><b>' . $TotalDetails["Price"] .
-            '<input name="update_totals[' . $TotalIndex . '][title]" type="hidden" value="' . trim($TotalDetails['Name']) . '" />' .
-            '<input name="update_totals[' . $TotalIndex . '][value]" type="hidden" value="' . $TotalDetails['Price'] . '" size="6" />' .
-            '<input name="update_totals[' . $TotalIndex . '][class]" type="hidden" value="' . $TotalDetails['Class'] . '" />' . "\n" .
+            '<input class="form-control" name="update_totals[' . $TotalIndex . '][title]" type="hidden" value="' . trim($TotalDetails['Name']) . '" />' .
+            '<input class="form-control" name="update_totals[' . $TotalIndex . '][value]" type="hidden" value="' . $TotalDetails['Price'] . '" size="6" />' .
+            '<input class="form-control" name="update_totals[' . $TotalIndex . '][class]" type="hidden" value="' . $TotalDetails['Class'] . '" />' . "\n" .
             '<input type="hidden" name="update_totals[' . $TotalIndex . '][total_id]" value="' . $TotalDetails['TotalID'] . '"></b></td>' .
         '       </tr>' . "\n";
     }
@@ -1455,9 +1455,9 @@ if (ORDER_EDIT_EDT_PRICE == '1'){
         {
           echo  '       <tr>' . "\n" .
             '   <td class="main" align="right"><font color="#FF0000">' . ENTRY_CUSTOMER_DISCOUNT . '<b>' . $TotalDetails["Name"] . '</b></font></td>' .
-            '   <td align="right" SPAN class="' . $TotalStyle . '">' . '<input name="update_totals[' . $TotalIndex . '][value]" size="6" value="' . $TotalDetails['Price'] . '"></SPAN>' .
-                '<input name="update_totals[' . $TotalIndex . '][title]" type="hidden" value="' . trim($TotalDetails['Name']) . '" />' .
-                '<input name="update_totals[' . $TotalIndex . '][class]" type="hidden" value="' . $TotalDetails['Class'] . '" />' . "\n" .
+            '   <td align="right" SPAN class="' . $TotalStyle . '">' . '<input class="form-control" name="update_totals[' . $TotalIndex . '][value]" size="6" value="' . $TotalDetails['Price'] . '"></SPAN>' .
+                '<input class="form-control" name="update_totals[' . $TotalIndex . '][title]" type="hidden" value="' . trim($TotalDetails['Name']) . '" />' .
+                '<input class="form-control" name="update_totals[' . $TotalIndex . '][class]" type="hidden" value="' . $TotalDetails['Class'] . '" />' . "\n" .
                 '<input type="hidden" name="update_totals[' . $TotalIndex . '][total_id]" value="' . $TotalDetails['TotalID'] . '"></b></td>' .
             '       </tr>' . "\n";
     }
@@ -1466,9 +1466,9 @@ if (ORDER_EDIT_EDT_PRICE == '1'){
         {
           echo  '       <tr>' . "\n" .
             '   <td class="main" align="right">' . ENTRY_CUSTOMER_GV . '<b>' . $TotalDetails["Name"] . '</b></td>' .
-            '   <td align="right" class="' . $TotalStyle . '">' . '<input name="update_totals[' . $TotalIndex . '][value]" size="6" value="' . $TotalDetails['Price'] . '">' .
-                '<input name="update_totals[' . $TotalIndex . '][title]" type="hidden" value="' . trim($TotalDetails['Name']) . '" />' .
-                '<input name="update_totals[' . $TotalIndex . '][class]" type="hidden" value="' . $TotalDetails['Class'] . '" />' . "\n" .
+            '   <td align="right" class="' . $TotalStyle . '">' . '<input class="form-control" name="update_totals[' . $TotalIndex . '][value]" size="6" value="' . $TotalDetails['Price'] . '">' .
+                '<input class="form-control" name="update_totals[' . $TotalIndex . '][title]" type="hidden" value="' . trim($TotalDetails['Name']) . '" />' .
+                '<input class="form-control" name="update_totals[' . $TotalIndex . '][class]" type="hidden" value="' . $TotalDetails['Class'] . '" />' . "\n" .
                 '<input type="hidden" name="update_totals[' . $TotalIndex . '][total_id]" value="' . $TotalDetails['TotalID'] . '"></b></td>' .
             '       </tr>' . "\n";
     }
@@ -1478,9 +1478,9 @@ if (ORDER_EDIT_EDT_PRICE == '1'){
       echo  '       <tr>' . "\n" .
         '   <td class="main" align="right"><b>' . $TotalDetails["Name"] . '</b></td>' .
         '   <td class="main" align="right"><b>' . $TotalDetails["Price"] .
-            '<input name="update_totals[' . $TotalIndex . '][title]" type="hidden" value="' . trim($TotalDetails['Name']) . '" />' .
-            '<input name="update_totals[' . $TotalIndex . '][value]" type="hidden" value="' . $TotalDetails['Price'] . '" size="6" />' .
-            '<input name="update_totals[' . $TotalIndex . '][class]" type="hidden" value="' . $TotalDetails['Class'] . '" />' . "\n" .
+            '<input class="form-control" name="update_totals[' . $TotalIndex . '][title]" type="hidden" value="' . trim($TotalDetails['Name']) . '" />' .
+            '<input class="form-control" name="update_totals[' . $TotalIndex . '][value]" type="hidden" value="' . $TotalDetails['Price'] . '" size="6" />' .
+            '<input class="form-control" name="update_totals[' . $TotalIndex . '][class]" type="hidden" value="' . $TotalDetails['Class'] . '" />' . "\n" .
             '<input type="hidden" name="update_totals[' . $TotalIndex . '][total_id]" value="' . $TotalDetails['TotalID'] . '" /></b></td>' .
         '       </tr>' . "\n";
     }
@@ -1500,7 +1500,7 @@ if (ORDER_EDIT_EDT_PRICE == '1'){
 
       echo  ' <tr>' . "\n" .
           '       <td align="right" class="' . $TotalStyle . '"><b>' . HEADING_SHIPPING . '</b>' . tep_draw_pull_down_menu('update_totals[' . $TotalIndex . '][title]', $orders_ship_method1, $TotalDetails["Name"]) . '</td>' . "\n";
-      echo  ' <td align="right" class="' . $TotalStyle . '">' . '<input name="update_totals[' . $TotalIndex . '][value]" size="6" value="' . $TotalDetails['Price'] . '" />' .
+      echo  ' <td align="right" class="' . $TotalStyle . '">' . '<input class="form-control" name="update_totals[' . $TotalIndex . '][value]" size="6" value="' . $TotalDetails['Price'] . '" />' .
             '<input type="hidden" name="update_totals[' . $TotalIndex . '][class]" value="' . $TotalDetails['Class'] . '" />' .
             '<input type="hidden" name="update_totals[' . $TotalIndex . '][total_id]" value="' . $TotalDetails['TotalID'] . '" /></td>' .
         '       </tr>' . "\n";
@@ -1535,7 +1535,7 @@ if (ORDER_EDIT_EDT_PRICE == '1'){
       </tr>
 
       <tr>
-        <td class="main"><table border="1" cellspacing="0" cellpadding="5" class="table table-striped">
+        <td class="main"><div style="width:50%"><table border="1" cellspacing="0" cellpadding="5" class="table table-striped">
           <tr>
             <td class="smallText" align="center"><b><?php echo TABLE_HEADING_DATE_ADDED; ?></b></td>
             <td class="smallText" align="center"><b><?php echo TABLE_HEADING_CUSTOMER_NOTIFIED; ?></b></td>
@@ -1574,7 +1574,7 @@ $orders_status_query = tep_db_query("select orders_status from " . TABLE_ORDERS 
              '          </tr>' . "\n";
     }
 ?>
-        </table></td>
+        </table></div></td>
       </tr>
 
       <tr>
@@ -1584,11 +1584,11 @@ $orders_status_query = tep_db_query("select orders_status from " . TABLE_ORDERS 
         <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '5'); ?></td>
       </tr>
       <tr>
-        <td class="main">
+        <td class="main"><div style="width:50%">
 <?php
             echo tep_draw_textarea_field('comments', 'soft', '60', '5');
 ?>
-        </td>
+        </div></td>
       </tr>
       <tr>
         <td><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
@@ -2116,7 +2116,7 @@ $cols = '';
      </tr><tr>
 
             <td class="dataTableContent" align="left"></td>
-            <td class="dataTableContent" valign="top"><input name="add_product_quantity" size="2" value="1"><?php echo TEXT_ADD_QUANTITY ;?></td>
+            <td class="dataTableContent" valign="top"><input class="form-control" name="add_product_quantity" size="2" value="1"><?php echo TEXT_ADD_QUANTITY ;?></td>
             <td class="dataTableContent" align="center"><input class="btn btn-sm btn-primary m-l-5" type="submit" value="<?php echo TEXT_ADD_NOW ;?>">
       <?php
   $product_options = $_POST['product_options'];

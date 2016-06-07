@@ -20,7 +20,7 @@
 
   if (tep_db_num_rows($result) > 0) {
     // Query Successful
-    $SelectCustomerBox = "<select name='Customer'><option value=''>". BUTTON_TEXT_CHOOSE_CUST . "</option>\n";
+    $SelectCustomerBox = "<select name='Customer' class='form-control'><option value=''>". BUTTON_TEXT_CHOOSE_CUST . "</option>\n";
     while($db_Row = tep_db_fetch_array($result)){
       $SelectCustomerBox .= "<option value='" . $db_Row["customers_id"] . "'";
       if(isset($_GET['Customer']) and $db_Row["customers_id"]==$_GET['Customer']) $SelectCustomerBox .= ' selected="selected" ';
@@ -34,7 +34,7 @@
   
   if (tep_db_num_rows($result) > 0) {
     // Query Successful
-    $SelectCurrencyBox = '<select name="Currency"><option value="" selected="selected">' . TEXT_SELECT_CURRENCY . "</option>\n";
+    $SelectCurrencyBox = '<select name="Currency" class="form-control"><option value="" selected="selected">' . TEXT_SELECT_CURRENCY . "</option>\n";
     while($db_Row = tep_db_fetch_array($result)) { 
       $SelectCurrencyBox .= "<option value='" . $db_Row["code"] . " , " . $db_Row["value"] . "'";
       $SelectCurrencyBox .= ">" . $db_Row["code"] . "</option>\n";
@@ -127,7 +127,7 @@
                   echo tep_draw_hidden_field(tep_session_name(), $_GET[tep_session_name()]);
                 }
                 echo  '<table border="0"><tr>' . "\n";
-                echo  '<td><font class="main"><b>' . TEXT_OR_BY . '</b></font><br><input type="text" name="Customer"></td>' . "\n";
+                echo  '<td><font class="main"><b>' . TEXT_OR_BY . '</b></font><br><input type="text" name="Customer" class="form-control"></td>' . "\n";
                 echo  '<td valign="bottom">' . tep_image_submit('submit.png', BUTTON_TEXT_CHOOSE_CUST) . '</td>' . "\n";
                 echo  '</tr></table></form>' . "\n";
               ?>
