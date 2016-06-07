@@ -21,6 +21,7 @@ define('MY_ACCOUNT_TITLE', 'My Account');
 define('MY_ACCOUNT_INFORMATION', 'View or change my account information.');
 define('MY_ACCOUNT_ADDRESS_BOOK', 'View or change entries in my address book.');
 define('MY_ACCOUNT_PASSWORD', 'Change my account password.');
+define('MY_ACCOUNT_WISHLIST', 'View My Wishlist.');
 
 define('MY_ORDERS_TITLE', 'My Orders');
 define('MY_ORDERS_VIEW', 'View the orders I have made.');
