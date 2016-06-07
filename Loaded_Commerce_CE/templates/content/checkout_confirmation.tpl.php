@@ -54,7 +54,7 @@ echo $cre_RCI->get('checkoutconfirmation', 'top');
                 <?php
                 // RCO start
                 if ($cre_RCO->get('checkoutconfirmation', 'editshippingmethodlink') !== true) {
-                  echo '<h3>' . HEADING_SHIPPING_METHOD . '</h3> <a href="' . tep_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL') . '"><span class="orderEdit">(' . TEXT_EDIT . ')</span></a>' . "\n";
+                  echo '<h4><b>' . HEADING_SHIPPING_METHOD . '</b></h4> <a href="' . tep_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL') . '"><div class="btn-group clearfix absolute-top-right small-padding-right small-padding-top"><h4></h4><button class="btn btn-default btn-xs hide">' . TEXT_EDIT . '</button></div></a>' . "\n";
                 }
                 // RCO end
                 ?>
@@ -149,11 +149,6 @@ echo $cre_RCI->get('checkoutconfirmation', 'top');
               }
               ?>
             </table>
-       		  <table class="table margin-bottom-neg"><tr><td>&nbsp;</td></tr></table>
-              <div class="row padding-right" id="content-checkout-confirmation-order-totals">
-                <div id="content-checkout-confirmation-order-totals-left" class="col-sm-5 col-lg-5"></div>
-                <div id="content-checkout-confirmation-order-totals-right" class="col-sm-7 col-lg-7">
-				<div class="clearfix">
 					<table class="table" width="100%">
 					  <?php
 					  if (MODULE_ORDER_TOTAL_INSTALLED) {
@@ -165,13 +160,9 @@ echo $cre_RCI->get('checkoutconfirmation', 'top');
 					  // RCI code eof
 					  ?>
 					</table>
-           </div>
-          </div>
-         </div>
-        </div>
-       </div>
-         			   <div class="col-sm-12 col-lg-12">
-
+			</div>
+		   </div>
+		   <div class="col-sm-12 col-lg-12">
 			  <?php
 			  if (is_array($payment_modules->modules)) {
 				if ($confirmation = $payment_modules->confirmation()) {
@@ -197,7 +188,7 @@ echo $cre_RCI->get('checkoutconfirmation', 'top');
 		<?php	}
 		  }
 		  ?>
-					</div>
+		</div>
 
   <?php
   if (tep_not_null($order->info['comments'])) {
@@ -238,97 +229,56 @@ echo $cre_RCI->get('checkoutconfirmation', 'top');
           } else if (is_array($payment_modules->modules)) {
             echo $payment_modules->process_button();
           }
+          
+			//RCI start
+			$fss_data_template = trim($cre_RCI->get('checkoutconfirmation', 'insideformabovebuttons'));
+			if($fss_data_template != "" || ACCOUNT_CONDITIONS_REQUIRED == 'true')
+			{
           ?>
-          <table border="0" width="100%" cellspacing="0" cellpadding="2">
-            <?php
-            //RCI start
-            echo $cre_RCI->get('checkoutconfirmation', 'insideformabovebuttons');
-            if (ACCOUNT_CONDITIONS_REQUIRED == 'true') {
-              ?>
-
-                <?php echo CONDITION_AGREEMENT; ?> <input type="checkbox" value="0" name="agree">
-
-              <?php
-            }
-            ?>
-              <div class="col-sm-12 col-lg-12 large-margin-bottom"><div class="well relative no-padding-bottom">
-
-             <?php echo '<h4 class="no-margin-top"><b>' . TITLE_CONTINUE_CHECKOUT_PROCEDURE .'&nbsp;' . TEXT_CONTINUE_CHECKOUT_PROCEDURE . '</b></h4>&nbsp;&nbsp;'  ; ?>
-             <?php
-                echo HEADING_IPRECORDED_1;
-                $ip_iprecorded = YOUR_IP_IPRECORDED;
-                $isp_iprecorded = YOUR_ISP_IPRECORDED;
-                $ip = $_SERVER["REMOTE_ADDR"];
-                $client = gethostbyaddr($_SERVER["REMOTE_ADDR"]);
-                $str = preg_split("/\./", $client);
-                $i = count($str);
-                $x = $i - 1;
-                $n = $i - 2;
-                $isp = $str[$n] . "." . $str[$x];
-                echo "<div align=\"justify\">&nbsp;&nbsp;&nbsp;<font size=\".1\">$ip_iprecorded: $ip<br>&nbsp;&nbsp;&nbsp;$isp_iprecorded: $isp</div><h4></h4>";
-                ?>
+              <div class="col-sm-12 col-lg-12">
+              <div class="well relative no-padding-bottom">
+				  <table border="0" width="100%" cellspacing="0" cellpadding="2" class="table">
+					<?php
+					echo $fss_data_template;
+					if (ACCOUNT_CONDITIONS_REQUIRED == 'true') {
+					  ?>
+						<tr><td><?php echo CONDITION_AGREEMENT; ?> <input type="checkbox" value="0" name="agree"></td></tr>
+					  <?php
+					}
+					?>
+	            </table>
+				</div>
+			  </div>
+			<?php
+			}
+			?>
+              <div class="col-sm-12 col-lg-12 large-margin-bottom">
+              <div class="well relative no-padding-bottom">
+				 <?php echo '<h4 class="no-margin-top"><b>' . TITLE_CONTINUE_CHECKOUT_PROCEDURE .'&nbsp;' . TEXT_CONTINUE_CHECKOUT_PROCEDURE . '</b></h4>&nbsp;&nbsp;'  ; ?>
+				 <?php
+					echo HEADING_IPRECORDED_1;
+					$ip_iprecorded = YOUR_IP_IPRECORDED;
+					$isp_iprecorded = YOUR_ISP_IPRECORDED;
+					$ip = $_SERVER["REMOTE_ADDR"];
+					$client = gethostbyaddr($_SERVER["REMOTE_ADDR"]);
+					$str = preg_split("/\./", $client);
+					$i = count($str);
+					$x = $i - 1;
+					$n = $i - 2;
+					$isp = $str[$n] . "." . $str[$x];
+					echo "<div align=\"justify\">&nbsp;&nbsp;&nbsp;<font size=\".1\">$ip_iprecorded: $ip<br>&nbsp;&nbsp;&nbsp;$isp_iprecorded: $isp</div><h4></h4>";
+					?>
 				</div>
 			  </div>
             <?php
             //RCI start
             echo $cre_RCI->get('checkoutconfirmation', 'insideformbelowbuttons');
             ?>
-            <?php   /*echo   '<div class="btn-set clearfix">' . tep_template_image_submit('button_confirm_order.gif', IMAGE_BUTTON_CONFIRM_ORDER) . '</div>' . "\n"*/;?>
-   </div>
-  </div>
- </div>
-     <div class="btn-set small-margin-top clearfix">
-       <button class="pull-right btn btn-lg btn-primary" type="submit"><?php echo IMAGE_BUTTON_CONTINUE; ?></button>
-      </div>
+		 <div class="btn-set small-margin-top clearfix"><button class="pull-right btn btn-lg btn-primary" type="submit"><?php echo IMAGE_BUTTON_CONTINUE; ?></button></div>
+	   </div>
+	  </div>
+	 </div>
   </form>
-
-  <?php
-  //RCI start
-  echo $cre_RCI->get('checkoutconfirmation', 'menu');
-  //RCI end
-  // RCO start
-  if ($cre_RCO->get('checkoutconfirmation', 'checkoutbar') !== true) {
-    ?>
-  <?php/*  <tr>
-      <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
-        <tr>
-          <td width="25%"><table border="0" width="100%" cellspacing="0" cellpadding="0">
-            <tr>
-              <td width="50%" align="right"><?php echo tep_draw_separator('pixel_silver.gif', '1', '5'); ?></td>
-              <td width="50%"><?php echo tep_draw_separator('pixel_silver.gif', '100%', '1'); ?></td>
-            </tr>
-          </table></td>
-          <td width="25%"><?php echo tep_draw_separator('pixel_silver.gif', '100%', '1'); ?></td>
-          <td width="25%"><table border="0" width="100%" cellspacing="0" cellpadding="0">
-            <tr>
-              <td width="50%"><?php echo tep_draw_separator('pixel_silver.gif', '100%', '1'); ?></td>
-              <td><?php echo tep_image(DIR_WS_IMAGES . 'checkout_bullet.gif'); ?></td>
-              <td width="50%"><?php echo tep_draw_separator('pixel_silver.gif', '100%', '1'); ?></td>
-            </tr>
-          </table></td>
-          <td width="25%"><table border="0" width="100%" cellspacing="0" cellpadding="0">
-            <tr>
-              <td width="50%"><?php echo tep_draw_separator('pixel_silver.gif', '100%', '1'); ?></td>
-              <td width="50%"><?php echo tep_draw_separator('pixel_silver.gif', '1', '5'); ?></td>
-            </tr>
-          </table></td>
-        </tr>
-        <tr>
-          <td align="center" width="25%" class="checkoutBarFrom"><?php echo '<a href="' . tep_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL') . '" class="checkoutBarFrom">' . CHECKOUT_BAR_DELIVERY . '</a>'; ?></td>
-          <td align="center" width="25%" class="checkoutBarFrom"><?php echo '<a href="' . tep_href_link(FILENAME_CHECKOUT_PAYMENT, '', 'SSL') . '" class="checkoutBarFrom">' . CHECKOUT_BAR_PAYMENT . '</a>'; ?></td>
-          <td align="center" width="25%" class="checkoutBarCurrent"><?php echo CHECKOUT_BAR_CONFIRMATION; ?></td>
-          <td align="center" width="25%" class="checkoutBarTo"><?php echo CHECKOUT_BAR_FINISHED; ?></td>
-        </tr>*/?>
-      </table></td>
-    </tr>
-
- <?php
-  }
-  // RCO end
-  ?>
- </div>
-</div>
- </div>
 </div>
 <?php
 // RCI code start

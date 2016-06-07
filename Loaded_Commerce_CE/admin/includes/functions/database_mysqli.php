@@ -121,7 +121,7 @@
   }   
 
   function tep_db_fetch_array($db_query) {
-    return mysqli_fetch_array($db_query, MYSQL_ASSOC);
+    return mysqli_fetch_array($db_query, MYSQLI_ASSOC);
   }
 
   function tep_db_result($result, $row, $field = '') {

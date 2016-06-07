@@ -16,9 +16,6 @@ $header_text = '&nbsp;'
 //EOF: Lango Added for template MOD
 ?>
     <h1 class="no-margin-top"><?php echo HEADING_TITLE; ?></h1>
-
-
-
 <?php
 }else{
 $header_text = '<h1 class="no-margin-top">'. HEADING_TITLE .'</h1>';
@@ -267,20 +264,6 @@ echo '</tr>';
 // RCI code start
 echo $cre_RCI->get('shoppingcart', 'insideformabovebuttons');
 // RCI code eof
-if (MAIN_TABLE_BORDER == 'yes'){
-table_image_border_bottom();
-}
-?>
-
-
-       <?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?>
-
-
-
-
-                <?php/* echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?>
-                <?php echo tep_template_image_submit('button_update_cart.gif', IMAGE_BUTTON_UPDATE_CART);*/ ?>
-<?php
 if (RETURN_CART == 'L'){
    $back = sizeof($navigation->path)-2;
     if (isset($navigation->path[$back])) {
