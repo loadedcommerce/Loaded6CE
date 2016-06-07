@@ -20,7 +20,7 @@ $modules_count = tep_count_payment_modules();
 if ($dp_enabled) $modules_count++;
 ?>
 <tr>
-  <td><table border="0" width="100%" cellspacing="1" cellpadding="2" class="infoBox">
+  <td><table border="0" width="100%" cellspacing="1" cellpadding="2">
     <tr class="infoBoxContents">
       <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
         <?php
@@ -37,7 +37,7 @@ if ($dp_enabled) $modules_count++;
           ?>
           <tr>
             <td><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
-            <td colspan="2"><table border="0" width="100%" cellspacing="0" cellpadding="2">
+            <td colspan="2"><table border="0" width="100%" cellspacing="0" cellpadding="2" class="table">
               <?php
               if ( ($selection[$i]['id'] == $payment) || ($n == 1) ) {
                 echo '<tr id="defaultSelected" class="moduleRowSelected" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="selectRowEffect(this, ' . $radio_buttons . ')">' . "\n";
@@ -101,7 +101,7 @@ if ($dp_enabled) $modules_count++;
           ?>
           <tr>
             <td><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
-            <td colspan="2"><table border="0" width="100%" cellspacing="0" cellpadding="2">
+            <td colspan="2"><table border="0" width="100%" cellspacing="0" cellpadding="2" class="table">
               <?php
               echo '<tr id="defaultSelected" class="moduleRowSelected" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="selectRowEffect(this, ' . $radio_buttons . ')">' . "\n";    
                 ?>
@@ -126,7 +126,7 @@ if ($dp_enabled) $modules_count++;
           ?>
           <tr>
             <td><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
-            <td colspan="2"><table border="0" width="100%" cellspacing="0" cellpadding="2">
+            <td colspan="2"><table border="0" width="100%" cellspacing="0" cellpadding="2" class="table">
               <?php
               echo '<tr id="defaultSelected" class="moduleRowSelected" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="selectRowEffect(this, ' . $radio_buttons . ')">' . "\n";   
               ?>
