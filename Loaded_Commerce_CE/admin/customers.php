@@ -163,7 +163,15 @@
           if (ACCOUNT_DOB == 'true') $sql_data_array['customers_dob'] = tep_date_raw($customers_dob);
 
           tep_db_perform(TABLE_CUSTOMERS, $sql_data_array, 'update', "customers_id = '" . (int)$customers_id . "'");
-          tep_db_query("update ".TABLE_COUPON_GV_CUSTOMER." set amount = " . $customers_voucher_amount . " where customer_id = " . (int)$customers_id . "");
+
+			$str = tep_db_query("select * from ".TABLE_COUPON_GV_CUSTOMER." where customer_id = ".(int)$customers_id."");
+			$number_of_customer = tep_db_num_rows($str);
+			if($number_of_customer == 0){
+				tep_db_query("insert into ".TABLE_COUPON_GV_CUSTOMER." (customer_id,amount) values (".(int)$customers_id.",".$customers_voucher_amount.")");
+			} else {
+				tep_db_query("update ".TABLE_COUPON_GV_CUSTOMER." set amount = ".$customers_voucher_amount." where customer_id = ".(int)$customers_id."");
+			}
+          
           tep_db_query("update " . TABLE_CUSTOMERS_INFO . " set customers_info_date_account_last_modified = now() where customers_info_id = '" . (int)$customers_id . "'");
 
           if ($entry_zone_id > 0) $entry_state = '';
