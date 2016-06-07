@@ -546,5 +546,4 @@ define('MENU_TEXT_SIGN_IN', 'Sign In');
 define('MENU_TEXT_RETURNING_CUSTOMER', 'Returning Customer');
 define('MENU_TEXT_PASSWORD', 'Password:');
 define('MENU_TEXT_GUEST', 'Guest Checkout');
-
 ?>
