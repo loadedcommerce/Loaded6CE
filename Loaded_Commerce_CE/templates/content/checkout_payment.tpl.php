@@ -251,13 +251,7 @@ $_SESSION['payment'] = 'freecharger';
      $header_text = TABLE_HEADING_COMMENTS;
   }
   ?>
-<div class="form-group">
-        <label class="sr-only"></label>
-
-<?php/*<textarea class="form-control" name="comments" rows="5" cols="25" ></textarea>
-  */ ?>
-  <?php echo tep_draw_textarea_field('comments', 'soft', '60', '5', isset($_SESSION['comments']) ? $_SESSION['comments'] : '');?>
-</div>
+	<div class="form-group"> <label class="sr-only"></label> <?php echo tep_draw_textarea_field('comments', 'soft', '60', '5', isset($_SESSION['comments']) ? $_SESSION['comments'] : '');?> </div>
 </div>
 </div>
 
@@ -274,23 +268,6 @@ $_SESSION['payment'] = 'freecharger';
       <button type="submit" class="pull-right btn btn-lg btn-primary">Continue</button>
     </div>
    </div>
-
-
-
-   <?php/*   <tr>
-        <td><table border="0" width="100%" cellspacing="1" cellpadding="2" class="infoBox">
-          <tr class="infoBoxContents">
-            <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
-              <tr>
-                <td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
-                <td class="main"><b><?php echo TITLE_CONTINUE_CHECKOUT_PROCEDURE . '</b><br>' . TEXT_CONTINUE_CHECKOUT_PROCEDURE; ?></td>
-                <td class="main" align="right"><?php echo tep_template_image_submit('button_continue.gif', IMAGE_BUTTON_CONTINUE); ?></td>
-                <td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
-              </tr>
-            </table></td>
-          </tr>
-        </table></td>
-      </tr>*/?>
       <?php
       //RCI start
       echo $cre_RCI->get('checkoutpayment', 'insideformbelowbuttons');

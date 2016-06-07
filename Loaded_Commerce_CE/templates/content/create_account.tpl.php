@@ -18,7 +18,6 @@ echo tep_draw_form('create_account', tep_href_link(FILENAME_CREATE_ACCOUNT, '', 
 <?php
   }
 ?>
-
           <div class="row">
             <div class="col-sm-6 col-lg-6 large-padding-left margin-top">
 	          <div class="well no-padding-top">
@@ -99,12 +98,12 @@ echo tep_draw_form('create_account', tep_href_link(FILENAME_CREATE_ACCOUNT, '', 
 										$selected_zone = $zones_values['zone_name'];
 									  }
 									}
-									echo tep_draw_pull_down_menu('state', $zones_array, $selected_zone);
+									echo tep_draw_pull_down_menu('state', $zones_array, $selected_zone, 'class="form-control"');
 								  } else {
-									echo tep_draw_input_field('state', '', 'placeholder="' . ENTRY_STATE . '"');
+									echo tep_draw_input_field('state', '', 'placeholder="' . ENTRY_STATE . '" class="form-control"');
 								  }
 								} else {
-								  echo '<div class="form-group full-width margin-bottom"><label class="sr-only"></label><span class="address-book-state-container">' . tep_draw_input_field('state', '', 'placeholder="' . ENTRY_STATE . '"') .'</span></div>';
+								  echo '<div class="form-group full-width margin-bottom"><label class="sr-only"></label><span class="address-book-state-container">' . tep_draw_input_field('state', '', 'placeholder="' . ENTRY_STATE . '" class="form-control"') .'</span></div>';
 								}
 
 							?>
@@ -134,10 +133,6 @@ echo tep_draw_form('create_account', tep_href_link(FILENAME_CREATE_ACCOUNT, '', 
                 <div class="checkbox margin-top">
                   <label class="normal"><?php echo ENTRY_NEWSLETTER; ?><input id="newsletter" class="small-margin-left" type="checkbox" checked="checked" value="1" name="newsletter"></label>
                 </div>
-                <div class="checkbox margin-top">
-                  <label class="normal"><?php echo 'Entry daiy detail'; ?><input id="dailydetail" class="small-margin-left" type="checkbox" checked="checked" value="1" name="dailydetail"></label>
-                </div>
-
 			 </div>
 			</div>
 
@@ -212,19 +207,6 @@ echo tep_draw_form('create_account', tep_href_link(FILENAME_CREATE_ACCOUNT, '', 
 echo $cre_RCI->get('createaccount', 'menu');
 // RCI code eof
 ?>
-    <?/*  <tr>
-        <td><table border="0" width="100%" cellspacing="1" cellpadding="2" class="infoBox">
-          <tr class="infoBoxContents">
-            <td><table border="0" width="100%" cellspacing="0" cellpadding="2">
-              <tr>
-                <td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
-                <td><?php echo tep_template_image_submit('button_continue.gif', IMAGE_BUTTON_CONTINUE); ?></td>
-                <td width="10"><?php echo tep_draw_separator('pixel_trans.gif', '10', '1'); ?></td>
-              </tr>
-            </table></td>
-          </tr>
-*/?>
-
    </form>
 <?php
 // RCI code start

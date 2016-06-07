@@ -52,8 +52,8 @@
       <tr>
         <td><a href="http://www.php.net/manual/en/ref.mysql.php" target="php">PHP MySQL</a></td>
         <td align="left"><?php
-            if(!extension_loaded( 'mysql' )) { $ok_to_continue = 0; }
-            echo extension_loaded( 'mysql' ) ? '<b><font color="green">' . TEXT_CHECK_5 .'</font></b>' : '<b><font color="red">' . TEXT_CHECK_6 .'</font></b>';
+            if(!extension_loaded( 'mysqli' )) { $ok_to_continue = 0; }
+            echo extension_loaded( 'mysqli' ) ? '<b><font color="green">' . TEXT_CHECK_5 .'</font></b>' : '<b><font color="red">' . TEXT_CHECK_6 .'</font></b>';
           ?>
         </td>
       </tr>
