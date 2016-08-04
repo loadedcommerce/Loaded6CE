@@ -1,4 +1,5 @@
 <?php
+    chdir('../');
     require('includes/application_top.php');
     $languages = tep_get_languages();
     $options_query = tep_db_query("select * from " . TABLE_PRODUCTS_OPTIONS . " po," . TABLE_PRODUCTS_OPTIONS_TEXT . " pot where pot.products_options_text_id = po.products_options_id and po.products_options_id = '" . $_GET['editOpID'] . "'");

@@ -12,7 +12,7 @@
     require('includes/application_top.php');
     $languages = tep_get_languages();
 
-    $page_info = '';//'option_page=' . (isset($_GET['option_page']) ? $_GET['option_page'] : '1') . '&value_page=' . (isset($_GET['value_page']) ? $_GET['value_page'] : '1') . '&attribute_page=' . (isset($_GET['attribute_page']) ? $_GET['attribute_page'] : '1');
+    $page_info = '';
 
     if (isset($_GET['action'])) {
         switch($_GET['action']) {
@@ -290,7 +290,7 @@
                                                     </div>
                                                 </div>
                                                 <?php
-                                                    include(DIR_WS_MODULES . 'products_attributes/modal_new_option_group.php');
+                                                    include('ajax/products_attributes/modal_new_option_group.php');
                                                     $options = "select * from " . TABLE_PRODUCTS_OPTIONS . " po," . TABLE_PRODUCTS_OPTIONS_TEXT . " pot where pot.products_options_text_id = po.products_options_id and pot.language_id = '" . (int)$languages_id . "' order by products_options_id";
                                                     $option_query = tep_db_query($options);
                                                 ?>
@@ -320,8 +320,7 @@
                                                                 <td><?php echo translate_type_to_name($options_values["options_type"]); ?></td>
                                                                 <td><?php echo $options_values["options_length"]; ?></td>
                                                                 <td class="text-center"><?php echo $options_values["products_options_sort_order"]; ?></td>
-                                                                <td class="text-center"><a onclick="editOptionEntry('<?php echo $options_values["products_options_id"]; ?>')" class="btn btn-info btn-xs editOption"><i class="fa fa-pencil"></i></a> <a data-href="<?php echo tep_href_link(FILENAME_PRODUCTS_ATTRIBUTES, 'action=delete_option&option_id=' . $options_values["products_options_id"],'NONSSL');?>" data-toggle="modal" data-target="#confirm-delete-option" class="btn btn-danger btn-xs"><i class="fa fa-times"></i></a>
-                                                                </td>
+                                                                <td class="text-center"><a onclick="editOptionEntry('<?php echo $options_values["products_options_id"]; ?>')" class="btn btn-info btn-xs editOption"><i class="fa fa-pencil"></i></a> <a onclick="deleteOptionEntry('<?php echo $options_values["products_options_id"]; ?>', '<?php echo htmlspecialchars($options_values["products_options_name"]); ?>')" class="btn btn-danger btn-xs editOption"><i class="fa fa-times"></i></a></td>
                                                             </tr>     
                                                             <?php
                                                             }
@@ -339,7 +338,7 @@
                                                         <a href="#new-option-value" data-toggle="modal" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Add Option Value</a>
                                                     </div>
                                                 </div>  
-                                                <?php include(DIR_WS_MODULES . 'products_attributes/modal_new_option_value.php');?>
+                                                <?php include('ajax/products_attributes/modal_new_option_value.php');?>
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <?php
@@ -372,7 +371,7 @@
                                                                         <td><?php echo $values_values["products_options_values_id"]; ?></td>
                                                                         <td><?php echo htmlspecialchars($options_name); ?></td>
                                                                         <td><?php echo htmlspecialchars($values_name); ?></td>
-                                                                        <td class="text-center"><a onclick="editOptionValues('<?php echo $values_values["products_options_values_id"]; ?>')" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i></a> <a data-href="<?php echo tep_href_link(FILENAME_PRODUCTS_ATTRIBUTES, 'action=delete_value&value_id=' . $values_values['products_options_values_id'],'NONSSL');?>" data-toggle="modal" data-target="#confirm-delete-option-value" class="btn btn-danger btn-xs"><i class="fa fa-times"></i></a></td>
+                                                                        <td class="text-center"><a onclick="editOptionValues('<?php echo $values_values["products_options_values_id"]; ?>')" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i></a> <a onclick="deleteOptionValue('<?php echo $values_values['products_options_values_id']; ?>', '<?php echo htmlspecialchars($values_name); ?>')" class="btn btn-danger btn-xs editOption"><i class="fa fa-times"></i></a> </td>
                                                                     </tr>
                                                                     <?php
                                                                     }
@@ -392,7 +391,7 @@
                                                         <a href="#new-attribute" data-toggle="modal" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> New Attribute</a>
                                                     </div>
                                                 </div>
-                                                <?php include(DIR_WS_MODULES . 'products_attributes/modal_new_attribute.php');?>
+                                                <?php include('ajax/products_attributes/modal_new_attribute.php');?>
                                                 <table id="data-table" class="table table-striped table-bordered">
                                                     <thead>
                                                         <tr>
@@ -462,57 +461,13 @@
         <!-- end #content -->                        
 
         <?php include('includes/footer.php');?> 
-        <!-- #modal-alert-option -->
-        <div class="modal fade" id="confirm-delete-option">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h4 class="modal-title">Confirm Delete</h4>
-                    </div>
-                    <div class="modal-body">
-                        <div class="alert alert-danger m-b-0">
-                            <h4><i class="fa fa-info-circle"></i> Confirm Delete?</h4>
-                            <p><?php echo TEXT_WARNING_OF_DELETE; ?></p>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Cancel</a>
-                        <a href="javascript:;" class="btn btn-sm btn-danger btn-delete-confirm">Delete</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- #modal-alert-option -->
-        <!-- #modal-alert-option-value -->
-        <div class="modal fade" id="confirm-delete-option-value">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h4 class="modal-title">Confirm Delete</h4>
-                    </div>
-                    <div class="modal-body">
-                        <div class="alert alert-danger m-b-0">
-                            <h4><i class="fa fa-info-circle"></i> Confirm Delete?</h4>
-                            <p><?php echo TEXT_WARNING_OF_DELETE; ?></p>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Cancel</a>
-                        <a href="javascript:;" class="btn btn-sm btn-danger btn-delete-confirm">Delete</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- #modal-alert-option-value -->
-        <!-- #modal-alert-option-value -->
+        <!-- #modal-alert-delete-attribute -->
         <div class="modal fade" id="confirm-delete-attribute">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h4 class="modal-title">Confirm Delete</h4>
+                        <h4 class="modal-title">Confirm Delete Attribute</h4>
                     </div>
                     <div class="modal-body">
                         <div class="alert alert-danger m-b-0">
@@ -527,7 +482,7 @@
                 </div>
             </div>
         </div>
-        <!-- #modal-alert-option-value -->
+        <!-- #modal-alert-delete-attribute eof -->
         <script src="assets/plugins/DataTables/media/js/jquery.dataTables.js"></script>
         <script src="assets/plugins/DataTables/media/js/dataTables.bootstrap.min.js"></script>
         <script src="assets/plugins/DataTables/extensions/Responsive/js/dataTables.responsive.min.js"></script>
@@ -552,8 +507,6 @@
                         responsive: true
                     });
                 }
-
-
                 $(".default-select2").select2();
 
             });
@@ -564,31 +517,45 @@
                     buttons: false,
                     loadingHtml: '<span class="fa fa-circle-o-notch fa-spin fa-3x text-primary"></span><span class="h4">Loading</span>',
                     title: 'Edit Product Option',
-                    url: '<?php echo DIR_WS_MODULES;?>products_attributes/modal_edit_option_groups.php?editOpID='+id,
+                    url: './ajax/products_attributes/modal_edit_option_groups.php?editOpID='+id,
                 };
 
                 return eModal.ajax(params);
             }
-            $('#confirm-delete-option').on('show.bs.modal', function(e) {
-                $(this).find('.btn-delete-confirm').attr('href', $(e.relatedTarget).data('href'));
-            });
+            
+            function deleteOptionEntry(id, opname) {
+                var params = {
+                    buttons: false,   
+                    loadingHtml: '<span class="fa fa-circle-o-notch fa-spin fa-3x text-primary"></span><span class="h4">Loading</span>',
+                    title: 'Delete Product Option Group '+opname,
+                    url: './ajax/products_attributes/modal_delete_option_groups.php?delOpID='+id,
+                };
 
-
+                return eModal.ajax(params);
+            }
 
             /**** Edit and delete for Options Values ****/
             function editOptionValues(id) {
                 var params = {
                     buttons: false,
                     loadingHtml: '<span class="fa fa-circle-o-notch fa-spin fa-3x text-primary"></span><span class="h4">Loading</span>',
-                    title: 'Edit Product Option',
-                    url: '<?php echo DIR_WS_MODULES;?>products_attributes/modal_edit_option_values.php?editOpValID='+id,
+                    title: 'Edit Product Option Value',
+                    url: './ajax/products_attributes/modal_edit_option_values.php?editOpValID='+id,
                 };
 
                 return eModal.ajax(params);
             }
-            $('#confirm-delete-option-value').on('show.bs.modal', function(e) {
-                $(this).find('.btn-delete-confirm').attr('href', $(e.relatedTarget).data('href'));
-            });
+            
+            function deleteOptionValue(id, opvname) {
+                var params = {
+                    buttons: false,   
+                    loadingHtml: '<span class="fa fa-circle-o-notch fa-spin fa-3x text-primary"></span><span class="h4">Loading</span>',
+                    title: 'Delete Product Option Value '+opvname,
+                    url: './ajax/products_attributes/modal_delete_option_values.php?delOpValID='+id,
+                };
+
+                return eModal.ajax(params);
+            }
             
             /**** Edit attributes ****/
             function editProductAttributes(id) {
@@ -596,7 +563,7 @@
                     buttons: false,
                     loadingHtml: '<span class="fa fa-circle-o-notch fa-spin fa-3x text-primary"></span><span class="h4">Loading</span>',
                     title: 'Edit Product Attributes',
-                    url: '<?php echo DIR_WS_MODULES;?>products_attributes/modal_edit_attributes.php?editAttributelID='+id,
+                    url: './ajax/products_attributes/modal_edit_attributes.php?editAttributelID='+id,
                 };
 
                 return eModal.ajax(params);
@@ -606,9 +573,6 @@
             });
 
         </script>
-
-
-
     </body>
 </html>
 <?php require(DIR_WS_INCLUDES . 'application_bottom.php'); ?>
