@@ -1,5 +1,5 @@
 <?php
-    chdir('../');
+    chdir('../../');
     require('includes/application_top.php');
     $languages = tep_get_languages();
 
