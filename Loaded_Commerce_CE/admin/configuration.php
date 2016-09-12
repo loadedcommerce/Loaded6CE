@@ -77,7 +77,7 @@
 <html lang="en">
     <!--<![endif]-->
     <head>
-        <?php include('html_head.php');?>
+        <?php include(DIR_WS_INCLUDES . 'html_head.php');?>
     </head>
     <body>
         <!-- ================== BEGIN PAGE LEVEL JS ================== -->
@@ -96,10 +96,10 @@
 
         <!-- begin #page-container -->
         <div id="page-container" class="fade page-sidebar-fixed page-header-fixed"> 
-        <?php include('header.php');?> 
+        <?php include(DIR_WS_INCLUDES . 'header.php');?> 
 
         <?php
-            include('includes/column_left.php');
+            include(DIR_WS_INCLUDES . 'column_left.php');
         ?>
 
         <!-- begin #content -->
@@ -111,7 +111,7 @@
             </ol>
             <!-- end breadcrumb --> 
             <!-- begin page-header -->
-            <h1 class="page-header">Configuration</h1>
+            <h1 class="page-header"><?php echo BOX_HEADING_CONFIGURATION;?></h1>
             <!-- end page-header --> 
             <!-- begin row -->
             <div class="row"> 
@@ -152,9 +152,9 @@
                                             <table border="0" width="100%" cellspacing="0" cellpadding="0" class="table table-bordered table-hover f-s-13">
                                                 <thead>
                                                     <tr>
-                                                        <th class="col-md-3 table-title-cell-bg f-s-15">Configuration Title</th>
-                                                        <th class="col-md-8 table-title-cell-bg f-s-15">Value</th>
-                                                        <th class="col-md-1 text-center table-title-cell-bg f-s-15">Action</th>
+                                                        <th class="col-md-3 table-title-cell-bg f-s-15"><?php echo TABLE_HEADING_CONFIGURATION_TITLE;?></th>
+                                                        <th class="col-md-8 table-title-cell-bg f-s-15"><?php echo TABLE_HEADING_CONFIGURATION_VALUE;?></th>
+                                                        <th class="col-md-1 text-center table-title-cell-bg f-s-15"><?php echo TABLE_HEADING_ACTION;?></th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -207,7 +207,7 @@
                                                                 //echo '<a href="#" id="configuration' . $configuration["configuration_id"] . '" data-type="text" data-pk="1" >' . htmlspecialchars($cfgValue) . '</a>';
                                                             }
                                                         ?></td>
-                                                        <td class="text-center" style="padding-top:8px !important; padding-bottom:5px !important;"><a style="text-decoration: none" onclick="editConfiguration('<?php echo $configuration["configuration_id"]; ?>','<?php echo htmlspecialchars($configuration['configuration_title']);?>')" href="#" title="" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit</a></td>
+                                                        <td class="text-center" style="padding-top:8px !important; padding-bottom:5px !important;"><a style="text-decoration: none" onclick="editConfiguration('<?php echo $configuration["configuration_id"]; ?>','<?php echo htmlspecialchars($configuration['configuration_title']);?>')" href="#" title="" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> <?php echo IMAGE_EDIT;?></a></td>
                                                         </tr>
                                                         <?php
                                                         }
@@ -231,7 +231,7 @@
             <!-- end row --> 
         </div>
         <!-- end #content --> 
-        <?php include('footer.php');?> 
+        <?php include(DIR_WS_INCLUDES . 'footer.php');?> 
         <!-- ================== BEGIN PAGE LEVEL JS ================== -->
         <script src="assets/plugins/emodal/eModal.js"></script> 
         <script>
@@ -239,7 +239,7 @@
                 var params = {
                     buttons: false,
                     loadingHtml: '<span class="fa fa-circle-o-notch fa-spin fa-3x text-primary"></span><span class="h4">Loading</span>',
-                    title: 'Edit - '+title,
+                    title: '<?php echo IMAGE_EDIT;?> - '+title,
                     url: './ajax/configuration/modal_edit_configuration.php?editConfigurationlID='+id,
                 };
 

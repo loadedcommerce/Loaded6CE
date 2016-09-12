@@ -32,8 +32,8 @@
         <div class="modal-footer col-sm-12 m-t-15 p-t-15">
             <div class="form-group">
                 <div class="col-md-12 text-right">
-                    <a href="javascript:;" class="btn btn btn-white m-r-5" data-dismiss="modal">Cancel</a>
-                    <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Save</button>
+                    <a href="javascript:;" class="btn btn btn-white m-r-5" data-dismiss="modal"><?php echo IMAGE_CANCEL;?></a>
+                    <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> <?php echo IMAGE_SAVE;?></button>
                 </div>
             </div>
         </div>
