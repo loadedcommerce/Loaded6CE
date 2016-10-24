@@ -39,6 +39,7 @@ $heading[] = array('text'  => BOX_HEADING_DESIGN_CONTROLS,
   $returned_rci_top4 = $cre_RCI->get('designcontrols', 'boxestop4');
   $returned_rci_bottom4 = $cre_RCI->get('designcontrols', 'boxestop4');  
   $returned_rci_top5 = $cre_RCI->get('designcontrols', 'boxestop5'); 
+  $returned_rci_bottom .= lc_addon_load_side_links('design_controls');
   $contents[] = array('text'  => $returned_rci_top .
                                  tep_admin_files_boxes('',BOX_HEADING_TEMPLATE_HEADER_TAGS ) .
                                  $returned_rci_top2 . 

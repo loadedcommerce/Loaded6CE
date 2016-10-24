@@ -21,6 +21,7 @@ $heading[] = array('text'  => BOX_HEADING_GV_ADMIN,
   //RCI to include links  
   $returned_rci_top = $cre_RCI->get('gvadmin', 'boxestop');
   $returned_rci_bottom = $cre_RCI->get('gvadmin', 'boxesbottom');
+  $returned_rci_bottom .= lc_addon_load_side_links('gv_admin');
   $contents[] = array('text'  => $returned_rci_top .
                                  tep_admin_files_boxes(FILENAME_COUPON_ADMIN , BOX_COUPON_ADMIN, 'SSL','selected_box=gv_admin','2') .
                                  tep_admin_files_boxes(FILENAME_GV_REPORT , BOX_GV_REPORT, 'SSL','selected_box=gv_admin','2') .

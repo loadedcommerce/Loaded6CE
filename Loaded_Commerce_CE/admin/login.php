@@ -64,7 +64,7 @@
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
     <meta content="noindex" name="index" />
     <meta content="" name="author" />
-    
+
     <!-- ================== BEGIN BASE CSS STYLE ================== -->
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
     <link href="assets/plugins/jquery-ui/themes/base/minified/jquery-ui.min.css" rel="stylesheet" />
@@ -75,7 +75,7 @@
     <link href="assets/css/style-responsive.min.css" rel="stylesheet" />
     <link href="assets/css/theme/blue.css" rel="stylesheet" id="theme" />
     <!-- ================== END BASE CSS STYLE ================== -->
-    
+
 </head>
 <body onload="document.getElementById('email_address').focus()">
    <body class="pace-top">
@@ -90,7 +90,7 @@
     <!-- begin #page-loader -->
     <div id="page-loader" class="fade in"><span class="spinner"></span></div>
     <!-- end #page-loader -->
-    
+
     <div class="login-cover">
         <div class="login-cover-image"><img src="assets/img/login-bg/bg-1.jpg" data-id="login-cover-image" alt="" /></div>
         <div class="login-cover-bg"></div>
@@ -119,22 +119,26 @@
                         <input name="password" id="password" type="password" class="form-control input-lg" placeholder="Password" />
                     </div>
                     <div class="checkbox m-b-20">
-                            
+
                     </div>
                     <div class="login-buttons">
                         <button type="submit" class="btn btn-success btn-block btn-lg">Sign me in</button>
                     </div>
                     <div class="m-t-20">
                           <?php echo '<a href="' . tep_href_link(FILENAME_PASSWORD_FORGOTTEN, '', 'SSL') . '">' . TEXT_PASSWORD_FORGOTTEN . '</a>';?>
+                         <?php echo '<a class="pull-right" href="' . tep_href_link(FILENAME_UPGRADE_PRODUCT, '', 'SSL') . '">'.TEXT_UPGRADE_PRODUCT.'</a>';?>
+                    </div>
+                    <div class="m-t-10">
+
                     </div>
                 </form>
             </div>
         </div>
         <!-- end login -->
-        
+
     </div>
     <!-- end page container -->
-    
+
     <!-- ================== BEGIN BASE JS ================== -->
     <script src="assets/plugins/jquery/jquery-1.9.1.min.js"></script>
     <script src="assets/plugins/jquery/jquery-migrate-1.1.0.min.js"></script>
@@ -147,7 +151,7 @@
     <![endif]-->
     <script src="assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
     <!-- ================== END BASE JS ================== -->
-    
+
     <!-- ================== BEGIN PAGE LEVEL JS ================== -->
     <script src="assets/js/apps.min.js"></script>
     <!-- ================== END PAGE LEVEL JS ================== -->

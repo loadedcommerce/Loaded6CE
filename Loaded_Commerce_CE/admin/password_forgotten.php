@@ -28,12 +28,12 @@
       $check_admin = tep_db_fetch_array($check_admin_query);
       $_GET['login'] = 'success';
       $makePassword = tep_create_hard_pass();
-      
+
       tep_mail($check_admin['check_firstname'] . ' ' . $check_admin['admin_lastname'], $check_admin['check_email_address'], ADMIN_EMAIL_SUBJECT, sprintf(ADMIN_EMAIL_TEXT, $check_admin['check_firstname'], HTTP_SERVER . DIR_WS_ADMIN, $check_admin['check_email_address'], $makePassword, STORE_OWNER), STORE_OWNER, STORE_OWNER_EMAIL_ADDRESS);
       tep_db_query("update " . TABLE_ADMIN . " set admin_password = '" . tep_encrypt_password($makePassword) . "' where admin_id = '" . $check_admin['check_id'] . "'");
       }
     }
-  
+
     require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_DEFAULT);
   if  (isset($_GET['login']) && $_GET['login'] == 'success' ) {
     $success_message = TEXT_FORGOTTEN_SUCCESS;
@@ -52,7 +52,7 @@
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
     <meta content="noindex" name="index" />
     <meta content="" name="author" />
-    
+
     <!-- ================== BEGIN BASE CSS STYLE ================== -->
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
     <link href="assets/plugins/jquery-ui/themes/base/minified/jquery-ui.min.css" rel="stylesheet" />
@@ -70,7 +70,7 @@
     <!-- begin #page-loader -->
     <div id="page-loader" class="fade in"><span class="spinner"></span></div>
     <!-- end #page-loader -->
-    
+
     <div class="login-cover">
         <div class="login-cover-image"><img src="assets/img/login-bg/bg-1.jpg" data-id="login-cover-image" alt="" /></div>
         <div class="login-cover-bg"></div>
@@ -96,7 +96,7 @@
         if (isset($_SESSION['password_forgotten'])) {
           ?>
           <div class="form-group m-b-20"><?php echo TEXT_FORGOTTEN_FAIL; ?></div>
-          
+
           <?php
           $success_message = '';
         } elseif (isset($success_message)) {
@@ -110,7 +110,7 @@
         }
         if (!isset($success_message) && !isset($_SESSION['password_forgotten'])){
           ?>
-                
+
                     <div class="form-group m-b-20">
                         <?php echo TEXT_FORGOTTEN_SUPPORT_MESSAGE; ?>
                     </div>
@@ -122,11 +122,11 @@
                         <input name="email_address" id="email_address" type="text" class="form-control input-lg" placeholder="Email Address" />
                     </div>
 
- 
+
                     <div class="login-buttons">
                         <button type="submit" class="btn btn-success btn-block btn-lg"><?php echo IMAGE_SEND;?></button>
                     </div>
-                    <?php 
+                    <?php
         } else {
           ?>
           <div class="m-t-20">
@@ -135,14 +135,14 @@
           <?php
         }
         ?>
-                    
-                          
-                 
+
+
+
                 </form>
             </div>
         </div>
         <!-- end login -->
-        
+
         <!--ul class="login-bg-list">
             <li class="active"><a href="#" data-click="change-bg"><img src="assets/img/login-bg/bg-1.jpg" alt="" /></a></li>
             <li><a href="#" data-click="change-bg"><img src="assets/img/login-bg/bg-2.jpg" alt="" /></a></li>
@@ -151,10 +151,10 @@
             <li><a href="#" data-click="change-bg"><img src="assets/img/login-bg/bg-5.jpg" alt="" /></a></li>
             <li><a href="#" data-click="change-bg"><img src="assets/img/login-bg/bg-6.jpg" alt="" /></a></li>
         </ul-->
-        
+
     </div>
     <!-- end page container -->
-    
+
     <!-- ================== BEGIN BASE JS ================== -->
     <script src="assets/plugins/jquery/jquery-1.9.1.min.js"></script>
     <script src="assets/plugins/jquery/jquery-migrate-1.1.0.min.js"></script>
@@ -167,7 +167,7 @@
     <![endif]-->
     <script src="assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
     <!-- ================== END BASE JS ================== -->
-    
+
     <!-- ================== BEGIN PAGE LEVEL JS ================== -->
     <script src="assets/js/apps.min.js"></script>
     <!-- ================== END PAGE LEVEL JS ================== -->

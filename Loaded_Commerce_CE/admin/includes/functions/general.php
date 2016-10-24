@@ -144,7 +144,6 @@ function tep_admin_check_boxes($filename, $boxes='') {
 function tep_admin_files_boxes ($filename = '', $sub_box_name = '', $connection = 'NONSSL', $parameters = '', $space = '') {
   global $request_type;
   $sub_boxes = '';
-
   if ($filename != '' ){
   // by pass the check for top level admins
     if ( $_SESSION['login_groups_id'] != 1 ) {

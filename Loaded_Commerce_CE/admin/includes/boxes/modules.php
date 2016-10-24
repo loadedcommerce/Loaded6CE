@@ -21,6 +21,7 @@ $heading[] = array('text'  => BOX_HEADING_MODULES,
   //RCI to include links
   $returned_rci_top = $cre_RCI->get('modules', 'boxestop');
   $returned_rci_bottom = $cre_RCI->get('modules', 'boxesbottom');
+  $returned_rci_bottom .= lc_addon_load_side_links('modules');
   $contents[] = array('text'  => $returned_rci_top .
                                  tep_admin_files_boxes(FILENAME_MODULES, BOX_MODULES_PAYMENT, 'SSL' , 'set=payment&selected_box=modules', '2') .
                                  tep_admin_files_boxes(FILENAME_MODULES, BOX_MODULES_SHIPPING, 'NONSSL' , 'set=shipping&selected_box=modules', '2') . 

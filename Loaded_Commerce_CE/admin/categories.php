@@ -404,6 +404,9 @@ if (tep_not_null($action)) {
         // EOF: Eversun Added: Update Product Attributes and Sort Order
         /////////////////////////////////////////////////////////////////////
 
+	  //Load the addon Action
+	  lc_load_addon_action('categories', 'product_update');
+
       if (USE_CACHE == 'true') {
         tep_reset_cache_block('categories');
         tep_reset_cache_block('also_purchased');
@@ -526,6 +529,9 @@ if (tep_not_null($action)) {
               }
             }
           }
+
+		//Load the addon Action
+		lc_load_addon_action('categories', 'product_insert');
 
         if (USE_CACHE == 'true') {
           tep_reset_cache_block('categories');
@@ -1477,6 +1483,10 @@ function trim(str) {
                     </table></td>
                   </tr>
                 </table>
+<?php
+if(!lc_check_addons('categories', 'pricemsrp_html'))
+{
+?>
                 <table width="100%"  border="0" cellspacing="2" cellpadding="2">
                   <tr bgcolor="#ebebff">
                     <td class="main"><?php echo TEXT_PRODUCTS_TAX_CLASS; ?></td>
@@ -1496,11 +1506,18 @@ function trim(str) {
                     //-->
                   </script>
                 </table>
+<?php
+}
+?>
               </fieldset></td>
             </tr>
               <?php
           } // RCO eof fieldsetpinfo
           ?>
+<?php
+lc_check_addons('categories', 'qpb_html');
+?>
+
           <?php
           // RCO start fieldsetimages
           if ($cre_RCO->get('categories', 'fieldsetimages') !== true) {
@@ -1794,6 +1811,10 @@ function trim(str) {
           <tr>
             <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '5'); ?></td>
           </tr>
+<?php
+lc_check_addons('categories', 'subproducts_html');
+lc_check_addons('categories', 'extrafields_html');
+?>
         </table>
         <!-- begin the attribute presentation -->
         <table border="3" cellspacing="5" cellpadding="2" align="center" bgcolor="000000">

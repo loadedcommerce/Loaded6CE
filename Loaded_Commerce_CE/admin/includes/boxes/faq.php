@@ -21,6 +21,7 @@ $heading[] = array('text'  => BOX_HEADING_FAQ,
   //RCI to include links  
   $returned_rci_top = $cre_RCI->get('faq', 'boxestop');
   $returned_rci_bottom = $cre_RCI->get('faq', 'boxesbottom');
+  $returned_rci_bottom .= lc_addon_load_side_links('faq');
   $contents[] = array('text'  => $returned_rci_top .
                                  tep_admin_files_boxes(FILENAME_FAQ_MANAGER, BOX_FAQ_MANAGER, 'SSL','selected_box=faq','2') .
                                  tep_admin_files_boxes(FILENAME_FAQ_CATEGORIES, BOX_FAQ_CATEGORIES, 'SSL','selected_box=faq','2') .

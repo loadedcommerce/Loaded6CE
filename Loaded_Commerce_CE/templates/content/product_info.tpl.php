@@ -12,66 +12,63 @@
 */
 // RCI code start
 echo $cre_RCI->get('global', 'top');
-echo $cre_RCI->get('productinfotabs', 'top');
+echo $cre_RCI->get('productinfo', 'top');
 // RCI code eof
-echo tep_draw_form('cart_quantity', tep_href_link(FILENAME_PRODUCT_INFO, tep_get_all_get_params(array('action', 'products_id', 'id')) . 'action=add_product' . '&' . $params), 'post', 'enctype="multipart/form-data"');
-echo tep_draw_hidden_field('products_id', $product_info['products_id']);
-?>
+$product_subproducts_check = tep_has_product_subproducts((int)$_GET['products_id']);
+echo tep_draw_form('cart_quantity', tep_href_link(FILENAME_PRODUCT_INFO, tep_get_all_get_params(array('action', 'products_id', 'id')) . 'action=add_product' . '&' . $params), 'post', 'enctype="multipart/form-data" onsubmit = "return func_chk_subproducts('.(($product_subproducts_check)?1:0).');"'); ?>
+<div class="row" id="content"><!--Start of row-->
 
-<div class="row" id="content">
 <?php
   if ($messageStack->size('cart_quantity') > 0) {
 ?>
-<div class="message-stack-container alert alert-danger margin-bottom mid-margin-right with-padding">
-
-<?php echo $messageStack->output('cart_quantity'); ?>
-</div>
-
-
+        <div class="message-stack-container alert alert-success">
+        	<?php echo $messageStack->output('cart_quantity'); ?>
+        </div>
 <?php
   }
+
   // added for CDS CDpath support
   $params = (isset($_SESSION['CDpath'])) ? 'CDpath=' . $_SESSION['CDpath'] : '';
   if ($product_check['total'] < 1) {
     ?>
-<?php  new infoBox(array(array('text' => TEXT_PRODUCT_NOT_FOUND))); ?>
-<?php echo '<a href="' . tep_href_link(FILENAME_DEFAULT, $params) . '">' . tep_template_image_button('button_continue.gif', IMAGE_BUTTON_CONTINUE) . '</a>'; ?>
-  <?php
+    <div class="col-sm-12 col-lg-12">
+      <?php  echo TEXT_PRODUCT_NOT_FOUND; ?>
+    </div>
+    <div class="col-sm-12 col-lg-12 text-right">
+    	<?php echo '<a href="' . tep_href_link(FILENAME_DEFAULT, $params) . '">' . tep_template_image_button('button_continue.gif', IMAGE_BUTTON_CONTINUE) . '</a>'; ?>
+    </div>
+    <?php
   } else {
     $product_info_query = tep_db_query("select p.products_id, pd.products_name, pd.products_description, p.products_model, p.products_quantity, p.products_image, p.products_image_med, p.products_image_lrg, p.products_image_sm_1, p.products_image_xl_1, p.products_image_sm_2, p.products_image_xl_2, p.products_image_sm_3, p.products_image_xl_3, p.products_image_sm_4, p.products_image_xl_4, p.products_image_sm_5, p.products_image_xl_5, p.products_image_sm_6, p.products_image_xl_6, pd.products_url, p.products_price, p.products_tax_class_id, p.products_date_added, p.products_date_available, p.manufacturers_id from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_status = '1' and p.products_id = '" . (int)$_GET['products_id'] . "' and pd.products_id = p.products_id and pd.language_id = '" . (int)$languages_id . "'");
     $product_info = tep_db_fetch_array($product_info_query);
     tep_db_query("update " . TABLE_PRODUCTS_DESCRIPTION . " set products_viewed = products_viewed+1 where products_id = '" . (int)$product_info['products_id'] . "' and language_id = '" . (int)$languages_id . "'");
-   /*if (tep_not_null($product_info['products_model'])) {
+    /*if (tep_not_null($product_info['products_model'])) {
       $products_name = '<h1>' . $product_info['products_name'] . '</h1>&nbsp;<span class="smallText">[' . $product_info['products_model'] . ']</span>';
     } else {
-      $products_name = '<h1 class="pageHeading">' . $product_info['products_name'] . '</h1>';
+      $products_name = '<h1>' . $product_info['products_name'] . '</h1>';
     }*/
-    $products_name = '<h1 class="pageHeading">' . $product_info['products_name'] . '</h1>';
+    $products_name = '<h1 class="no-padding-top">' . $product_info['products_name'] . '</h1>';
     if ($product_has_sub > '0'){ // if product has sub products
       $products_price ='';// if you like to show some thing in place of price add here
     } else {
       $pf->loadProduct($product_info['products_id'],$languages_id);
       $products_price = $pf->getPriceStringShort();
     } // end sub product check
+    if (SHOW_HEADING_TITLE_ORIGINAL=='yes') {
+      $header_text = '';
       ?>
+      <div class="col-sm-12 col-lg-12">
+        <h1 class="no-padding-top"><?php echo $products_name; ?></h1>
+        <hr>
+	  </div>
 
 
-
-
-<?php
-              if ($product_info['products_date_available'] > date('Y-m-d H:i:s')) {
-                echo '<div class="col-sm-12 col-lg-12 clearfix" ><span class="main alert-success">' . sprintf(TEXT_DATE_AVAILABLE . '<br>', tep_date_long($product_info['products_date_available'])) . '</span></div>';
-              }
-              ?>
-  <?php
-    // RCI code start
-    echo $cre_RCI->get('productinfotabs', 'underpriceheading');
-    // RCI code eof
-  ?>
-
-<div class="col-sm-12 col-lg-12 clearfix" ><h1 class="no-margin-top"><?php echo $product_info['products_name']; ?></h1></div>
-<div class="clearfix"></div>
-   <div class="col-sm-6 product-left">
+      <?php
+        // RCI code start
+        echo $cre_RCI->get('productinfo', 'underpriceheading');
+        // RCI code eof
+      ?>
+   <div class="col-sm-6 product-left"><!--col6 1st start-->
 
         <div class="product-info">
            <div class="left product-image thumbnails">
@@ -125,235 +122,346 @@ echo tep_draw_hidden_field('products_id', $product_info['products_id']);
    	<!-- Megnor Cloud-Zoom Image Effect End-->
           </div>
      </div>
-    </div><!--product-left finished-->
-    <div class="col-sm-6 col-lg-6 clearfix ">
-                 <?php if ($product_has_sub > '0') { } else { ?>
+    </div><!--col6 1st end-->
+    <div class="col-sm-6 col-lg-6 clearfix "><!--col62nd start-->
+					<div class="social-container">
+					  <div class="social_wrap list-inline no-print">
 
+							<div class="addthis_toolbox addthis_32x32_style addthis_default_style">
 
-                  <?php } if (tep_not_null($product_info['products_model'])) { ?>
-
-                  <?php }
-                  if ($product_info['manufacturers_id'] != 0) {
-                  ?>
-
-                  <b><?php /*echo TEXT_MANUFACTURER;?></b>
-                    <b><?phpecho tep_get_manufacturers_name($product_info['manufacturers_id']); */?></b>
-
-                  <?php } ?>
-
-                  <?php
-                      if ($product_has_sub > '0') {
-                        echo '&nbsp;';
-                      } else {
-                  ?>
-                    <?php /*(echo TEXT_ENTER_QUANTITY . ':&nbsp;&nbsp;' . tep_draw_input_field('cart_quantity', '1', 'size="4" maxlength="4" id="Qty1" onkeyup="document.getElementById(\'Qty2\').value = document.getElementById(\'Qty1\').value;"  ');*/?>
-
-                  <?php
-                      }
-                  ?>
-
-                    <?php
-                      $valid_to_checkout= true;
-                      if (STOCK_CHECK == 'true') {
-                        $stock_check = tep_check_stock((int)$_GET['products_id'], 1);
-                        if (tep_not_null($stock_check) && (STOCK_ALLOW_CHECKOUT == 'false')) {
-                          $valid_to_checkout = false;
-                        }
-                      }
-                      if ($hide_add_to_cart == 'false' && group_hide_show_prices() == 'true') {
-                        echo tep_draw_hidden_field('products_id', $product_info['products_id']);
-                        if ($valid_to_checkout == true) {
-
-                        }
-                      }
-                    ?>
-
-
-    <div class="social-container">
-      <div class="social_wrap list-inline no-print">
-
-			<div class="addthis_toolbox addthis_32x32_style addthis_default_style">
-
-				<a class="addthis_button_email"></a>
-				<a class="addthis_button_facebook"></a>
-				<a class="addthis_button_twitter"></a>
-				<a class="addthis_button_google_plusone_share"></a>
-				<a class="addthis_button_linkedin"></a>
-				<a class="addthis_button_addthis.com"></a>
-				<a class="addthis_button_compact"></a>
-			</div>
-      </div>
-    </div>
-  <script type="text/javascript">var addthis_config = {"data_track_clickback":true};</script>
-  <script type="text/javascript" src="https://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4d9b61612caae177"></script>
-		            <!-- sub products -->
-		            <?php
-		    // sub product start
-		    if (STOCK_ALLOW_CHECKOUT =='false') {
-		      $allowcriteria = "";
-		    }
-		    // get sort order
-		    $csort_order = tep_db_fetch_array(tep_db_query("select configuration_value from " . TABLE_CONFIGURATION . " where configuration_key = 'SUB_PRODUCTS_SORT_ORDER'"));
-		    $select_order_by = '';
-		    switch (strtoupper($csort_order['configuration_value'])) {
-		      case 'MODEL':
-		        $select_order_by .= 'sp.products_model';
-		        break;
-		      case 'NAME':
-		        $select_order_by .= 'spd.products_name';
-		        break;
-		      case 'PRICE':
-		        $select_order_by .= 'sp.products_price';
-		        break;
-		      case 'QUANTITY':
-		        $select_order_by .= 'sp.products_quantity';
-		        break;
-		      case 'WEIGHT':
-		        $select_order_by .= 'sp.products_weight';
-		        break;
-		      case 'SORT ORDER':
-		        $select_order_by .= 'sp.sort_order';
-		        break;
-		      case 'LAST ADDED':
-		        $select_order_by .= 'sp.products_date_added';
-		        break;
-		      default:
-		        $select_order_by .= 'sp.products_model';
-		        break;
-		    }
-		    ?>
-		            <!-- sub products eof -->
-
-<div class="well large-margin-top margin-bottom">
+								<a class="addthis_button_email"></a>
+								<a class="addthis_button_facebook"></a>
+								<a class="addthis_button_twitter"></a>
+								<a class="addthis_button_google_plusone_share"></a>
+								<a class="addthis_button_linkedin"></a>
+								<a class="addthis_button_addthis.com"></a>
+								<a class="addthis_button_compact"></a>
+							</div>
+					  </div>
+					</div>
+				  <script type="text/javascript">var addthis_config = {"data_track_clickback":true};</script>
+				  <script type="text/javascript" src="https://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4d9b61612caae177"></script>
+					<div class="well">
 <div class="content-products-info-price-container clearfix">
-	<?php
-		$load_attributes_for = $product_info['products_id'];
-		include(DIR_WS_MODULES . 'product_info/product_attributes.php');
-	?>
+<?php
+            $products_id_tmp = $product_info['products_id'];
+            if(tep_subproducts_parent($products_id_tmp)){
+              $products_id_query = tep_subproducts_parent($products_id_tmp);
+            } else {
+              $products_id_query = $products_id_tmp;
+            }
+            if($product_has_sub > '0') {
+              if ((defined('PRODUCT_INFO_SUB_PRODUCT_ATTRIBUTES') && PRODUCT_INFO_SUB_PRODUCT_ATTRIBUTES == 'False')) {
+                // 2.a) PRODUCT_INFO_SUB_PRODUCT_ATTRIBUTES = False
+                //        -- Show attributes to main product only
+                $load_attributes_for = $products_id_query;
+                //$load_attributes_for = $products_id_query;
+                include(DIR_WS_MODULES . 'product_info/product_attributes.php');
+              } else {
+                // 2.b) PRODUCT_INFO_SUB_PRODUCT_ATTRIBUTES = True
+                //        -- Show attributes to sub product only
+              }
+            } else {
+              // show attributes for parent only
+              $load_attributes_for = $products_id_query;
+              include(DIR_WS_MODULES . 'product_info/product_attributes.php');
+            }
+?>
 </div>
-	<div class="content-products-info-price-container clearfix"> <span class="content-products-info-price pull-left lt-blue"><?php echo $products_price; ?></span> </div>
-      <div class="content-products-info-reviews-container large-margin-bottom">
-       <label class="content-products-info-reviews-rating-label with-padding-no-top-bottom">Model:&nbsp;<?php echo $product_info['products_model']; ?></label><br/>
-       <label class="content-products-info-reviews-rating-label with-padding-no-top-bottom">Manufacturers:&nbsp;<?php echo tep_get_manufacturers_name($product_info['manufacturers_id']); ?></label>
-	  </div>
+<div class="content-products-info-price-container clearfix">
+<span class="content-products-info-price pull-left lt-blue"><?php echo $products_price; ?></span>
+</div>
+	                    <div class="clearfix"></div>
+	                  <?php if (tep_not_null($product_info['products_model'])) { ?>
+	                    <div class="col-xs-6 col-sm-6 col-lg-6"><b><?php echo TEXT_MODEL;?></b></div>
+	                    <div class="col-xs-6 col-sm-6 col-lg-6"><b><?php echo $product_info['products_model']; ?></b></div>
+	                    <div class="clearfix"></div>
+	                  <?php }
+	                  if ($product_info['manufacturers_id'] != 0) {
+	                  ?>
+	                    <div class="col-xs-6 col-sm-6 col-lg-6"><b><?php echo TEXT_MANUFACTURER;?></b></div>
+	                    <div class="col-xs-6 col-sm-6 col-lg-6"><b><?php echo tep_get_manufacturers_name($product_info['manufacturers_id']); ?></b></div>
+	                    <div class="clearfix"></div>
+	                  <?php } ?>
+					<div class="col-sm-12 col-lg-12 large-padding-top"><!--qty section start-->
+	                  <?php
+	                    $hide_add_to_cart = hide_add_to_cart();
+	                    if ($hide_add_to_cart == 'false') {
+	                      if ($product_has_sub > '0') {
+	                        echo '&nbsp;';
+	                      } else {
+	                  ?>
+							<label class="content-products-info-qty-label"><?php echo TEXT_ENTER_QUANTITY,':'; ?></label>
+							<?php echo  tep_draw_input_field('cart_quantity', '1', 'class="form-control" style="width:69px;" class="content-products-info-qty-input mid-margin-right" maxlength="4" id="Qty1" onkeyup="document.getElementById(\'Qty2\').value = document.getElementById(\'Qty1\').value;"  ');?>
+							<i onclick="setQty('up');" style="position:relative; right:-71px; top:-37px; opacity:.3; cursor:pointer;" class="fa fa-plus-square-o fa-lg"></i>
+							<i onclick="setQty('dn');" style="position:relative; right:-53px; top:-15px; opacity:.3; cursor:pointer;" class="fa fa-minus-square-o fa-lg"></i>
 
-		<label class="content-products-info-qty-label"><?php echo TEXT_ENTER_QUANTITY,':'; ?></label>
-		<?php echo  tep_draw_input_field('cart_quantity', '1', 'class="form-control" style="width:150px;" class="content-products-info-qty-input mid-margin-right" maxlength="4" id="Qty1" onkeyup="document.getElementById(\'Qty2\').value = document.getElementById(\'Qty1\').value;"  ');?>
-		<i onclick="setQty('up');" style="position:relative; right:-154px; top:-37px; opacity:.3; cursor:pointer;" class="fa fa-plus-square-o fa-lg"></i>
-		<i onclick="setQty('dn');" style="position:relative; right:-136px; top:-15px; opacity:.3; cursor:pointer;" class="fa fa-minus-square-o fa-lg"></i>
+	                   <?php /*echo TEXT_ENTER_QUANTITY . ':&nbsp;&nbsp;' . tep_draw_input_field('cart_quantity', '1', 'size="4" maxlength="4" class="form-control" id="Qty1" onkeyup="document.getElementById(\'Qty2\').value = document.getElementById(\'Qty1\').value;"  ');*/?>
+	                  <?php
+	                      }
+	                    }
+	                  ?>
+						</div><!--qty section end-->
+						<div class="clearfix"></div>
+	                    <?php
+	                      $valid_to_checkout= true;
+	                      if (STOCK_CHECK == 'true') {
+	                        $stock_check = tep_check_stock((int)$_GET['products_id'], 1);
+	                        if (tep_not_null($stock_check) && (STOCK_ALLOW_CHECKOUT == 'false')) {
+	                          $valid_to_checkout = false;
+	                        }
+	                      }
+	                      if ($hide_add_to_cart == 'false') {
+	                        echo tep_draw_hidden_field('products_id', $product_info['products_id']);
+	                        if ($valid_to_checkout == true && !$product_subproducts_check) {
+	                          echo ((PRODUCT_INFO_SUB_PRODUCT_PURCHASE == 'Multi' || (PRODUCT_INFO_SUB_PRODUCT_PURCHASE == 'Single' && PRODUCT_INFO_SUB_PRODUCT_DISPLAY == 'Drop Down') || $product_has_sub == 0) ? '<p><button id="btn-buy-now" class="btn btn-block btn-lg btn-success">'. IMAGE_BUTTON_IN_CART.'</button></p>' : '');
+	                        }
+	                      }
+	                    ?>
 
-
-   </div>
-    <div class="relative clear-both clearfix buy-btn-div">
-  <div class="col-sm-12 col-lg-12 text-right">
-	<p class="margin-top"><button id="btn-buy-now" class="btn  btn-lg btn-success"><?php echo IMAGE_BUTTON_IN_CART; ?></button></p>
-  </div>
-
-      <div class="display-inline">
-<div class="col-sm-4 col-lg-4 align-right mid-margin-top"><?php echo '<a href="' . tep_href_link(FILENAME_PRODUCT_REVIEWS, tep_get_all_get_params() . $params) . '" class="btn btn-sm cursor-pointer small-margin-right btn-success">' .  IMAGE_BUTTON_REVIEWS . '</a>'; ?></div>
-        <div class="col-sm-8 col-lg-8 align-right mid-margin-top">
-          <div class="form-group">
-                    <?php
-                      if ($product_check['total'] > 0) {
-                        if (DESIGN_BUTTON_WISHLIST == 'true') {
-                          echo '<script type="text/javascript"><!--' . "\n";
-                          echo 'function addwishlist() {' . "\n";
-                          echo 'document.cart_quantity.action=\'' . str_replace('&amp;', '&', tep_href_link(FILENAME_PRODUCT_INFO, 'action=add_wishlist' . '&' . $params)) . '\';' . "\n";
-                          echo 'document.cart_quantity.submit();' . "\n";
-                          echo '}' . "\n";
-                          echo '--></script>' . "\n";
-                          echo '<a href="javascript:addwishlist()" class="btn btn-sm cursor-pointer small-margin-right btn-success">' . IMAGE_BUTTON_ADD_WISHLIST . '</a>';
-                        }
-                      } // if products_check
-                    ?>
-          </div>
-        </div>
-      </div>
-    </div>
-    </div>
-    <div class="col-sm-12 col-lg-12 no-padding-left no-padding-right large-margin-bottom"><!--newtabstart12div-->
-	<div class="col-sm-12 prod-desc"><!--prod-desc Started-->
-		<h3><?php echo TEXT_TAB_PRODUCT_INFO ?></h3>
-		<?php
-			echo '<p>' .  cre_clean_product_description($product_info['products_description']) . '</p><table>';
-			if (tep_not_null($product_info['products_url'])) {
-			  ?>
-			  <tr>
-				<td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
-			  </tr>
-			  <tr>
-				<td class="main"><?php echo sprintf(TEXT_MORE_INFORMATION, tep_href_link(FILENAME_REDIRECT, 'action=url&amp;goto=' . urlencode($product_info['products_url']), 'NONSSL', true, false)); ?></td>
-			  </tr>
-			  <tr>
-				<td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
-			  </tr>
-			  <?php
-			}
-			if ($product_info['products_date_available'] > date('Y-m-d H:i:s')) {
-			  ?>
-			  <tr>
-				<td align="center" class="smallText"><?php echo sprintf(TEXT_DATE_AVAILABLE, tep_date_long($product_info['products_date_available'])); ?></td>
-			  </tr>
-			  <?php
-			} else {
-			  ?>
-			  <tr>
-				<td align="center" class="smallText"><?php echo sprintf(TEXT_DATE_ADDED, tep_date_long($product_info['products_date_added'])); ?></td>
-			  </tr>
-			  <?php
-			}
-			echo '</table>';
-		?>
-
-	</div><!--prod-desc finished-->
- </div><!--newtabend12div-->
-
-<div class="clearfix"></div>
-<div class="col-sm-12 col-lg-12">
-  <?php
-    if (SHOW_PRICE_BREAK_TABLE == 'true') {
+					</div>
+						<div class="display-inline">
+						 <div class="col-xs-6 col-sm-4 col-lg-4 no-padding-left"><?php echo '<a href="' . tep_href_link(FILENAME_PRODUCT_REVIEWS, tep_get_all_get_params() . $params) . '" class="btn btn-sm cursor-pointer no-margin-left btn-success">' .  IMAGE_BUTTON_REVIEWS . '</a>'; ?></div>
+								<div class="col-xs-6 col-sm-8 col-lg-8  text-right no-padding-right">
+								  <div class="form-group">
+											<?php
+											  if ($product_check['total'] > 0) {
+												if (DESIGN_BUTTON_WISHLIST == 'true') {
+												  echo '<script type="text/javascript"><!--' . "\n";
+												  echo 'function addwishlist() {' . "\n";
+												  echo 'document.cart_quantity.action=\'' . str_replace('&amp;', '&', tep_href_link(FILENAME_PRODUCT_INFO, 'action=add_wishlist' . '&' . $params)) . '\';' . "\n";
+												  echo 'document.cart_quantity.submit();' . "\n";
+												  echo '}' . "\n";
+												  echo '--></script>' . "\n";
+												  echo '<a href="javascript:addwishlist()" class="btn btn-sm cursor-pointer  btn-success">' . IMAGE_BUTTON_ADD_WISHLIST . '</a>';
+												}
+											  } // if products_check
+											?>
+								  </div>
+								</div>
+						 </div>
+	                   </div><!--col62nd end-->
+						<div class="col-sm-12 col-lg-12">
+						<div id="pointsRewards"><!--pointsRewards start-->
+	                      <?php
+	                        if (defined(MODULE_ADDONS_POINTS_STATUS) && MODULE_ADDONS_POINTS_STATUS == 'True') {
+	                          $productTaxClass_query = tep_db_query("SELECT products_tax_class_id, products_price FROM " . TABLE_PRODUCTS . " where products_id = '" . $_GET['products_id'] . "'");
+	                          $productTaxClass = tep_db_fetch_array($productTaxClass_query);
+	                          $hasSpecialPrice = $pf->hasSpecialPrice();
+	                          if ($hasSpecialPrice == 1) {
+	                            $specialPrice = tep_db_fetch_array(tep_db_query("SELECT specials_new_products_price FROM " . TABLE_SPECIALS . " where products_id = '" . $_GET['products_id'] . "'"));
+	                            $products_price_points = tep_display_points($specialPrice['specials_new_products_price'], tep_get_tax_rate($productTaxClass['products_tax_class_id']));
+	                          } else {
+	                            $products_price_points = tep_display_points($productTaxClass['products_price'], tep_get_tax_rate($productTaxClass['products_tax_class_id']));
+	                          }
+	                          $products_points = tep_calc_products_price_points($products_price_points);
+	                          $products_points_value = tep_calc_price_pvalue($products_points);
+	                          $q_cID_reverse = array_reverse(explode("_", $cPath));
+	                          $q_cID = $q_cID_reverse[0];
+	                          $cat_ids = explode(",", RESTRICTION_PATH);
+	                          $p_ids = explode(",", RESTRICTION_PID);
+	                          $m_ids = explode(",", RESTRICTION_MODEL);
+	                          if (!in_array($q_cID, $cat_ids)) {
+	                            if (!in_array($product_info['products_id'], $p_ids)) {
+	                              if (!in_array($product_info['products_model'], $m_ids)) {
+	                                if (USE_POINTS_FOR_SPECIALS == 'true' || $new_price == false) {
+	                                  if ((USE_REDEEM_SYSTEM == 'true') && (tep_not_null(USE_POINTS_FOR_REVIEWS))) {
+	                                    echo '<table border="0" cellspacing="0" cellpadding="0">
+	                                            <tr class="infoBoxContents">
+	                                              <td><strong>' . TEXT_PRODUCT_POINTS_HEADING . '</strong></td>
+	                                            </tr>
+	                                          </table>
+	                                          <table border="0" cellspacing="1" cellpadding="2" class="infoBox">
+	                                            <tr class="infoBoxContents">
+	                                              <td>' . sprintf(TEXT_PRODUCT_POINTS , number_format($products_points, POINTS_DECIMAL_PLACES), $currencies->format($products_points_value)) . '<br />' . REVIEW_HELP_LINK . '</td>
+	                                            </tr>
+	                                          </table>';
+	                                  } else {
+	                                    echo '<table border="0" cellspacing="0" cellpadding="0">
+	                                            <tr class="infoBoxContents">
+	                                              <td><strong>' . TEXT_PRODUCT_POINTS_HEADING . '</strong></td>
+	                                            </tr>
+	                                          </table>
+	                                          <table border="0" cellspacing="1" cellpadding="2" class="infoBox">
+	                                            <tr class="infoBoxContents">
+	                                              <td>' . sprintf(TEXT_PRODUCT_POINTS , number_format($products_points, POINTS_DECIMAL_PLACES), $currencies->format($products_points_value)) . '<br />' . PRODUCTINFO_REVIEW_HELP_LINK . '</td>
+	                                            </tr>
+	                                          </table>';
+	                                  }
+	                                } else {
+	                                  echo '<table border="0" cellspacing="0" cellpadding="0">
+	                                            <tr class="infoBoxContents">
+	                                              <td><strong>' . TEXT_PRODUCT_POINTS_HEADING . '</strong></td>
+	                                            </tr>
+	                                          </table>
+	                                          <table border="0" cellspacing="1" cellpadding="2" class="infoBox">
+	                                          <tr class="infoBoxContents">
+	                                            <td>' . TEXT_PRODUCT_NO_POINTS . '<br />' . REVIEW_HELP_LINK . '
+	                                          </tr>
+	                                        </table>
+	                                      </td>';
+	                                }
+	                              }
+	                            }
+	                          }
+	                        }
+	                      ?>
+	                      </div><!--pointsRewards end-->
+	                   </div>
+     <?php
+    } else {
+      $header_text = '<div class="col-sm-8 col-lg-8"><h1>'. $products_name .'</h1></div><div class="col-sm-4 col-lg-4"><h1>' . $products_price .'</h1></div>';
+    }
     ?>
-    <?php
-      //include_once(DIR_WS_MODULES . FILENAME_PRODUCT_QUANTITY_TABLE);
-         if ( file_exists(TEMPLATE_FS_CUSTOM_MODULES . FILENAME_PRODUCT_QUANTITY_TABLE)) {
-            require(TEMPLATE_FS_CUSTOM_MODULES . FILENAME_PRODUCT_QUANTITY_TABLE);
-        } else {
-            require(DIR_WS_MODULES . FILENAME_PRODUCT_QUANTITY_TABLE);
-        }
 
+  <div class="col-sm-12 col-lg-12">
+      <table width="100%" border="0" cellspacing="0" cellpadding="2">
+        <?php
+            echo '<tr><td class="main" valign="top"><p>' .  cre_clean_product_description($product_info['products_description']) . '</p>';
+            echo tep_draw_separator('pixel_trans.gif', '100%', '10') . '</td></tr>';
+            if (defined('MODULE_ADDONS_TABS_STATUS') && MODULE_ADDONS_TABS_STATUS == 'True') {
+                $product_tabs_query = tep_db_query("select products_tab_2, products_tab_3, products_tab_4 from " . TABLE_PRODUCTS_DESCRIPTION . " where products_id = '" . (int)$product_info['products_id'] . "'");
+                $product_tab = tep_db_fetch_array($product_tabs_query);
+                if(tep_not_null($product_tab['products_tab_2'])){
+                    echo '<tr><td class="main" valign="top">' . (tep_not_null(TEXT_PRODUCTS_TAB_2_TITLE ) ? '<strong>' . TEXT_PRODUCTS_TAB_2_TITLE  . '</strong>': '') . '<p>' .  cre_clean_product_description($product_tab['products_tab_2']) . '</p></td></tr>';
+                }
+                if(tep_not_null($product_tab['products_tab_3'])){
+                    echo '<tr><td class="main" valign="top">' . (tep_not_null(TEXT_PRODUCTS_TAB_3_TITLE ) ? '<strong>' . TEXT_PRODUCTS_TAB_3_TITLE  . '</strong>': '') . '<p>' .  cre_clean_product_description($product_tab['products_tab_3']) . '</p></td></tr>';
+                }
+                if(tep_not_null($product_tab['products_tab_4'])){
+                    echo '<tr><td class="main" valign="top">' . (tep_not_null(TEXT_PRODUCTS_TAB_4_TITLE ) ? '<strong>' . TEXT_PRODUCTS_TAB_4_TITLE  . '</strong>': '') . '<p>' .  cre_clean_product_description($product_tab['products_tab_4']) . '</p></td></tr>';
+                }
+            }
+            ?>
+      </table>
+     </div>
+    <div class="col-sm-12 col-lg-12"><!--TABLE_REVIEWS-->
+    <?php
+    $reviews_query = tep_db_query("select count(*) as count from " . TABLE_REVIEWS . " where products_id = '" . (int)$product_info['products_id'] . "'");
+    $reviews = tep_db_fetch_array($reviews_query);
+    if ($reviews['count'] > 0) {
+      ?>
+		<?php echo TEXT_CURRENT_REVIEWS . ' ' . $reviews['count']; ?>
+      <?php
+    }?>
+  </div><!--TABLE_REVIEWS end-->
+  <div class="col-sm-12 col-lg-12"><!--extra_products-->
+    <?php
+    include(DIR_WS_MODULES . 'product_info/extra_products_fields.php');
+    ?>
+   </div><!--End extra_products-->
+	<?php
+    if (tep_not_null($product_info['products_url'])) {
+      ?>
+     <div class="col-sm-12 col-lg-12">
+        <?php echo sprintf(TEXT_MORE_INFORMATION, tep_href_link(FILENAME_REDIRECT, 'action=url&amp;goto=' . urlencode($product_info['products_url']), 'NONSSL', true, false)); ?>
+     </div>
+      <?php
+    }
+    if ($product_info['products_date_available'] > date('Y-m-d H:i:s')) {
+      ?>
+      <div class="col-sm-12 col-lg-12">
+        <?php echo sprintf(TEXT_DATE_AVAILABLE, tep_date_long($product_info['products_date_available'])); ?>
+      </div>
+      <?php
+    } else {
+      ?>
+      <div class="col-sm-12 col-lg-12">
+        <?php echo sprintf(TEXT_DATE_ADDED, tep_date_long($product_info['products_date_added'])); ?>
+      </div>
+      <?php
+    }
+    // sub product start
+    if (STOCK_ALLOW_CHECKOUT =='false') {
+      $allowcriteria = "";
+    }
+
+    $select_order_by = '';
+    switch (defined('SUB_PRODUCTS_SORT_ORDER')? strtoupper(SUB_PRODUCTS_SORT_ORDER) : '') {
+      case 'MODEL':
+        $select_order_by .= 'sp.products_model';
+        break;
+      case 'NAME':
+        $select_order_by .= 'spd.products_name';
+        break;
+      case 'PRICE':
+        $select_order_by .= 'sp.products_price';
+        break;
+      case 'QUANTITY':
+        $select_order_by .= 'sp.products_quantity';
+        break;
+      case 'WEIGHT':
+        $select_order_by .= 'sp.products_weight';
+        break;
+      case 'SORT ORDER':
+        $select_order_by .= 'sp.sort_order';
+        break;
+      case 'LAST ADDED':
+        $select_order_by .= 'sp.products_date_added';
+        break;
+      default:
+        $select_order_by .= 'sp.products_model';
+        break;
+    }
+    $sub_products_query = tep_db_query("select sp.products_id, sp.products_quantity, sp.products_price, sp.products_tax_class_id, sp.products_image, spd.products_name, spd.products_blurb, sp.products_model from " . TABLE_PRODUCTS . " sp, " . TABLE_PRODUCTS_DESCRIPTION . " spd where sp.products_quantity > 0 and sp.products_parent_id = " . (int)$product_info['products_id'] . " and spd.products_id = sp.products_id and spd.language_id = " . (int)$languages_id . " order by " . $select_order_by);
+    if ( tep_db_num_rows($sub_products_query) > 0 ) {
+      if (defined('PRODUCT_INFO_SUB_PRODUCT_DISPLAY') && PRODUCT_INFO_SUB_PRODUCT_DISPLAY == 'In Listing') {
+        include(DIR_WS_MODULES . 'product_info/sub_products_listing.php');
+      } else if ( PRODUCT_INFO_SUB_PRODUCT_DISPLAY == 'Drop Down'){
+        include(DIR_WS_MODULES . 'product_info/sub_products_dropdown.php');
+      }
+    }
+    if ((PRODUCT_INFO_SUB_PRODUCT_PURCHASE == 'Multi') ||
+        (PRODUCT_INFO_SUB_PRODUCT_PURCHASE == 'Single' && PRODUCT_INFO_SUB_PRODUCT_DISPLAY == 'Drop Down') ||
+        ($product_has_sub == 0)
+      ){
+      if ($hide_add_to_cart == 'false') {
+        if ($valid_to_checkout == true) {
+         // echo '<div class="col-sm-12 col-lg-12">' . tep_template_image_submit('button_in_cart.gif', IMAGE_BUTTON_IN_CART, 'align="middle"') . '</div>' ;
+        }
+      }
+    }
+    // sub product_eof
+    if (SHOW_PRICE_BREAK_TABLE == 'true' && defined(FILENAME_PRODUCT_QUANTITY_TABLE)) {
+      if ( file_exists(TEMPLATE_FS_CUSTOM_MODULES . FILENAME_PRODUCT_QUANTITY_TABLE)) {
+        require(TEMPLATE_FS_CUSTOM_MODULES . FILENAME_PRODUCT_QUANTITY_TABLE);
+      } else {
+        require(DIR_WS_MODULES . FILENAME_PRODUCT_QUANTITY_TABLE);
+      }
     }
     if ( (USE_CACHE == 'true') && !SID) {
       echo tep_cache_also_purchased(3600);
-//      include(DIR_WS_MODULES . FILENAME_XSELL_PRODUCTS);
-         if ( file_exists(TEMPLATE_FS_CUSTOM_MODULES . FILENAME_XSELL_PRODUCTS)) {
-            require(TEMPLATE_FS_CUSTOM_MODULES . FILENAME_XSELL_PRODUCTS);
-        } else {
-            require(DIR_WS_MODULES . FILENAME_XSELL_PRODUCTS);
-        }
+      // include(DIR_WS_MODULES . FILENAME_XSELL_PRODUCTS);
+      if ( file_exists(TEMPLATE_FS_CUSTOM_MODULES . FILENAME_XSELL_PRODUCTS)) {
+          require(TEMPLATE_FS_CUSTOM_MODULES . FILENAME_XSELL_PRODUCTS);
+      } else {
+          require(DIR_WS_MODULES . FILENAME_XSELL_PRODUCTS);
+      }
     } else {
       //include(DIR_WS_MODULES . FILENAME_XSELL_PRODUCTS_BUYNOW);
-         if ( file_exists(TEMPLATE_FS_CUSTOM_MODULES . FILENAME_XSELL_PRODUCTS_BUYNOW)) {
-            require(TEMPLATE_FS_CUSTOM_MODULES . FILENAME_XSELL_PRODUCTS_BUYNOW);
-        } else {
-            require(DIR_WS_MODULES . FILENAME_XSELL_PRODUCTS_BUYNOW);
-        }
-
+      if ( file_exists(TEMPLATE_FS_CUSTOM_MODULES . FILENAME_XSELL_PRODUCTS_BUYNOW)) {
+         require(TEMPLATE_FS_CUSTOM_MODULES . FILENAME_XSELL_PRODUCTS_BUYNOW);
+      } else {
+         require(DIR_WS_MODULES . FILENAME_XSELL_PRODUCTS_BUYNOW);
+      }
       //include(DIR_WS_MODULES . FILENAME_ALSO_PURCHASED_PRODUCTS);
-         if ( file_exists(TEMPLATE_FS_CUSTOM_MODULES . FILENAME_ALSO_PURCHASED_PRODUCTS)) {
-            require(TEMPLATE_FS_CUSTOM_MODULES . FILENAME_ALSO_PURCHASED_PRODUCTS);
-        } else {
-           // require(DIR_WS_MODULES . FILENAME_ALSO_PURCHASED_PRODUCTS);
-        }
+      if ( file_exists(TEMPLATE_FS_CUSTOM_MODULES . FILENAME_ALSO_PURCHASED_PRODUCTS)) {
+        require(TEMPLATE_FS_CUSTOM_MODULES . FILENAME_ALSO_PURCHASED_PRODUCTS);
+      } else {
+        require(DIR_WS_MODULES . FILENAME_ALSO_PURCHASED_PRODUCTS);
+      }
     }
   }
   // product info page bottom
-  echo $cre_RCI->get('productinfotabs', 'bottom');
-  ?>
-
- </div>
-</div>
+  echo $cre_RCI->get('productinfo', 'bottom');
+ ?>
+ </div><!--End of row-->
+<?php
+    if(PRODUCT_INFO_SUB_PRODUCT_DISPLAY != 'Single Purchase'){
+?>
 </form>
 <?php
+    }
 // RCI code start
 echo $cre_RCI->get('global', 'bottom');
 ?>

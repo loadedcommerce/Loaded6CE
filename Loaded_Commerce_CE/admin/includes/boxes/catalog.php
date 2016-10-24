@@ -23,6 +23,7 @@ $heading[] = array('text'  => BOX_HEADING_CATALOG,
     //RCI to include links  
     $returned_rci_top = $cre_RCI->get('catalog', 'boxestop');
     $returned_rci_bottom = $cre_RCI->get('catalog', 'boxesbottom');
+    $returned_rci_bottom .= lc_addon_load_side_links('catalog');
     $contents[] = array('text'  => $returned_rci_top .
                                    tep_admin_files_boxes(FILENAME_CATEGORIES, BOX_CATALOG_CATEGORIES_PRODUCTS, 'SSL','selected_box=catalog','2') .
                                    tep_admin_files_boxes(FILENAME_PRODUCTS_ATTRIBUTES, BOX_CATALOG_CATEGORIES_PRODUCTS_ATTRIBUTES, 'SSL','selected_box=catalog','2') .

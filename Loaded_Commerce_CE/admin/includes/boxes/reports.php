@@ -19,13 +19,13 @@ $heading[] = array('text'  => BOX_HEADING_REPORTS,
                    'link'  => tep_href_link(FILENAME_STATS_PRODUCTS_VIEWED, 'selected_box=reports'));
 
   //RCI to include links 
-  $returned_rci_top = $cre_RCI->get('reports', 'boxestop');
-  $returned_rci_bottom = $cre_RCI->get('reports', 'boxesbottom');
-  $returned_rci_bottom2 = $cre_RCI->get('reports', 'boxesbottom2'); 
-  $returned_rci_bottom3 = $cre_RCI->get('reports', 'boxesbottom3'); 
-  $returned_rci_bottom4 = $cre_RCI->get('reports', 'boxesbottom4'); 
-  $returned_rci_bottom5 = $cre_RCI->get('reports', 'boxesbottom5');
-  $returned_rci_bottom5 = $cre_RCI->get('reports', 'boxesbottom6');    
+  $returned_rci_top = $cre_RCI->get('reports', 'boxestop').lc_addon_load_side_links('reports', 'top');
+  $returned_rci_bottom = $cre_RCI->get('reports', 'boxesbottom').lc_addon_load_side_links('reports', 'bottom');
+  $returned_rci_bottom2 = $cre_RCI->get('reports', 'boxesbottom2').lc_addon_load_side_links('reports', 'bottom2'); 
+  $returned_rci_bottom3 = $cre_RCI->get('reports', 'boxesbottom3').lc_addon_load_side_links('reports', 'bottom3'); 
+  $returned_rci_bottom4 = $cre_RCI->get('reports', 'boxesbottom4').lc_addon_load_side_links('reports', 'bottom4'); 
+  $returned_rci_bottom5 = $cre_RCI->get('reports', 'boxesbottom5').lc_addon_load_side_links('reports', 'bottom5');
+  $returned_rci_bottom6 = $cre_RCI->get('reports', 'boxesbottom6').lc_addon_load_side_links('reports', 'bottom6');    
   $contents[] = array('text'  => $returned_rci_top .
                                  // top viewed
                                  tep_admin_files_boxes(FILENAME_STATS_PRODUCTS_VIEWED, BOX_REPORTS_PRODUCTS_VIEWED, 'SSL','selected_box=reports','2') .

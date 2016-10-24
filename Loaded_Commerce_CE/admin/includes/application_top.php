@@ -45,12 +45,12 @@ include('includes/version.php');
     define('DIR_WS_ADMIN', DIR_WS_HTTPS_ADMIN);
     define('BASE_HREF', HTTPS_SERVER . DIR_WS_HTTPS_ADMIN);
   }
-  
+
   // this is patch up code to support sites with configuration file built
   // before 6.2.08.  The only define was for the DIR_WS_CATALOG
   // the instal routines were updated to provide additional references
-  // Values are forced to prevent problems, however this will still be a 
-  // problem for sites using shared ssl certificates htat havea different 
+  // Values are forced to prevent problems, however this will still be a
+  // problem for sites using shared ssl certificates htat havea different
   // file names
   if ( !defined('DIR_WS_HTTPS_CATALOG') || !defined('DIR_WS_HTTP_CATALOG') ) {
     define('DIR_WS_HTTPS_CATALOG', DIR_WS_CATALOG);
@@ -63,6 +63,10 @@ include('includes/version.php');
   if (file_exists(DIR_FS_INCLUDES . 'application_top_admin_cre_setting.php')){
     include(DIR_FS_INCLUDES . 'application_top_admin_cre_setting.php');
   }
+
+// define our addons base functions
+  require(DIR_FS_CATALOG.'addons/addons.php');
+  lc_addon_init();
 
 // include the list of project filenames
   require(DIR_FS_INCLUDES . 'filenames.php');
@@ -88,11 +92,12 @@ include('includes/version.php');
 // set application wide parameters
   $configuration_query = tep_db_query('select configuration_key as cfgKey, configuration_value as cfgValue from ' . TABLE_CONFIGURATION);
   while ($configuration = tep_db_fetch_array($configuration_query)) {
-    if (!defined($configuration['cfgKey'])) { 
+    if (!defined($configuration['cfgKey'])) {
       define($configuration['cfgKey'], $configuration['cfgValue']);
     }
   }
   tep_db_free_result($configuration_query); unset($configuration_query, $configuration);
+
 
 // Set the Time Zone
 if ( ! defined(STORE_TIME_ZONE)) define('STORE_TIME_ZONE', 'America/New_York');
@@ -106,7 +111,7 @@ if ($timeOffset != 0) {
   $remaining_seconds = abs($timeOffset) - ($hours * 3600);
   if ($timeOffset < 0) $hours = $hours * -1;
   if ($remaining_seconds > 0) $mins = floor($remaining_seconds / 60);
-  
+
   tep_db_query("SET SESSION time_zone = '" . sprintf('%+02d:%02d', $hours, $mins) . "'");
   unset($hours, $mins, $remaining_seconds);
 }
@@ -152,7 +157,7 @@ if (MENU_DHTML != 'True') {
 
 // include shopping cart class
   require(DIR_FS_CLASSES . 'shopping_cart.php');
-  
+
 // some code to solve compatibility issues
   require(DIR_FS_FUNCTIONS . 'compatibility.php');
 
@@ -162,10 +167,10 @@ if (MENU_DHTML != 'True') {
 // instantiate the RCI class
   require(DIR_FS_CLASSES . 'rci.php');
   $cre_RCI = new cre_RCI;
-  
+
 // instantiate the RCO class
   require(DIR_FS_CLASSES . 'rco.php');
-  $cre_RCO = new cre_RCO;   
+  $cre_RCO = new cre_RCO;
 
 // set the session name and save path
   tep_session_name('osCAdminID');
@@ -174,7 +179,7 @@ if (MENU_DHTML != 'True') {
 
 // set the session cookie parameters
    session_set_cookie_params(0, $cookie_path, $cookie_domain);
-  
+
 // lets start our session
   tep_session_start();
   $session_started = true;
@@ -191,10 +196,10 @@ if (MENU_DHTML != 'True') {
     }
   }
 
-  // the language variable is used in so many locations and 
-  // is not set very often, special handling is being applied to 
+  // the language variable is used in so many locations and
+  // is not set very often, special handling is being applied to
   // reduce the amount of code changes needed with registered globals turned off
-  
+
   if ( ! isset($_SESSION['language']) || isset($_GET['language']) ) {
     include(DIR_FS_CLASSES . 'language.php');
     $lng = new language();
@@ -206,7 +211,7 @@ if (MENU_DHTML != 'True') {
     $_SESSION['language'] = $lng->language['directory'];
     $_SESSION['languages_id'] = $lng->language['id'];
   }
-  
+
   $language = $_SESSION['language'];
   $languages_id = $_SESSION['languages_id'];
 
@@ -216,6 +221,9 @@ if (MENU_DHTML != 'True') {
   if (file_exists(DIR_WS_LANGUAGES . $language . '/' . $current_page)) {
     include_once(DIR_WS_LANGUAGES . $language . '/' . $current_page);
   }
+
+  //Load the installed Addon Modules
+  lc_load_addons($current_page);
 
 // include RCI language extensions
   $cre_RCI->get($language, 'lang', false);
@@ -281,12 +289,12 @@ if (MENU_DHTML != 'True') {
   if ( ! isset($_SESSION['selected_box']) ) {
     $_SESSION['selected_box'] = '';
   }
- 
+
   if (isset($_GET['selected_box'])) {
     $_SESSION['selected_box'] = $_GET['selected_box'];
   }
 
-  //Cache control system 
+  //Cache control system
   $cache_blocks = array(array('title' => TEXT_CACHE_CATEGORIES, 'code' => 'categories', 'file' => 'categories_box-language.cache', 'multiple' => true),
                         array('title' => TEXT_CACHE_CATEGORIES1, 'code' => 'categories1', 'file' => 'categories1_box-language.cache', 'multiple' => true),
                         array('title' => TEXT_CACHE_CATEGORIES2, 'code' => 'categories2', 'file' => 'categories2_box-language.cache', 'multiple' => true),
@@ -298,9 +306,9 @@ if (MENU_DHTML != 'True') {
 
   // do a call to the monitor initial load handler
   $cre_RCI->get('monitor', 'initial', false);
-  
+
   //Admin begin
-  if (basename($PHP_SELF) != FILENAME_LOGIN && basename($PHP_SELF) != FILENAME_PASSWORD_FORGOTTEN && basename($PHP_SELF) != FILENAME_MERCHANT_ACCOUNT) {
+  if (basename($PHP_SELF) != FILENAME_LOGIN && basename($PHP_SELF) != FILENAME_PASSWORD_FORGOTTEN && basename($PHP_SELF) != FILENAME_MERCHANT_ACCOUNT && basename($PHP_SELF) != FILENAME_UPGRADE_PRODUCT) {
     tep_admin_check_login();
   }
 //Admin end
@@ -333,4 +341,7 @@ if (file_exists('includes/application_top_newsdesk.php')) { include('includes/ap
 if (file_exists('includes/application_top_faqdesk.php')) { include('includes/application_top_faqdesk.php'); }
 //RCI bottom
 echo $cre_RCI->get('applicationtop', 'bottom', false);
+
+//Load the Post var of Addon
+lc_addon_post_init();
 ?>

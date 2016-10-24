@@ -21,6 +21,7 @@ $heading[] = array('text'  => BOX_HEADING_MARKETING,
   //RCI to include links  
   $returned_rci_top = $cre_RCI->get('marketing', 'boxestop');
   $returned_rci_bottom = $cre_RCI->get('marketing', 'boxesbottom');
+  $returned_rci_bottom .= lc_addon_load_side_links('marketing');
   $contents[] = array('text'  => $returned_rci_top .
                                  tep_admin_files_boxes(FILENAME_BANNER_MANAGER, BOX_MARKETING_BANNER_MANAGER, 'SSL', 'selected_box=marketing', '2') .
                                  tep_admin_files_boxes(FILENAME_SPECIALS, BOX_MARKETING_SPECIALS, 'SSL', 'selected_box=marketing', '2') .

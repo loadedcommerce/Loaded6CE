@@ -20,6 +20,7 @@ $heading[] = array('text'  => BOX_HEADING_LINKS,
   //RCI to include links  
   $returned_rci_top = $cre_RCI->get('links', 'boxestop');
   $returned_rci_bottom = $cre_RCI->get('links', 'boxesbottom');
+  $returned_rci_bottom .= lc_addon_load_side_links('links');
   $contents[] = array('text'  => $returned_rci_top .
                                  tep_admin_files_boxes(FILENAME_LINKS, BOX_LINKS_LINKS, 'SSL','selected_box=links','2') .
                                  tep_admin_files_boxes(FILENAME_LINK_CATEGORIES, BOX_LINKS_LINK_CATEGORIES, 'SSL','selected_box=links','2') .

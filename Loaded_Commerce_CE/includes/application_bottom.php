@@ -12,7 +12,8 @@
 */
 // close session (store variables)
 tep_session_close();
-cre_uregisterBasicFunctions();
+if(!defined('SYSTEM_ADDON'))
+	cre_uregisterBasicFunctions();
 if (STORE_PAGE_PARSE_TIME == 'true') {
   $time_start = explode(' ', PAGE_PARSE_START_TIME);
   $time_end = explode(' ', microtime());

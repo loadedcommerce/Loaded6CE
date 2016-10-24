@@ -22,6 +22,7 @@ if (defined('PROJECT_VERSION') && preg_match('/6.2/', PROJECT_VERSION)) {
     //RCI start
     $returned_rci_top = $cre_RCI->get('information', 'boxestop');
     $returned_rci_bottom = $cre_RCI->get('information', 'boxesbottom');
+    $returned_rci_bottom .= lc_addon_load_side_links('information');
     $contents[] = array('text'  => $returned_rci_top . 
                                    tep_admin_files_boxes(FILENAME_CDS_PAGE_MANAGER, BOX_CDS_PAGE_MANAGER, 'SSL', 'selected_box=information', '0') . 
                                    tep_admin_files_boxes(FILENAME_CDS_CONFIGURATION, BOX_CDS_CONFIGUARION, 'SSL', 'selected_box=information&gID=480', '0') .
@@ -38,6 +39,7 @@ if (defined('PROJECT_VERSION') && preg_match('/6.2/', PROJECT_VERSION)) {
     //RCI start
     $returned_rci_top = $cre_RCI->get('information', 'boxestop');
     $returned_rci_bottom = $cre_RCI->get('information', 'boxesbottom');
+    $returned_rci_bottom .= lc_addon_load_side_links('information');
     $contents[] = array('text'  => $returned_rci_top . 
                                    tep_admin_files_boxes(FILENAME_CDS_PAGE_MANAGER, BOX_CDS_PAGE_MANAGER, 'SSL', 'selected_box=information', '2') . 
                                    tep_admin_files_boxes(FILENAME_CDS_CONFIGURATION, BOX_CDS_CONFIGUARION, 'SSL', 'selected_box=information&gID=480', '2') .

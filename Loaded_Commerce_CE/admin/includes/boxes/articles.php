@@ -21,6 +21,7 @@ $heading[] = array('text'  => BOX_HEADING_ARTICLES,
   //RCI to include links  
   $returned_rci_top = $cre_RCI->get('articles', 'boxestop');
   $returned_rci_bottom = $cre_RCI->get('articles', 'boxesbottom');
+  $returned_rci_bottom .= lc_addon_load_side_links('articles');
   $contents[] = array('text'  => $returned_rci_top .
                                  tep_admin_files_boxes(FILENAME_ARTICLES,  BOX_TOPICS_ARTICLES, 'SSL','selected_box=articles','2')  .
                                  tep_admin_files_boxes(FILENAME_ARTICLES_CONFIG,  BOX_ARTICLES_CONFIG, 'SSL','selected_box=articles','2')  .

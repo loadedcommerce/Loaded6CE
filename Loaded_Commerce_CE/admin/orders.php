@@ -346,7 +346,7 @@ echo $cre_RCI->get('orders', 'javascript');
     for ($i=0, $n=sizeof($order->products); $i<$n; $i++) {
       echo '          <tr class="dataTableRow">' . "\n" .
            '            <td class="dataTableContent" valign="top" align="right">' . $order->products[$i]['qty'] . '&nbsp;x</td>' . "\n" .
-           '            <td class="dataTableContent" valign="top">' . $order->products[$i]['name'];
+           '            <td class="dataTableContent" valign="top">' . lc_addon_concat($order->products[$i]['name'], 'refund_link|'.$oID.'|'.$order->products[$i]['id'].'|'.$order->info['orders_status'].'|'.$order->products[$i]['return']);
 
       if (isset($order->products[$i]['attributes']) && (sizeof($order->products[$i]['attributes']) > 0)) {
         for ($j = 0, $k = sizeof($order->products[$i]['attributes']); $j < $k; $j++) {

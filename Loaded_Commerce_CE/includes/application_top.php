@@ -54,6 +54,11 @@ if ($request_type == 'NONSSL') {
 $PHP_SELF = $_SERVER['SCRIPT_NAME'];
 // define the project version
 include('includes/version.php');
+
+// define our addons base functions
+  require('addons/addons_catalog.php');
+  lc_addon_init();
+
 // include the list of project database tables and functions
 // define functions and classes needed early in the processing used application-wide
 require(DIR_FS_INCLUDES . 'database_tables.php');
@@ -224,7 +229,7 @@ $cart = new shoppingCart();
 require(DIR_FS_CLASSES . 'currencies.php');
 $currencies = new currencies();
 // require price formatter class
-require(DIR_FS_CLASSES . 'PriceFormatter.php');
+lc_check_addon_class('PriceFormatter.php');
 $pf = new PriceFormatter;
 
 // load the Input Filter class

@@ -14,6 +14,8 @@
 // The HTML href link wrapper function
   function tep_href_link($page = '', $parameters = '', $connection = 'NONSSL') {
     global $request_type, $session_started, $SID, $spider_flag;
+    $arr_argument = lc_load_addon_function('tep_href_link', array('page' => $page, 'parameters' => $parameters, 'connection' => $connection));
+    extract($arr_argument);
     if ($page == '') {
       die('</td></tr></table></td></tr></table><br><br><font color="#ff0000">'.UNABLE_TO_DETERMINE_PAGE_LINK.'tep_href_link(\'' . $page . '\', \'' . $parameters . '\', \'' . $connection . '\')</b>');
     }
@@ -209,7 +211,7 @@
     $field .= ' class="form-control" ';
     if (tep_not_null($parameters)) $field .= ' ' . $parameters;
 
-    $field .= '>';
+    $field .= ' style="width:94%;display:inline-block;">';
 
     if ($required == true) $field .= TEXT_FIELD_REQUIRED;
 
@@ -345,8 +347,11 @@
 ////
 // Output a form pull down menu
   function tep_draw_pull_down_menu($name, $values, $default = '', $parameters = '', $required = false) {
-    $field = '<select class="form-control" name="' . tep_output_string($name) . '"';
-
+    if($parameters == '')
+	    $field = '<select class="form-control" style="width:94%;display:inline-block;" name="' . tep_output_string($name) . '"';
+	else
+	    $field = '<select class="form-control" name="' . tep_output_string($name) . '"';
+	
     if (tep_not_null($parameters)) $field .= ' ' . $parameters;
 
     $field .= '>';

@@ -20,6 +20,7 @@ define('ENTRY_FIRSTNAME', 'First Name:');
 define('IMAGE_BUTTON_LOGIN', 'Submit');
 
 define('TEXT_PASSWORD_FORGOTTEN', 'Password forgotten?');
+define('TEXT_UPGRADE_PRODUCT','Upgrade Your Products?');
 
 define('TEXT_LOGIN_ERROR', '<font color="#ff0000"><b>ERROR:</b></font> Wrong username or password!');
 define('TEXT_FORGOTTEN_ERROR', '<font color="#ff0000"><b>ERROR:</b></font> The email entered is not found!');
@@ -28,6 +29,7 @@ define('TEXT_FORGOTTEN_SUCCESS', '<b>The new password has been sent to your Emai
 define('TEXT_FORGOTTEN_SUPPORT_MESSAGE','If you need assistance resetting your email address or retrieving your password please contact your webhost support or Loaded Commerce support at <a href="http://www.loadedcommerce.com/" target="_blank">www.LoadedCommerce.com/</a>');
 define('TEXT_FORGOTTEN_USER_MESSAGE','Enter your login email address and a new password will be emailed to you.');
 define('TEXT_PASSWORD_FORGOTTEN_TITLE','Forgotten Password');
+define('TEXT_UPGRADE_PRODUCT_TITLE','Upgrade Your Products');
 
 define('ADMIN_EMAIL_SUBJECT', 'New Password');
 define('ADMIN_EMAIL_TEXT', 'Hi %s,' . "\n\n" . 'You can access the admin panel with the following password. Once you accessed the admin, please change your password immediately!' . "\n\n" . 'Website: %s' . "\n" . 'Username: %s' . "\n" . 'Password: %s' . "\n\n" . 'Thanks!' . "\n" . '%s' . "\n\n" . 'This is a system automated response, please do not reply, as your answer would be unread!');

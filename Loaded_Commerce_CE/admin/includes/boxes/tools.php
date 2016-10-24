@@ -21,6 +21,7 @@ $heading[] = array('text'  => BOX_HEADING_TOOLS,
   //RCI to include links
   $returned_rci_top = $cre_RCI->get('tools', 'boxestop');
   $returned_rci_bottom = $cre_RCI->get('tools', 'boxesbottom');
+  $returned_rci_bottom .= lc_addon_load_side_links('tools');
   $contents[] = array('text'  => $returned_rci_top .
                                  tep_admin_files_boxes(FILENAME_BACKUP_MYSQL, BOX_TOOLS_MYSQL_BACKUP, 'SSL','selected_box=tools','2') .
                                  tep_admin_files_boxes(FILENAME_BACKUP,BOX_TOOLS_BACKUP, 'SSL','selected_box=tools','2') .

@@ -10,7 +10,7 @@
   Released under the GNU General Public License
 */
 
-define('FILENAME_STATS_NOT_VALID_USER', 'stats_not_valid_users.php');   
+define('FILENAME_STATS_NOT_VALID_USER', 'stats_not_valid_users.php');
 define('FILENAME_STATS_CREDITS', 'stats_credits.php');
 define('FILENAME_CONFIGURATION_PRODUCTS', 'configuration_products.php');
 define('FILENAME_CONFIGURATION_STOCK', 'configuration_stock.php');
@@ -47,6 +47,7 @@ define('FILENAME_FILE_RELEASES','/frs/');
   define('FILENAME_LOGIN', 'login.php');
   define('FILENAME_LOGOFF', 'logoff.php');
   define('FILENAME_PASSWORD_FORGOTTEN', 'password_forgotten.php');
+  define('FILENAME_UPGRADE_PRODUCT', 'upgrade_products.php');
 //Admin end
 
 // MaxiDVD Added Line For WYSIWYG HTML Area: BOF
@@ -179,10 +180,10 @@ define('FILENAME_DOCUMENT_HELP', 'document_help.php');
 
 // VJ member approval added
   define('FILENAME_MEMBERS', 'members.php');
-  
+
 // DMG Sales Report 2
   define('FILENAME_STATS_SALES_REPORT2', 'stats_sales_report2.php');
-  
+
   define('FILENAME_STATS_DAILY_SALES_REPORT', 'stats_daily_products_sales_report.php');
 
 //DMG :  FAQ System 2.1
@@ -190,10 +191,10 @@ define('FILENAME_DOCUMENT_HELP', 'document_help.php');
   define('FILENAME_FAQ_MANAGER', 'faq_manager.php');
   define('FILENAME_FAQ_VIEW', 'faq_view.php');
   define('FILENAME_FAQ_VIEW_ALL', 'faq_view_all.php');
-  
+
 // VJ faq manager added
   define('FILENAME_FAQ_CATEGORIES', 'faq_categories.php');
-  
+
 //DMG : Article Manager
 
   define('FILENAME_ARTICLE_REVIEWS', 'article_reviews.php');

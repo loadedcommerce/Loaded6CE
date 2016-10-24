@@ -21,6 +21,7 @@ $heading[] = array('text'  => BOX_HEADING_LOCATION_AND_TAXES,
   //RCI to include links  
   $returned_rci_top = $cre_RCI->get('taxes', 'boxestop');
   $returned_rci_bottom = $cre_RCI->get('taxes', 'boxesbottom');
+  $returned_rci_bottom .= lc_addon_load_side_links('taxes');
   $contents[] = array('text'  => $returned_rci_top .
                                  tep_admin_files_boxes(FILENAME_COUNTRIES, BOX_TAXES_COUNTRIES, 'SSL','selected_box=taxes','2') .
                                  tep_admin_files_boxes(FILENAME_ZONES, BOX_TAXES_ZONES, 'SSL','selected_box=taxes','2') .

@@ -25,6 +25,7 @@ $heading[] = array('text'  => BOX_HEADING_CUSTOMERS,
     $returned_rci_orders_bottom = $cre_RCI->get('orders', 'boxesbottom');
     $returned_rci_customers_top = $cre_RCI->get('customers', 'boxestop');
     $returned_rci_customers_bottom = $cre_RCI->get('customers', 'boxesbottom');
+    $returned_rci_customers_bottom .= lc_addon_load_side_links('customers');
     $contents[] = array('text'  => $returned_rci_orders_top .
                                    tep_admin_files_boxes(FILENAME_ORDERS, BOX_CUSTOMERS_ORDERS, 'SSL','selected_box=customers','2') .
                                    tep_admin_files_boxes(FILENAME_CREATE_ORDER, BOX_MANUAL_ORDER_CREATE_ORDER, 'SSL','selected_box=customers','2') .

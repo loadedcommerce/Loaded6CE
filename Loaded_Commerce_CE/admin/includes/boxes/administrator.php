@@ -21,6 +21,7 @@ $heading[] = array('text'  => BOX_HEADING_ADMINISTRATOR,
   //RCI to include links 
   $returned_rci_top = $cre_RCI->get('administrator', 'boxestop');
   $returned_rci_bottom = $cre_RCI->get('administrator', 'boxesbottom');
+  $returned_rci_bottom .= lc_addon_load_side_links('administrator');
   $contents[] = array('text'  => $returned_rci_top .
                                  tep_admin_files_boxes(FILENAME_ADMIN_MEMBERS, BOX_ADMINISTRATOR_MEMBERS, 'NONSSL','selected_box=administrator','2') .
                                  tep_admin_files_boxes(FILENAME_ADMIN_MEMBERS, BOX_ADMINISTRATOR_GROUPS,'NONSSL','gID=groups&selected_box=administrator','2') .

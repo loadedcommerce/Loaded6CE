@@ -26,6 +26,7 @@ $heading[] = array('text'  => BOX_HEADING_DATA,
   $returned_rci_top3 = $cre_RCI->get('data', 'boxestop3');
   $returned_rci_bottom3 = $cre_RCI->get('data', 'boxesbottom3');
   $returned_rci_top4 = $cre_RCI->get('data', 'boxestop4');
+  $returned_rci_bottom .= lc_addon_load_side_links('data');
   $contents[] = array('text'  => $returned_rci_top .
                                  tep_admin_files_boxes('', BOX_DATA_EASYPOPULATE) .
                                  $returned_rci_top2 .
