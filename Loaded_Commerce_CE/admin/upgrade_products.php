@@ -10,36 +10,73 @@
   Released under the GNU General Public License
 */
 
-  require('includes/application_top.php');
-  require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_LOGIN);
-echo hiii;
-  if (isset($_GET['action']) && ($_GET['action'] == 'process')) {
-    $email_address = tep_db_prepare_input($_POST['email_address']);
-    $log_times = (isset($_POST['log_times']) ? $_POST['log_times']+1 : 1);
-  if ( $log_times >= 4 ) {
-      $_SESSION['password_forgotten'] = true;
-    }
-
-// Check if email exists
-    $check_admin_query = tep_db_query("select admin_id as check_id, admin_firstname as check_firstname, admin_lastname as check_lastname, admin_email_address as check_email_address from " . TABLE_ADMIN . " where admin_email_address = '" . tep_db_input($email_address) . "'");
-    if (!tep_db_num_rows($check_admin_query)) {
-      $_GET['login'] = 'fail';
-    } else {
-      $check_admin = tep_db_fetch_array($check_admin_query);
-      $_GET['login'] = 'success';
-      $makePassword = tep_create_hard_pass();
-
-      tep_mail($check_admin['check_firstname'] . ' ' . $check_admin['admin_lastname'], $check_admin['check_email_address'], ADMIN_EMAIL_SUBJECT, sprintf(ADMIN_EMAIL_TEXT, $check_admin['check_firstname'], HTTP_SERVER . DIR_WS_ADMIN, $check_admin['check_email_address'], $makePassword, STORE_OWNER), STORE_OWNER, STORE_OWNER_EMAIL_ADDRESS);
-      tep_db_query("update " . TABLE_ADMIN . " set admin_password = '" . tep_encrypt_password($makePassword) . "' where admin_id = '" . $check_admin['check_id'] . "'");
-      }
-    }
-
-    require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_DEFAULT);
-  if  (isset($_GET['login']) && $_GET['login'] == 'success' ) {
-    $success_message = TEXT_FORGOTTEN_SUCCESS;
-  } elseif  (isset($_GET['login']) && $_GET['login'] == 'fail' ) {
-    $info_message = TEXT_FORGOTTEN_ERROR;
+require('includes/application_top.php');
+require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_UPGRADE_PRODUCT);
+$error = (isset($_SESSION['validate_error']) && $_SESSION['validate_error'] == true) ? true : false;
+$error_message = ($error == true) ? $_SESSION['validate_error']['error_message'] : '';
+$action = (isset($_GET['action']) && ($_GET['action'] != '')) ? $_GET['action'] : ''; 
+$_SESSION['force_registration'] = true;
+$paction = (isset($_POST['action']) && ($_POST['action'] != '')) ? $_POST['action'] : '';
+$serial = (isset($_POST['serial']) && ($_POST['serial'] != '')) ? tep_db_prepare_input($_POST['serial']) : '';
+if (($paction == 'validate') || $serial && !$error) {
+  // check for blank serial
+    if ($serial == '') {
+    $error = true;
+    $error_message = TEXT_ERROR_BLANK_SERIAL;    
   }
+  // validation logic  
+  if (!$error) {
+
+	$data = file_get_contents('https://api.loadedcommerce.com/lc6_addon_api/?serial='.$serial);
+	if (preg_match('/<status>/', $data)) {
+		preg_match_all("'<addondata[^>]*?>(.*?)</addondata>'", $data, $filedata);
+		$fp = fopen('../addons/temp/pro.zip', 'w');
+		fwrite($fp, base64_decode($filedata[1][0]));
+		fclose($fp);
+
+		$command = 'unzip ../addons/temp/pro.zip loaded6-pro-addon-master/addon_pro/* -d ../addons/temp/';
+		exec($command);
+		$command = 'mkdir ../addons/addon_pro/';
+		exec($command);
+		$command = 'mv ../addons/temp/loaded6-pro-addon-master/addon_pro/ ../addons/';
+		exec($command);
+		$command = 'rm -rf ../addons/temp/*';
+		exec($command);
+		$error = false;
+		preg_match_all("'<sucessmessage>(.*?)</sucessmessage>'", $data, $sucessmessage);
+		$success_message = $sucessmessage[1][0];   
+	}
+	else
+	{
+		preg_match_all("'<error>(.*?)</error>'", $data, $filedata);
+		$error = true;
+		$info_message = $filedata[1][0];   
+	}
+/*
+    // instantiate the serial class
+    require_once(DIR_WS_CLASSES . 'sss_verify.php');
+    $sss = new sss_verify;
+    $verify_array = $sss->verifySerial($serial);
+    print_r($verify_array);
+    exit();
+    if ($verify_array['verified'] == true) {
+      if (isset($_SESSION['new_registration']) && $_SESSION['new_registration'] == true) {
+        unset($_SESSION['new_registration']);
+        if (isset($_SESSION['force_registration'])) unset($_SESSION['force_registration']);
+        $_SESSION['verify_array'] = $verify_array;
+        tep_redirect(FILENAME_SSS_REGISTER . '?action=confirm', '', 'SSL');
+      } else {
+        $_SESSION['continue'] = true;
+        tep_redirect(FILENAME_DEFAULT, '', 'SSL');  
+      }
+    } else {
+      $error = true;
+      $error_message = $verify_array['error_message'];   
+    }    
+*/
+  }
+
+}
 ?>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
@@ -48,7 +85,7 @@ echo hiii;
 <!--<![endif]-->
 <head>
     <meta charset="utf-8" />
-    <title><?php echo TITLE; ?> | Login Page</title>
+    <title><?php echo TITLE; ?> | Upgrade Your Product</title>
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
     <meta content="noindex" name="index" />
     <meta content="" name="author" />
@@ -82,7 +119,7 @@ echo hiii;
             <!-- begin brand -->
             <div class="login-header">
                 <div class="brand">
-                    <span class="logo-sm"><img src="images/logo-sm.png" border="0"></span> Admin Login
+                    <span class="logo-sm"><img src="images/logo-sm.png" border="0"></span> Upgrade Your Product
                     <small><a href="http://www.loadedcommerce.com/" target="_blank"><?php echo PROJECT_VERSION; ?></a> | <a href="<?php echo HTTP_CATALOG_SERVER . DIR_WS_HTTP_CATALOG; ?>" target="_blank"><?php echo TEXT_VIEW_CATALOG; ?></a></small>
                 </div>
                 <div class="icon">
@@ -91,16 +128,10 @@ echo hiii;
             </div>
             <!-- end brand -->
             <div class="login-content">
-            <?php echo tep_draw_form('login', FILENAME_PASSWORD_FORGOTTEN, 'action=process', 'post', 'class="margin-bottom-0"', 'SSL') . tep_draw_hidden_field("action","process"); ?>
+            <?php echo tep_draw_form('login', FILENAME_UPGRADE_PRODUCT, 'action=process', 'post', 'class="margin-bottom-0"', 'SSL') . tep_draw_hidden_field("action","process"); ?>
 <?php
-        if (isset($_SESSION['password_forgotten'])) {
-          ?>
-          <div class="form-group m-b-20"><?php echo TEXT_FORGOTTEN_FAIL; ?></div>
-
-          <?php
-          $success_message = '';
-        } elseif (isset($success_message)) {
-          $success_message = TEXT_FORGOTTEN_SUCCESS . '<br><br><a href="' . tep_href_link(FILENAME_LOGIN, '' , 'SSL') . '">' . tep_image_button('button_back.gif', IMAGE_BACK) . '</a>';
+		if (isset($success_message)) {
+          $success_message .= '<br><br><a href="' . tep_href_link(FILENAME_UPGRADE_PRODUCT, '' , 'SSL') . '">' . tep_image_button('button_back.gif', IMAGE_BACK) . '</a>';
         } else {
           if (isset($info_message)) {
             echo '<tr><td colspan="2"><div class="message">' . $info_message . '</div></td></tr>' . tep_draw_hidden_field('log_times', $log_times);
@@ -111,20 +142,16 @@ echo hiii;
         if (!isset($success_message) && !isset($_SESSION['password_forgotten'])){
           ?>
 
-                    <div class="form-group m-b-20">
-                        <?php echo TEXT_FORGOTTEN_SUPPORT_MESSAGE; ?>
-                    </div>
-                   <div class="m-t-20">
-                        <h3><?php echo TEXT_UPGRADE_PRODUCT_TITLE;?></h3>
-                        <p><?php echo TEXT_FORGOTTEN_USER_MESSAGE;?></p>
+                   <div>
+                        <p><?php echo TEXT_ENTER_SERIAL_KEY;?></p>
                     </div>
                     <div class="form-group m-b-20">
-                        <input name="email_address" id="email_address" type="text" class="form-control input-lg" placeholder="Email Address" />
+                        <input name="serial" id="serial" type="text" class="form-control input-lg" placeholder="Serial Key" />
                     </div>
 
 
                     <div class="login-buttons">
-                        <button type="submit" class="btn btn-success btn-block btn-lg"><?php echo IMAGE_SEND;?></button>
+                        <button type="submit" class="btn btn-success btn-block btn-lg"><?php echo IMAGE_BUTTON_VALIDATE;?></button>
                     </div>
                     <?php
         } else {
@@ -142,15 +169,6 @@ echo hiii;
             </div>
         </div>
         <!-- end login -->
-
-        <!--ul class="login-bg-list">
-            <li class="active"><a href="#" data-click="change-bg"><img src="assets/img/login-bg/bg-1.jpg" alt="" /></a></li>
-            <li><a href="#" data-click="change-bg"><img src="assets/img/login-bg/bg-2.jpg" alt="" /></a></li>
-            <li><a href="#" data-click="change-bg"><img src="assets/img/login-bg/bg-3.jpg" alt="" /></a></li>
-            <li><a href="#" data-click="change-bg"><img src="assets/img/login-bg/bg-4.jpg" alt="" /></a></li>
-            <li><a href="#" data-click="change-bg"><img src="assets/img/login-bg/bg-5.jpg" alt="" /></a></li>
-            <li><a href="#" data-click="change-bg"><img src="assets/img/login-bg/bg-6.jpg" alt="" /></a></li>
-        </ul-->
 
     </div>
     <!-- end page container -->
