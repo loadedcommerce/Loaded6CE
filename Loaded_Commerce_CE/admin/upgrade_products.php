@@ -42,6 +42,8 @@ if (($paction == 'validate') || $serial && !$error) {
 		exec($command);
 		$command = 'rm -rf ../addons/temp/*';
 		exec($command);
+		$command = 'mysql -h'. DB_SERVER .' -u'.DB_SERVER_USERNAME.' -p'.DB_SERVER_PASSWORD.' '. DB_DATABASE .' < ../addons/addon_pro/install/install.sql';
+		exec($command);
 		$error = false;
 		preg_match_all("'<sucessmessage>(.*?)</sucessmessage>'", $data, $sucessmessage);
 		$success_message = $sucessmessage[1][0];   
