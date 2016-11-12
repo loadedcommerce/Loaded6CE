@@ -29,6 +29,10 @@
   $product_check = tep_db_fetch_array($product_check_query);
 
   $content = CONTENT_PRODUCT_INFO;
+
+  //Addon Hook	
+  lc_check_addon_core_include('product_info.php');
+
   $javascript = 'popup_window.js';
 
   require(DIR_WS_TEMPLATES . TEMPLATE_NAME . '/' . TEMPLATENAME_MAIN_PAGE);
