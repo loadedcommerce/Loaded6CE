@@ -172,6 +172,8 @@ case 'save':
         $update_sql_data = array('last_modified' => 'now()');
         $sql_data_array = array_merge($sql_data_array, $update_sql_data);
         tep_db_perform(TABLE_TEMPLATE, $sql_data_array, 'update', "template_id = '" . (int)$cID . "'");
+        // CDS Top Menu Selection
+        tep_db_query("update " . TABLE_CONFIGURATION . " set configuration_value = '" . tep_db_prepare_input($_POST['template_cds_topmenu_id']) . "' where configuration_key = 'TEMPLATE_CDS_TOPMENU_ID'");
         
     if (isset($_POST['default'])){
        if ($_POST['default'] == 'on') {
@@ -549,6 +551,10 @@ case 'insert':
         $contents[] = array('text' =>  TEXT_TEMPLATE_SYSTEM . '<b>' . $template_type . '</b>'. TEXT_TEMPLATE_SYSTEM_1 . '<br><br>');
 
       $contents[] = array('text' => TEXT_SITE_WIDTH . '  ' . tep_draw_input_field('site_width', $tInfo->site_width,'size="3"') . '<br>');
+
+      require(DIR_WS_FUNCTIONS . 'cds_functions.php');           
+      $contents[] = array('text' => 'Header CDS Menu Category' . '  ' . tep_draw_pull_down_menu('template_cds_topmenu_id', tep_get_pages_category_tree(), TEMPLATE_CDS_TOPMENU_ID, '') . '<br>');
+
 
       $contents[] = array('text' => TEXT_HEADER . '<br>');
 

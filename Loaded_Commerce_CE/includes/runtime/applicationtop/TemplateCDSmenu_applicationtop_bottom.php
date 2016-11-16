@@ -1,6 +1,6 @@
 <?php
 /*
-  $Id: cds_menu.php,v 1.1.1.1 2016/03/04 23:40:38 kiran Exp $
+  $Id: TemplateCDSmenu_applicationtop_bottom.php,v 1.1.1.1 2016/03/04 23:40:38 kiran Exp $
 
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com

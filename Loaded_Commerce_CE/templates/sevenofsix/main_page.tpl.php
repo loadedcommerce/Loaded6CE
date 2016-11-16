@@ -10,9 +10,6 @@
 
   Released under the GNU General Public License
 */
-if(file_exists(TEMPLATE_FS_CUSTOM_INCLUDES . 'template_cds_menu.php')){
-    require(TEMPLATE_FS_CUSTOM_INCLUDES . 'template_cds_menu.php');
-}
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
    "http://www.w3.org/TR/html4/loose.dtd">

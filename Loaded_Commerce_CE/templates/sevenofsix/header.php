@@ -117,8 +117,16 @@ if (DOWN_FOR_MAINTENANCE_HEADER_OFF == 'false') {
           	<div class="collapse navbar-collapse navbar-ex1-collapse">
           	<ul class="nav navbar-nav col-lg-7 z-index-1">
 		  		<?php
-                   if(defined(TEMPLATE_CDS_TOPMENU_ID)){
+                   if(defined(TEMPLATE_CDS_TOPMENU_ID) && TEMPLATE_CDS_TOPMENU_ID > 0){
                     generate_cds_menu(TEMPLATE_CDS_TOPMENU_ID);
+                   } else {
+                ?>
+                  <li><a href="<?php echo tep_href_link(FILENAME_DEFAULT); ?>"><?php echo MENU_TEXT_HOME;?></a></li>
+                  <li><a href="<?php echo tep_href_link(FILENAME_FEATURED_PRODUCTS); ?>"><?php echo MENU_TEXT_FEATURED; ?></a></li>
+                  <li><a href="<?php echo tep_href_link(FILENAME_SPECIALS); ?>"><?php echo MENU_TEXT_SPECIALS;?></a></li>
+                  <li><a href="<?php echo tep_href_link(FILENAME_PRODUCTS_NEW); ?>"><?php echo MENU_TEXT_NEW_PRODUCTS; ?></a></li>
+                  <li><a href="<?php echo tep_href_link(FILENAME_ACCOUNT, '', 'SSL'); ?>"><?php echo MENU_TEXT_MEMBERS; ?></a></li>
+                <?php
                    }
                 ?>
 		  	</ul>
