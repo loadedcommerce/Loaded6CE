@@ -26,7 +26,6 @@ if ((defined('MODULE_PAYMENT_PAYPAL_STATUS') && MODULE_PAYMENT_PAYPAL_STATUS == 
     if (($paypal_order->orders_id != '') && (!$_SESSION['PayPal_processed'])) {
       $url_string = 'action=success&order_id=' . (int)$paypal_order->orders_id;
       $_SESSION['PayPal_processed'] = true;
-     // tep_redirect(tep_href_link(FILENAME_CHECKOUT_SUCCESS, $url_string));
       $url_redirect = tep_redirect(tep_href_link(FILENAME_CHECKOUT_SUCCESS, $url_string,'SSL'));
       echo '<script>';
       echo 'window.location.href = "' . $url_redirect . '";';
