@@ -9,6 +9,6 @@
   Released under the GNU General Public License
 */
 // define the project version
-define('PROJECT_VERSION', 'Loaded Commerce Community Edition v6.5.3.2');
+define('PROJECT_VERSION', 'Loaded Commerce Community Edition v6.5.3.3');
 define('INSTALLED_VERSION_TYPE', 'Community Edition');
 ?>
