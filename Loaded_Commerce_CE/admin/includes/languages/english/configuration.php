@@ -44,7 +44,7 @@ define('TEXT_HEADER_EXPLAIN_CUST_DETAILS', 'This form will configure customer de
 //Unique to configuration_cust_details.php
 define('HEADING_TITLE_AFFILIATES', 'Affiliates');  
 define('TEXT_HEADER_EXPLAIN_AFFILIATES', 'This form will configure Affiliates settings');
-define('TABLE_HEADING_CONFIGURATION_TITLE', 'Title');
+define('TABLE_HEADING_CONFIGURATION_TITLE', 'Configuration Title');
 define('TABLE_HEADING_CONFIGURATION_VALUE', 'Value');
 define('TABLE_HEADING_ACTION', 'Action');
 
